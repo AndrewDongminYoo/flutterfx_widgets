@@ -5,21 +5,9 @@ import 'package:fx_2_folder/button_shimmer/design/widget_theme.dart';
 class GridPatternPainter extends CustomPainter {
   GridPatternPainter({required this.isDarkMode});
   final bool isDarkMode;
-
   @override
   void paint(Canvas canvas, Size size) {
-    // First, draw the background fill
-    final backgroundPaint = Paint()
-      ..color = isDarkMode ? Colors.black : Colors.white
-      ..style = PaintingStyle.fill;
-
-    canvas.drawRect(
-      Rect.fromLTWH(0, 0, size.width, size.height),
-      backgroundPaint,
-    );
-
-    // Then draw the grid lines
-    final gridPaint = Paint()
+    final paint = Paint()
       ..color = AppTheme.getPatternColor(isDarkMode)
       ..strokeWidth = 1;
 
@@ -29,7 +17,7 @@ class GridPatternPainter extends CustomPainter {
       canvas.drawLine(
         Offset(i, 0),
         Offset(i, size.height),
-        gridPaint,
+        paint,
       );
     }
 
@@ -37,7 +25,7 @@ class GridPatternPainter extends CustomPainter {
       canvas.drawLine(
         Offset(0, i),
         Offset(size.width, i),
-        gridPaint,
+        paint,
       );
     }
   }

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:fx_2_folder/fx_14_text_reveal/strategies/chaotic_spring_reveal_strategy.dart';
 import 'package:fx_2_folder/fx_14_text_reveal/text_reveal_widget.dart';
-import 'package:fx_2_folder/loader-sphere/grid.dart';
+import 'package:fx_2_folder/loader_sphere/grid.dart';
 
 class TextChaoticSpringDemo extends StatefulWidget {
   const TextChaoticSpringDemo({super.key});
