@@ -297,15 +297,15 @@ class PerlinNoiseStrategy implements NoiseStrategy {
     final v = _fade(y);
 
     final A = p[X] + Y;
-    final AA = p[A];
-    final AB = p[A + 1];
+    final pA = p[A];
+    final pA1 = p[A + 1];
     final B = p[X + 1] + Y;
-    final BA = p[B];
-    final BB = p[B + 1];
+    final pB = p[B];
+    final pB1 = p[B + 1];
 
     final result = _lerp(
-      _lerp(_grad(p[AA], x, y), _grad(p[BA], x - 1, y), u),
-      _lerp(_grad(p[AB], x, y - 1), _grad(p[BB], x - 1, y - 1), u),
+      _lerp(_grad(p[pA], x, y), _grad(p[pB], x - 1, y), u),
+      _lerp(_grad(p[pA1], x, y - 1), _grad(p[pB1], x - 1, y - 1), u),
       v,
     );
 

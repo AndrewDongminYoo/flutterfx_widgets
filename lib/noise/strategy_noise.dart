@@ -21,8 +21,8 @@ class SimplexNoiseStrategy implements NoiseStrategy {
     }
   }
   final List<int> p = List.generate(512, (i) => 0);
-  static double F2 = 0.5 * (math.sqrt(3.0) - 1.0);
-  static double G2 = (3.0 - math.sqrt(3.0)) / 6.0;
+  static double f2 = 0.5 * (math.sqrt(3.0) - 1.0);
+  static double g2 = (3.0 - math.sqrt(3.0)) / 6.0;
 
   @override
   String get name => 'Simplex Noise';
@@ -34,15 +34,15 @@ class SimplexNoiseStrategy implements NoiseStrategy {
     double n2;
 
     // Skew the input space to determine which simplex cell we're in
-    final s = (xin + yin) * F2;
+    final s = (xin + yin) * f2;
     final i = (xin + s).floor();
     final j = (yin + s).floor();
 
-    final t = (i + j) * G2;
-    final X0 = i - t;
-    final Y0 = j - t;
-    final x0 = xin - X0;
-    final y0 = yin - Y0;
+    final t = (i + j) * g2;
+    final it = i - t;
+    final jt = j - t;
+    final x0 = xin - it;
+    final y0 = yin - jt;
 
     // Determine which simplex we are in
     // ignore: avoid_multiple_declarations_per_line
@@ -55,10 +55,10 @@ class SimplexNoiseStrategy implements NoiseStrategy {
       j1 = 1;
     }
 
-    final x1 = x0 - i1 + G2;
-    final y1 = y0 - j1 + G2;
-    final x2 = x0 - 1.0 + 2.0 * G2;
-    final y2 = y0 - 1.0 + 2.0 * G2;
+    final x1 = x0 - i1 + g2;
+    final y1 = y0 - j1 + g2;
+    final x2 = x0 - 1.0 + 2.0 * g2;
+    final y2 = y0 - 1.0 + 2.0 * g2;
 
     // Calculate contribution from three corners
     var t0 = 0.5 - x0 * x0 - y0 * y0;
@@ -149,7 +149,7 @@ class WorleyNoiseStrategy implements NoiseStrategy {
       }
     }
 
-    // Return F2-F1 difference
+    // Return f2-F1 difference
     return secondMinDist - minDist;
   }
 

@@ -21,7 +21,7 @@ import 'package:fx_2_folder/button_shimmer/button_shimmer_demo.dart';
 import 'package:fx_2_folder/celebrate/celebrate_demo.dart';
 import 'package:fx_2_folder/circles_selector/circles_home_widget.dart';
 import 'package:fx_2_folder/confetti/confetti_demo.dart';
-import 'package:fx_2_folder/debug_overlay_3D/debug_overlay_3d.dart';
+import 'package:fx_2_folder/debug_overlay_3d/debug_overlay_3d.dart';
 import 'package:fx_2_folder/decoration_bulbs/decoration_bulbs_demo.dart';
 import 'package:fx_2_folder/decoration_thread/decoration_thread_demo_1.dart';
 import 'package:fx_2_folder/dots/dots_demo.dart';

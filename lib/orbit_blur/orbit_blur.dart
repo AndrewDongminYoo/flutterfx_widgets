@@ -5,28 +5,13 @@ import 'package:flutter/material.dart';
 
 /// Configuration class to manage animation settings
 class OrbitConfig extends ChangeNotifier {
-  bool _reverse = true;
-  double _duration = 10;
-  bool _showPaths = true;
+  final bool _reverse = true;
+  final double _duration = 10;
+  final bool _showPaths = true;
 
   bool get reverse => _reverse;
   double get duration => _duration;
   bool get showPaths => _showPaths;
-
-  set reverse(bool value) {
-    _reverse = value;
-    notifyListeners();
-  }
-
-  set duration(double value) {
-    _duration = value;
-    notifyListeners();
-  }
-
-  set showPaths(bool value) {
-    _showPaths = value;
-    notifyListeners();
-  }
 }
 
 /// Main widget that combines controls and orbiting circles
@@ -50,58 +35,6 @@ class OrbitingIconsWithControls extends StatelessWidget {
           },
         ),
       ],
-    );
-  }
-}
-
-/// Configuration panel widget
-class OrbitConfigPanel extends StatelessWidget {
-  const OrbitConfigPanel({super.key, required this.config});
-  final OrbitConfig config;
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Configuration',
-              style: Theme.of(context).textTheme.titleLarge,
-            ),
-            const SizedBox(height: 16),
-            Row(
-              children: [
-                const Text('Reverse Direction:'),
-                Switch(
-                  value: config.reverse,
-                  onChanged: (value) => config.reverse = value,
-                ),
-              ],
-            ),
-            Row(
-              children: [
-                const Text('Show Paths:'),
-                Switch(
-                  value: config.showPaths,
-                  onChanged: (value) => config.showPaths = value,
-                ),
-              ],
-            ),
-            Slider(
-              value: config.duration,
-              min: 5,
-              max: 20,
-              divisions: 15,
-              label: '${config.duration.round()}s',
-              onChanged: (value) => config.duration = value,
-            ),
-            Text('Duration: ${config.duration.round()} seconds'),
-          ],
-        ),
-      ),
     );
   }
 }
@@ -273,7 +206,6 @@ class OrbitingCircle extends StatelessWidget {
               delay: duration / icons.length * index,
               radius: radius,
               moveClockwise: clockwise,
-              isDarkMode: isDarkMode,
               child: icon,
             );
           }),
@@ -304,14 +236,12 @@ class SingleOrbitingCircle extends StatefulWidget {
     required this.duration,
     required this.delay,
     required this.radius,
-    required this.isDarkMode,
     required this.moveClockwise,
     this.child,
   });
   final double duration;
   final double delay;
   final double radius;
-  final bool isDarkMode;
   final bool moveClockwise;
   final Widget? child;
 
