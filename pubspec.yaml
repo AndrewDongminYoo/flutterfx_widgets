@@ -2,7 +2,7 @@ name: fx_2_folder
 description: "A new Flutter project."
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: none # Remove this line if you wish to publish to pub.dev
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -19,33 +19,28 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.4.3 <4.0.0'
+  sdk: ">=3.4.3 <4.0.0"
 
 dependencies:
+  cached_network_image: ^3.4.1
+  cupertino_icons: ^1.0.6
   flutter:
     sdk: flutter
-
-  cupertino_icons: ^1.0.6
-  google_fonts: ^6.2.1
   flutter_colorpicker: ^1.1.0
-  vector_math: ^2.1.4
-
-  #text-3d-pop
-  sensors: ^2.0.3 
-
-  #shaders
   flutter_shaders: ^0.1.2
-  cached_network_image: ^3.4.1
+  google_fonts: ^6.2.1
+  sensors: ^2.0.3
   url_launcher: ^6.3.1
+  vector_math: ^2.1.4
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  import_sorter: ^4.6.0
 
-  flutter_lints: ^3.0.0
+scripts: derry.yaml
 
 flutter:
-
   uses-material-design: true
 
   assets:
@@ -67,7 +62,6 @@ flutter:
     - assets/images/smoke/bottom_logo.png
     - assets/images/smoke/main_logo.png
     - shaders/motion_blur.frag
-
 
   shaders:
     - shaders/motion_blur.frag

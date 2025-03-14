@@ -1,6 +1,6 @@
 # FlutterFX: A collection of animated effects build with Flutter
 
-Multiple Flutter aniamted effects examples with Flutter.
+Multiple Flutter animated effects examples with Flutter.
 
 Each one a building block.
 
@@ -443,7 +443,7 @@ Star the repo if you find any effect usefull.
 
 ## Documentation
 
-For detailed implementation guides and API references, visit [flutterfx.com/docs](https://www.flutterfx.com/docs)
+For detailed implementation guides and API references, visit [flutterFX.com/docs](https://www.flutterfx.com/docs)
 
 ## Contributing
 
@@ -453,4 +453,4 @@ Found a bug? Have a suggestion? Feel free to open a PR with your improvements!
 
 This project is licensed under the MIT License. See the LICENSE file for details.
 
-[flutterfx.com](https://flutterfx.com/)
+[flutterFX.com](https://flutterfx.com/)
