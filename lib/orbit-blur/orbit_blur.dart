@@ -175,7 +175,7 @@ class OrbitingIcons extends StatelessWidget {
                       height: 70,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: Colors.grey.withOpacity(0.15),
+                        color: Colors.grey.withValues(alpha: 0.15),
                       ),
                     ),
                   ),
@@ -218,7 +218,7 @@ class ChevronPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = Colors.blue.withOpacity(0.6) // Reduced opacity to blend better
+      ..color = Colors.blue.withValues(alpha: 0.6) // Reduced opacity to blend better
       ..style = PaintingStyle.stroke
       ..strokeWidth = 2.5
       ..strokeCap = StrokeCap.round
@@ -290,7 +290,7 @@ class OrbitingCircle extends StatelessWidget {
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           border: Border.all(
-            color: isDarkMode ? Colors.black.withOpacity(0.1) : Colors.white.withOpacity(0.1),
+            color: isDarkMode ? Colors.black.withValues(alpha: 0.1) : Colors.white.withValues(alpha: 0.1),
           ),
         ),
       ),

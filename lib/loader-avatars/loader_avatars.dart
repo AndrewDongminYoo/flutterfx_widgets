@@ -128,7 +128,7 @@ class _AnimatedAvatarRowState extends State<AnimatedAvatarRow> with TickerProvid
         ),
         boxShadow: [
           BoxShadow(
-            color: borderColor.withOpacity(0.3),
+            color: borderColor.withValues(alpha: 0.3),
             blurRadius: 8,
             spreadRadius: 2,
           ),

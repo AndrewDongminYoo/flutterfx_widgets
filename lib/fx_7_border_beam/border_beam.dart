@@ -24,10 +24,10 @@ class BorderBeam extends StatefulWidget {
   final EdgeInsetsGeometry padding;
 
   @override
-  _BorderBeamState createState() => _BorderBeamState();
+  BorderBeamState createState() => BorderBeamState();
 }
 
-class _BorderBeamState extends State<BorderBeam> with SingleTickerProviderStateMixin {
+class BorderBeamState extends State<BorderBeam> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animation;
 
@@ -130,7 +130,7 @@ class BorderBeamPainter extends CustomPainter {
       gradientStart,
       gradientEnd,
       [
-        colorTo.withOpacity(0), // Transparent color for fading effect
+        colorTo.withValues(alpha: 0), // Transparent color for fading effect
         colorTo,
         colorFrom,
       ],

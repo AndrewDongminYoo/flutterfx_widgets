@@ -2,10 +2,10 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 
-import 'package:fx_2_folder/fx_14_text_reveal/strategies/FadeBlurStrategy.dart';
-import 'package:fx_2_folder/fx_14_text_reveal/strategies/FlipUpStragegy.dart';
-import 'package:fx_2_folder/fx_14_text_reveal/strategies/FlyingCharactersStrategy.dart';
-import 'package:fx_2_folder/fx_14_text_reveal/strategies/SwirlFloatStrategy.dart';
+import 'package:fx_2_folder/fx_14_text_reveal/strategies/fade_blur_strategy.dart';
+import 'package:fx_2_folder/fx_14_text_reveal/strategies/flip_up_strategy.dart';
+import 'package:fx_2_folder/fx_14_text_reveal/strategies/flying_characters_strategy.dart';
+import 'package:fx_2_folder/fx_14_text_reveal/strategies/swirl_float_strategy.dart';
 import 'package:fx_2_folder/fx_14_text_reveal/text_reveal_widget.dart';
 
 // Animation Strategy Selection Model

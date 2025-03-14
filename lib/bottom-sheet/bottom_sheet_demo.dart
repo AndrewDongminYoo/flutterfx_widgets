@@ -36,89 +36,87 @@ class _BottomSheetDemoState extends State<BottomSheetDemo> {
             painter: GridPatternPainter(isDarkMode: false),
           ),
         ),
-        Container(
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.fromLTRB(24, 24, 24, 24),
-                child: Row(
+        Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(24, 24, 24, 24),
+              child: Row(
+                children: [
+                  Icon(
+                    Icons.design_services_rounded,
+                    size: 32,
+                    color: Colors.grey[800],
+                  ),
+                  const SizedBox(width: 12),
+                  Text(
+                    'Your App',
+                    style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                          color: Colors.grey[900],
+                          fontWeight: FontWeight.bold,
+                          letterSpacing: 0.5,
+                        ),
+                  ),
+                ],
+              ),
+            ),
+            Expanded(
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Icon(
-                      Icons.design_services_rounded,
-                      size: 32,
-                      color: Colors.grey[800],
+                      Icons.swipe_up_rounded,
+                      size: 48,
+                      color: Colors.grey[700],
                     ),
-                    const SizedBox(width: 12),
+                    const SizedBox(height: 24),
                     Text(
-                      'Your App',
+                      'Show bottomsheet',
                       style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                            color: Colors.grey[900],
-                            fontWeight: FontWeight.bold,
-                            letterSpacing: 0.5,
+                            color: Colors.grey[800],
+                            fontWeight: FontWeight.w500,
+                            letterSpacing: 0.8,
                           ),
+                    ),
+                    const SizedBox(height: 12),
+                    Text(
+                      'Discover More',
+                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                            color: Colors.grey[600],
+                            fontWeight: FontWeight.w400,
+                          ),
+                    ),
+                    const SizedBox(height: 32),
+                    ElevatedButton(
+                      onPressed: _drawerController.toggle,
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.grey[800],
+                        foregroundColor: Colors.white,
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 32,
+                          vertical: 16,
+                        ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(
+                            12,
+                          ), // More modern, squared corners
+                        ),
+                        elevation: 0,
+                      ),
+                      child: const Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text('Open'),
+                          SizedBox(width: 8),
+                          Icon(Icons.arrow_upward_rounded, size: 18),
+                        ],
+                      ),
                     ),
                   ],
                 ),
               ),
-              Expanded(
-                child: Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.swipe_up_rounded,
-                        size: 48,
-                        color: Colors.grey[700],
-                      ),
-                      const SizedBox(height: 24),
-                      Text(
-                        'Show bottomsheet',
-                        style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                              color: Colors.grey[800],
-                              fontWeight: FontWeight.w500,
-                              letterSpacing: 0.8,
-                            ),
-                      ),
-                      const SizedBox(height: 12),
-                      Text(
-                        'Discover More',
-                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                              color: Colors.grey[600],
-                              fontWeight: FontWeight.w400,
-                            ),
-                      ),
-                      const SizedBox(height: 32),
-                      ElevatedButton(
-                        onPressed: _drawerController.toggle,
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.grey[800],
-                          foregroundColor: Colors.white,
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 32,
-                            vertical: 16,
-                          ),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(
-                              12,
-                            ), // More modern, squared corners
-                          ),
-                          elevation: 0,
-                        ),
-                        child: const Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Text('Open'),
-                            SizedBox(width: 8),
-                            Icon(Icons.arrow_upward_rounded, size: 18),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ],
     );
@@ -223,13 +221,13 @@ class _BottomSheetDemoState extends State<BottomSheetDemo> {
                   end: Alignment.bottomRight,
                   colors: [
                     color,
-                    color.withOpacity(0.7),
+                    color.withValues(alpha: 0.7),
                   ],
                 ),
                 borderRadius: BorderRadius.circular(16),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.grey[400]!.withOpacity(0.3),
+                    color: Colors.grey[400]!.withValues(alpha: 0.3),
                     blurRadius: 8,
                     offset: const Offset(0, 4),
                   ),

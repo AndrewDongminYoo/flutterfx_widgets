@@ -29,9 +29,9 @@ class MysticalWavesState extends State<MysticalWaves> with TickerProviderStateMi
   List<Color> get _waveColors =>
       widget.waveColors ??
       [
-        const Color(0xFFFFD700).withOpacity(0.5), // Radiant gold
-        const Color(0xFFFFA500).withOpacity(0.4), // Glowing orange
-        const Color(0xFFFFE4B5).withOpacity(0.3), // Soft moccasin
+        const Color(0xFFFFD700).withValues(alpha: 0.5), // Radiant gold
+        const Color(0xFFFFA500).withValues(alpha: 0.4), // Glowing orange
+        const Color(0xFFFFE4B5).withValues(alpha: 0.3), // Soft moccasin
       ];
 
   @override
@@ -129,7 +129,7 @@ class _WavePainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = waveColor.withOpacity(opacity)
+      ..color = waveColor.withValues(alpha: opacity)
       ..style = PaintingStyle.fill
       ..maskFilter = MaskFilter.blur(BlurStyle.normal, blur);
 
@@ -162,7 +162,7 @@ class MyScreen extends StatefulWidget {
   const MyScreen({super.key});
 
   @override
-  _MyScreenState createState() => _MyScreenState();
+  State<MyScreen> createState() => _MyScreenState();
 }
 
 class _MyScreenState extends State<MyScreen> {
@@ -190,12 +190,12 @@ class _MyScreenState extends State<MyScreen> {
         mainAxisSize: MainAxisSize.min,
         children: [
           FloatingActionButton(
-            onPressed: () => _wavesKey.currentState?.startAnimation(),
+            onPressed: () async => _wavesKey.currentState?.startAnimation(),
             child: const Icon(Icons.play_arrow),
           ),
           const SizedBox(width: 16),
           FloatingActionButton(
-            onPressed: () => _wavesKey.currentState?.stopAnimation(),
+            onPressed: () async => _wavesKey.currentState?.stopAnimation(),
             child: const Icon(Icons.stop),
           ),
         ],

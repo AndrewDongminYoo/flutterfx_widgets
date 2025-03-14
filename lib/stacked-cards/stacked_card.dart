@@ -294,6 +294,7 @@ class CardModel {
   final int id;
 }
 
+@immutable
 // A custom position class for better type safety and clarity
 class CardPosition {
   const CardPosition({

@@ -7,7 +7,7 @@ class Particle {
     required this.position,
     required this.size,
     required this.direction,
-    required this.speedHorz,
+    required this.speedHorizontal,
     required this.speedUp,
     required this.spinSpeed,
     required this.spinVal,
@@ -17,7 +17,7 @@ class Particle {
   Offset position;
   double size;
   double direction;
-  double speedHorz;
+  double speedHorizontal;
   double speedUp;
   double spinSpeed;
   double spinVal;
@@ -25,7 +25,7 @@ class Particle {
 
   void update() {
     position = Offset(
-      position.dx - speedHorz * direction,
+      position.dx - speedHorizontal * direction,
       position.dy - speedUp,
     );
     speedUp = math.min(size, speedUp - 1);
@@ -38,14 +38,14 @@ class CoolMode extends StatefulWidget {
     super.key,
     required this.child,
     this.particleCount = 45,
-    this.speedHorz,
+    this.speedHorizontal,
     this.speedUp,
     this.particleImage,
   });
 
   final Widget child;
   final int particleCount;
-  final double? speedHorz;
+  final double? speedHorizontal;
   final double? speedUp;
   final String? particleImage;
 
@@ -79,7 +79,9 @@ class _CoolModeState extends State<CoolMode> with TickerProviderStateMixin {
     final renderBox = _childKey.currentContext?.findRenderObject() as RenderBox?;
     final paintBox = context.findRenderObject() as RenderBox?;
 
-    if (renderBox == null || paintBox == null) return Offset.zero;
+    if (renderBox == null || paintBox == null) {
+      return Offset.zero;
+    }
 
     // Get the global position of the button
     final globalPosition = renderBox.localToGlobal(Offset.zero);
@@ -117,7 +119,7 @@ class _CoolModeState extends State<CoolMode> with TickerProviderStateMixin {
   void _addParticle() {
     final sizes = <double>[15, 18, 21, 23, 26];
     final size = sizes[_random.nextInt(sizes.length)];
-    final speedHorz = widget.speedHorz ?? _random.nextDouble() * 10;
+    final speedHorizontal = widget.speedHorizontal ?? _random.nextDouble() * 10;
     final speedUp = widget.speedUp ?? _random.nextDouble() * 25;
     final spinVal = _random.nextDouble() * 360;
     final spinSpeed = _random.nextDouble() * 35 * (_random.nextBool() ? -1 : 1);
@@ -130,7 +132,7 @@ class _CoolModeState extends State<CoolMode> with TickerProviderStateMixin {
         position: widgetPosition,
         size: size,
         direction: direction.toDouble(),
-        speedHorz: speedHorz,
+        speedHorizontal: speedHorizontal,
         speedUp: speedUp,
         spinSpeed: spinSpeed,
         spinVal: spinVal,

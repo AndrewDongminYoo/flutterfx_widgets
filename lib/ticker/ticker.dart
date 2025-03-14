@@ -142,14 +142,10 @@ class _ScrollingTickerWidgetState extends State<ScrollingTickerWidget> with Sing
     final screenWidth = MediaQuery.of(context).size.width;
     final duration = Duration(milliseconds: (screenWidth / widget.speed * 4000).toInt());
 
-    Future.delayed(const Duration(milliseconds: 50), () {
+    Future.delayed(const Duration(milliseconds: 50), () async {
       if (_scrollController.hasClients) {
-        _scrollController
-            .animateTo(
-          _scrollController.position.maxScrollExtent,
-          duration: duration,
-          curve: Curves.linear,
-        )
+        await _scrollController
+            .animateTo(_scrollController.position.maxScrollExtent, duration: duration, curve: Curves.linear)
             .then((_) {
           if (_scrollController.hasClients) {
             _scrollController.jumpTo(0);

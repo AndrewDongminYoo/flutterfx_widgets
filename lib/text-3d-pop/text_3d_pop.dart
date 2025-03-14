@@ -58,7 +58,9 @@ class _Gyro3DTextState extends State<Gyro3DText> {
   }
 
   String _getOrientationEmoji(double angle, bool isPitch) {
-    if (angle.abs() < widget.movementThreshold) return '⬆️';
+    if (angle.abs() < widget.movementThreshold) {
+      return '⬆️';
+    }
     if (isPitch) {
       return angle > 0 ? '⬇️' : '⬆️';
     } else {
@@ -68,9 +70,15 @@ class _Gyro3DTextState extends State<Gyro3DText> {
 
   String _getTiltIntensity(double angle) {
     final absAngle = angle.abs();
-    if (absAngle < widget.movementThreshold) return 'Stable';
-    if (absAngle < 10) return 'Slight';
-    if (absAngle < 20) return 'Moderate';
+    if (absAngle < widget.movementThreshold) {
+      return 'Stable';
+    }
+    if (absAngle < 10) {
+      return 'Slight';
+    }
+    if (absAngle < 20) {
+      return 'Moderate';
+    }
     return 'Strong';
   }
 
@@ -86,7 +94,7 @@ class _Gyro3DTextState extends State<Gyro3DText> {
   }
 
   void _logDeviceOrientation(double pitch, double roll) {
-    if (_logCounter % 2 == 0) {
+    if (_logCounter.isEven) {
       // Log every second
       final timestamp = DateTime.now().toIso8601String();
       final pitchIntensity = _getTiltIntensity(pitch);
@@ -106,7 +114,9 @@ class _Gyro3DTextState extends State<Gyro3DText> {
   void _startListening() {
     _accelerometerSubscription = accelerometerEvents.listen(
       (AccelerometerEvent event) {
-        if (!mounted) return;
+        if (!mounted) {
+          return;
+        }
 
         final x = event.x;
         final y = event.y;
@@ -159,6 +169,7 @@ class _Gyro3DTextState extends State<Gyro3DText> {
 
   @override
   void dispose() {
+    // ignore: discarded_futures
     _accelerometerSubscription?.cancel();
     _logTimer?.cancel();
     super.dispose();
@@ -192,7 +203,7 @@ class _Gyro3DTextState extends State<Gyro3DText> {
             color: widget.textColor,
             shadows: [
               Shadow(
-                color: widget.shadowColor.withOpacity(0.3),
+                color: widget.shadowColor.withValues(alpha: 0.3),
                 offset: const Offset(1, 1),
                 blurRadius: 2,
               ),

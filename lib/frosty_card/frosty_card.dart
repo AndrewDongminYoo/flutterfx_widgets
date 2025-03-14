@@ -9,14 +9,14 @@ class FrostyCardDemo extends StatefulWidget {
   const FrostyCardDemo({super.key});
 
   @override
-  _FrostyCardDemoState createState() => _FrostyCardDemoState();
+  FrostyCardDemoState createState() => FrostyCardDemoState();
 }
 
-class _FrostyCardDemoState extends State<FrostyCardDemo> with SingleTickerProviderStateMixin {
+class FrostyCardDemoState extends State<FrostyCardDemo> with SingleTickerProviderStateMixin {
   double _borderRadius = 20;
   double _blurValue = 10;
   double _opacity = 0.2;
-  Color _color = Colors.white.withOpacity(0.2);
+  Color _color = Colors.white.withValues(alpha: 0.2);
   late AnimationController _controller;
 
   @override
@@ -113,8 +113,8 @@ class _FrostyCardDemoState extends State<FrostyCardDemo> with SingleTickerProvid
     );
   }
 
-  void _showColorPicker() {
-    showDialog(
+  Future<void> _showColorPicker() async {
+    await showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
@@ -123,7 +123,7 @@ class _FrostyCardDemoState extends State<FrostyCardDemo> with SingleTickerProvid
             child: ColorPicker(
               pickerColor: _color,
               onColorChanged: (Color color) {
-                setState(() => _color = color.withOpacity(_opacity));
+                setState(() => _color = color.withValues(alpha: _opacity));
               },
               pickerAreaHeightPercent: 0.8,
             ),
@@ -167,7 +167,7 @@ class FrostyCard extends StatelessWidget {
           decoration: BoxDecoration(
             color: color,
             borderRadius: BorderRadius.circular(borderRadius),
-            border: Border.all(color: Colors.white.withOpacity(0.2)),
+            border: Border.all(color: Colors.white.withValues(alpha: 0.2)),
           ),
           child: const Center(
             child: Text(
@@ -201,9 +201,9 @@ class BackgroundPainter extends CustomPainter {
 
     // Animated circles
     final circleColors = [
-      Colors.blue.withOpacity(0.7),
-      Colors.purple.withOpacity(0.7),
-      Colors.pink.withOpacity(0.7),
+      Colors.blue.withValues(alpha: 0.7),
+      Colors.purple.withValues(alpha: 0.7),
+      Colors.pink.withValues(alpha: 0.7),
     ];
 
     for (var i = 0; i < 3; i++) {

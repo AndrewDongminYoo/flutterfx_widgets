@@ -64,7 +64,9 @@ class _GlobeOfLogosState extends State<GlobeOfLogos> with SingleTickerProviderSt
   }
 
   void _initializeIcons() {
-    if (widget.icons.isEmpty) return;
+    if (widget.icons.isEmpty) {
+      return;
+    }
 
     iconItems = List.generate(widget.icons.length, (index) {
       final phi = math.acos(-1.0 + (2.0 * index) / widget.icons.length);
@@ -93,7 +95,9 @@ class _GlobeOfLogosState extends State<GlobeOfLogos> with SingleTickerProviderSt
   }
 
   void _performAutoRotation() {
-    if (!mounted || iconItems.isEmpty || _isInteracting) return;
+    if (!mounted || iconItems.isEmpty || _isInteracting) {
+      return;
+    }
 
     // Don't auto-rotate if we recently had user interaction
     if (_lastInteractionTime != null) {
@@ -144,7 +148,9 @@ class _GlobeOfLogosState extends State<GlobeOfLogos> with SingleTickerProviderSt
   }
 
   void _handlePanUpdate(DragUpdateDetails details) {
-    if (!mounted || iconItems.isEmpty) return;
+    if (!mounted || iconItems.isEmpty) {
+      return;
+    }
 
     setState(() {
       final delta = details.localPosition - _lastPanPosition;
@@ -175,7 +181,7 @@ class _GlobeOfLogosState extends State<GlobeOfLogos> with SingleTickerProviderSt
     _lastPanPosition = details.localPosition;
   }
 
-  void _handlePanEnd(DragEndDetails details) {
+  Future<void> _handlePanEnd(DragEndDetails details) async {
     _isInteracting = false;
     _lastInteractionTime = DateTime.now();
 
@@ -200,7 +206,9 @@ class _GlobeOfLogosState extends State<GlobeOfLogos> with SingleTickerProviderSt
       );
 
       animation.addListener(() {
-        if (!mounted) return;
+        if (!mounted) {
+          return;
+        }
         setState(() {
           final deltaRotation = _lastInteractionValue - animation.value;
           final deltaMatrix = vector.Matrix4.rotationY(deltaRotation);
@@ -217,18 +225,16 @@ class _GlobeOfLogosState extends State<GlobeOfLogos> with SingleTickerProviderSt
       });
 
       // Animate to rest using physics
-      _controller.animateWith(simulation).then((_) {
+      await _controller.animateWith(simulation).then((_) {
         if (mounted) {
           // Instead of resetting, continue from current value
-          _controller.value = _controller.value; // Ensure we're at the current value
           _controller.repeat(); // Resume auto-rotation
           _lastControllerValue = _controller.value; // Maintain continuity
         }
       });
     } else {
       // If velocity is very low, just resume auto-rotation smoothly
-      _controller.value = _controller.value; // Maintain current position
-      _controller.repeat();
+      await _controller.repeat();
       _lastControllerValue = _controller.value;
     }
   }
@@ -296,7 +302,7 @@ class IconCloudPainter extends CustomPainter {
             fontSize: 24 * item.scale,
             fontFamily: item.icon.fontFamily,
             package: item.icon.fontPackage,
-            color: item.color.withOpacity(opacity.toDouble()),
+            color: item.color.withValues(alpha: opacity.toDouble()),
           ),
         ),
         textDirection: TextDirection.ltr,

@@ -131,7 +131,7 @@ class GradientDemo extends StatelessWidget {
                     sigmaY: 10,
                   ),
                   child: Container(
-                    color: Colors.white.withOpacity(0.00001),
+                    color: Colors.white.withValues(alpha: 0.00001),
                   ),
                 ),
               ),
@@ -175,7 +175,7 @@ class GradientPainter extends CustomPainter {
         startAngle: startAngle,
         endAngle: startAngle + sweepAngle,
         colors: [
-          Colors.white.withOpacity(0),
+          Colors.white.withValues(alpha: 0),
           Colors.black,
         ],
         stops: const [0.0, 1.0],
@@ -190,7 +190,7 @@ class GradientPainter extends CustomPainter {
         endAngle: pi - startAngle,
         colors: [
           Colors.black,
-          Colors.white.withOpacity(0),
+          Colors.white.withValues(alpha: 0),
         ],
         stops: const [0.0, 1.0],
       ).createShader(rect)
@@ -200,7 +200,9 @@ class GradientPainter extends CustomPainter {
     canvas.drawRect(rect, leftGradientPaint);
     canvas.drawRect(rect, rightGradientPaint);
 
-    if (!showDebugElements) return;
+    if (!showDebugElements) {
+      return;
+    }
 
     // Debug elements for both centers
     final centerPointPaint = Paint()
@@ -212,7 +214,7 @@ class GradientPainter extends CustomPainter {
 
     // Debug circles
     final debugCirclePaint = Paint()
-      ..color = Colors.blue.withOpacity(0.3)
+      ..color = Colors.blue.withValues(alpha: 0.3)
       ..style = PaintingStyle.stroke
       ..strokeWidth = 1;
 

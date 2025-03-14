@@ -93,10 +93,10 @@ class BookWidget extends StatefulWidget {
   final bool isOpen;
 
   @override
-  _BookWidgetState createState() => _BookWidgetState();
+  BookWidgetState createState() => BookWidgetState();
 }
 
-class _BookWidgetState extends State<BookWidget> with SingleTickerProviderStateMixin {
+class BookWidgetState extends State<BookWidget> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animation;
 
@@ -199,7 +199,7 @@ class BookshelfWidget extends StatefulWidget {
   final List<Book> books;
 
   @override
-  _BookshelfWidgetState createState() => _BookshelfWidgetState();
+  State<BookshelfWidget> createState() => _BookshelfWidgetState();
 }
 
 class _BookshelfWidgetState extends State<BookshelfWidget> {
@@ -236,7 +236,7 @@ class _BookshelfWidgetState extends State<BookshelfWidget> {
           onTap: () => _toggleBook(index),
           behavior: HitTestBehavior.opaque,
           child: Padding(
-            padding: const EdgeInsets.symmetric(),
+            padding: EdgeInsets.zero,
             child: AnimatedBookWrapper(
               isOpen: _books[index].isOpen,
               child: BookWidget(

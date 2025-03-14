@@ -20,7 +20,7 @@ class AnimatedGrid extends StatefulWidget {
   final Duration animationDuration;
 
   @override
-  _AnimatedGridState createState() => _AnimatedGridState();
+  State<AnimatedGrid> createState() => _AnimatedGridState();
 }
 
 class _AnimatedGridState extends State<AnimatedGrid> {
@@ -178,7 +178,7 @@ class _AnimatedGridItemState extends State<_AnimatedGridItem> with SingleTickerP
                   color: Colors.white,
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.black.withOpacity(0.1),
+                      color: Colors.black.withValues(alpha: 0.1),
                       blurRadius: 10,
                       offset: const Offset(0, 4),
                     ),

@@ -6,7 +6,7 @@ class TypingAnimationDemo extends StatefulWidget {
   const TypingAnimationDemo({super.key});
 
   @override
-  _TypingAnimationDemoState createState() => _TypingAnimationDemoState();
+  State<TypingAnimationDemo> createState() => _TypingAnimationDemoState();
 }
 
 class _TypingAnimationDemoState extends State<TypingAnimationDemo> {

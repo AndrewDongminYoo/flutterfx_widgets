@@ -19,7 +19,9 @@ class ElasticOutCurve extends Curve {
 
   @override
   double transformInternal(double t) {
-    if (t == 0 || t == 1) return t;
+    if (t == 0 || t == 1) {
+      return t;
+    }
 
     final s = period / 2 * math.pi;
     final decay = math.pow(math.e, -damping * t);
@@ -45,7 +47,9 @@ class SpringOutCurve extends Curve {
 
   @override
   double transformInternal(double t) {
-    if (t == 0 || t == 1) return t;
+    if (t == 0 || t == 1) {
+      return t;
+    }
 
     // Calculate decay based on current time
     final decay = math.pow(t, tension);
@@ -72,7 +76,9 @@ class SingleBounceCurve extends Curve {
 
   @override
   double transformInternal(double t) {
-    if (t == 0 || t == 1) return t;
+    if (t == 0 || t == 1) {
+      return t;
+    }
 
     // Before peak: Smooth acceleration to overshoot
     if (t < peakPosition) {

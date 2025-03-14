@@ -179,11 +179,11 @@ class OrbitingDotsPainter extends CustomPainter {
 
       final z = math.sin(dot.angle);
       final opacity = math.max(0.3, math.min(1, (z + 1) / 2));
-      paint.color = paint.color.withOpacity(opacity.toDouble());
+      paint.color = paint.color.withValues(alpha: opacity.toDouble());
 
       if (z > 0) {
         final glowPaint = Paint()
-          ..color = dot.color.withOpacity(0.2)
+          ..color = dot.color.withValues(alpha: 0.2)
           ..style = PaintingStyle.fill;
         canvas.drawCircle(
           position,
@@ -199,7 +199,7 @@ class OrbitingDotsPainter extends CustomPainter {
       );
     }
 
-    _drawStar(canvas, const Offset(0, 0), 12, starColor);
+    _drawStar(canvas, Offset.zero, 12, starColor);
   }
 
   void _drawStar(Canvas canvas, Offset center, double radius, Color color) {

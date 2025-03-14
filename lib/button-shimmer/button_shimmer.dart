@@ -114,8 +114,8 @@ class _ShimmerButtonState extends State<ShimmerButton> with SingleTickerProvider
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
                       colors: [
-                        Colors.white.withOpacity(0.1),
-                        Colors.white.withOpacity(_isPressed ? 0.2 : 0.1),
+                        Colors.white.withValues(alpha: 0.1),
+                        Colors.white.withValues(alpha: _isPressed ? 0.2 : 0.1),
                       ],
                     ),
                   ),
@@ -186,7 +186,7 @@ class ShimmerBorderPainter extends CustomPainter {
       gradientStart,
       gradientEnd,
       [
-        colorTo.withOpacity(0),
+        colorTo.withValues(alpha: 0),
         colorTo,
         colorFrom,
       ],

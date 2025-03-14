@@ -133,12 +133,12 @@ class ReviewCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
           color: Theme.of(context).brightness == Brightness.light
-              ? Colors.black.withOpacity(0.1)
-              : Colors.white.withOpacity(0.1),
+              ? Colors.black.withValues(alpha: 0.1)
+              : Colors.white.withValues(alpha: 0.1),
         ),
         color: Theme.of(context).brightness == Brightness.light
-            ? Colors.black.withOpacity(0.01)
-            : Colors.white.withOpacity(0.1),
+            ? Colors.black.withValues(alpha: 0.01)
+            : Colors.white.withValues(alpha: 0.1),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -169,8 +169,8 @@ class ReviewCard extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 12,
                         color: Theme.of(context).brightness == Brightness.light
-                            ? Colors.black.withOpacity(0.4)
-                            : Colors.white.withOpacity(0.4),
+                            ? Colors.black.withValues(alpha: 0.4)
+                            : Colors.white.withValues(alpha: 0.4),
                       ),
                       softWrap: true,
                     ),
@@ -186,8 +186,8 @@ class ReviewCard extends StatelessWidget {
               style: TextStyle(
                 fontSize: 14,
                 color: Theme.of(context).brightness == Brightness.light
-                    ? Colors.black.withOpacity(0.8)
-                    : Colors.white.withOpacity(0.8),
+                    ? Colors.black.withValues(alpha: 0.8)
+                    : Colors.white.withValues(alpha: 0.8),
               ),
               overflow: TextOverflow.ellipsis,
               maxLines: 3,
@@ -295,7 +295,7 @@ class MarqueeDemo extends StatelessWidget {
                 gradient: LinearGradient(
                   colors: [
                     Theme.of(context).scaffoldBackgroundColor,
-                    Theme.of(context).scaffoldBackgroundColor.withOpacity(0),
+                    Theme.of(context).scaffoldBackgroundColor.withValues(alpha: 0),
                   ],
                 ),
               ),
@@ -313,7 +313,7 @@ class MarqueeDemo extends StatelessWidget {
                   end: Alignment.centerLeft,
                   colors: [
                     Theme.of(context).scaffoldBackgroundColor,
-                    Theme.of(context).scaffoldBackgroundColor.withOpacity(0),
+                    Theme.of(context).scaffoldBackgroundColor.withValues(alpha: 0),
                   ],
                 ),
               ),

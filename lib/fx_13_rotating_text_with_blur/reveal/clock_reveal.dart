@@ -12,7 +12,9 @@ class ClockHandRevealClipper extends CustomClipper<Path> {
   Path getClip(Size size) {
     final center = Offset(size.width / 2, size.height / 2);
 
-    if (progress <= 0.0) return Path();
+    if (progress <= 0.0) {
+      return Path();
+    }
     if (progress >= 1.0) {
       return Path()..addRect(Rect.fromLTWH(0, 0, size.width, size.height));
     }
@@ -50,7 +52,9 @@ class BlurWedgeClipper extends CustomClipper<Path> {
 
   @override
   Path getClip(Size size) {
-    if (progress <= 0.0 || progress >= 1.0) return Path();
+    if (progress <= 0.0 || progress >= 1.0) {
+      return Path();
+    }
 
     final center = Offset(size.width / 2, size.height / 2);
     final radius = size.width / 2;
@@ -87,7 +91,9 @@ class GradientMaskPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    if (progress <= 0.0 || progress >= 1.0) return;
+    if (progress <= 0.0 || progress >= 1.0) {
+      return;
+    }
 
     final center = Offset(size.width / 2, size.height / 2);
     final radius = size.width / 2;
@@ -97,8 +103,8 @@ class GradientMaskPainter extends CustomPainter {
     final paint = Paint()
       ..shader = SweepGradient(
         colors: [
-          Colors.white.withOpacity(wedgeOpacity),
-          Colors.white.withOpacity(0),
+          Colors.white.withValues(alpha: wedgeOpacity),
+          Colors.white.withValues(alpha: 0),
         ],
         stops: [0.0, bandWidth],
         startAngle: startAngle,

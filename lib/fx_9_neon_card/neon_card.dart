@@ -14,10 +14,10 @@ class NeonCard extends StatefulWidget {
   final double glowSpread;
 
   @override
-  _NeonCardState createState() => _NeonCardState();
+  NeonCardState createState() => NeonCardState();
 }
 
-class _NeonCardState extends State<NeonCard> with SingleTickerProviderStateMixin {
+class NeonCardState extends State<NeonCard> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
 
   @override
@@ -77,8 +77,8 @@ class GlowRectanglePainter extends CustomPainter {
         Offset(size.width / 2, size.height / 2),
         size.width * glowSpread,
         [
-          Color.lerp(firstColor, secondColor, progress)!.withOpacity(intensity),
-          Color.lerp(firstColor, secondColor, progress)!.withOpacity(0),
+          Color.lerp(firstColor, secondColor, progress)!.withValues(alpha: intensity),
+          Color.lerp(firstColor, secondColor, progress)!.withValues(alpha: 0),
         ],
       )
       ..maskFilter = const MaskFilter.blur(BlurStyle.normal, blurSigma);

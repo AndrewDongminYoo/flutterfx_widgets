@@ -9,7 +9,7 @@ class CameraSimulation extends StatefulWidget {
   const CameraSimulation({super.key});
 
   @override
-  _CameraSimulationState createState() => _CameraSimulationState();
+  State<CameraSimulation> createState() => _CameraSimulationState();
 }
 
 class _CameraSimulationState extends State<CameraSimulation> {
@@ -215,7 +215,7 @@ class _CameraSimulationState extends State<CameraSimulation> {
     );
   }
 
-  void _exportSettings() {
+  Future<void> _exportSettings() async {
     final settings = {
       'rotateX': _rotateX,
       'rotateY': _rotateY,
@@ -230,7 +230,7 @@ class _CameraSimulationState extends State<CameraSimulation> {
     };
 
     final jsonString = const JsonEncoder.withIndent('  ').convert(settings);
-    Clipboard.setData(ClipboardData(text: jsonString));
+    await Clipboard.setData(ClipboardData(text: jsonString));
 
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(content: Text('Settings and code copied to clipboard')),

@@ -206,9 +206,9 @@ class GlowingThreadPainter extends CustomPainter {
         gradientStart,
         gradientEnd,
         [
-          glowColor.withOpacity(0),
-          glowColor.withOpacity(0.15),
-          glowColor.withOpacity(0),
+          glowColor.withValues(alpha: 0),
+          glowColor.withValues(alpha: 0.15),
+          glowColor.withValues(alpha: 0),
         ],
         [0.0, 0.5, 1.0],
       );
@@ -224,9 +224,9 @@ class GlowingThreadPainter extends CustomPainter {
         gradientStart,
         gradientEnd,
         [
-          glowColor.withOpacity(0),
-          glowColor.withOpacity(0.4),
-          glowColor.withOpacity(0),
+          glowColor.withValues(alpha: 0),
+          glowColor.withValues(alpha: 0.4),
+          glowColor.withValues(alpha: 0),
         ],
         [0.0, 0.5, 1.0],
       );
@@ -242,9 +242,9 @@ class GlowingThreadPainter extends CustomPainter {
         gradientStart,
         gradientEnd,
         [
-          glowColor.withOpacity(0),
-          glowColor.withOpacity(0.8),
-          glowColor.withOpacity(0),
+          glowColor.withValues(alpha: 0),
+          glowColor.withValues(alpha: 0.8),
+          glowColor.withValues(alpha: 0),
         ],
         [0.0, 0.5, 1.0],
       );
@@ -256,7 +256,7 @@ class GlowingThreadPainter extends CustomPainter {
     } else {
       // Make the base thread slightly transparent
       final basePaint = Paint()
-        ..color = threadColor.withOpacity(0.6)
+        ..color = threadColor.withValues(alpha: 0.6)
         ..strokeWidth = 1.5
         ..style = PaintingStyle.stroke
         ..strokeCap = StrokeCap.round;
@@ -302,7 +302,7 @@ class GlowingThreadDemo extends StatelessWidget {
             width: 200,
             height: 100,
             child: GlowingThreadWidget(
-              threadColor: const Color(0xFF80FFDB).withOpacity(0.4),
+              threadColor: const Color(0xFF80FFDB).withValues(alpha: 0.4),
               glowColor: const Color(0xFFFFD700), // Golden glow
               glowWidth: 3,
               duration: 2,

@@ -61,7 +61,9 @@ class _DotPatternState extends State<DotPattern> with SingleTickerProviderStateM
 
   /// Updates the touch location with spring physics animation
   void _updateTouchLocation() {
-    if (_targetTouchLocation == null || _currentTouchLocation == null) return;
+    if (_targetTouchLocation == null || _currentTouchLocation == null) {
+      return;
+    }
 
     setState(() {
       final progress = _animationController.value;
@@ -99,7 +101,7 @@ class _DotPatternState extends State<DotPattern> with SingleTickerProviderStateM
   }
 
   /// Handles touch input and triggers haptic feedback
-  void _handleTouch(dynamic details) {
+  Future<void> _handleTouch(dynamic details) async {
     setState(() {
       if (details is DragStartDetails) {
         _targetTouchLocation = details.localPosition;
@@ -121,14 +123,14 @@ class _DotPatternState extends State<DotPattern> with SingleTickerProviderStateM
       _animationController.forward(from: startValue);
     });
 
-    _triggerHapticFeedback();
+    await _triggerHapticFeedback();
   }
 
   /// Provides haptic feedback with rate limiting
-  void _triggerHapticFeedback() {
+  Future<void> _triggerHapticFeedback() async {
     final now = DateTime.now();
     if (now.difference(_lastFeedbackTime).inMilliseconds > 100) {
-      HapticFeedback.lightImpact();
+      await HapticFeedback.lightImpact();
       _lastFeedbackTime = now;
     }
   }

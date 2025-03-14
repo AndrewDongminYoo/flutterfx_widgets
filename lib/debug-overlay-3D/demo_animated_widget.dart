@@ -146,7 +146,7 @@ class CirclePatternPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = Colors.blue.withOpacity(0.5)
+      ..color = Colors.blue.withValues(alpha: 0.5)
       ..style = PaintingStyle.fill
       ..strokeWidth = 2.0;
 
@@ -168,7 +168,7 @@ class SquarePatternPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = Colors.purple.withOpacity(0.5)
+      ..color = Colors.purple.withValues(alpha: 0.5)
       ..style = PaintingStyle.fill
       ..strokeWidth = 2.0;
 
@@ -191,7 +191,7 @@ class DiamondPatternPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = Colors.orange.withOpacity(0.5)
+      ..color = Colors.orange.withValues(alpha: 0.5)
       ..style = PaintingStyle.fill
       ..strokeWidth = 2.0;
 

@@ -69,7 +69,7 @@ class _BackgroundBeamsWithCollisionState extends State<BackgroundBeamsWithCollis
                     : const Color(0xFF262626),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.06),
+                    color: Colors.black.withValues(alpha: 0.06),
                     blurRadius: 24,
                   ),
                 ],
@@ -200,8 +200,8 @@ class ExplosionPainter extends CustomPainter {
       // Create a gradient for the particle
       final gradient = RadialGradient(
         colors: [
-          Colors.purple.withOpacity(1 - progress),
-          Colors.purple.withOpacity(0),
+          Colors.purple.withValues(alpha: 1 - progress),
+          Colors.purple.withValues(alpha: 0),
         ],
       );
 

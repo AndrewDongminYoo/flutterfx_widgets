@@ -34,7 +34,9 @@ class _DebugTransformOverlayState extends State<DebugTransformOverlay> {
 
   @override
   Widget build(BuildContext context) {
-    if (!widget.enabled) return widget.child;
+    if (!widget.enabled) {
+      return widget.child;
+    }
 
     return Stack(
       children: [
@@ -82,7 +84,7 @@ class _DebugTransformOverlayState extends State<DebugTransformOverlay> {
           child: Container(
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
-              color: Colors.black.withOpacity(0.7),
+              color: Colors.black.withValues(alpha: 0.7),
               borderRadius: BorderRadius.circular(8),
             ),
             child: Column(

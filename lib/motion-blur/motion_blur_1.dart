@@ -32,6 +32,7 @@ class _MotionBlurWidgetState extends State<MotionBlurWidget> {
   @override
   void initState() {
     super.initState();
+    // ignore: discarded_futures
     _loadShader();
   }
 
@@ -230,10 +231,10 @@ class ExampleScreen extends StatefulWidget {
   const ExampleScreen({super.key});
 
   @override
-  _ExampleScreenState createState() => _ExampleScreenState();
+  ExampleScreenState createState() => ExampleScreenState();
 }
 
-class _ExampleScreenState extends State<ExampleScreen> with TickerProviderStateMixin {
+class ExampleScreenState extends State<ExampleScreen> with TickerProviderStateMixin {
   late AnimationController _demoController;
   bool _showAutomatedDemo = false;
 
@@ -280,7 +281,7 @@ class _ExampleScreenState extends State<ExampleScreen> with TickerProviderStateM
                       shape: BoxShape.circle,
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.black.withOpacity(0.2),
+                          color: Colors.black.withValues(alpha: 0.2),
                           blurRadius: 10,
                           offset: const Offset(0, 4),
                         ),
@@ -299,7 +300,7 @@ class _ExampleScreenState extends State<ExampleScreen> with TickerProviderStateM
               color: Colors.white,
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.1),
+                  color: Colors.black.withValues(alpha: 0.1),
                   blurRadius: 10,
                   offset: const Offset(0, -4),
                 ),

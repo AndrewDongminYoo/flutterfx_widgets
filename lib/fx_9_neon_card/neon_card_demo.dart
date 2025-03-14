@@ -8,29 +8,27 @@ class NeonGradientCardDemo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return const Center(
       child: SizedBox(
         width: 300,
         height: 200,
         child: Center(
-          child: Container(
-            child: const NeonCard(
-              intensity: 0.5,
-              glowSpread: .8,
-              child: SizedBox(
-                width: 300,
-                height: 200,
-                child: Center(
-                  child: GradientText(
-                    text: 'Neon\nGradient\nCard',
-                    fontSize: 44,
-                    gradientColors: [
-                      // Pink
-                      Color.fromARGB(255, 255, 41, 117),
-                      Color.fromARGB(255, 255, 41, 117),
-                      Color.fromARGB(255, 9, 221, 222), // Cyan
-                    ],
-                  ),
+          child: NeonCard(
+            intensity: 0.5,
+            glowSpread: .8,
+            child: SizedBox(
+              width: 300,
+              height: 200,
+              child: Center(
+                child: GradientText(
+                  text: 'Neon\nGradient\nCard',
+                  fontSize: 44,
+                  gradientColors: [
+                    // Pink
+                    Color.fromARGB(255, 255, 41, 117),
+                    Color.fromARGB(255, 255, 41, 117),
+                    Color.fromARGB(255, 9, 221, 222), // Cyan
+                  ],
                 ),
               ),
             ),

@@ -56,7 +56,9 @@ class _FlickeringGridState extends State<FlickeringGrid> with SingleTickerProvid
   }
 
   void _initializeSquares() {
-    if (_size == null) return;
+    if (_size == null) {
+      return;
+    }
 
     final cols = (_size!.width / (widget.squareSize + widget.gridGap)).floor();
     final rows = (_size!.height / (widget.squareSize + widget.gridGap)).floor();
@@ -68,7 +70,9 @@ class _FlickeringGridState extends State<FlickeringGrid> with SingleTickerProvid
   }
 
   void _updateSquares() {
-    if (squares.isEmpty) return;
+    if (squares.isEmpty) {
+      return;
+    }
 
     const deltaTime = 1 / 60; // Assuming 60 FPS
 
@@ -122,11 +126,13 @@ class _GridPainter extends CustomPainter {
 
     for (var i = 0; i < cols; i++) {
       for (var j = 0; j < rows; j++) {
-        if (i * rows + j >= squares.length) continue;
+        if (i * rows + j >= squares.length) {
+          continue;
+        }
 
         final opacity = squares[i * rows + j];
         final paint = Paint()
-          ..color = color.withOpacity(opacity)
+          ..color = color.withValues(alpha: opacity)
           ..style = PaintingStyle.fill;
 
         canvas.drawRect(
@@ -338,7 +344,7 @@ class FullscreenFlickeringGrid extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
-                color: Colors.black.withOpacity(0.7),
+                color: Colors.black.withValues(alpha: 0.7),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Column(
@@ -393,8 +399,8 @@ class ThemePreviewCard extends StatelessWidget {
       margin: const EdgeInsets.all(4),
       child: InkWell(
         // Add this InkWell widget
-        onTap: () {
-          Navigator.of(context).push<void>(
+        onTap: () async {
+          await Navigator.of(context).push<void>(
             MaterialPageRoute(
               builder: (context) => FullscreenFlickeringGrid(
                 config: config,

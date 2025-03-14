@@ -72,11 +72,15 @@ class TextOnPathPainter extends CustomPainter {
     // Draw each character
     for (var i = 0; i < text.length; i++) {
       final charOffset = startOffset + (i * charWidth);
-      if (charOffset < 0 || charOffset > pathLength) continue;
+      if (charOffset < 0 || charOffset > pathLength) {
+        continue;
+      }
 
       // Get position and tangent angle at this point
       final tangent = pathMetric.getTangentForOffset(charOffset);
-      if (tangent == null) continue;
+      if (tangent == null) {
+        continue;
+      }
 
       // Save canvas state
       canvas.save();
@@ -166,10 +170,7 @@ class _BezierTextOnPathState extends State<BezierTextOnPath> {
           controlPoints: _controlPoints,
           path: _createPath(),
         ),
-        child: const SizedBox(
-          width: double.infinity,
-          height: double.infinity,
-        ),
+        child: const SizedBox.expand(),
       ),
     );
   }
@@ -245,7 +246,7 @@ class BezierTextPainter extends CustomPainter {
 
   void _drawControlLines(Canvas canvas) {
     final linePaint = Paint()
-      ..color = Colors.white.withOpacity(0.5)
+      ..color = Colors.white.withValues(alpha: 0.5)
       ..style = PaintingStyle.stroke
       ..strokeWidth = 1;
 
@@ -276,10 +277,14 @@ class BezierTextPainter extends CustomPainter {
     // Draw each character along the path
     for (var i = 0; i < text.length; i++) {
       final charOffset = startOffset + (i * charWidth);
-      if (charOffset < 0 || charOffset > pathLength) continue;
+      if (charOffset < 0 || charOffset > pathLength) {
+        continue;
+      }
 
       final tangent = pathMetric.getTangentForOffset(charOffset);
-      if (tangent == null) continue;
+      if (tangent == null) {
+        continue;
+      }
 
       canvas.save();
 

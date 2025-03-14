@@ -16,10 +16,10 @@ class BlurFade extends StatefulWidget {
   final bool? isVisible;
 
   @override
-  _BlurFadeState createState() => _BlurFadeState();
+  BlurFadeState createState() => BlurFadeState();
 }
 
-class _BlurFadeState extends State<BlurFade> with SingleTickerProviderStateMixin {
+class BlurFadeState extends State<BlurFade> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _opacityAnimation;
   late Animation<double> _blurAnimation;
@@ -53,9 +53,11 @@ class _BlurFadeState extends State<BlurFade> with SingleTickerProviderStateMixin
 
   void _handleVisibilityChange() {
     Future.delayed(widget.delay, () {
-      if (!mounted) return;
+      if (!mounted) {
+        return;
+      }
 
-      if (widget.isVisible == true) {
+      if (widget.isVisible ?? false) {
         _controller.forward();
       } else if (widget.isVisible == false) {
         _controller.reverse();

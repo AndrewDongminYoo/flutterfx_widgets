@@ -16,7 +16,7 @@ class TypingAnimation extends StatefulWidget {
   final bool animate;
 
   @override
-  _TypingAnimationState createState() => _TypingAnimationState();
+  State<TypingAnimation> createState() => _TypingAnimationState();
 }
 
 class _TypingAnimationState extends State<TypingAnimation> {

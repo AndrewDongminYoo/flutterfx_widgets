@@ -92,7 +92,9 @@ class _BackgroundBeamsState extends State<BackgroundBeams> with TickerProviderSt
   }
 
   void _spawnBeam() {
-    if (_activeBeams.length >= widget.numberOfBeams) return;
+    if (_activeBeams.length >= widget.numberOfBeams) {
+      return;
+    }
 
     final controller = AnimationController(
       vsync: this,
@@ -205,11 +207,11 @@ class BeamsPainter extends CustomPainter {
 
     // Draw base paths with lower opacity
     paint.shader = ui.Gradient.linear(
-      const Offset(0, 0),
+      Offset.zero,
       Offset(size.width, size.height),
       [
-        Colors.grey.withOpacity(0.25),
-        Colors.grey.withOpacity(0.25),
+        Colors.grey.withValues(alpha: 0.25),
+        Colors.grey.withValues(alpha: 0.25),
       ],
     );
 
@@ -253,7 +255,7 @@ class BeamsPainter extends CustomPainter {
             gradientStart,
             gradientEnd,
             [
-              const Color(0xFFAE48FF).withOpacity(0), // Transparent start
+              const Color(0xFFAE48FF).withValues(alpha: 0), // Transparent start
               // const Color.fromARGB(255, 79, 41, 250), // Deep blue
               // const Color.fromARGB(255, 107, 75, 253), // Medium blue
               // const Color.fromARGB(255, 107, 75, 253), // Cyan

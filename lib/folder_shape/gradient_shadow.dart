@@ -160,7 +160,7 @@ class FolderBackCoverGradientPainter extends CustomPainter {
       stops: [0.0, 0.4 + 0.4 * animation.value], //from .4 to .8
       colors: [
         Colors.transparent,
-        Colors.black.withOpacity(.7),
+        Colors.black.withValues(alpha: .7),
       ],
     );
 
@@ -288,8 +288,8 @@ class BigCirclePainter extends CustomPainter {
   final Animation<double> animation;
   final Animation<double> shadowAnimation;
 
-  final Color bgLightiningColor = const Color.fromARGB(255, 112, 112, 112);
-  final Color bgLightiningColorShine = const Color.fromARGB(255, 188, 188, 188);
+  final Color bgLightningColor = const Color.fromARGB(255, 112, 112, 112);
+  final Color bgLightningColorShine = const Color.fromARGB(255, 188, 188, 188);
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -301,8 +301,8 @@ class BigCirclePainter extends CustomPainter {
 
     final paint = Paint()
       ..color = Color.lerp(
-        bgLightiningColor,
-        bgLightiningColorShine,
+        bgLightningColor,
+        bgLightningColorShine,
         animation.value,
       )!
       ..style = PaintingStyle.fill;
@@ -362,16 +362,10 @@ class ReflectionWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        const SizedBox(
-          width: double.infinity,
-          height: double.infinity,
-        ),
+        const SizedBox.expand(),
         CustomPaint(
           painter: BigCirclePainter(animation, shadowAnimation),
-          child: const SizedBox(
-            width: double.infinity,
-            height: double.infinity,
-          ),
+          child: const SizedBox.expand(),
         ),
       ],
     );

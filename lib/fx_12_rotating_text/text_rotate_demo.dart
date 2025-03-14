@@ -6,7 +6,7 @@ class TextRotateDemo extends StatefulWidget {
   const TextRotateDemo({super.key});
 
   @override
-  _TextRotateDemoState createState() => _TextRotateDemoState();
+  State<TextRotateDemo> createState() => _TextRotateDemoState();
 }
 
 class _TextRotateDemoState extends State<TextRotateDemo> {

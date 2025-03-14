@@ -28,7 +28,9 @@ class _StackedExpandedCardDemoState extends State<StackedExpandedCardDemo> {
   ];
 
   void toggleExpanded() {
-    if (isTransitioning) return;
+    if (isTransitioning) {
+      return;
+    }
     setState(() {
       isTransitioning = true;
       isExpanded = !isExpanded;
@@ -336,6 +338,7 @@ class CardModel {
   bool hasCompletedEntryAnimation;
 }
 
+@immutable
 class CardPosition {
   const CardPosition({
     this.x = 0.0,

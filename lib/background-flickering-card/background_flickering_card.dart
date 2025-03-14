@@ -132,7 +132,7 @@ class FancyCard extends StatelessWidget {
                         gradient: RadialGradient(
                           colors: [
                             colorScheme.accentGlowColor,
-                            colorScheme.accentGlowColor.withOpacity(0),
+                            colorScheme.accentGlowColor.withValues(alpha: 0),
                           ],
                         ),
                       ),
@@ -174,98 +174,98 @@ class CardColorScheme {
 //   // Cyberpunk Neon
 //   static final cyberpunk = CardColorScheme(
 //     gridColor: const Color(0xFF00FF9C),
-//     borderColor: const Color(0xFF00FF9C).withOpacity(0.3),
+//     borderColor: const Color(0xFF00FF9C).withValues(alpha: 0.3),
 //     gradientColors: [
-//       const Color(0xFF2E1460).withOpacity(0.8),
-//       const Color(0xFF6B1C8C).withOpacity(0.6),
-//       const Color(0xFF530083).withOpacity(0.4),
+//       const Color(0xFF2E1460).withValues(alpha: 0.8),
+//       const Color(0xFF6B1C8C).withValues(alpha: 0.6),
+//       const Color(0xFF530083).withValues(alpha: 0.4),
 //     ],
-//     glassColor: const Color(0xFF2A0F4D).withOpacity(0.2),
+//     glassColor: const Color(0xFF2A0F4D).withValues(alpha: 0.2),
 //     iconColor: const Color(0xFF00FFB2),
 //     titleColor: const Color(0xFF00FFB2),
 //     subtitleColor: const Color(0xFFB4FFE3),
-//     accentGlowColor: const Color(0xFF00FF9C).withOpacity(0.2),
+//     accentGlowColor: const Color(0xFF00FF9C).withValues(alpha: 0.2),
 //   );
 
 //   // Aurora Borealis
 //   static final aurora = CardColorScheme(
 //     gridColor: const Color(0xFF7AF5FF),
-//     borderColor: const Color(0xFF7AF5FF).withOpacity(0.3),
+//     borderColor: const Color(0xFF7AF5FF).withValues(alpha: 0.3),
 //     gradientColors: [
-//       const Color(0xFF134E5E).withOpacity(0.8),
-//       const Color(0xFF1FA88C).withOpacity(0.6),
-//       const Color(0xFF16A085).withOpacity(0.4),
+//       const Color(0xFF134E5E).withValues(alpha: 0.8),
+//       const Color(0xFF1FA88C).withValues(alpha: 0.6),
+//       const Color(0xFF16A085).withValues(alpha: 0.4),
 //     ],
-//     glassColor: const Color(0xFF134E5E).withOpacity(0.2),
+//     glassColor: const Color(0xFF134E5E).withValues(alpha: 0.2),
 //     iconColor: const Color(0xFF7AF5FF),
 //     titleColor: const Color(0xFF7AF5FF),
 //     subtitleColor: const Color(0xFFB4F8FF),
-//     accentGlowColor: const Color(0xFF7AF5FF).withOpacity(0.2),
+//     accentGlowColor: const Color(0xFF7AF5FF).withValues(alpha: 0.2),
 //   );
 
 //   // Sunset Fusion
 //   static final sunset = CardColorScheme(
 //     gridColor: const Color(0xFFFFB347),
-//     borderColor: const Color(0xFFFFB347).withOpacity(0.3),
+//     borderColor: const Color(0xFFFFB347).withValues(alpha: 0.3),
 //     gradientColors: [
-//       const Color(0xFFCB2D3E).withOpacity(0.8),
-//       const Color(0xFFEF473A).withOpacity(0.6),
-//       const Color(0xFFDE6262).withOpacity(0.4),
+//       const Color(0xFFCB2D3E).withValues(alpha: 0.8),
+//       const Color(0xFFEF473A).withValues(alpha: 0.6),
+//       const Color(0xFFDE6262).withValues(alpha: 0.4),
 //     ],
-//     glassColor: const Color(0xFFCB2D3E).withOpacity(0.2),
+//     glassColor: const Color(0xFFCB2D3E).withValues(alpha: 0.2),
 //     iconColor: const Color(0xFFFFB347),
 //     titleColor: const Color(0xFFFFB347),
 //     subtitleColor: const Color(0xFFFFD7A8),
-//     accentGlowColor: const Color(0xFFFFB347).withOpacity(0.2),
+//     accentGlowColor: const Color(0xFFFFB347).withValues(alpha: 0.2),
 //   );
 // }
 class CardThemes {
   // Cyberpunk Neon
   static final cyberpunk = CardColorScheme(
     gridColor: const Color(0xFF00FF9C), // Kept bright neon green
-    borderColor: const Color(0xFF00FF9C).withOpacity(0.3),
+    borderColor: const Color(0xFF00FF9C).withValues(alpha: 0.3),
     gradientColors: [
-      const Color(0xFF2E1460).withOpacity(0.6), // Reduced opacity from 0.8
-      const Color(0xFF6B1C8C).withOpacity(0.4), // Reduced opacity from 0.6
-      const Color(0xFF530083).withOpacity(0.2), // Reduced opacity from 0.4
+      const Color(0xFF2E1460).withValues(alpha: 0.6), // Reduced opacity from 0.8
+      const Color(0xFF6B1C8C).withValues(alpha: 0.4), // Reduced opacity from 0.6
+      const Color(0xFF530083).withValues(alpha: 0.2), // Reduced opacity from 0.4
     ],
-    glassColor: const Color(0xFF2A0F4D).withOpacity(0.1), // Reduced from 0.2
+    glassColor: const Color(0xFF2A0F4D).withValues(alpha: 0.1), // Reduced from 0.2
     iconColor: const Color(0xFF00FFB2),
     titleColor: const Color(0xFF00FFB2),
     subtitleColor: const Color(0xFFB4FFE3),
-    accentGlowColor: const Color(0xFF00FF9C).withOpacity(0.2),
+    accentGlowColor: const Color(0xFF00FF9C).withValues(alpha: 0.2),
   );
 
   // Aurora Borealis
   static final aurora = CardColorScheme(
     gridColor: const Color(0xFF7AF5FF),
-    borderColor: const Color(0xFF7AF5FF).withOpacity(0.3),
+    borderColor: const Color(0xFF7AF5FF).withValues(alpha: 0.3),
     gradientColors: [
-      const Color(0xFF134E5E).withOpacity(0.6), // Reduced opacity
-      const Color(0xFF1FA88C).withOpacity(0.4), // Reduced opacity
-      const Color(0xFF16A085).withOpacity(0.2), // Reduced opacity
+      const Color(0xFF134E5E).withValues(alpha: 0.6), // Reduced opacity
+      const Color(0xFF1FA88C).withValues(alpha: 0.4), // Reduced opacity
+      const Color(0xFF16A085).withValues(alpha: 0.2), // Reduced opacity
     ],
-    glassColor: const Color(0xFF134E5E).withOpacity(0.1), // Reduced opacity
+    glassColor: const Color(0xFF134E5E).withValues(alpha: 0.1), // Reduced opacity
     iconColor: const Color(0xFF7AF5FF),
     titleColor: const Color(0xFF7AF5FF),
     subtitleColor: const Color(0xFFB4F8FF),
-    accentGlowColor: const Color(0xFF7AF5FF).withOpacity(0.2),
+    accentGlowColor: const Color(0xFF7AF5FF).withValues(alpha: 0.2),
   );
 
   // Sunset Fusion
   static final sunset = CardColorScheme(
     gridColor: const Color(0xFFFFB347),
-    borderColor: const Color(0xFFFFB347).withOpacity(0.3),
+    borderColor: const Color(0xFFFFB347).withValues(alpha: 0.3),
     gradientColors: [
-      const Color(0xFFCB2D3E).withOpacity(0.6), // Reduced opacity
-      const Color(0xFFEF473A).withOpacity(0.4), // Reduced opacity
-      const Color(0xFFDE6262).withOpacity(0.2), // Reduced opacity
+      const Color(0xFFCB2D3E).withValues(alpha: 0.6), // Reduced opacity
+      const Color(0xFFEF473A).withValues(alpha: 0.4), // Reduced opacity
+      const Color(0xFFDE6262).withValues(alpha: 0.2), // Reduced opacity
     ],
-    glassColor: const Color(0xFFCB2D3E).withOpacity(0.1), // Reduced opacity
+    glassColor: const Color(0xFFCB2D3E).withValues(alpha: 0.1), // Reduced opacity
     iconColor: const Color(0xFFFFB347),
     titleColor: const Color(0xFFFFB347),
     subtitleColor: const Color(0xFFFFD7A8),
-    accentGlowColor: const Color(0xFFFFB347).withOpacity(0.2),
+    accentGlowColor: const Color(0xFFFFB347).withValues(alpha: 0.2),
   );
 }
 

@@ -42,6 +42,7 @@ class _SimpleShaderExampleState extends State<SimpleShaderExample> with SingleTi
         right: false,
         bottom: false,
         child: FutureBuilder<FragmentShader>(
+          // ignore: discarded_futures
           future: _loadShader(),
           builder: (context, snapshot) {
             if (!snapshot.hasData) {

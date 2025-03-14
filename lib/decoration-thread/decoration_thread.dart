@@ -111,7 +111,7 @@ class ThreadPainter extends CustomPainter {
     canvas.drawPath(
       path,
       Paint()
-        ..color = Colors.purple.withOpacity(0.3)
+        ..color = Colors.purple.withValues(alpha: 0.3)
         ..strokeWidth = 1.0
         ..style = PaintingStyle.stroke
         ..strokeCap = StrokeCap.round
@@ -119,7 +119,7 @@ class ThreadPainter extends CustomPainter {
         ..shader = ui.Gradient.linear(
           start,
           end,
-          [Colors.purple.withOpacity(0.3), Colors.transparent],
+          [Colors.purple.withValues(alpha: 0.3), Colors.transparent],
           [0, 0.5],
           TileMode.repeated,
           Float64List.fromList(Matrix4.identity().storage),

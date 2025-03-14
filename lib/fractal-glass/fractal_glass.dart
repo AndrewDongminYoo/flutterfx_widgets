@@ -12,7 +12,7 @@ class FractalGlassEffect extends StatefulWidget {
   final ImageProvider imageProvider;
 
   @override
-  _FractalGlassEffectState createState() => _FractalGlassEffectState();
+  State<FractalGlassEffect> createState() => _FractalGlassEffectState();
 }
 
 class _FractalGlassEffectState extends State<FractalGlassEffect> {
@@ -112,7 +112,7 @@ class FractalGlassPainter extends CustomPainter {
 
   Future<void> _loadImage() async {
     final completer = Completer<ui.Image>();
-    final stream = image.resolve(const ImageConfiguration());
+    final stream = image.resolve(ImageConfiguration.empty);
 
     stream.addListener(
       ImageStreamListener((ImageInfo info, bool _) {
@@ -127,6 +127,7 @@ class FractalGlassPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     if (_cachedImage == null) {
       // Trigger image loading if not already loaded
+      // ignore: discarded_futures
       _loadImage();
       return;
     }

@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 /// A widget that displays text rotating in a circular pattern.
 ///
 /// ASCII Visualization of how it works:
-/// ```
+/// ```log
 ///      Top (-π/2)
 ///         |
 ///    \    |    /
@@ -34,10 +34,10 @@ class RotatingTextWidget extends StatefulWidget {
   final Duration rotationDuration;
 
   @override
-  _RotatingTextWidgetState createState() => _RotatingTextWidgetState();
+  RotatingTextWidgetState createState() => RotatingTextWidgetState();
 }
 
-class _RotatingTextWidgetState extends State<RotatingTextWidget> with SingleTickerProviderStateMixin {
+class RotatingTextWidgetState extends State<RotatingTextWidget> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
 
   @override

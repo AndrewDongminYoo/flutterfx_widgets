@@ -175,7 +175,7 @@ class _ScrollProgressBasicState extends State<ScrollProgressBasic> {
                 borderRadius: BorderRadius.circular(3),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.purple.withOpacity(0.3),
+                    color: Colors.purple.withValues(alpha: 0.3),
                     blurRadius: 3,
                     offset: const Offset(0, 1),
                   ),
@@ -285,8 +285,8 @@ class _ScrollProgressBasicState extends State<ScrollProgressBasic> {
                 begin: Alignment.bottomCenter,
                 end: Alignment.topCenter,
                 colors: [
-                  if (isDarkMode) Colors.black.withOpacity(0.9) else Colors.white.withOpacity(0.9),
-                  if (isDarkMode) Colors.black.withOpacity(0) else Colors.white.withOpacity(0),
+                  if (isDarkMode) Colors.black.withValues(alpha: 0.9) else Colors.white.withValues(alpha: 0.9),
+                  if (isDarkMode) Colors.black.withValues(alpha: 0) else Colors.white.withValues(alpha: 0),
                 ],
               ),
             ),

@@ -438,7 +438,7 @@ class EnhancedConfettiPainter extends CustomPainter {
 
     // Add highlight effect
     if (particle.state == ParticleState.burst) {
-      paint.color = paint.color.withOpacity(0.3);
+      paint.color = paint.color.withValues(alpha: 0.3);
       canvas.drawPath(
         path,
         paint
@@ -503,7 +503,7 @@ class EnhancedConfettiPainter extends CustomPainter {
   ) {
     // Enhanced rendering with shadows and effects
     final opacity = _calculateOpacity(particle);
-    paint.color = particle.color.withOpacity(opacity);
+    paint.color = particle.color.withValues(alpha: opacity);
 
     canvas.save();
     canvas.translate(

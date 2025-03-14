@@ -126,7 +126,7 @@ class ParticlePainter extends CustomPainter {
 
       // Draw main glow
       paint
-        ..color = Colors.white.withOpacity(currentBrightness * 0.6)
+        ..color = Colors.white.withValues(alpha: currentBrightness * 0.6)
         ..maskFilter = MaskFilter.blur(
           BlurStyle.normal,
           particle.size * (0.5 + shimmerIntensity),
@@ -141,7 +141,7 @@ class ParticlePainter extends CustomPainter {
       // Draw bright core when catching light
       if (shimmerIntensity > 0.7) {
         paint
-          ..color = Colors.white.withOpacity(shimmerIntensity * 0.9)
+          ..color = Colors.white.withValues(alpha: shimmerIntensity * 0.9)
           ..maskFilter = null;
 
         canvas.drawCircle(
@@ -184,7 +184,7 @@ class OrbitalPathsPainter extends CustomPainter {
     for (var i = 0; i < numberOfPaths; i++) {
       // Exponential growth for radius to match the image pattern
       final radius = size.width * (0.3 + (i * i * 0.08));
-      paint.color = Colors.purple[100]!.withOpacity(0.15 - (i * 0.02));
+      paint.color = Colors.purple[100]!.withValues(alpha: 0.15 - (i * 0.02));
 
       canvas.drawArc(
         Rect.fromCircle(center: center, radius: radius),
@@ -204,10 +204,10 @@ class MovingStars extends StatefulWidget {
   const MovingStars({super.key});
 
   @override
-  _MovingStarsState createState() => _MovingStarsState();
+  MovingStarsState createState() => MovingStarsState();
 }
 
-class _MovingStarsState extends State<MovingStars> with TickerProviderStateMixin {
+class MovingStarsState extends State<MovingStars> with TickerProviderStateMixin {
   late List<StarController> starControllers;
 
   @override
@@ -282,7 +282,7 @@ class StarTrailPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = Colors.white.withOpacity(brightness)
+      ..color = Colors.white.withValues(alpha: brightness)
       ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 1);
 
     // Calculate the path radius based on the star's assigned path
@@ -304,7 +304,7 @@ class StarTrailPainter extends CustomPainter {
       final trailX = center.dx + radius * cos(trailAngle);
       final trailY = center.dy + radius * sin(trailAngle);
 
-      paint.color = Colors.white.withOpacity(brightness * (1 - i * 0.2));
+      paint.color = Colors.white.withValues(alpha: brightness * (1 - i * 0.2));
       canvas.drawCircle(Offset(trailX, trailY), 1.0 - (i * 0.15), paint);
     }
   }

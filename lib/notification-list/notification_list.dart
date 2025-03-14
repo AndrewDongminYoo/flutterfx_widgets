@@ -35,12 +35,15 @@ class _AnimatedNotificationListState extends State<AnimatedNotificationList> {
   @override
   void initState() {
     super.initState();
+    // ignore: discarded_futures
     _startAddingNotifications();
   }
 
   Future<void> _startAddingNotifications() async {
     for (final notification in widget.notifications) {
-      if (!mounted) return;
+      if (!mounted) {
+        return;
+      }
       await Future<void>.delayed(widget.delay);
       setState(() {
         _visibleNotifications.insert(0, notification);
@@ -56,7 +59,7 @@ class _AnimatedNotificationListState extends State<AnimatedNotificationList> {
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: Colors.black.withValues(alpha: 0.05),
             blurRadius: 20,
             spreadRadius: 1,
           ),
@@ -170,7 +173,7 @@ class NotificationCard extends StatelessWidget {
               borderRadius: BorderRadius.circular(16),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.05),
+                  color: Colors.black.withValues(alpha: 0.05),
                   blurRadius: 10,
                 ),
               ],

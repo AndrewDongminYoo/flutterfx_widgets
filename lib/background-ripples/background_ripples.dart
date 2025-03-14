@@ -98,9 +98,9 @@ class _RippleState extends State<Ripple> with TickerProviderStateMixin {
                   height: size,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color: widget.color.withOpacity(opacity),
+                    color: widget.color.withValues(alpha: opacity),
                     border: Border.all(
-                      color: widget.color.withOpacity(borderOpacity),
+                      color: widget.color.withValues(alpha: borderOpacity),
                       style: index == widget.numCircles - 1 ? BorderStyle.solid : BorderStyle.solid,
                     ),
                   ),

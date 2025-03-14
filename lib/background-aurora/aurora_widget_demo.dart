@@ -13,12 +13,12 @@ class AuroraDemo extends StatelessWidget {
           padding: const EdgeInsets.all(20),
           decoration: BoxDecoration(
             color: Theme.of(context).brightness == Brightness.dark
-                ? Colors.grey[850]?.withOpacity(0.7)
-                : Colors.white.withOpacity(0.7),
+                ? Colors.grey[850]?.withValues(alpha: 0.7)
+                : Colors.white.withValues(alpha: 0.7),
             borderRadius: BorderRadius.circular(20),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.1),
+                color: Colors.black.withValues(alpha: 0.1),
                 blurRadius: 10,
                 spreadRadius: 5,
               ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:fx_2_folder/fx_14_text_reveal/strategies/FadeBlurStrategy.dart';
+import 'package:fx_2_folder/fx_14_text_reveal/strategies/fade_blur_strategy.dart';
 
 abstract class TextAnimationStrategy {
   const TextAnimationStrategy({
@@ -95,7 +95,9 @@ class EnhancedTextAnimationManager {
         return text.split('');
       case AnimationUnit.word:
         // Early return for empty text
-        if (text.isEmpty) return [];
+        if (text.isEmpty) {
+          return [];
+        }
 
         // Split text keeping spaces with words
         final words = <String>[];
@@ -263,7 +265,9 @@ class _EnhancedTextRevealEffectState extends State<EnhancedTextRevealEffect> wit
 
   @override
   Widget build(BuildContext context) {
-    if (!_isVisible) return const SizedBox.shrink(); // Hide when not visible
+    if (!_isVisible) {
+      return const SizedBox.shrink(); // Hide when not visible
+    }
 
     return Wrap(
       children: List.generate(

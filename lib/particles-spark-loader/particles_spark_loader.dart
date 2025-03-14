@@ -42,9 +42,9 @@ class _StepRotatingShapeState extends State<StepRotatingShape> with SingleTicker
       ),
     );
 
-    _controller.addStatusListener((status) {
+    _controller.addStatusListener((status) async {
       if (status == AnimationStatus.completed) {
-        _startNextRotation();
+        await _startNextRotation();
       }
     });
 
@@ -53,7 +53,9 @@ class _StepRotatingShapeState extends State<StepRotatingShape> with SingleTicker
 
   Future<void> _startNextRotation() async {
     await Future<void>.delayed(widget.pauseDuration);
-    if (!mounted) return;
+    if (!mounted) {
+      return;
+    }
 
     _currentStep = (_currentStep + 1) % 4;
     if (_currentStep == 0) {
@@ -63,7 +65,9 @@ class _StepRotatingShapeState extends State<StepRotatingShape> with SingleTicker
   }
 
   void _startRotation() {
-    if (!mounted) return;
+    if (!mounted) {
+      return;
+    }
     _controller.forward(from: 0);
   }
 

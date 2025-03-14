@@ -16,10 +16,10 @@ class RotatingTextWidget extends StatefulWidget {
   final Duration rotationDuration;
 
   @override
-  _RotatingTextWidgetState createState() => _RotatingTextWidgetState();
+  RotatingTextWidgetState createState() => RotatingTextWidgetState();
 }
 
-class _RotatingTextWidgetState extends State<RotatingTextWidget> with SingleTickerProviderStateMixin {
+class RotatingTextWidgetState extends State<RotatingTextWidget> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
 
   @override

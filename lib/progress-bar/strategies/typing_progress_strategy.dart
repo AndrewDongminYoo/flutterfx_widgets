@@ -51,7 +51,9 @@ class _TypingProgressWidgetState extends State<_TypingProgressWidget> with Singl
   }
 
   void _onAnimationUpdate() {
-    if (!mounted) return;
+    if (!mounted) {
+      return;
+    }
 
     setState(() {
       _currentText = _getProgressText(widget.animation.value);
@@ -86,7 +88,7 @@ class _TypingProgressWidgetState extends State<_TypingProgressWidget> with Singl
             widthFactor: widget.animation.value,
             child: Container(
               decoration: BoxDecoration(
-                color: widget.style.primaryColor.withOpacity(0.2),
+                color: widget.style.primaryColor.withValues(alpha: 0.2),
                 borderRadius: widget.style.borderRadius,
               ),
             ),

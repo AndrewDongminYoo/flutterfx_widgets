@@ -8,8 +8,12 @@ class ButterflyFlapCurve extends Curve {
     final phase = t * 2 * pi;
     var value = 0.6 * sin(phase) + 0.2 * sin(2 * phase) + 0.1 * sin(3 * phase);
 
-    if (value > 0.8) value = 0.8;
-    if (value < -0.8) value = -0.8;
+    if (value > 0.8) {
+      value = 0.8;
+    }
+    if (value < -0.8) {
+      value = -0.8;
+    }
 
     return value;
   }

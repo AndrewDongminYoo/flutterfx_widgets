@@ -99,7 +99,7 @@ class _ProgressLoaderState extends State<ProgressLoader> with SingleTickerProvid
       ),
     )..addListener(() {
         if (widget.onProgressUpdate != null) {
-          widget.onProgressUpdate!(_animation.value);
+          widget.onProgressUpdate!.call(_animation.value);
         }
       });
     _controller.forward();

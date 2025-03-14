@@ -20,7 +20,7 @@ class HyperText extends StatefulWidget {
   final String text;
 
   @override
-  _HyperTextState createState() => _HyperTextState();
+  State<HyperText> createState() => _HyperTextState();
 }
 
 class _HyperTextState extends State<HyperText> {

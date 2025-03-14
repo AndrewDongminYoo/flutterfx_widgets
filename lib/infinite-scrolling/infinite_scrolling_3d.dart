@@ -34,9 +34,7 @@ class Marquee3D extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: double.infinity,
-      height: double.infinity,
+    return SizedBox.expand(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
@@ -213,7 +211,7 @@ class _LogoCardState extends State<LogoCard> {
           boxShadow: isHovered
               ? [
                   BoxShadow(
-                    color: Theme.of(context).dividerColor.withOpacity(0.5),
+                    color: Theme.of(context).dividerColor.withValues(alpha: 0.5),
                     blurRadius: 4,
                     spreadRadius: 2,
                   ),
@@ -226,7 +224,9 @@ class _LogoCardState extends State<LogoCard> {
             widget.imageUrl,
             fit: BoxFit.cover,
             loadingBuilder: (context, child, loadingProgress) {
-              if (loadingProgress == null) return child;
+              if (loadingProgress == null) {
+                return child;
+              }
               return Center(
                 child: CircularProgressIndicator(
                   value: loadingProgress.expectedTotalBytes != null

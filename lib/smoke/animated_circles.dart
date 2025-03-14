@@ -10,10 +10,10 @@ class AnimatedCircles extends StatefulWidget {
   final AnimationSequence sequence;
 
   @override
-  _AnimatedCirclesState createState() => _AnimatedCirclesState();
+  AnimatedCirclesState createState() => AnimatedCirclesState();
 }
 
-class _AnimatedCirclesState extends State<AnimatedCircles> with SingleTickerProviderStateMixin {
+class AnimatedCirclesState extends State<AnimatedCircles> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animation;
   int _currentIndex = 0;
@@ -118,7 +118,7 @@ class CirclesPainter extends CustomPainter {
       //     lerpedCircle.normalizedPosition.dy * size.height);
 
       final paint = Paint()
-        ..color = lerpedCircle.color.withOpacity(1)
+        ..color = lerpedCircle.color.withValues(alpha: 1)
         ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 100);
 
       canvas.drawCircle(position, lerpedCircle.radius, paint);

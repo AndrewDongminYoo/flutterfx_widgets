@@ -28,9 +28,9 @@ class AuroraPainter extends CustomPainter {
         Offset(size.width * 0.8, 0),
         Offset(size.width * 0.8, size.height),
         [
-          Colors.blue.withOpacity(0.1),
-          Colors.purple.withOpacity(0.1),
-          Colors.indigo.withOpacity(0.1),
+          Colors.blue.withValues(alpha: 0.1),
+          Colors.purple.withValues(alpha: 0.1),
+          Colors.indigo.withValues(alpha: 0.1),
         ],
         [0.2, 0.5, 0.8],
       )
@@ -52,8 +52,8 @@ class AuroraPainter extends CustomPainter {
           Offset(size.width, 0), // Top right corner
           size.width * 0.8,
           [
-            Colors.blue.withOpacity(0.3),
-            Colors.blue.withOpacity(0.1),
+            Colors.blue.withValues(alpha: 0.3),
+            Colors.blue.withValues(alpha: 0.1),
             Colors.transparent,
           ],
           [0.0, 0.5, 1.0],
@@ -69,8 +69,8 @@ class AuroraPainter extends CustomPainter {
         Offset(size.width * progress, 0),
         Offset(size.width * progress + 100, size.height),
         [
-          Colors.blue.withOpacity(0.05),
-          Colors.purple.withOpacity(0.05),
+          Colors.blue.withValues(alpha: 0.05),
+          Colors.purple.withValues(alpha: 0.05),
         ],
         [0.0, 1.0],
       )
@@ -177,7 +177,7 @@ class ExamplePage extends StatelessWidget {
             'And this, is chemical burn.',
             style: TextStyle(
               fontSize: 24,
-              color: Colors.white.withOpacity(0.7),
+              color: Colors.white.withValues(alpha: 0.7),
             ),
           ),
           const SizedBox(height: 24),

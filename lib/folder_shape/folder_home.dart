@@ -143,7 +143,7 @@ class _FolderHomeWidgetState extends State<FolderHomeWidget> with TickerProvider
                   color: Colors.white, // Background color of the clipped area
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.black.withOpacity(0.8), // Shadow color
+                      color: Colors.black.withValues(alpha: 0.8), // Shadow color
                       spreadRadius: 5, // Spread radius of the shadow
                       blurRadius: 7, // Blur radius of the shadow
                       offset: const Offset(0, 3), // Offset for the shadow

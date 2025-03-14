@@ -167,7 +167,7 @@ class WaveProgressPainter extends CustomPainter {
       final wavePhase = i * math.pi / 2; // Phase difference between waves
       final opacity = i == 0 ? 1.0 : 0.5; // Second wave is more transparent
 
-      paint.color = color.withOpacity(opacity);
+      paint.color = color.withValues(alpha: opacity);
 
       final wavePath = Path();
       wavePath.moveTo(0, size.height);
@@ -203,8 +203,8 @@ class WaveProgressPainter extends CustomPainter {
         begin: Alignment.topCenter,
         end: Alignment.bottomCenter,
         colors: [
-          color.withOpacity(0.1),
-          color.withOpacity(0.3),
+          color.withValues(alpha: 0.1),
+          color.withValues(alpha: 0.3),
         ],
         stops: const [0.0, 1.0],
       ).createShader(

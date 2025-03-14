@@ -14,10 +14,10 @@ class MeteorShower extends StatefulWidget {
   final Duration duration;
 
   @override
-  _MeteorShowerState createState() => _MeteorShowerState();
+  MeteorShowerState createState() => MeteorShowerState();
 }
 
-class _MeteorShowerState extends State<MeteorShower> with SingleTickerProviderStateMixin {
+class MeteorShowerState extends State<MeteorShower> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   List<Meteor> _meteors = [];
   final double meteorAngle = pi / 4;
@@ -62,7 +62,9 @@ class _MeteorShowerState extends State<MeteorShower> with SingleTickerProviderSt
                 builder: (context, child) {
                   final meteor = _meteors[index];
                   final progress = ((_controller.value - meteor.delay) % 1.0) / meteor.duration;
-                  if (progress < 0 || progress > 1) return const SizedBox.shrink();
+                  if (progress < 0 || progress > 1) {
+                    return const SizedBox.shrink();
+                  }
 
                   return Positioned(
                     left: meteor.startX + (meteor.endX - meteor.startX) * progress,
@@ -93,7 +95,7 @@ class MeteorPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     final trailPaint = Paint()
       ..shader = LinearGradient(
-        colors: [Colors.white, Colors.white.withOpacity(0)],
+        colors: [Colors.white, Colors.white.withValues(alpha: 0)],
         end: Alignment.topCenter,
         begin: Alignment.bottomCenter,
       ).createShader(Rect.fromLTWH(0, 0, size.width, size.height));

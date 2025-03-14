@@ -125,7 +125,7 @@ class RisingParticlesPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     for (final particle in particles) {
       final paint = Paint()
-        ..color = particle.color.withOpacity(easedOpacity(particle.progress))
+        ..color = particle.color.withValues(alpha: easedOpacity(particle.progress))
         ..style = PaintingStyle.fill;
 
       final currentPoint = _calculateBezierPoint(

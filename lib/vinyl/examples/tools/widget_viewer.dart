@@ -6,7 +6,7 @@ class WidgetViewer extends StatefulWidget {
   const WidgetViewer({super.key});
 
   @override
-  _WidgetViewerState createState() => _WidgetViewerState();
+  State<WidgetViewer> createState() => _WidgetViewerState();
 }
 
 class _WidgetViewerState extends State<WidgetViewer> {

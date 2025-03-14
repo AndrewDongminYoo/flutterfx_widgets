@@ -118,8 +118,8 @@ class _ButterflyInteractiveDemoState extends State<ButterflyInteractiveDemo> {
 class _SliderColors {
   // Private constructor to prevent instantiation
   _SliderColors._();
-  static final Color activeTrack = Colors.white.withOpacity(0.8);
-  static final Color inactiveTrack = Colors.white.withOpacity(0.2);
+  static final Color activeTrack = Colors.white.withValues(alpha: 0.8);
+  static final Color inactiveTrack = Colors.white.withValues(alpha: 0.2);
   static const Color thumb = Colors.white;
-  static final Color overlay = Colors.white.withOpacity(0.1);
+  static final Color overlay = Colors.white.withValues(alpha: 0.1);
 }

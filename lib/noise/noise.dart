@@ -1,3 +1,5 @@
+// ignore_for_file: parameter_assignments
+
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
@@ -401,7 +403,7 @@ class NoisePainter extends CustomPainter {
         final noiseValue = noiseStrategy.noise2D(nx, ny);
         paint.color = noiseStrategy.getColor(noiseValue);
 
-        paint.color = paint.color.withOpacity(opacity);
+        paint.color = paint.color.withValues(alpha: opacity);
 
         canvas.drawRect(
           Rect.fromLTWH(x.toDouble(), y.toDouble(), 1, 1),

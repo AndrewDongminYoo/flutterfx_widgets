@@ -67,7 +67,7 @@ class _SplashRevealWidgetState extends State<SplashRevealWidget> with SingleTick
   Future<void> _startAnimation() async {
     await _controller.forward();
     if (widget.onAnimationComplete != null) {
-      widget.onAnimationComplete!();
+      widget.onAnimationComplete!.call();
     }
   }
 
@@ -179,6 +179,7 @@ class _LoadingAppState extends State<LoadingApp1> {
   @override
   void initState() {
     super.initState();
+    // ignore: discarded_futures
     _initializeApp();
   }
 

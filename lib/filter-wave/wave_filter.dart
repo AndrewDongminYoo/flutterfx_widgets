@@ -18,10 +18,10 @@ class WaveWarpEffect extends StatefulWidget {
   final double phase;
 
   @override
-  _WaveWarpEffectState createState() => _WaveWarpEffectState();
+  WaveWarpEffectState createState() => WaveWarpEffectState();
 }
 
-class _WaveWarpEffectState extends State<WaveWarpEffect> with SingleTickerProviderStateMixin {
+class WaveWarpEffectState extends State<WaveWarpEffect> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
 
   @override

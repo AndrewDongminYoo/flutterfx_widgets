@@ -92,7 +92,7 @@ class _RetroGridBackgroundState extends State<RetroGridBackground> with SingleTi
                       end: Alignment.center,
                       colors: [
                         Colors.transparent,
-                        if (isDark) Colors.black.withOpacity(0.95) else Colors.white.withOpacity(0.95),
+                        if (isDark) Colors.black.withValues(alpha: 0.95) else Colors.white.withValues(alpha: 0.95),
                       ],
                       stops: const [0.6, 0.8], // Adjusted stops for better fade
                     ),
@@ -136,7 +136,7 @@ class GridPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = isDark ? Colors.white.withOpacity(0.3) : Colors.black.withOpacity(0.4)
+      ..color = isDark ? Colors.white.withValues(alpha: 0.3) : Colors.black.withValues(alpha: 0.4)
       ..strokeWidth = 1.5;
 
     // Calculate grid lines with animation offset

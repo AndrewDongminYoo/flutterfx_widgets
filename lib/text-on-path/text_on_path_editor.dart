@@ -165,7 +165,7 @@ class _TextOnPathEditorState extends State<TextOnPathEditor> {
             activeTrackColor: Colors.white,
             inactiveTrackColor: Colors.white24,
             thumbColor: Colors.white,
-            overlayColor: Colors.white.withOpacity(0.1),
+            overlayColor: Colors.white.withValues(alpha: 0.1),
           ),
           child: Slider(
             value: value,
@@ -291,7 +291,7 @@ class TextOnPathPainter extends CustomPainter {
 
   void _drawControlLines(Canvas canvas) {
     final paint = Paint()
-      ..color = Colors.white.withOpacity(0.5)
+      ..color = Colors.white.withValues(alpha: 0.5)
       ..style = PaintingStyle.stroke
       ..strokeWidth = 1;
 
@@ -330,14 +330,20 @@ class TextOnPathPainter extends CustomPainter {
     final totalTextLength = charWidth * text.length;
 
     var startOffset = (pathLength - totalTextLength) / 2;
-    if (startOffset < 0) startOffset = 0;
+    if (startOffset < 0) {
+      startOffset = 0;
+    }
 
     for (var i = 0; i < text.length; i++) {
       final charOffset = startOffset + (i * charWidth);
-      if (charOffset > pathLength) break;
+      if (charOffset > pathLength) {
+        break;
+      }
 
       final tangent = pathMetric.getTangentForOffset(charOffset);
-      if (tangent == null) continue;
+      if (tangent == null) {
+        continue;
+      }
 
       final charTextPainter = TextPainter(
         text: TextSpan(

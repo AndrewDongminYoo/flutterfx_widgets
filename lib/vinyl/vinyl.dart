@@ -20,10 +20,10 @@ class TransformApp extends StatefulWidget {
   const TransformApp({super.key});
 
   @override
-  _TransformAppState createState() => _TransformAppState();
+  TransformAppState createState() => TransformAppState();
 }
 
-class _TransformAppState extends State<TransformApp> with TickerProviderStateMixin {
+class TransformAppState extends State<TransformApp> with TickerProviderStateMixin {
   late AnimationController animController;
   late Animation<double> _flipAnimation;
   late Animation<double> _pushBackAnimation;
@@ -81,7 +81,7 @@ class _TransformAppState extends State<TransformApp> with TickerProviderStateMix
                       child: Transform(
                         transform: Matrix4.identity()
                           ..setEntry(3, 2, 0.0003512553609721081)
-                          ..rotateY(323 * pi / 180) // horixontal
+                          ..rotateY(323 * pi / 180) // horizontal
                           ..rotateX(
                             baseRotationX + sin(_headBowForwardAnimation.value * pi) * 10 * pi / 180,
                           ) // vertical
@@ -342,14 +342,14 @@ class _TransformAppState extends State<TransformApp> with TickerProviderStateMix
   }
 
   bool _isStackReordered = false;
-  void _animationHooks() {
+  Future<void> _animationHooks() async {
     if (animController.value >= 0.5 && !_isStackReordered) {
       _changeStackOrder();
       _isStackReordered = true;
     } else if (animController.value < 0.5) {
       _isStackReordered = false;
     } else if (animController.value > 0.74) {
-      vinylController.forward().then((_) => vinylController.reverse());
+      await vinylController.forward().then((_) => vinylController.reverse());
     }
   }
 

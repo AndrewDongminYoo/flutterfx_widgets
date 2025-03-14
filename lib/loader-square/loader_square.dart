@@ -188,7 +188,7 @@ class _BouncingSquareState extends State<BouncingSquare> with TickerProviderStat
                           width: _shadowSizeAnimation.value,
                           height: _shadowSizeAnimation.value,
                           decoration: BoxDecoration(
-                            color: Colors.black.withOpacity(_shadowOpacityAnimation.value),
+                            color: Colors.black.withValues(alpha: _shadowOpacityAnimation.value),
                             shape: BoxShape.circle,
                           ),
                         ),

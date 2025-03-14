@@ -77,10 +77,10 @@ class SpringButton extends StatefulWidget {
   final Curve curve;
 
   @override
-  _SpringButtonState createState() => _SpringButtonState();
+  SpringButtonState createState() => SpringButtonState();
 }
 
-class _SpringButtonState extends State<SpringButton> with SingleTickerProviderStateMixin {
+class SpringButtonState extends State<SpringButton> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animation;
 

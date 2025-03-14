@@ -21,21 +21,25 @@ class _SmokeHomeWidgetState extends State<SmokeHomeWidget> {
   @override
   void initState() {
     super.initState();
+    // ignore: discarded_futures
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
     enterFullScreen();
   }
 
-  // @override
-  // void dispose() {
-  //   SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
-  //   super.dispose();
-  // }
+  @override
+  void dispose() {
+    // ignore: discarded_futures
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+    super.dispose();
+  }
 
   void enterFullScreen() {
+    // ignore: discarded_futures
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
   }
 
   void exitFullScreen() {
+    // ignore: discarded_futures
     SystemChrome.setEnabledSystemUIMode(
       SystemUiMode.manual,
       overlays: SystemUiOverlay.values,
@@ -65,7 +69,7 @@ class BlurredCircle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final startScreenKey = GlobalKey<_StartScreenState>();
+    final startScreenKey = GlobalKey<StartScreenState>();
     const isDev = kDebugMode;
     final manualSequence = AnimationSequence(
       sequences: [
@@ -272,7 +276,7 @@ class BlurredCircle extends StatelessWidget {
         [
           CircleData(
             id: '1',
-            normalizedPosition: const Offset(0, 0),
+            normalizedPosition: Offset.zero,
             radius: 20,
             color: isDev ? Colors.red : defaultColor,
           ), //Color.fromRGBO(176, 176, 176, 1)),
@@ -520,10 +524,10 @@ class StartScreen extends StatefulWidget {
   const StartScreen({super.key});
 
   @override
-  _StartScreenState createState() => _StartScreenState();
+  StartScreenState createState() => StartScreenState();
 }
 
-class _StartScreenState extends State<StartScreen> with TickerProviderStateMixin {
+class StartScreenState extends State<StartScreen> with TickerProviderStateMixin {
   late AnimationController _rotateController;
 
   late AnimationController _logoController;

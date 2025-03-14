@@ -31,9 +31,7 @@ class _ParticlesDemoState extends State<ParticlesDemo> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: double.infinity,
-      width: double.infinity,
+    return SizedBox.expand(
       child: ClipRRect(
         borderRadius: BorderRadius.circular(8),
         child: Stack(

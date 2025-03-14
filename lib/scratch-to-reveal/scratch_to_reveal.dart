@@ -44,6 +44,7 @@ class _ScratchToRevealState extends State<ScratchToReveal> with SingleTickerProv
   void initState() {
     super.initState();
     _setupAnimations();
+    // ignore: discarded_futures
     _createScratchImage();
   }
 
@@ -93,18 +94,20 @@ class _ScratchToRevealState extends State<ScratchToReveal> with SingleTickerProv
     _path.moveTo(details.localPosition.dx, details.localPosition.dy);
   }
 
-  void _handlePanUpdate(DragUpdateDetails details) {
+  Future<void> _handlePanUpdate(DragUpdateDetails details) async {
     if (widget.enableHapticFeedback) {
-      HapticFeedback.selectionClick();
+      await HapticFeedback.selectionClick();
     }
     setState(() {
       _path.lineTo(details.localPosition.dx, details.localPosition.dy);
     });
-    _checkCompletion();
+    await _checkCompletion();
   }
 
-  void _checkCompletion() {
-    if (_isComplete) return;
+  Future<void> _checkCompletion() async {
+    if (_isComplete) {
+      return;
+    }
 
     final bounds = _path.getBounds();
     final totalArea = widget.width * widget.height;
@@ -113,7 +116,7 @@ class _ScratchToRevealState extends State<ScratchToReveal> with SingleTickerProv
 
     if (percentage >= widget.minScratchPercentage) {
       setState(() => _isComplete = true);
-      _animationController.forward().then((_) {
+      await _animationController.forward().then((_) {
         widget.onComplete?.call();
       });
     }

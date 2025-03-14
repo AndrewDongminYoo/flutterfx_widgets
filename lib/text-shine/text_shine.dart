@@ -47,13 +47,13 @@ class TextShiningDemo extends StatelessWidget {
                           begin: Alignment.topLeft,
                           end: Alignment.bottomRight,
                           colors: [
-                            Colors.white.withOpacity(0.95),
-                            Colors.white.withOpacity(0.90),
+                            Colors.white.withValues(alpha: 0.95),
+                            Colors.white.withValues(alpha: 0.90),
                           ],
                         ),
                         boxShadow: [
                           BoxShadow(
-                            color: const Color(0xFF6366F1).withOpacity(0.1),
+                            color: const Color(0xFF6366F1).withValues(alpha: 0.1),
                             blurRadius: 20,
                             spreadRadius: 5,
                           ),
@@ -157,14 +157,14 @@ class _AnimatedIconContainerState extends State<AnimatedIconContainer> with Sing
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                   colors: [
-                    const Color(0xFF6366F1).withOpacity(0.2),
-                    const Color(0xFF818CF8).withOpacity(0.1),
+                    const Color(0xFF6366F1).withValues(alpha: 0.2),
+                    const Color(0xFF818CF8).withValues(alpha: 0.1),
                   ],
                 ),
                 borderRadius: BorderRadius.circular(20),
                 boxShadow: [
                   BoxShadow(
-                    color: const Color(0xFF6366F1).withOpacity(0.2),
+                    color: const Color(0xFF6366F1).withValues(alpha: 0.2),
                     blurRadius: 15,
                     spreadRadius: 2,
                   ),
@@ -214,6 +214,7 @@ class _ShimmerTextState extends State<ShimmerText> with SingleTickerProviderStat
       duration: const Duration(milliseconds: 1500), // Faster animation
       vsync: this,
     );
+    // ignore: discarded_futures
     _startAnimation();
   }
 
@@ -311,9 +312,9 @@ class ShimmerBackgroundPainter extends CustomPainter {
         begin: Alignment.topLeft,
         end: Alignment.bottomRight,
         colors: [
-          const Color(0xFF6366F1).withOpacity(0.1),
-          const Color(0xFF818CF8).withOpacity(0.2),
-          const Color(0xFF6366F1).withOpacity(0.1),
+          const Color(0xFF6366F1).withValues(alpha: 0.1),
+          const Color(0xFF818CF8).withValues(alpha: 0.2),
+          const Color(0xFF6366F1).withValues(alpha: 0.1),
         ],
         stops: const [0.0, 0.5, 1.0],
         transform: GradientRotation(animation * 2 * math.pi),
@@ -363,7 +364,7 @@ class GridPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = const Color(0xFF6366F1).withOpacity(0.07)
+      ..color = const Color(0xFF6366F1).withValues(alpha: 0.07)
       ..strokeWidth = 1.0
       ..style = PaintingStyle.stroke;
 
@@ -383,7 +384,7 @@ class GridPainter extends CustomPainter {
 
     final random = math.Random(42);
     final dotPaint = Paint()
-      ..color = const Color(0xFF6366F1).withOpacity(0.15)
+      ..color = const Color(0xFF6366F1).withValues(alpha: 0.15)
       ..style = PaintingStyle.fill;
 
     for (var i = 0; i <= verticalLines; i++) {

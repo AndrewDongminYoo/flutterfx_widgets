@@ -8,11 +8,11 @@ class TextRotateBlurDemo extends StatefulWidget {
   const TextRotateBlurDemo({super.key});
 
   @override
-  _TextRotateBlurDemoState createState() => _TextRotateBlurDemoState();
+  State<TextRotateBlurDemo> createState() => _TextRotateBlurDemoState();
 }
 
 class _TextRotateBlurDemoState extends State<TextRotateBlurDemo> {
-  // Idealy have a intro anim, exit anim and a rotate anim!
+  // Ideally have a intro anim, exit anim and a rotate anim!
   // eg. intro strategy choice, exit strategy choice, rotate strategy choice
   // like the reveal text strategies.
 
@@ -142,7 +142,7 @@ class FadeBlurStrategy extends TextAnimationStrategy {
         return Text(
           character,
           style: style?.copyWith(
-            color: style.color?.withOpacity(value),
+            color: style.color?.withValues(alpha: value),
           ),
         );
       },

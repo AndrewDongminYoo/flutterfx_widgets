@@ -91,7 +91,9 @@ class _UnifiedStarAnimationState extends State<UnifiedStarAnimation> with Single
   }
 
   void _setupAnimations() {
-    if (_screenHeight == null) return;
+    if (_screenHeight == null) {
+      return;
+    }
 
     // Phase 1 Animations (0% - 40% of total duration)
     _starScale = Tween<double>(
@@ -246,7 +248,9 @@ class _UnifiedStarAnimationState extends State<UnifiedStarAnimation> with Single
 
   @override
   Widget build(BuildContext context) {
-    if (_screenHeight == null) return const SizedBox.shrink();
+    if (_screenHeight == null) {
+      return const SizedBox.shrink();
+    }
 
     return AnimatedBuilder(
       animation: _controller,
@@ -396,7 +400,7 @@ class EnhancedStarPainter extends CustomPainter {
 
     // Enhanced base glow
     final glowPaint = Paint()
-      ..color = primaryColor.withOpacity(glowIntensity * 0.7) // Increased opacity
+      ..color = primaryColor.withValues(alpha: glowIntensity * 0.7) // Increased opacity
       ..maskFilter = MaskFilter.blur(BlurStyle.normal, blur * 3); // Increased blur
 
     if (explosionProgress > 0) {
@@ -412,9 +416,9 @@ class EnhancedStarPainter extends CustomPainter {
         center: Alignment.topCenter,
         radius: 1,
         colors: [
-          primaryColor.withOpacity(0.4 * explosionProgress),
-          primaryColor.withOpacity(0.1 * explosionProgress),
-          primaryColor.withOpacity(0),
+          primaryColor.withValues(alpha: 0.4 * explosionProgress),
+          primaryColor.withValues(alpha: 0.1 * explosionProgress),
+          primaryColor.withValues(alpha: 0),
         ],
         stops: const [0.0, 0.5, 1.0],
       );
@@ -432,7 +436,7 @@ class EnhancedStarPainter extends CustomPainter {
         center,
         radius,
         Paint()
-          ..color = primaryColor.withOpacity(0.5 * (1 - explosionProgress))
+          ..color = primaryColor.withValues(alpha: 0.5 * (1 - explosionProgress))
           ..maskFilter = MaskFilter.blur(BlurStyle.normal, blur * 3),
       );
 
@@ -449,7 +453,7 @@ class EnhancedStarPainter extends CustomPainter {
         canvas.drawPath(
           path,
           Paint()
-            ..color = primaryColor.withOpacity(0.9 * (1 - explosionProgress))
+            ..color = primaryColor.withValues(alpha: 0.9 * (1 - explosionProgress))
             ..style = PaintingStyle.stroke
             ..strokeWidth = 3 // Increased width
             ..maskFilter = MaskFilter.blur(BlurStyle.normal, blur * 1.5),
@@ -460,7 +464,7 @@ class EnhancedStarPainter extends CustomPainter {
       canvas.drawCircle(
         center,
         radius * 0.4, // Increased center glow size
-        glowPaint..color = primaryColor.withOpacity(1.0 * (1 - explosionProgress)),
+        glowPaint..color = primaryColor.withValues(alpha: 1.0 * (1 - explosionProgress)),
       );
     } else {
       // Enhanced star glow
@@ -480,7 +484,7 @@ class EnhancedStarPainter extends CustomPainter {
         canvas.drawPath(
           starPath,
           Paint()
-            ..color = primaryColor.withOpacity(glowIntensity * 0.3)
+            ..color = primaryColor.withValues(alpha: glowIntensity * 0.3)
             ..maskFilter = MaskFilter.blur(BlurStyle.normal, blur * i),
         );
       }

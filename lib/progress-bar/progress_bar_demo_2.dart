@@ -92,7 +92,7 @@ class _ProgressBarDemo2State extends State<ProgressBarDemo2> {
                     Text(
                       'Adjust Progress',
                       style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                            color: _softWhite.withOpacity(0.7),
+                            color: _softWhite.withValues(alpha: 0.7),
                             letterSpacing: 0.5,
                             fontWeight: FontWeight.w500,
                           ),
@@ -104,7 +104,7 @@ class _ProgressBarDemo2State extends State<ProgressBarDemo2> {
                         activeTrackColor: _primaryWhite,
                         inactiveTrackColor: _mediumGray,
                         thumbColor: _primaryWhite,
-                        overlayColor: _primaryWhite.withOpacity(0.1),
+                        overlayColor: _primaryWhite.withValues(alpha: 0.1),
                         thumbShape: const RoundSliderThumbShape(
                           enabledThumbRadius: 7,
                           elevation: 2,

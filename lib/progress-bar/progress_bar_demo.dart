@@ -80,7 +80,7 @@ class _ProgressBarDemoState extends State<ProgressBarDemo> {
                     height: 130,
                     width: 130,
                     borderRadius: BorderRadius.circular(12),
-                    primaryColor: _primaryWhite.withOpacity(0.85),
+                    primaryColor: _primaryWhite.withValues(alpha: 0.85),
                     backgroundColor: _mediumGray,
                   ),
                 ),
@@ -110,7 +110,7 @@ class _ProgressBarDemoState extends State<ProgressBarDemo> {
                     Text(
                       'Adjust Progress',
                       style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                            color: _softWhite.withOpacity(0.7),
+                            color: _softWhite.withValues(alpha: 0.7),
                             letterSpacing: 0.5,
                             fontWeight: FontWeight.w500,
                           ),
@@ -122,7 +122,7 @@ class _ProgressBarDemoState extends State<ProgressBarDemo> {
                         activeTrackColor: _primaryWhite,
                         inactiveTrackColor: _mediumGray,
                         thumbColor: _primaryWhite,
-                        overlayColor: _primaryWhite.withOpacity(0.1),
+                        overlayColor: _primaryWhite.withValues(alpha: 0.1),
                         thumbShape: const RoundSliderThumbShape(
                           enabledThumbRadius: 7,
                           elevation: 2,

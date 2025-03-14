@@ -69,7 +69,7 @@ class MinimalistBookCover extends StatelessWidget {
                     child: Text(
                       author.toUpperCase(),
                       style: TextStyle(
-                        color: textColor.withOpacity(0.9),
+                        color: textColor.withValues(alpha: 0.9),
                         fontSize: authorFontSize,
                         fontWeight: FontWeight.w500,
                         letterSpacing: titleFontSize * 0.05,

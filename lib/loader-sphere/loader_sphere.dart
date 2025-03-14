@@ -32,7 +32,9 @@ class _AnimatedWaveRippleState extends State<AnimatedWaveRipple> with SingleTick
 
     // Add animation value and handle wraparound
     var offsetValue = (basePosition - animationValue) % 1.0;
-    if (offsetValue < 0) offsetValue += 1.0;
+    if (offsetValue < 0) {
+      offsetValue += 1.0;
+    }
 
     // Calculate current hue based on animation value and position
     final currentHue = lerpDouble(startHue, endHue, offsetValue);
@@ -153,7 +155,9 @@ class _AnimatedWaveRippleState extends State<AnimatedWaveRipple> with SingleTick
   double getVerticalPosition(double basePosition, double animationValue) {
     // Adjust the position based on the animation value
     var position = (basePosition - animationValue) % 1.0;
-    if (position < 0) position += 1.0;
+    if (position < 0) {
+      position += 1.0;
+    }
 
     // Calculate the vertical spacing
     final spacing = widget.size / 11;

@@ -181,7 +181,9 @@ class _MotionBlurDemoState extends State<MotionBlurDemo> with TickerProviderStat
 
   // Calculate position for each trailing copy
   double _calculatePosition(int index) {
-    if (!_controller.isAnimating) return 0;
+    if (!_controller.isAnimating) {
+      return 0;
+    }
 
     // Current position
     final currentPos = _animation.value * (MediaQuery.of(context).size.width - 70);
@@ -198,7 +200,9 @@ class _MotionBlurDemoState extends State<MotionBlurDemo> with TickerProviderStat
 
   // Calculate opacity for each trailing copy
   double _calculateOpacity(int index) {
-    if (!_controller.isAnimating) return 0;
+    if (!_controller.isAnimating) {
+      return 0;
+    }
 
     // Base opacity decreases for each trailing copy
     final baseOpacity = 1 - (index / numberOfCopies);

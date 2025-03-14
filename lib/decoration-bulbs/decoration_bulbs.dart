@@ -76,7 +76,9 @@ class SequentialBlinkStrategy implements LightAnimationStrategy {
     _currentIndex = 0;
 
     void animateNext() {
-      if (_controllers.isEmpty) return;
+      if (_controllers.isEmpty) {
+        return;
+      }
 
       // Turn off previous light
       if (_currentIndex > 0) {
@@ -129,7 +131,9 @@ class WaveBlinkStrategy implements LightAnimationStrategy {
 
   @override
   void startAnimation() {
-    if (_controllers.isEmpty) return;
+    if (_controllers.isEmpty) {
+      return;
+    }
 
     final segmentDuration = duration ~/ _controllers.length;
     var currentIndex = 0;
@@ -353,12 +357,12 @@ class LightBulb extends StatelessWidget {
         boxShadow: isOn
             ? [
                 BoxShadow(
-                  color: currentColor.withOpacity(0.4),
+                  color: currentColor.withValues(alpha: 0.4),
                   blurRadius: width * 1.5,
                   spreadRadius: width * 0.4,
                 ),
                 BoxShadow(
-                  color: Colors.white.withOpacity(0.7),
+                  color: Colors.white.withValues(alpha: 0.7),
                   blurRadius: width * 0.5,
                   spreadRadius: width * 0.1,
                 ),

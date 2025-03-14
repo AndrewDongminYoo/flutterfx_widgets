@@ -16,15 +16,15 @@ class _SparkleDemoState extends State<SparkleDemo> {
   final GlobalKey<MysticalWavesState> _wavesKey = GlobalKey();
 
   void _replayAnimation() {
-    setState(() {
+    setState(() async {
       _combinedKey = UniqueKey();
-      _wavesKey.currentState?.stopAnimation();
+      await _wavesKey.currentState?.stopAnimation();
     });
   }
 
-  void _onStarAnimationComplete() {
+  Future<void> _onStarAnimationComplete() async {
     // Start waves animation when star animation completes
-    _wavesKey.currentState?.startAnimation();
+    await _wavesKey.currentState?.startAnimation();
   }
 
   @override
@@ -50,9 +50,9 @@ class _SparkleDemoState extends State<SparkleDemo> {
               key: _wavesKey,
               animationDuration: const Duration(milliseconds: 400),
               waveColors: [
-                const Color(0xFFFFD700).withOpacity(0.5), // Radiant gold
-                const Color(0xFFFFA500).withOpacity(0.4), // Glowing orange
-                const Color(0xFFFFE4B5).withOpacity(0.3), // Soft moccasin
+                const Color(0xFFFFD700).withValues(alpha: 0.5), // Radiant gold
+                const Color(0xFFFFA500).withValues(alpha: 0.4), // Glowing orange
+                const Color(0xFFFFE4B5).withValues(alpha: 0.3), // Soft moccasin
               ],
             ),
           ),

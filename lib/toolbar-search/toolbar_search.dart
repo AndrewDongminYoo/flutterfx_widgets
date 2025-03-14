@@ -25,7 +25,7 @@ class _ToolbarDynamicState extends State<ToolbarDynamic> with SingleTickerProvid
 
   // For slide animation
   final Tween<Offset> _slideTween = Tween<Offset>(
-    begin: const Offset(0, 0),
+    begin: Offset.zero,
     end: const Offset(1, 0),
   );
 
@@ -94,11 +94,11 @@ class _ToolbarDynamicState extends State<ToolbarDynamic> with SingleTickerProvid
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(12),
                   border: Border.all(
-                    color: Colors.black.withOpacity(0.1),
+                    color: Colors.black.withValues(alpha: 0.1),
                   ),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.black.withOpacity(0.05),
+                      color: Colors.black.withValues(alpha: 0.05),
                       blurRadius: 10,
                       offset: const Offset(0, 2),
                     ),
@@ -125,7 +125,7 @@ class _ToolbarDynamicState extends State<ToolbarDynamic> with SingleTickerProvid
                       SlideTransition(
                         position: Tween<Offset>(
                           begin: const Offset(-1, 0),
-                          end: const Offset(0, 0),
+                          end: Offset.zero,
                         ).animate(
                           CurvedAnimation(
                             parent: _animationController,
@@ -180,7 +180,7 @@ class _ToolbarDynamicState extends State<ToolbarDynamic> with SingleTickerProvid
             focusNode: _focusNode,
             decoration: InputDecoration(
               hintText: 'Search notes',
-              hintStyle: TextStyle(color: Colors.black.withOpacity(0.5)),
+              hintStyle: TextStyle(color: Colors.black.withValues(alpha: 0.5)),
               contentPadding: const EdgeInsets.symmetric(
                 horizontal: 12,
                 vertical: 8,
@@ -188,19 +188,19 @@ class _ToolbarDynamicState extends State<ToolbarDynamic> with SingleTickerProvid
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(8),
                 borderSide: BorderSide(
-                  color: Colors.black.withOpacity(0.1),
+                  color: Colors.black.withValues(alpha: 0.1),
                 ),
               ),
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(8),
                 borderSide: BorderSide(
-                  color: Colors.black.withOpacity(0.1),
+                  color: Colors.black.withValues(alpha: 0.1),
                 ),
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(8),
                 borderSide: BorderSide(
-                  color: Colors.black.withOpacity(0.1),
+                  color: Colors.black.withValues(alpha: 0.1),
                 ),
               ),
             ),
@@ -241,7 +241,7 @@ class CustomIconButton extends StatelessWidget {
             child: Icon(
               icon,
               size: 20,
-              color: onPressed == null ? Colors.black.withOpacity(0.3) : Colors.black.withOpacity(0.6),
+              color: onPressed == null ? Colors.black.withValues(alpha: 0.3) : Colors.black.withValues(alpha: 0.6),
             ),
           ),
         ),

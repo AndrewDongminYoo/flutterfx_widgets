@@ -41,7 +41,7 @@ class LightEffectWidget extends StatelessWidget {
                   CustomPaint(
                     size: Size(width, height / 2),
                     painter: TopLightEffectPainter(
-                      lightColor: lightColor.withOpacity(0.3),
+                      lightColor: lightColor.withValues(alpha: 0.3),
                       backgroundColor: backgroundColor,
                     ),
                   ),
@@ -54,7 +54,7 @@ class LightEffectWidget extends StatelessWidget {
                       child: Container(
                         width: width,
                         height: height / 2,
-                        color: backgroundColor.withOpacity(0.7),
+                        color: backgroundColor.withValues(alpha: 0.7),
                       ),
                     ),
                   ),
@@ -87,9 +87,9 @@ class TopLightEffectPainter extends CustomPainter {
       endAngle: 6.28318, // 2*PI
       colors: [
         backgroundColor,
-        lightColor.withOpacity(0.8),
-        lightColor.withOpacity(0.9),
-        lightColor.withOpacity(0.8),
+        lightColor.withValues(alpha: 0.8),
+        lightColor.withValues(alpha: 0.9),
+        lightColor.withValues(alpha: 0.8),
         backgroundColor,
       ],
       stops: const [0.0, 0.25, 0.5, 0.75, 1.0],
@@ -118,8 +118,8 @@ class TopLightEffectPainter extends CustomPainter {
         begin: Alignment.topCenter,
         end: Alignment.bottomCenter,
         colors: [
-          backgroundColor.withOpacity(0),
-          backgroundColor.withOpacity(0.2),
+          backgroundColor.withValues(alpha: 0),
+          backgroundColor.withValues(alpha: 0.2),
         ],
       ).createShader(
         Rect.fromLTWH(0, size.height * 0.7, size.width, size.height * 0.3),

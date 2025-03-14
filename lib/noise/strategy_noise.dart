@@ -45,6 +45,7 @@ class SimplexNoiseStrategy implements NoiseStrategy {
     final y0 = yin - Y0;
 
     // Determine which simplex we are in
+    // ignore: avoid_multiple_declarations_per_line
     int i1, j1;
     if (x0 > y0) {
       i1 = 1;
@@ -103,6 +104,7 @@ class SimplexNoiseStrategy implements NoiseStrategy {
 
   @override
   Color getColor(double value) {
+    // ignore: parameter_assignments
     value = (value + 1) / 2; // Normalize to 0-1
     return Color.fromRGBO(
       (value * 255).round(),
@@ -153,6 +155,7 @@ class WorleyNoiseStrategy implements NoiseStrategy {
 
   @override
   Color getColor(double value) {
+    // ignore: parameter_assignments
     value = value.clamp(0, 1);
     return Color.fromRGBO(
       (value * 255).round(),
@@ -198,6 +201,7 @@ class FBMNoiseStrategy implements NoiseStrategy {
 
   @override
   Color getColor(double value) {
+    // ignore: parameter_assignments
     value = (value + 1) / 2;
     return HSVColor.fromAHSV(1, value * 360, 0.7, value).toColor();
   }

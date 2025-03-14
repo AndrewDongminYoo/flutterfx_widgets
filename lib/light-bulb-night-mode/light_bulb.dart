@@ -69,19 +69,23 @@ class _ThemeLightBulbState extends State<ThemeLightBulb> with SingleTickerProvid
   }
 
   void _handleDragUpdate(DragUpdateDetails details) {
-    if (_dragStart == null) return;
+    if (_dragStart == null) {
+      return;
+    }
 
     final distance = (details.globalPosition - _dragStart!).distance;
     final progress = (distance / _dragThreshold).clamp(0.0, 1.0);
     _controller.value = progress;
   }
 
-  void _handleDragEnd(DragEndDetails details) {
-    if (_dragStart == null) return;
+  Future<void> _handleDragEnd(DragEndDetails details) async {
+    if (_dragStart == null) {
+      return;
+    }
 
     final distance = _controller.value * _dragThreshold;
     if (distance >= _dragThreshold * 0.5) {
-      _controller.forward().then((_) {
+      await _controller.forward().then((_) {
         setState(() {
           isOn = !isOn;
           widget.onThemeChanged(isOn);
@@ -89,7 +93,7 @@ class _ThemeLightBulbState extends State<ThemeLightBulb> with SingleTickerProvid
         });
       });
     } else {
-      _controller.reverse();
+      await _controller.reverse();
     }
     _dragStart = null;
   }

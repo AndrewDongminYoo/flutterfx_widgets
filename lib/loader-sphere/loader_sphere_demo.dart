@@ -48,22 +48,22 @@ class RippleDemo extends StatelessWidget {
       width: 160,
       height: 160,
       decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.9), // Slightly transparent background
+        color: Colors.white.withValues(alpha: 0.9), // Slightly transparent background
         borderRadius: BorderRadius.circular(32),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: Colors.black.withValues(alpha: 0.05),
             blurRadius: 15,
             offset: const Offset(0, 4),
           ),
           BoxShadow(
-            color: Colors.black.withOpacity(0.03),
+            color: Colors.black.withValues(alpha: 0.03),
             blurRadius: 30,
             spreadRadius: 5,
             offset: const Offset(0, 8),
           ),
           BoxShadow(
-            color: Colors.black.withOpacity(0.01),
+            color: Colors.black.withValues(alpha: 0.01),
             blurRadius: 40,
             spreadRadius: 10,
             offset: const Offset(0, 12),

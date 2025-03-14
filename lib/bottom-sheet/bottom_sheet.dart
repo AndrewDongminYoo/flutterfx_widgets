@@ -143,7 +143,7 @@ class _CustomDrawerState extends State<CustomDrawer> with SingleTickerProviderSt
                   child: GestureDetector(
                     onTap: () => _controller.reverse(),
                     child: Container(
-                      color: widget.barrierColor.withOpacity(_controller.value * 0.7),
+                      color: widget.barrierColor.withValues(alpha: _controller.value * 0.7),
                     ),
                   ),
                 );
@@ -176,7 +176,7 @@ class _CustomDrawerState extends State<CustomDrawer> with SingleTickerProviderSt
                           ),
                           boxShadow: [
                             BoxShadow(
-                              color: Colors.black.withOpacity(0.1),
+                              color: Colors.black.withValues(alpha: 0.1),
                               blurRadius: 10,
                               offset: const Offset(0, -2),
                             ),
@@ -224,7 +224,9 @@ class _CustomDrawerState extends State<CustomDrawer> with SingleTickerProviderSt
   }
 
   void _handleDragUpdate(DragUpdateDetails details, double maxDrawerHeight) {
-    if (!_isDragging) return;
+    if (!_isDragging) {
+      return;
+    }
 
     final dragDistance = _dragStartPoint - details.globalPosition.dy;
     // Use maxDrawerHeight instead of screen height for calculations
@@ -233,7 +235,9 @@ class _CustomDrawerState extends State<CustomDrawer> with SingleTickerProviderSt
   }
 
   void _handleDragEnd(DragEndDetails details) {
-    if (!_isDragging) return;
+    if (!_isDragging) {
+      return;
+    }
 
     _isDragging = false;
     final velocity = details.primaryVelocity ?? 0;

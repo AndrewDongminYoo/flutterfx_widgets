@@ -54,11 +54,11 @@ class ThemeShowcaseCard extends StatelessWidget {
         padding: const EdgeInsets.all(16),
         child: Card(
           elevation: isDarkMode ? 8.0 : 4.0,
-          shadowColor: isDarkMode ? Colors.blue.withOpacity(0.4) : Colors.grey.withOpacity(0.2),
+          shadowColor: isDarkMode ? Colors.blue.withValues(alpha: 0.4) : Colors.grey.withValues(alpha: 0.2),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
             side: BorderSide(
-              color: isDarkMode ? Colors.blue.withOpacity(0.2) : Colors.grey.withOpacity(0.1),
+              color: isDarkMode ? Colors.blue.withValues(alpha: 0.2) : Colors.grey.withValues(alpha: 0.1),
             ),
           ),
           child: Container(
@@ -71,7 +71,7 @@ class ThemeShowcaseCard extends StatelessWidget {
                 // Header with icon
                 Container(
                   decoration: BoxDecoration(
-                    color: isDarkMode ? Colors.blue.withOpacity(0.1) : Colors.orange.withOpacity(0.1),
+                    color: isDarkMode ? Colors.blue.withValues(alpha: 0.1) : Colors.orange.withValues(alpha: 0.1),
                     borderRadius: const BorderRadius.only(
                       topLeft: Radius.circular(20),
                       topRight: Radius.circular(20),
@@ -87,7 +87,7 @@ class ThemeShowcaseCard extends StatelessWidget {
                           shape: BoxShape.circle,
                           boxShadow: [
                             BoxShadow(
-                              color: isDarkMode ? Colors.blue.withOpacity(0.2) : Colors.orange.withOpacity(0.2),
+                              color: isDarkMode ? Colors.blue.withValues(alpha: 0.2) : Colors.orange.withValues(alpha: 0.2),
                               blurRadius: 8,
                               offset: const Offset(0, 2),
                             ),
@@ -175,7 +175,7 @@ class ThemeShowcaseCard extends StatelessWidget {
             color: Theme.of(context).colorScheme.surface,
             borderRadius: BorderRadius.circular(8),
             border: Border.all(
-              color: Theme.of(context).dividerColor.withOpacity(0.1),
+              color: Theme.of(context).dividerColor.withValues(alpha: 0.1),
             ),
           ),
           child: Icon(

@@ -32,7 +32,7 @@ class _ParticlesDemoState extends State<ButtonShimmerDemo> {
             ShimmerButton(
               onPressed: () {
                 // Handle tap
-                print('onpressed');
+                print('onPressed');
               },
               shimmerColorFrom: const Color.fromARGB(255, 255, 255, 255), // Orange
               shimmerColorTo: const Color.fromARGB(255, 255, 255, 255), // Purple

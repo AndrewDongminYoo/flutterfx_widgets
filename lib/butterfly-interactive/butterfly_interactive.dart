@@ -170,7 +170,9 @@ class _InteractiveButterflyState extends State<InteractiveButterfly> with Single
   }
 
   void _updatePosition() {
-    if (!mounted) return;
+    if (!mounted) {
+      return;
+    }
 
     const deltaTime = 0.016; // ~60 FPS
     setState(() {
@@ -196,7 +198,9 @@ class _InteractiveButterflyState extends State<InteractiveButterfly> with Single
     final direction = target - _currentPosition;
     final distance = direction.distance;
 
-    if (distance < 1.0) return;
+    if (distance < 1.0) {
+      return;
+    }
 
     // Calculate desired velocity
     final targetVelocity = direction.normalize() * MovementPhysics.maxSpeed;
@@ -244,7 +248,9 @@ class _InteractiveButterflyState extends State<InteractiveButterfly> with Single
   }
 
   double _calculateRotation() {
-    if (_velocity.distance < 0.1) return 0;
+    if (_velocity.distance < 0.1) {
+      return 0;
+    }
     return atan2(_velocity.dy, _velocity.dx);
   }
 

@@ -88,7 +88,7 @@ class OrbitingCircles extends StatelessWidget {
 
   // Helper method to get the color for paths
   Color _getPathColor(bool isDarkMode) {
-    return isDarkMode ? Colors.white.withOpacity(0.1) : Colors.black.withOpacity(0.1);
+    return isDarkMode ? Colors.white.withValues(alpha: 0.1) : Colors.black.withValues(alpha: 0.1);
   }
 }
 
@@ -168,7 +168,7 @@ class _SingleOrbitingCircleState extends State<SingleOrbitingCircle> with Single
 
   // Helper method to build the circle
   Widget _buildCircle() {
-    final circleColor = widget.isDarkMode ? Colors.white.withOpacity(0.1) : Colors.black.withOpacity(0.1);
+    final circleColor = widget.isDarkMode ? Colors.white.withValues(alpha: 0.1) : Colors.black.withValues(alpha: 0.1);
 
     return Container(
       width: 40,

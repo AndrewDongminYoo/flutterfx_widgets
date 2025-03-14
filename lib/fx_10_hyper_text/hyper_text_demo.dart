@@ -8,7 +8,7 @@ class HyperTextDemo extends StatefulWidget {
   const HyperTextDemo({super.key});
 
   @override
-  _HyperTextDemoState createState() => _HyperTextDemoState();
+  State<HyperTextDemo> createState() => _HyperTextDemoState();
 }
 
 class _HyperTextDemoState extends State<HyperTextDemo> {

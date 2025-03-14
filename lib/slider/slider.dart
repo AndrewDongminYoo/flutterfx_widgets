@@ -142,12 +142,12 @@ class _WorkLifeSliderState extends State<WorkLifeSlider> {
             _buildTrackSection(
               left: 0,
               width: (width * _value / 100) - 8,
-              color: _SliderStyles.workColor.withOpacity(0.25),
+              color: _SliderStyles.workColor.withValues(alpha: 0.25),
             ),
             _buildTrackSection(
               right: 0,
               width: (width * (100 - _value) / 100) - 8,
-              color: _SliderStyles.lifeColor.withOpacity(0.37),
+              color: _SliderStyles.lifeColor.withValues(alpha: 0.37),
             ),
             _buildSliderIndicator(width),
           ],

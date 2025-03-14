@@ -241,7 +241,7 @@ class SnowProgressPainter extends CustomPainter {
       end: Alignment.bottomCenter,
       colors: [
         snowColor,
-        snowColor.withOpacity(0.85),
+        snowColor.withValues(alpha: 0.85),
       ],
     ).createShader(Offset.zero & size);
 
@@ -256,7 +256,7 @@ class SnowProgressPainter extends CustomPainter {
       // Only draw snowflakes above the snow pile
       if (snowflakeY < size.height - (baseSnowHeight * 0.9)) {
         final flakePaint = Paint()
-          ..color = snowColor.withOpacity(snowflake.opacity)
+          ..color = snowColor.withValues(alpha: snowflake.opacity)
           ..style = PaintingStyle.fill;
 
         canvas.drawCircle(

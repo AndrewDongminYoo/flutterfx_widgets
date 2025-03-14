@@ -75,15 +75,17 @@ class _ConfettiDemoScreenState extends State<ConfettiDemo> with SingleTickerProv
   }
 
   void _startConfetti(EnhancedConfettiOptions options) {
-    if (_isPlaying) return;
+    if (_isPlaying) {
+      return;
+    }
 
     setState(() {
       _isPlaying = true;
       _particles = List.generate(
         options.particleCount,
         (index) => EnhancedConfettiParticle(
-          position: const Offset(0, 0),
-          velocity: const Offset(0, 0),
+          position: Offset.zero,
+          velocity: Offset.zero,
           color: options.colors[index % options.colors.length],
           shape: options.shapes[index % options.shapes.length],
           size: 8 + index % 4 * 2,

@@ -102,7 +102,7 @@ class GridPatternPainter extends CustomPainter {
     // Draw base grid with slightly darker lines
     final gridPaint = Paint()
       ..style = PaintingStyle.stroke
-      ..color = Colors.grey.withOpacity(0.4)
+      ..color = Colors.grey.withValues(alpha: 0.4)
       ..strokeWidth = 0.5;
 
     // Draw vertical lines
@@ -141,12 +141,12 @@ class GridPatternPainter extends CustomPainter {
       //   center: Alignment.center,
       //   radius: 1.0,
       //   colors: [
-      //     Colors.blue.withOpacity(animations[i].value),
-      //     Colors.purple.withOpacity(animations[i].value * 0.7),
+      //     Colors.blue.withValues(alpha: animations[i].value),
+      //     Colors.purple.withValues(alpha: animations[i].value * 0.7),
       //   ],
       // ).createShader(squareRect);
-// Colors.grey.withOpacity(0.4)
-      fillPaint.color = Colors.grey.withOpacity(0.3 * animations[i].value);
+// Colors.grey.withValues(alpha: 0.4)
+      fillPaint.color = Colors.grey.withValues(alpha: 0.3 * animations[i].value);
 
       canvas.drawRect(squareRect, fillPaint);
     }
@@ -171,28 +171,26 @@ class GridBlinkerDemo extends StatelessWidget {
 
     return LayoutBuilder(
       builder: (context, constraints) {
-        return Container(
-          child: Stack(
-            alignment: Alignment.center,
-            children: [
-              Transform.translate(
-                offset: const Offset(0, -100), // Adjust this value to move up
-                child: AnimatedGridPattern(
-                  squares: squares,
-                  gridSize: 30, // Smaller grid size for more squares
-                  skewAngle: 15, // Slightly more pronounced skew
-                ),
+        return Stack(
+          alignment: Alignment.center,
+          children: [
+            Transform.translate(
+              offset: const Offset(0, -100), // Adjust this value to move up
+              child: AnimatedGridPattern(
+                squares: squares,
+                gridSize: 30, // Smaller grid size for more squares
+                skewAngle: 15, // Slightly more pronounced skew
               ),
-              Text(
-                'GRID PATTERN',
-                style: Theme.of(context).textTheme.headlineLarge?.copyWith(
-                      fontWeight: FontWeight.w900,
-                      letterSpacing: -1,
-                      color: Colors.white.withOpacity(0.9),
-                    ),
-              ),
-            ],
-          ),
+            ),
+            Text(
+              'GRID PATTERN',
+              style: Theme.of(context).textTheme.headlineLarge?.copyWith(
+                    fontWeight: FontWeight.w900,
+                    letterSpacing: -1,
+                    color: Colors.white.withValues(alpha: 0.9),
+                  ),
+            ),
+          ],
         );
       },
     );

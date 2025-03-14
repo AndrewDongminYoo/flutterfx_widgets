@@ -58,9 +58,9 @@ class _BookOpenState extends State<BookOpenDemo> {
             data: SliderThemeData(
               trackHeight: 2,
               activeTrackColor: Colors.white,
-              inactiveTrackColor: Colors.white.withOpacity(0.3),
+              inactiveTrackColor: Colors.white.withValues(alpha: 0.3),
               thumbColor: Colors.white,
-              overlayColor: Colors.white.withOpacity(0.1),
+              overlayColor: Colors.white.withValues(alpha: 0.1),
               thumbShape: const RoundSliderThumbShape(
                 enabledThumbRadius: 6,
                 elevation: 0,
@@ -125,7 +125,7 @@ class _BookOpenState extends State<BookOpenDemo> {
                     decoration: BoxDecoration(
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.white.withOpacity(0.05),
+                          color: Colors.white.withValues(alpha: 0.05),
                           blurRadius: 20,
                           offset: const Offset(0, -5),
                         ),

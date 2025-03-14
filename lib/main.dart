@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 
@@ -20,7 +19,7 @@ import 'package:fx_2_folder/butterfly-interactive/butterfly_interactive_demo.dar
 import 'package:fx_2_folder/butterfly/butterfly_demo.dart';
 import 'package:fx_2_folder/button-shimmer/button_shimmer_demo.dart';
 import 'package:fx_2_folder/celebrate/celebrate_demo.dart';
-import 'package:fx_2_folder/circles_selector/CirclesHomeWidget.dart';
+import 'package:fx_2_folder/circles_selector/circles_home_widget.dart';
 import 'package:fx_2_folder/confetti/confetti_demo.dart';
 import 'package:fx_2_folder/debug-overlay-3D/debug_overlay_3d.dart';
 import 'package:fx_2_folder/decoration-bulbs/decoration_bulbs_demo.dart';
@@ -40,7 +39,7 @@ import 'package:fx_2_folder/fx_7_border_beam/border_beam_demo.dart';
 import 'package:fx_2_folder/fx_8_meteor_border/meteors_demo.dart';
 import 'package:fx_2_folder/fx_9_neon_card/neon_card_demo.dart';
 import 'package:fx_2_folder/gemini-splash/gemini_splash_demo.dart';
-import 'package:fx_2_folder/globe/3d_cloud_demo.dart';
+import 'package:fx_2_folder/globe/cloud_demo.dart';
 import 'package:fx_2_folder/grid-animated/grid_animated.dart';
 import 'package:fx_2_folder/infinite-scrolling/infinite_scrolling.dart';
 import 'package:fx_2_folder/infinite-scrolling/infinite_scrolling_3d.dart';
@@ -521,23 +520,12 @@ class HomeScreen extends StatelessWidget {
     ),
   ];
 
-  void enterFullScreen() {
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
-  }
-
-  void exitFullScreen() {
-    SystemChrome.setEnabledSystemUIMode(
-      SystemUiMode.manual,
-      overlays: SystemUiOverlay.values,
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     // Automatically navigate to the first example on launch (e.g., "Folder").
-    Future.microtask(() {
+    Future.microtask(() async {
       if (examples.isNotEmpty) {
-        Navigator.push<void>(
+        await Navigator.push<void>(
           context,
           MaterialPageRoute(
             builder: (context) {
@@ -572,8 +560,8 @@ class HomeScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: InkWell(
-                  onTap: () {
-                    Navigator.push<void>(
+                  onTap: () async {
+                    await Navigator.push<void>(
                       context,
                       MaterialPageRoute(
                         builder: (context) {
