@@ -18,10 +18,10 @@ class PannableCircleGrid extends StatefulWidget {
   const PannableCircleGrid({super.key});
 
   @override
-  _PannableCircleGridState createState() => _PannableCircleGridState();
+  PannableCircleGridState createState() => PannableCircleGridState();
 }
 
-class _PannableCircleGridState extends State<PannableCircleGrid> with TickerProviderStateMixin {
+class PannableCircleGridState extends State<PannableCircleGrid> with TickerProviderStateMixin {
   static const double _circleSize = 80;
   static const double _selectedCircleMultiplier = 2;
   static const double _spacing = 10;
@@ -112,12 +112,12 @@ class _PannableCircleGridState extends State<PannableCircleGrid> with TickerProv
                       Colors.black,
                       Colors.black,
                       Colors.black,
-                      Colors.black.withOpacity(0.9),
-                      Colors.black.withOpacity(0.8),
-                      Colors.black.withOpacity(0.7),
-                      Colors.black.withOpacity(0.5),
-                      Colors.black.withOpacity(0.3),
-                      Colors.black.withOpacity(0.1),
+                      Colors.black.withValues(alpha: 0.9),
+                      Colors.black.withValues(alpha: 0.8),
+                      Colors.black.withValues(alpha: 0.7),
+                      Colors.black.withValues(alpha: 0.5),
+                      Colors.black.withValues(alpha: 0.3),
+                      Colors.black.withValues(alpha: 0.1),
                       Colors.transparent,
                       Colors.transparent,
                     ],
@@ -172,7 +172,9 @@ class _PannableCircleGridState extends State<PannableCircleGrid> with TickerProv
   }
 
   void _handleFlingAnimation() {
-    if (!_flingAnimationController.isAnimating) return;
+    if (!_flingAnimationController.isAnimating) {
+      return;
+    }
 
     final t = _flingAnimationController.value;
     final easeOutFactor = Curves.decelerate.transform(1 - t);
@@ -197,6 +199,7 @@ class _PannableCircleGridState extends State<PannableCircleGrid> with TickerProv
       if (_selectedIndex == tappedIndex) {
         // Case 1: Tapping the same circle
         final simulation = SpringSimulation(spring, 1, 0, -1);
+        // ignore: discarded_futures
         _animationControllers[tappedIndex]?.animateWith(simulation).then((_) {
           if (mounted) {
             setState(() {
@@ -211,6 +214,7 @@ class _PannableCircleGridState extends State<PannableCircleGrid> with TickerProv
           final selectedIndex = _selectedIndex;
           // Collapse the previously selected circle
           final simulation = SpringSimulation(spring, 1, 0, -1);
+          // ignore: discarded_futures
           _animationControllers[selectedIndex]?.animateWith(simulation).then((_) {
             if (mounted) {
               setState(() {
