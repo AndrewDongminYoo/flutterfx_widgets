@@ -1,14 +1,8 @@
 import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 
 class OrbitingDot {
-  final double orbitRadius;
-  final double baseHeight;
-  final Color color;
-  final double dotSize;
-  double angle;
-  final double startAngle;
-
   OrbitingDot({
     required this.orbitRadius,
     required this.baseHeight,
@@ -17,6 +11,12 @@ class OrbitingDot {
     this.dotSize = 4.0,
     this.angle = 0.0,
   });
+  final double orbitRadius;
+  final double baseHeight;
+  final Color color;
+  final double dotSize;
+  double angle;
+  final double startAngle;
 
   Offset getPosition() {
     final x = math.cos(angle) * orbitRadius;
@@ -27,14 +27,8 @@ class OrbitingDot {
 }
 
 class FestiveTree extends StatefulWidget {
-  final double maxRadius;
-  final double height;
-  final int numberOfOrbits;
-  final int dotsPerOrbit; // New parameter for dots per orbit
-  final List<Color> dotColors;
-
   const FestiveTree({
-    Key? key,
+    super.key,
     this.maxRadius = 200.0,
     this.height = 400.0,
     this.numberOfOrbits = 14,
@@ -47,14 +41,18 @@ class FestiveTree extends StatefulWidget {
       Colors.purple,
       Colors.orange,
     ],
-  }) : super(key: key);
+  });
+  final double maxRadius;
+  final double height;
+  final int numberOfOrbits;
+  final int dotsPerOrbit; // New parameter for dots per orbit
+  final List<Color> dotColors;
 
   @override
   State<FestiveTree> createState() => _FestiveTreeState();
 }
 
-class _FestiveTreeState extends State<FestiveTree>
-    with SingleTickerProviderStateMixin {
+class _FestiveTreeState extends State<FestiveTree> with SingleTickerProviderStateMixin {
   late List<OrbitingDot> dots;
   late AnimationController _controller;
   bool isChaoticMode = false;
@@ -69,7 +67,7 @@ class _FestiveTreeState extends State<FestiveTree>
   void _initializeDots() {
     dots = [];
 
-    for (int orbitIndex = 0; orbitIndex < widget.numberOfOrbits; orbitIndex++) {
+    for (var orbitIndex = 0; orbitIndex < widget.numberOfOrbits; orbitIndex++) {
       // Calculate orbit properties
       final radiusProgress = orbitIndex / (widget.numberOfOrbits - 1);
       final orbitRadius = widget.maxRadius * radiusProgress;
@@ -77,7 +75,7 @@ class _FestiveTreeState extends State<FestiveTree>
       final height = heightProgress * widget.height;
 
       // Create multiple dots for each orbit
-      for (int dotIndex = 0; dotIndex < widget.dotsPerOrbit; dotIndex++) {
+      for (var dotIndex = 0; dotIndex < widget.dotsPerOrbit; dotIndex++) {
         // Distribute dots evenly around the orbit
         final startAngle = (dotIndex / widget.dotsPerOrbit) * math.pi * 2;
 
@@ -85,9 +83,8 @@ class _FestiveTreeState extends State<FestiveTree>
         final colorIndex = (orbitIndex + dotIndex) % widget.dotColors.length;
 
         // Vary dot sizes slightly for more visual interest
-        final baseDotSize = 4.0;
-        final randomSize =
-            baseDotSize * (0.8 + math.Random().nextDouble() * 0.4);
+        const baseDotSize = 4.0;
+        final randomSize = baseDotSize * (0.8 + math.Random().nextDouble() * 0.4);
 
         dots.add(
           OrbitingDot(
@@ -113,7 +110,7 @@ class _FestiveTreeState extends State<FestiveTree>
 
   void _updateDotPositions() {
     setState(() {
-      for (var dot in dots) {
+      for (final dot in dots) {
         dot.angle = dot.startAngle + (_controller.value * math.pi * 2);
       }
     });
@@ -128,8 +125,6 @@ class _FestiveTreeState extends State<FestiveTree>
         painter: OrbitingDotsPainter(
           dots: dots,
           starColor: Colors.yellow,
-          showOrbits: false, // Hide orbits for cleaner look with many dots
-          isChaoticMode: false,
         ),
       ),
     );
@@ -143,10 +138,7 @@ class _FestiveTreeState extends State<FestiveTree>
 }
 
 class OrbitingDotsPainter extends CustomPainter {
-  final List<OrbitingDot> dots;
-  final Color starColor;
-  final bool showOrbits;
-  final bool isChaoticMode; // New parameter
+  // New parameter
 
   OrbitingDotsPainter({
     required this.dots,
@@ -154,6 +146,10 @@ class OrbitingDotsPainter extends CustomPainter {
     this.showOrbits = false,
     this.isChaoticMode = false, // Default to orderly mode
   });
+  final List<OrbitingDot> dots;
+  final Color starColor;
+  final bool showOrbits;
+  final bool isChaoticMode;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -168,21 +164,22 @@ class OrbitingDotsPainter extends CustomPainter {
       });
 
     // Draw the dots with motion-based effects
-    for (var dot in sortedDots) {
+    for (final dot in sortedDots) {
       final position = isChaoticMode
           ? dot.getPosition() // Use wobble effect in chaotic mode
           : Offset(
               // Simple circular motion in orderly mode
               math.cos(dot.angle) * dot.orbitRadius,
-              dot.baseHeight + math.sin(dot.angle) * dot.orbitRadius * 0.1);
+              dot.baseHeight + math.sin(dot.angle) * dot.orbitRadius * 0.1,
+            );
 
       final paint = Paint()
         ..color = dot.color
         ..style = PaintingStyle.fill;
 
       final z = math.sin(dot.angle);
-      final opacity = math.max(0.3, math.min(1.0, (z + 1) / 2));
-      paint.color = paint.color.withOpacity(opacity);
+      final opacity = math.max(0.3, math.min(1, (z + 1) / 2));
+      paint.color = paint.color.withOpacity(opacity.toDouble());
 
       if (z > 0) {
         final glowPaint = Paint()
@@ -202,7 +199,7 @@ class OrbitingDotsPainter extends CustomPainter {
       );
     }
 
-    _drawStar(canvas, Offset(0, 0), 12, starColor);
+    _drawStar(canvas, const Offset(0, 0), 12, starColor);
   }
 
   void _drawStar(Canvas canvas, Offset center, double radius, Color color) {
@@ -211,7 +208,7 @@ class OrbitingDotsPainter extends CustomPainter {
       ..style = PaintingStyle.fill;
 
     final path = Path();
-    final angleStep = math.pi / 5;
+    const angleStep = math.pi / 5;
 
     for (var i = 0; i < 10; i++) {
       final r = i.isEven ? radius : radius * 0.4;
@@ -235,23 +232,12 @@ class OrbitingDotsPainter extends CustomPainter {
 }
 
 class TreeDemo extends StatelessWidget {
-  const TreeDemo({Key? key}) : super(key: key);
+  const TreeDemo({super.key});
 
   @override
   Widget build(BuildContext context) {
     return const Center(
-      child: FestiveTree(
-        maxRadius: 200,
-        numberOfOrbits: 14,
-        dotColors: [
-          Colors.red,
-          Colors.blue,
-          Colors.green,
-          Colors.yellow,
-          Colors.purple,
-          Colors.orange,
-        ],
-      ),
+      child: FestiveTree(),
     );
   }
 }

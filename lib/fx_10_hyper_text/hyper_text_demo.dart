@@ -1,6 +1,8 @@
 import 'dart:async';
+
 import 'package:flutter/material.dart';
-import 'hyper_text.dart';
+
+import 'package:fx_2_folder/fx_10_hyper_text/hyper_text.dart';
 
 class HyperTextDemo extends StatefulWidget {
   const HyperTextDemo({super.key});
@@ -28,7 +30,7 @@ class _HyperTextDemoState extends State<HyperTextDemo> {
     _resetTimer?.cancel();
 
     // Set a new timer to reset the trigger after 300ms
-    _resetTimer = Timer(Duration(milliseconds: 300), () {
+    _resetTimer = Timer(const Duration(milliseconds: 300), () {
       setState(() {
         _triggerAnimation = false;
       });
@@ -52,8 +54,8 @@ class _HyperTextDemoState extends State<HyperTextDemo> {
                     Expanded(
                       child: Center(
                         child: HyperText(
-                          text: "Hyper Text",
-                          style: TextStyle(
+                          text: 'Hyper Text',
+                          style: const TextStyle(
                             fontSize: 32,
                             fontWeight: FontWeight.bold,
                             color: Colors.white70,
@@ -62,12 +64,12 @@ class _HyperTextDemoState extends State<HyperTextDemo> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 24),
+                    const SizedBox(height: 24),
                     ElevatedButton(
                       onPressed: _handleAnimationTrigger,
-                      child: Text("Trigger Animation"),
+                      child: const Text('Trigger Animation'),
                     ),
-                    SizedBox(height: 24),
+                    const SizedBox(height: 24),
                   ],
                 ),
               ),

@@ -1,8 +1,10 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
+
 import 'package:fx_2_folder/fx_12_rotating_text/text_rotate.dart';
 
 class TextRotateDemo extends StatefulWidget {
+  const TextRotateDemo({super.key});
+
   @override
   _TextRotateDemoState createState() => _TextRotateDemoState();
 }
@@ -26,9 +28,8 @@ class _TextRotateDemoState extends State<TextRotateDemo> {
                       child: Center(
                         child: RotatingTextWidget(
                           text: 'Your rotating text here',
-                          radius: 100.0,
-                          textStyle:
-                              TextStyle(fontSize: 18, color: Colors.blue),
+                          radius: 100,
+                          textStyle: TextStyle(fontSize: 18, color: Colors.blue),
                           rotationDuration: Duration(seconds: 15),
                         ),
                       ),

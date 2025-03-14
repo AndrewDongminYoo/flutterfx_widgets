@@ -1,18 +1,12 @@
 import 'dart:math' as math;
 import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/physics.dart';
+
 import 'package:fx_2_folder/fx_14_text_reveal/text_reveal_widget.dart';
 
 class FancySpringStrategy extends BaseAnimationStrategy {
-  final double maxOffset;
-  final double maxRotation;
-  final double minScale;
-  final bool enableRandomColors;
-  final SpringDescription springDescription;
-  final bool enableBlur;
-  final double maxBlur;
-
   const FancySpringStrategy({
     this.maxOffset = 50.0,
     this.maxRotation = 45.0,
@@ -28,6 +22,13 @@ class FancySpringStrategy extends BaseAnimationStrategy {
               damping: 10,
             ),
         super(synchronizeAnimation: false);
+  final double maxOffset;
+  final double maxRotation;
+  final double minScale;
+  final bool enableRandomColors;
+  final SpringDescription springDescription;
+  final bool enableBlur;
+  final double maxBlur;
 
   // Generate random color
   Color _getRandomColor() {
@@ -82,7 +83,7 @@ class FancySpringStrategy extends BaseAnimationStrategy {
         Widget child = Text(
           character,
           style: style?.copyWith(
-            color: enableRandomColors ? currentColor : style?.color,
+            color: enableRandomColors ? currentColor : style.color,
           ),
         );
 
@@ -122,7 +123,7 @@ class FancySpringStrategy extends BaseAnimationStrategy {
     required Curve curve,
   }) {
     // Use a custom curve that combines spring physics with easing
-    return Tween<double>(begin: 0.0, end: 1.0).animate(
+    return Tween<double>(begin: 0, end: 1).animate(
       CurvedAnimation(
         parent: controller,
         curve: Interval(

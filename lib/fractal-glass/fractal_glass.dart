@@ -1,16 +1,15 @@
 import 'dart:async';
-
-import 'package:flutter/material.dart';
 import 'dart:math' as math;
 import 'dart:ui' as ui;
 
-class FractalGlassEffect extends StatefulWidget {
-  final ImageProvider imageProvider;
+import 'package:flutter/material.dart';
 
+class FractalGlassEffect extends StatefulWidget {
   const FractalGlassEffect({
-    Key? key,
+    super.key,
     required this.imageProvider,
-  }) : super(key: key);
+  });
+  final ImageProvider imageProvider;
 
   @override
   _FractalGlassEffectState createState() => _FractalGlassEffectState();
@@ -18,7 +17,7 @@ class FractalGlassEffect extends StatefulWidget {
 
 class _FractalGlassEffectState extends State<FractalGlassEffect> {
   double _turbulence = 0.05;
-  double _scale = 10.0;
+  double _scale = 10;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +32,7 @@ class _FractalGlassEffectState extends State<FractalGlassEffect> {
             scale: _scale,
           ),
           child: AspectRatio(
-            aspectRatio: 1.0,
+            aspectRatio: 1,
             child: Container(),
           ),
         ),
@@ -75,13 +74,13 @@ class _FractalGlassEffectState extends State<FractalGlassEffect> {
     required ValueChanged<double> onChanged,
   }) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             '$label: ${value.toStringAsFixed(2)}',
-            style: TextStyle(
+            style: const TextStyle(
               color: Colors.black87,
               fontWeight: FontWeight.w500,
             ),
@@ -101,24 +100,25 @@ class _FractalGlassEffectState extends State<FractalGlassEffect> {
 }
 
 class FractalGlassPainter extends CustomPainter {
-  final ImageProvider image;
-  final double turbulence;
-  final double scale;
-  ui.Image? _cachedImage;
-
   FractalGlassPainter({
     required this.image,
     this.turbulence = 0.05,
     this.scale = 10.0,
   });
+  final ImageProvider image;
+  final double turbulence;
+  final double scale;
+  ui.Image? _cachedImage;
 
   Future<void> _loadImage() async {
     final completer = Completer<ui.Image>();
-    ImageStream stream = image.resolve(ImageConfiguration());
+    final stream = image.resolve(const ImageConfiguration());
 
-    stream.addListener(ImageStreamListener((ImageInfo info, bool _) {
-      completer.complete(info.image);
-    }));
+    stream.addListener(
+      ImageStreamListener((ImageInfo info, bool _) {
+        completer.complete(info.image);
+      }),
+    );
 
     _cachedImage = await completer.future;
   }
@@ -156,8 +156,9 @@ class FractalGlassPainter extends CustomPainter {
     // Create a matrix with noise-based transformations
     final matrix = Matrix4.identity()
       ..translate(
-          (random.nextDouble() * 2 - 1) * turbulence * size.width * scale,
-          (random.nextDouble() * 2 - 1) * turbulence * size.height * scale)
+        (random.nextDouble() * 2 - 1) * turbulence * size.width * scale,
+        (random.nextDouble() * 2 - 1) * turbulence * size.height * scale,
+      )
       ..rotateZ(random.nextDouble() * turbulence * scale);
 
     // Create an image shader with the transformation
@@ -176,13 +177,16 @@ class FractalGlassPainter extends CustomPainter {
 }
 
 class FractalGlassDemo extends StatelessWidget {
+  const FractalGlassDemo({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: Center(
         child: FractalGlassEffect(
           imageProvider: NetworkImage(
-              'https://plus.unsplash.com/premium_photo-1689568158814-3b8e9c1a9618'),
+            'https://plus.unsplash.com/premium_photo-1689568158814-3b8e9c1a9618',
+          ),
         ),
       ),
     );

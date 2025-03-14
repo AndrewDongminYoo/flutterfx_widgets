@@ -1,5 +1,7 @@
 import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
+
 import 'package:fx_2_folder/loader-avatars/strategies/loader_strategy_pulse.dart';
 import 'package:fx_2_folder/loader-avatars/strategies/loader_strategy_ripple.dart';
 import 'package:fx_2_folder/loader-avatars/strategies/loader_strategy_wave.dart';
@@ -19,6 +21,16 @@ abstract class AvatarAnimationStrategy {
 
 // Step 3: Main widget that uses the strategy
 class AnimatedAvatarRow extends StatefulWidget {
+  const AnimatedAvatarRow({
+    super.key,
+    this.numberOfAvatars = 5,
+    this.avatarSize = 45.0,
+    this.overlapFactor = 0.6,
+    this.animationCurve = Curves.easeInOut,
+    required this.animationStrategy,
+    this.avatarImages,
+    this.borderColors,
+  });
   final int numberOfAvatars;
   final double avatarSize;
   final double overlapFactor;
@@ -27,23 +39,11 @@ class AnimatedAvatarRow extends StatefulWidget {
   final List<ImageProvider>? avatarImages;
   final List<Color>? borderColors;
 
-  const AnimatedAvatarRow({
-    Key? key,
-    this.numberOfAvatars = 5,
-    this.avatarSize = 45.0,
-    this.overlapFactor = 0.6,
-    this.animationCurve = Curves.easeInOut,
-    required this.animationStrategy,
-    this.avatarImages,
-    this.borderColors,
-  }) : super(key: key);
-
   @override
   State<AnimatedAvatarRow> createState() => _AnimatedAvatarRowState();
 }
 
-class _AnimatedAvatarRowState extends State<AnimatedAvatarRow>
-    with TickerProviderStateMixin {
+class _AnimatedAvatarRowState extends State<AnimatedAvatarRow> with TickerProviderStateMixin {
   late List<AnimationController> _controllers;
   late List<Animation<double>> _animations;
 
@@ -73,7 +73,7 @@ class _AnimatedAvatarRowState extends State<AnimatedAvatarRow>
     _animations = List.generate(
       widget.numberOfAvatars,
       (index) => Tween<double>(
-        begin: 0.0,
+        begin: 0,
         end: math.pi * 2,
       ).animate(
         CurvedAnimation(
@@ -83,7 +83,7 @@ class _AnimatedAvatarRowState extends State<AnimatedAvatarRow>
       ),
     );
 
-    for (int i = 0; i < widget.numberOfAvatars; i++) {
+    for (var i = 0; i < widget.numberOfAvatars; i++) {
       Future.delayed(
         widget.animationStrategy.getAnimationDelay(i, widget.numberOfAvatars),
         () {
@@ -99,7 +99,7 @@ class _AnimatedAvatarRowState extends State<AnimatedAvatarRow>
 
   @override
   void dispose() {
-    for (var controller in _controllers) {
+    for (final controller in _controllers) {
       controller.dispose();
     }
     super.dispose();
@@ -113,8 +113,7 @@ class _AnimatedAvatarRowState extends State<AnimatedAvatarRow>
   }
 
   Widget _buildAvatar(int index) {
-    final hasImage =
-        widget.avatarImages != null && index < widget.avatarImages!.length;
+    final hasImage = widget.avatarImages != null && index < widget.avatarImages!.length;
     final borderColor = _getBorderColor(index);
 
     return Container(
@@ -125,7 +124,7 @@ class _AnimatedAvatarRowState extends State<AnimatedAvatarRow>
         color: Colors.white,
         border: Border.all(
           color: borderColor,
-          width: 3.0,
+          width: 3,
         ),
         boxShadow: [
           BoxShadow(
@@ -136,7 +135,7 @@ class _AnimatedAvatarRowState extends State<AnimatedAvatarRow>
         ],
       ),
       child: Padding(
-        padding: const EdgeInsets.all(3.0),
+        padding: const EdgeInsets.all(3),
         child: ClipOval(
           child: hasImage
               ? Image(
@@ -152,10 +151,8 @@ class _AnimatedAvatarRowState extends State<AnimatedAvatarRow>
 
   @override
   Widget build(BuildContext context) {
-    final rowWidth = widget.avatarSize +
-        (widget.avatarSize *
-            (1 - widget.overlapFactor) *
-            (widget.numberOfAvatars - 1));
+    final rowWidth =
+        widget.avatarSize + (widget.avatarSize * (1 - widget.overlapFactor) * (widget.numberOfAvatars - 1));
 
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
@@ -191,7 +188,7 @@ class _AnimatedAvatarRowState extends State<AnimatedAvatarRow>
 
 // Example usage
 class ExampleImplementation extends StatelessWidget {
-  const ExampleImplementation({Key? key}) : super(key: key);
+  const ExampleImplementation({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -199,28 +196,22 @@ class ExampleImplementation extends StatelessWidget {
       appBar: AppBar(title: const Text('Animated Avatar Row')),
       body: Center(
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(16),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               // Wave animation example
               AnimatedAvatarRow(
-                numberOfAvatars: 5,
                 avatarSize: 50,
-                animationStrategy: WaveAnimationStrategy(
-                  animationDuration: const Duration(milliseconds: 1200),
-                  staggerDelay: const Duration(milliseconds: 120),
-                  reverseWave: false,
-                ),
+                animationStrategy: WaveAnimationStrategy(),
               ),
               const SizedBox(height: 20),
 
               // Ripple animation example
               AnimatedAvatarRow(
-                numberOfAvatars: 5,
                 avatarSize: 50,
                 animationStrategy: RippleAnimationStrategy(
-                  maxDisplacement: 15.0,
+                  maxDisplacement: 15,
                   staggerDelay: const Duration(milliseconds: 150),
                 ),
               ),
@@ -228,7 +219,6 @@ class ExampleImplementation extends StatelessWidget {
 
               // Pulse animation example with custom settings
               AnimatedAvatarRow(
-                numberOfAvatars: 5,
                 avatarSize: 50,
                 animationStrategy: PulseAnimationStrategy(
                   scaleAmount: 0.4,

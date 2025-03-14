@@ -1,20 +1,21 @@
 import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
 import 'package:fx_2_folder/butterfly-interactive/butterfly.dart';
 
 class ButterflyConfig {
-  final Duration delay;
-  final Duration duration;
-  final double startXPercent;
-  final double scale;
-
   ButterflyConfig({
     required this.delay,
     required this.duration,
     required this.startXPercent,
     required this.scale,
   });
+  final Duration delay;
+  final Duration duration;
+  final double startXPercent;
+  final double scale;
 }
 
 extension VectorNormalization on Offset {
@@ -32,9 +33,6 @@ class ButterflyController extends ChangeNotifier {
   Offset _targetPosition = Offset.zero;
   ButterflyMode _mode = ButterflyMode.random;
   bool _isInteracting = false;
-
-  // Add momentum tracking
-  Offset _velocity = Offset.zero;
 
   Offset get targetPosition => _targetPosition;
   ButterflyMode get mode => _mode;
@@ -65,15 +63,24 @@ class ButterflyController extends ChangeNotifier {
 
 // movement_physics.dart
 class MovementPhysics {
-  static const double maxSpeed = 300.0; // pixels per second
-  static const double acceleration = 200.0; // pixels per second squared
-  static const double deceleration = 150.0; // pixels per second squared
-  static const double hoverAmplitude = 2.0; // pixels
+  static const double maxSpeed = 300; // pixels per second
+  static const double acceleration = 200; // pixels per second squared
+  static const double deceleration = 150; // pixels per second squared
+  static const double hoverAmplitude = 2; // pixels
   static const double hoverFrequency = 1.5; // cycles per second
 }
 
 // interactive_butterfly.dart
 class InteractiveButterfly extends StatefulWidget {
+  const InteractiveButterfly({
+    super.key,
+    required this.screenHeight,
+    required this.screenWidth,
+    required this.controller,
+    this.duration = const Duration(seconds: 6),
+    this.startXPercent = 0.5,
+    this.scale = 1.0,
+  });
   final double screenHeight;
   final double screenWidth;
   final Duration duration;
@@ -81,31 +88,18 @@ class InteractiveButterfly extends StatefulWidget {
   final double scale;
   final ButterflyController controller;
 
-  const InteractiveButterfly({
-    Key? key,
-    required this.screenHeight,
-    required this.screenWidth,
-    required this.controller,
-    this.duration = const Duration(seconds: 6),
-    this.startXPercent = 0.5,
-    this.scale = 1.0,
-  }) : super(key: key);
-
   @override
   State<InteractiveButterfly> createState() => _InteractiveButterflyState();
 }
 
-class _InteractiveButterflyState extends State<InteractiveButterfly>
-    with SingleTickerProviderStateMixin {
+class _InteractiveButterflyState extends State<InteractiveButterfly> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Offset _currentPosition;
-  late Offset _randomTarget;
   final _random = Random();
 
   // Physics variables
   Offset _velocity = Offset.zero;
-  double _currentSpeed = 0.0;
-  double _hoverPhase = 0.0;
+  double _hoverPhase = 0;
 
   // Path planning
   final List<Offset> _pathPoints = [];
@@ -118,7 +112,7 @@ class _InteractiveButterflyState extends State<InteractiveButterfly>
       widget.screenWidth * widget.startXPercent,
       widget.screenHeight - 100,
     );
-    _randomTarget = _generateRandomTarget();
+    _generateRandomTarget();
 
     _controller = AnimationController(
       duration: const Duration(milliseconds: 16), // ~60 FPS
@@ -153,9 +147,9 @@ class _InteractiveButterflyState extends State<InteractiveButterfly>
 
     // Generate intermediate points for natural path
     final steps = 3 + _random.nextInt(3);
-    Offset lastPoint = _currentPosition;
+    var lastPoint = _currentPosition;
 
-    for (int i = 0; i < steps; i++) {
+    for (var i = 0; i < steps; i++) {
       final maxDistance = widget.screenWidth * 0.2;
       final angle = _random.nextDouble() * 2 * pi;
       final distance = maxDistance * (0.3 + _random.nextDouble() * 0.7);
@@ -178,7 +172,7 @@ class _InteractiveButterflyState extends State<InteractiveButterfly>
   void _updatePosition() {
     if (!mounted) return;
 
-    final deltaTime = 0.016; // ~60 FPS
+    const deltaTime = 0.016; // ~60 FPS
     setState(() {
       if (widget.controller.mode == ButterflyMode.follow) {
         _updateFollowMode(deltaTime);
@@ -233,8 +227,7 @@ class _InteractiveButterflyState extends State<InteractiveButterfly>
     }
 
     // Calculate desired velocity
-    final targetVelocity =
-        direction.normalize() * MovementPhysics.maxSpeed * 0.5;
+    final targetVelocity = direction.normalize() * MovementPhysics.maxSpeed * 0.5;
 
     // Smoothly interpolate current velocity towards target velocity
     _velocity = Offset(
@@ -251,7 +244,7 @@ class _InteractiveButterflyState extends State<InteractiveButterfly>
   }
 
   double _calculateRotation() {
-    if (_velocity.distance < 0.1) return 0.0;
+    if (_velocity.distance < 0.1) return 0;
     return atan2(_velocity.dy, _velocity.dx);
   }
 
@@ -281,12 +274,11 @@ class _InteractiveButterflyState extends State<InteractiveButterfly>
 
 // butterfly_swarm.dart
 class ButterflySwarm extends StatefulWidget {
-  final int numberOfButterflies;
-
   const ButterflySwarm({
-    Key? key,
+    super.key,
     this.numberOfButterflies = 15,
-  }) : super(key: key);
+  });
+  final int numberOfButterflies;
 
   @override
   State<ButterflySwarm> createState() => _ButterflySwarmState();
@@ -305,7 +297,7 @@ class _ButterflySwarmState extends State<ButterflySwarm> {
   }
 
   void _initializeButterflies() {
-    for (int i = 0; i < widget.numberOfButterflies; i++) {
+    for (var i = 0; i < widget.numberOfButterflies; i++) {
       _butterflies.add(
         ButterflyConfig(
           delay: Duration(milliseconds: _random.nextInt(5000)),
@@ -346,10 +338,8 @@ class _ButterflySwarmState extends State<ButterflySwarm> {
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: SafeArea(
-        top: true,
         bottom: false,
         left: false,
-        right: true,
         child: MouseRegion(
           onHover: _handleMouseEvent,
           onExit: _handleMouseEvent,
@@ -364,7 +354,7 @@ class _ButterflySwarmState extends State<ButterflySwarm> {
                 return Stack(
                   children: _butterflies.map((config) {
                     return FutureBuilder(
-                      future: Future.delayed(config.delay),
+                      future: Future<void>.delayed(config.delay),
                       builder: (context, snapshot) {
                         if (snapshot.connectionState != ConnectionState.done) {
                           return const SizedBox.shrink();

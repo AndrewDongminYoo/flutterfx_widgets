@@ -1,4 +1,5 @@
-import 'dart:math' show pow, sqrt, Random;
+import 'dart:math' show pow, sqrt;
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show HapticFeedback;
 
@@ -24,8 +25,7 @@ class DotPattern extends StatefulWidget {
   State<DotPattern> createState() => _DotPatternState();
 }
 
-class _DotPatternState extends State<DotPattern>
-    with SingleTickerProviderStateMixin {
+class _DotPatternState extends State<DotPattern> with SingleTickerProviderStateMixin {
   // Animation Configuration
   late final AnimationController _animationController;
   static const Duration _animationDuration = Duration(milliseconds: 300);
@@ -42,10 +42,8 @@ class _DotPatternState extends State<DotPattern>
   static const double _maxEffectRadius = 100;
 
   // Physics Configuration
-  static const double _dragAnimationSpeed =
-      0.6; // Controls how quickly dots follow touch
-  static const double _springStiffness =
-      0.85; // Controls the springiness of the effect
+  static const double _dragAnimationSpeed = 0.6; // Controls how quickly dots follow touch
+  static const double _springStiffness = 0.85; // Controls the springiness of the effect
 
   @override
   void initState() {
@@ -66,7 +64,7 @@ class _DotPatternState extends State<DotPattern>
     if (_targetTouchLocation == null || _currentTouchLocation == null) return;
 
     setState(() {
-      final double progress = _animationController.value;
+      final progress = _animationController.value;
       // Apply spring physics using quadratic easing
       final springProgress = -pow(progress - 1, 2) * _springStiffness + 1;
 
@@ -84,7 +82,7 @@ class _DotPatternState extends State<DotPattern>
       onPanStart: _handleTouch,
       onPanUpdate: _handleTouch,
       onPanEnd: (_) => _clearTouch(),
-      child: Container(
+      child: ColoredBox(
         color: Colors.black,
         child: CustomPaint(
           painter: _DotsPainter(
@@ -103,7 +101,13 @@ class _DotPatternState extends State<DotPattern>
   /// Handles touch input and triggers haptic feedback
   void _handleTouch(dynamic details) {
     setState(() {
-      _targetTouchLocation = details.localPosition;
+      if (details is DragStartDetails) {
+        _targetTouchLocation = details.localPosition;
+      } else if (details is DragUpdateDetails) {
+        _targetTouchLocation = details.localPosition;
+      } else {
+        _targetTouchLocation = null;
+      }
 
       // Initialize touch location if this is the first touch
       if (_currentTouchLocation == null) {
@@ -112,8 +116,7 @@ class _DotPatternState extends State<DotPattern>
       }
 
       // For drag updates, continue from current animation progress
-      final startValue =
-          details is DragUpdateDetails ? _animationController.value : 0.0;
+      final startValue = details is DragUpdateDetails ? _animationController.value : 0.0;
 
       _animationController.forward(from: startValue);
     });
@@ -147,15 +150,7 @@ class _DotPatternState extends State<DotPattern>
 
 /// Custom painter that renders the dot grid with interactive effects
 class _DotsPainter extends CustomPainter {
-  final int columns;
-  final int rows;
-  final double dotSize;
-  final Offset? touchLocation;
-  final double maxEffectRadius;
-
-  // Physics configuration
-  static const double _dentStrength =
-      20.0; // Controls the depth of the touch effect
+  // Controls the depth of the touch effect
 
   const _DotsPainter({
     required this.columns,
@@ -164,6 +159,14 @@ class _DotsPainter extends CustomPainter {
     required this.touchLocation,
     required this.maxEffectRadius,
   });
+  final int columns;
+  final int rows;
+  final double dotSize;
+  final Offset? touchLocation;
+  final double maxEffectRadius;
+
+  // Physics configuration
+  static const double _dentStrength = 20;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -178,29 +181,41 @@ class _DotsPainter extends CustomPainter {
   }
 
   /// Draws the grid of interactive dots
-  void _drawDotGrid(Canvas canvas, Paint paint, Size size, double cellWidth,
-      double cellHeight) {
-    for (int row = 0; row < rows; row++) {
-      for (int col = 0; col < columns; col++) {
+  void _drawDotGrid(
+    Canvas canvas,
+    Paint paint,
+    Size size,
+    double cellWidth,
+    double cellHeight,
+  ) {
+    for (var row = 0; row < rows; row++) {
+      for (var col = 0; col < columns; col++) {
         final position = _calculateDotPosition(col, row, cellWidth, cellHeight);
         final adjustedPosition = _applyTouchEffect(position);
 
         canvas.drawCircle(
-            adjustedPosition.center, adjustedPosition.size / 2, paint);
+          adjustedPosition.center,
+          adjustedPosition.size / 2,
+          paint,
+        );
       }
     }
   }
 
   /// Calculates the base position for a dot
   Offset _calculateDotPosition(
-      int col, int row, double cellWidth, double cellHeight) {
+    int col,
+    int row,
+    double cellWidth,
+    double cellHeight,
+  ) {
     return Offset(col * cellWidth, row * cellHeight);
   }
 
   /// Applies touch-based displacement and scaling to a dot
   ({Offset center, double size}) _applyTouchEffect(Offset originalCenter) {
-    double scale = 1.0;
-    Offset displacement = Offset.zero;
+    var scale = 1.0;
+    var displacement = Offset.zero;
 
     if (touchLocation != null) {
       final toTouch = touchLocation! - originalCenter;
@@ -213,9 +228,7 @@ class _DotsPainter extends CustomPainter {
         scale = 0.3 + (pow(normalizedDistance, 1.5) * 0.7);
 
         // Calculate displacement using a bell curve for smooth transition
-        final displacementStrength = _dentStrength *
-            (1 - normalizedDistance) *
-            (1 - pow(normalizedDistance, 2));
+        final displacementStrength = _dentStrength * (1 - normalizedDistance) * (1 - pow(normalizedDistance, 2));
 
         displacement = toTouch.normalize() * displacementStrength;
       }

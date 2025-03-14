@@ -1,10 +1,9 @@
-
-
 import 'package:flutter/material.dart';
+
 import 'package:fx_2_folder/background-aurora/aurora_widget.dart';
 
 class AuroraDemo extends StatelessWidget {
-  const AuroraDemo({Key? key}) : super(key: key);
+  const AuroraDemo({super.key});
 
   @override
   Widget build(BuildContext context) {

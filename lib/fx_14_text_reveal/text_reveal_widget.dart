@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:fx_2_folder/fx_14_text_reveal/strategies/FadeBlurStrategy.dart';
 
 abstract class TextAnimationStrategy {
-  final bool synchronizeAnimation;
   const TextAnimationStrategy({
     this.synchronizeAnimation = false,
   });
+  final bool synchronizeAnimation;
 
   Widget buildAnimatedCharacter({
     required String character,
@@ -47,7 +47,7 @@ class BaseAnimationStrategy extends TextAnimationStrategy {
     required double endTime,
     required Curve curve,
   }) {
-    return Tween<double>(begin: 0.0, end: 1.0).animate(
+    return Tween<double>(begin: 0, end: 1).animate(
       CurvedAnimation(
         parent: controller,
         curve: Interval(startTime, endTime, curve: curve),
@@ -70,15 +70,6 @@ enum AnimationUnit {
 
 // Enhanced Animation Manager
 class EnhancedTextAnimationManager {
-  final AnimationController controller;
-  final String text;
-  final Curve curve;
-  final AnimationUnit unit;
-  final TextAnimationStrategy strategy;
-
-  late final List<Animation<double>> _animations;
-  late final List<String> _units;
-
   EnhancedTextAnimationManager({
     required this.controller,
     required this.text,
@@ -89,6 +80,14 @@ class EnhancedTextAnimationManager {
     _units = _splitTextIntoUnits();
     _initializeAnimations();
   }
+  final AnimationController controller;
+  final String text;
+  final Curve curve;
+  final AnimationUnit unit;
+  final TextAnimationStrategy strategy;
+
+  late final List<Animation<double>> _animations;
+  late final List<String> _units;
 
   List<String> _splitTextIntoUnits() {
     switch (unit) {
@@ -99,8 +98,8 @@ class EnhancedTextAnimationManager {
         if (text.isEmpty) return [];
 
         // Split text keeping spaces with words
-        final List<String> words = [];
-        final RegExp pattern = RegExp(r'\S+\s*');
+        final words = <String>[];
+        final pattern = RegExp(r'\S+\s*');
 
         for (final match in pattern.allMatches(text)) {
           words.add(match.group(0)!);
@@ -116,30 +115,25 @@ class EnhancedTextAnimationManager {
       return;
     }
 
-    const double animationDuration = 0.8;
-    const double totalAnimationTime = 1.0 + animationDuration;
+    const animationDuration = 0.8;
+    const totalAnimationTime = 1.0 + animationDuration;
 
     if (strategy.synchronizeAnimation) {
       // When synchronized, all characters use the same timing
       _animations = List.generate(_units.length, (index) {
         return strategy.createAnimation(
           controller: controller,
-          startTime: 0.0, // All start together
+          startTime: 0, // All start together
           endTime: animationDuration, // All end together
           curve: curve,
         );
       });
     } else {
-      final double staggerOffset = _units.length > 1
-          ? (totalAnimationTime - animationDuration) / (_units.length - 1)
-          : 0.0;
+      final staggerOffset = _units.length > 1 ? (totalAnimationTime - animationDuration) / (_units.length - 1) : 0.0;
 
       _animations = List.generate(_units.length, (index) {
-        final double start =
-            (index * staggerOffset / totalAnimationTime).clamp(0.0, 1.0);
-        final double end =
-            ((index * staggerOffset + animationDuration) / totalAnimationTime)
-                .clamp(0.0, 1.0);
+        final start = (index * staggerOffset / totalAnimationTime).clamp(0.0, 1.0);
+        final end = ((index * staggerOffset + animationDuration) / totalAnimationTime).clamp(0.0, 1.0);
 
         return strategy.createAnimation(
           controller: controller,
@@ -162,15 +156,6 @@ class EnhancedTextAnimationManager {
 
 // Enhanced Text Reveal Widget
 class EnhancedTextRevealEffect extends StatefulWidget {
-  final String text;
-  final TextStyle? style;
-  final Duration duration;
-  final Curve curve;
-  final bool trigger;
-  final AnimationUnit unit;
-  final TextAnimationStrategy strategy;
-  final AnimationDirection direction;
-
   const EnhancedTextRevealEffect({
     required this.text,
     this.style,
@@ -181,16 +166,22 @@ class EnhancedTextRevealEffect extends StatefulWidget {
     // Now this is const-correct!
     this.strategy = const FadeBlurStrategy(),
     this.direction = AnimationDirection.forward,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
+  final String text;
+  final TextStyle? style;
+  final Duration duration;
+  final Curve curve;
+  final bool trigger;
+  final AnimationUnit unit;
+  final TextAnimationStrategy strategy;
+  final AnimationDirection direction;
 
   @override
-  State<EnhancedTextRevealEffect> createState() =>
-      _EnhancedTextRevealEffectState();
+  State<EnhancedTextRevealEffect> createState() => _EnhancedTextRevealEffectState();
 }
 
-class _EnhancedTextRevealEffectState extends State<EnhancedTextRevealEffect>
-    with SingleTickerProviderStateMixin {
+class _EnhancedTextRevealEffectState extends State<EnhancedTextRevealEffect> with SingleTickerProviderStateMixin {
   late final AnimationController _controller;
   late EnhancedTextAnimationManager _animationManager;
   bool _isVisible = false;
@@ -256,9 +247,7 @@ class _EnhancedTextRevealEffectState extends State<EnhancedTextRevealEffect>
     }
 
     // Handle content or strategy changes
-    if (widget.text != oldWidget.text ||
-        widget.unit != oldWidget.unit ||
-        widget.strategy != oldWidget.strategy) {
+    if (widget.text != oldWidget.text || widget.unit != oldWidget.unit || widget.strategy != oldWidget.strategy) {
       _animationManager.dispose();
       _initializeAnimationManager();
     }

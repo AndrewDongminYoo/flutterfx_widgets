@@ -1,10 +1,11 @@
 // particles_demo.dart
+
 import 'package:flutter/material.dart';
-import 'package:fx_2_folder/background-beam/background_beam.dart';
+
 import 'package:fx_2_folder/primitives/primitives.dart';
 
 class MotionPrimitiveDemo extends StatefulWidget {
-  const MotionPrimitiveDemo({Key? key}) : super(key: key);
+  const MotionPrimitiveDemo({super.key});
 
   @override
   State<MotionPrimitiveDemo> createState() => _DemoState();

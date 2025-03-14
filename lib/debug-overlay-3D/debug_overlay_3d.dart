@@ -1,20 +1,19 @@
-import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
-import 'package:fx_2_folder/debug-overlay-3D/demo_animated_widget.dart';
+import 'package:flutter/material.dart';
+
 import 'package:fx_2_folder/stacked-cards/stacked_card.dart';
 import 'package:fx_2_folder/vinyl/vinyl.dart';
 
 /// A widget that wraps content in a debug overlay allowing 3D inspection
 class DebugTransformOverlay extends StatefulWidget {
-  final Widget child;
-  final bool enabled;
-
   const DebugTransformOverlay({
-    Key? key,
+    super.key,
     required this.child,
     this.enabled = true,
-  }) : super(key: key);
+  });
+  final Widget child;
+  final bool enabled;
 
   @override
   State<DebugTransformOverlay> createState() => _DebugTransformOverlayState();
@@ -22,16 +21,16 @@ class DebugTransformOverlay extends StatefulWidget {
 
 class _DebugTransformOverlayState extends State<DebugTransformOverlay> {
   // Track rotation angles
-  double _rotationX = 0.0;
-  double _rotationY = 0.0;
-  double _rotationZ = 0.0;
+  double _rotationX = 0;
+  double _rotationY = 0;
+  double _rotationZ = 0;
 
   // Track scale and translation
-  double _scale = 1.0;
+  double _scale = 1;
   Offset _translation = Offset.zero;
 
   // Track previous scale value for delta calculation
-  double _previousScale = 1.0;
+  double _previousScale = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -89,13 +88,19 @@ class _DebugTransformOverlayState extends State<DebugTransformOverlay> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                Text('Gestures:', style: TextStyle(color: Colors.white)),
-                Text('• Single finger drag: Rotate',
-                    style: TextStyle(color: Colors.white)),
-                Text('• Two finger pinch: Scale',
-                    style: TextStyle(color: Colors.white)),
-                Text('• Two finger pan: Move',
-                    style: TextStyle(color: Colors.white)),
+                const Text('Gestures:', style: TextStyle(color: Colors.white)),
+                const Text(
+                  '• Single finger drag: Rotate',
+                  style: TextStyle(color: Colors.white),
+                ),
+                const Text(
+                  '• Two finger pinch: Scale',
+                  style: TextStyle(color: Colors.white),
+                ),
+                const Text(
+                  '• Two finger pan: Move',
+                  style: TextStyle(color: Colors.white),
+                ),
                 const SizedBox(height: 8),
                 _buildRotationSlider(
                   label: 'X Rotation',
@@ -120,8 +125,10 @@ class _DebugTransformOverlayState extends State<DebugTransformOverlay> {
                     _scale = 1.0;
                     _translation = Offset.zero;
                   }),
-                  child: const Text('Reset',
-                      style: TextStyle(color: Colors.white)),
+                  child: const Text(
+                    'Reset',
+                    style: TextStyle(color: Colors.white),
+                  ),
                 ),
               ],
             ),
@@ -139,7 +146,7 @@ class _DebugTransformOverlayState extends State<DebugTransformOverlay> {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Text(label, style: TextStyle(color: Colors.white)),
+        Text(label, style: const TextStyle(color: Colors.white)),
         SizedBox(
           width: 150,
           child: Slider(
@@ -155,11 +162,12 @@ class _DebugTransformOverlayState extends State<DebugTransformOverlay> {
 }
 
 class OverlayDebugDemo extends StatelessWidget {
+  const OverlayDebugDemo({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor:
-          Colors.transparent, // Make scaffold background transparent
+      backgroundColor: Colors.transparent, // Make scaffold background transparent
       body: Stack(
         fit: StackFit.expand, // Make stack fill the available space
         children: [
@@ -169,8 +177,7 @@ class OverlayDebugDemo extends StatelessWidget {
             size: Size.infinite,
           ),
           // Centered demo widget
-          DebugTransformOverlay(
-            enabled: true, // Toggle debug overlay
+          const DebugTransformOverlay(
             child: VinylHomeWidget(),
 
             // LayeredAnimationDemo(), // Your actual widget here

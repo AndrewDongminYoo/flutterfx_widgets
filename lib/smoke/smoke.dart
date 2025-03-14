@@ -1,6 +1,9 @@
+import 'dart:ui' as ui;
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'dart:ui' as ui;
+
 import 'package:fx_2_folder/smoke/animated_circles.dart';
 import 'package:fx_2_folder/smoke/animation_sequence.dart';
 import 'package:fx_2_folder/smoke/circle_data.dart';
@@ -8,7 +11,7 @@ import 'package:fx_2_folder/smoke/circle_data.dart';
 const defaultColor = Color.fromRGBO(176, 176, 176, 1);
 
 class SmokeHomeWidget extends StatefulWidget {
-  const SmokeHomeWidget({Key? key}) : super(key: key);
+  const SmokeHomeWidget({super.key});
 
   @override
   State<SmokeHomeWidget> createState() => _SmokeHomeWidgetState();
@@ -33,8 +36,10 @@ class _SmokeHomeWidgetState extends State<SmokeHomeWidget> {
   }
 
   void exitFullScreen() {
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
-        overlays: SystemUiOverlay.values);
+    SystemChrome.setEnabledSystemUIMode(
+      SystemUiMode.manual,
+      overlays: SystemUiOverlay.values,
+    );
   }
 
   @override
@@ -44,11 +49,11 @@ class _SmokeHomeWidgetState extends State<SmokeHomeWidget> {
       child: Scaffold(
         body: GestureDetector(
           onTap: () {
-            print("Tapped!");
+            print('Tapped!');
             exitFullScreen();
             Navigator.pop(context);
           },
-          child: BlurredCircle(), // Your full-screen content goes here
+          child: const BlurredCircle(), // Your full-screen content goes here
         ),
       ),
     );
@@ -56,11 +61,13 @@ class _SmokeHomeWidgetState extends State<SmokeHomeWidget> {
 }
 
 class BlurredCircle extends StatelessWidget {
+  const BlurredCircle({super.key});
+
   @override
   Widget build(BuildContext context) {
-    final GlobalKey<_StartScreenState> _startScreenKey = GlobalKey();
-    bool isDev = false;
-    var manualSequence = AnimationSequence(
+    final startScreenKey = GlobalKey<_StartScreenState>();
+    const isDev = kDebugMode;
+    final manualSequence = AnimationSequence(
       sequences: [
         [
           CircleData(
@@ -265,7 +272,7 @@ class BlurredCircle extends StatelessWidget {
         [
           CircleData(
             id: '1',
-            normalizedPosition: const Offset(0.0, .0),
+            normalizedPosition: const Offset(0, 0),
             radius: 20,
             color: isDev ? Colors.red : defaultColor,
           ), //Color.fromRGBO(176, 176, 176, 1)),
@@ -301,13 +308,13 @@ class BlurredCircle extends StatelessWidget {
           ), //Color.fromRGBO(176, 176, 176, 1)),
           CircleData(
             id: '7',
-            normalizedPosition: const Offset(.45, .0),
+            normalizedPosition: const Offset(.45, 0),
             radius: 30,
             color: isDev ? Colors.cyan : defaultColor,
           ), //Color.fromRGBO(176, 176, 176, 1)),
           CircleData(
             id: '8',
-            normalizedPosition: const Offset(.38, .0),
+            normalizedPosition: const Offset(.38, 0),
             radius: 35,
             color: isDev ? Colors.indigo : defaultColor,
           ), //Color.fromRGBO(176, 176, 176, 1)),
@@ -315,7 +322,7 @@ class BlurredCircle extends StatelessWidget {
         [
           CircleData(
             id: '1',
-            normalizedPosition: const Offset(1, .0),
+            normalizedPosition: const Offset(1, 0),
             radius: 20,
             color: isDev ? Colors.red : defaultColor,
           ), //Color.fromRGBO(176, 176, 176, 1)),
@@ -406,12 +413,11 @@ class BlurredCircle extends StatelessWidget {
             color: isDev ? Colors.cyan : defaultColor,
           ), //Color.fromRGBO(176, 176, 176, 1)),
           CircleData(
-              id: '8',
-              normalizedPosition: const Offset(1, .40),
-              radius: 20,
-              color: isDev
-                  ? Colors.indigo
-                  : defaultColor), //Color.fromRGBO(176, 176, 176, 1)),
+            id: '8',
+            normalizedPosition: const Offset(1, .40),
+            radius: 20,
+            color: isDev ? Colors.indigo : defaultColor,
+          ), //Color.fromRGBO(176, 176, 176, 1)),
         ],
         [
           CircleData(
@@ -464,35 +470,27 @@ class BlurredCircle extends StatelessWidget {
           ), //Color.fromRGBO(176, 176, 176, 1)),
         ],
       ],
-      stepDuration: Duration(seconds: 3),
+      stepDuration: const Duration(seconds: 3),
       onSequenceChange: (int index) {
-        print("New sequence started: $index");
+        print('New sequence started: $index');
         // Perform any other actions you need here
         //switch from 0 to 7
         if (index == 0) {
-          _startScreenKey.currentState
-              ?.updateOpacities(logoOpacity: 0, textOpacity: 0);
+          startScreenKey.currentState?.updateOpacities(logoOpacity: 0, textOpacity: 0);
         } else if (index == 1) {
-          _startScreenKey.currentState
-              ?.updateOpacities(logoOpacity: 1, textOpacity: 1);
+          startScreenKey.currentState?.updateOpacities(logoOpacity: 1, textOpacity: 1);
         } else if (index == 2) {
-          _startScreenKey.currentState
-              ?.updateOpacities(logoOpacity: .7, textOpacity: .1);
+          startScreenKey.currentState?.updateOpacities(logoOpacity: .7, textOpacity: .1);
         } else if (index == 3) {
-          _startScreenKey.currentState
-              ?.updateOpacities(logoOpacity: .1, textOpacity: .1);
+          startScreenKey.currentState?.updateOpacities(logoOpacity: .1, textOpacity: .1);
         } else if (index == 4) {
-          _startScreenKey.currentState
-              ?.updateOpacities(logoOpacity: .1, textOpacity: .1);
+          startScreenKey.currentState?.updateOpacities(logoOpacity: .1, textOpacity: .1);
         } else if (index == 5) {
-          _startScreenKey.currentState
-              ?.updateOpacities(logoOpacity: .6, textOpacity: .1);
+          startScreenKey.currentState?.updateOpacities(logoOpacity: .6, textOpacity: .1);
         } else if (index == 6) {
-          _startScreenKey.currentState
-              ?.updateOpacities(logoOpacity: 1, textOpacity: 1);
+          startScreenKey.currentState?.updateOpacities(logoOpacity: 1, textOpacity: 1);
         } else if (index == 7) {
-          _startScreenKey.currentState
-              ?.updateOpacities(logoOpacity: .2, textOpacity: .6);
+          startScreenKey.currentState?.updateOpacities(logoOpacity: .2, textOpacity: .6);
         }
       },
     );
@@ -511,7 +509,7 @@ class BlurredCircle extends StatelessWidget {
             ),
             child: Container(color: Colors.transparent),
           ),
-          StartScreen(key: _startScreenKey)
+          StartScreen(key: startScreenKey),
         ],
       ),
     );
@@ -519,14 +517,13 @@ class BlurredCircle extends StatelessWidget {
 }
 
 class StartScreen extends StatefulWidget {
-  const StartScreen({Key? key}) : super(key: key);
+  const StartScreen({super.key});
 
   @override
   _StartScreenState createState() => _StartScreenState();
 }
 
-class _StartScreenState extends State<StartScreen>
-    with TickerProviderStateMixin {
+class _StartScreenState extends State<StartScreen> with TickerProviderStateMixin {
   late AnimationController _rotateController;
 
   late AnimationController _logoController;
@@ -543,11 +540,11 @@ class _StartScreenState extends State<StartScreen>
     )..repeat();
 
     _logoController = AnimationController(
-      duration: Duration(milliseconds: 1000),
+      duration: const Duration(milliseconds: 1000),
       vsync: this,
     );
     _textController = AnimationController(
-      duration: Duration(milliseconds: 1000),
+      duration: const Duration(milliseconds: 1000),
       vsync: this,
     );
 
@@ -567,15 +564,23 @@ class _StartScreenState extends State<StartScreen>
     super.dispose();
   }
 
-  void updateOpacities(
-      {required double logoOpacity, required double textOpacity}) {
+  void updateOpacities({
+    required double logoOpacity,
+    required double textOpacity,
+  }) {
     setState(() {
-      _logoOpacity = Tween<double>(begin: _logoOpacity.value, end: logoOpacity)
-          .animate(CurvedAnimation(
-              parent: _logoController, curve: Curves.easeInOut));
-      _textOpacity = Tween<double>(begin: _textOpacity.value, end: textOpacity)
-          .animate(CurvedAnimation(
-              parent: _textController, curve: Curves.easeInOut));
+      _logoOpacity = Tween<double>(begin: _logoOpacity.value, end: logoOpacity).animate(
+        CurvedAnimation(
+          parent: _logoController,
+          curve: Curves.easeInOut,
+        ),
+      );
+      _textOpacity = Tween<double>(begin: _textOpacity.value, end: textOpacity).animate(
+        CurvedAnimation(
+          parent: _textController,
+          curve: Curves.easeInOut,
+        ),
+      );
 
       // _logoOpacity = Tween<double>(begin: _logoOpacity.value, end: logoOpacity)
       //     .animate(_logoController);
@@ -620,7 +625,7 @@ class _StartScreenState extends State<StartScreen>
                     height: 32,
                   ),
                 ),
-                SizedBox(height: 40),
+                const SizedBox(height: 40),
                 const Text(
                   'Tap to Enter',
                   style: TextStyle(

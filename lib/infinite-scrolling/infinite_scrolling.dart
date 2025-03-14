@@ -1,6 +1,16 @@
 import 'package:flutter/material.dart';
 
 class MarqueeWidget extends StatefulWidget {
+  const MarqueeWidget({
+    super.key,
+    required this.children,
+    this.reverse = false,
+    this.pauseOnHover = false,
+    this.vertical = false,
+    this.repeat = 4,
+    this.duration = const Duration(seconds: 40),
+    this.gap = 16.0,
+  });
   final List<Widget> children;
   final bool reverse;
   final bool pauseOnHover;
@@ -9,23 +19,11 @@ class MarqueeWidget extends StatefulWidget {
   final Duration duration;
   final double gap;
 
-  const MarqueeWidget({
-    Key? key,
-    required this.children,
-    this.reverse = false,
-    this.pauseOnHover = false,
-    this.vertical = false,
-    this.repeat = 4,
-    this.duration = const Duration(seconds: 40),
-    this.gap = 16.0,
-  }) : super(key: key);
-
   @override
   State<MarqueeWidget> createState() => _MarqueeWidgetState();
 }
 
-class _MarqueeWidgetState extends State<MarqueeWidget>
-    with SingleTickerProviderStateMixin {
+class _MarqueeWidgetState extends State<MarqueeWidget> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   bool _isHovered = false;
   late ScrollController _scrollController;
@@ -75,11 +73,8 @@ class _MarqueeWidgetState extends State<MarqueeWidget>
         }
       },
       child: SizedBox(
-        height: widget.vertical
-            ? null
-            : 200, // Fixed height for horizontal scrolling
-        width:
-            widget.vertical ? 200 : null, // Fixed width for vertical scrolling
+        height: widget.vertical ? null : 200, // Fixed height for horizontal scrolling
+        width: widget.vertical ? 200 : null, // Fixed width for vertical scrolling
         child: SingleChildScrollView(
           scrollDirection: widget.vertical ? Axis.vertical : Axis.horizontal,
           physics: const NeverScrollableScrollPhysics(),
@@ -91,14 +86,10 @@ class _MarqueeWidgetState extends State<MarqueeWidget>
                 offset: widget.vertical
                     ? Offset(
                         0,
-                        _controller.value *
-                            -(widget.children.length * (200 + widget.gap)) *
-                            (widget.reverse ? -1 : 1),
+                        _controller.value * -(widget.children.length * (200 + widget.gap)) * (widget.reverse ? -1 : 1),
                       )
                     : Offset(
-                        _controller.value *
-                            -(widget.children.length * (200 + widget.gap)) *
-                            (widget.reverse ? -1 : 1),
+                        _controller.value * -(widget.children.length * (200 + widget.gap)) * (widget.reverse ? -1 : 1),
                         0,
                       ),
                 child: Wrap(
@@ -120,18 +111,17 @@ class _MarqueeWidgetState extends State<MarqueeWidget>
 
 // review_card.dart
 class ReviewCard extends StatelessWidget {
-  final String imageUrl;
-  final String name;
-  final String username;
-  final String body;
-
   const ReviewCard({
-    Key? key,
+    super.key,
     required this.imageUrl,
     required this.name,
     required this.username,
     required this.body,
-  }) : super(key: key);
+  });
+  final String imageUrl;
+  final String name;
+  final String username;
+  final String body;
 
   @override
   Widget build(BuildContext context) {
@@ -169,9 +159,7 @@ class ReviewCard extends StatelessWidget {
                       name,
                       style: TextStyle(
                         fontWeight: FontWeight.w500,
-                        color: Theme.of(context).brightness == Brightness.light
-                            ? Colors.black
-                            : Colors.white,
+                        color: Theme.of(context).brightness == Brightness.light ? Colors.black : Colors.white,
                       ),
                       softWrap: true,
                     ),
@@ -214,7 +202,7 @@ class ReviewCard extends StatelessWidget {
 
 // example_usage.dart
 class MarqueeDemo extends StatelessWidget {
-  MarqueeDemo({Key? key}) : super(key: key);
+  MarqueeDemo({super.key});
 
   final List<Map<String, String>> reviews = [
     {
@@ -237,7 +225,7 @@ class MarqueeDemo extends StatelessWidget {
     final firstRow = reviews.sublist(0, reviews.length ~/ 2);
     final secondRow = reviews.sublist(reviews.length ~/ 2);
 
-    return Container(
+    return DecoratedBox(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
         border: Border.all(
@@ -247,7 +235,7 @@ class MarqueeDemo extends StatelessWidget {
       child: Stack(
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 20.0),
+            padding: const EdgeInsets.symmetric(vertical: 20),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -255,38 +243,42 @@ class MarqueeDemo extends StatelessWidget {
                   duration: const Duration(milliseconds: 1000),
                   pauseOnHover: true,
                   children: firstRow
-                      .map((review) => ReviewCard(
-                            imageUrl: review['imageUrl']!,
-                            name: review['name']!,
-                            username: review['username']!,
-                            body: review['body']!,
-                          ))
+                      .map(
+                        (review) => ReviewCard(
+                          imageUrl: review['imageUrl']!,
+                          name: review['name']!,
+                          username: review['username']!,
+                          body: review['body']!,
+                        ),
+                      )
                       .toList(),
                 ),
                 MarqueeWidget(
                   duration: const Duration(milliseconds: 1200),
                   pauseOnHover: true,
-                  reverse: false,
                   children: secondRow
-                      .map((review) => ReviewCard(
-                            imageUrl: review['imageUrl']!,
-                            name: review['name']!,
-                            username: review['username']!,
-                            body: review['body']!,
-                          ))
+                      .map(
+                        (review) => ReviewCard(
+                          imageUrl: review['imageUrl']!,
+                          name: review['name']!,
+                          username: review['username']!,
+                          body: review['body']!,
+                        ),
+                      )
                       .toList(),
                 ),
                 MarqueeWidget(
                   duration: const Duration(milliseconds: 1000),
                   pauseOnHover: true,
-                  reverse: false,
                   children: secondRow
-                      .map((review) => ReviewCard(
-                            imageUrl: review['imageUrl']!,
-                            name: review['name']!,
-                            username: review['username']!,
-                            body: review['body']!,
-                          ))
+                      .map(
+                        (review) => ReviewCard(
+                          imageUrl: review['imageUrl']!,
+                          name: review['name']!,
+                          username: review['username']!,
+                          body: review['body']!,
+                        ),
+                      )
                       .toList(),
                 ),
               ],
@@ -301,8 +293,6 @@ class MarqueeDemo extends StatelessWidget {
             child: Container(
               decoration: BoxDecoration(
                 gradient: LinearGradient(
-                  begin: Alignment.centerLeft,
-                  end: Alignment.centerRight,
                   colors: [
                     Theme.of(context).scaffoldBackgroundColor,
                     Theme.of(context).scaffoldBackgroundColor.withOpacity(0),

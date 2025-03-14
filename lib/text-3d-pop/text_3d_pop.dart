@@ -1,9 +1,25 @@
-import 'package:flutter/material.dart';
-import 'package:sensors/sensors.dart';
 import 'dart:async';
-import 'dart:math' as Math;
+import 'dart:math' as math;
+
+import 'package:flutter/material.dart';
+
+import 'package:sensors/sensors.dart';
 
 class Gyro3DText extends StatefulWidget {
+  const Gyro3DText({
+    super.key,
+    required this.text,
+    this.fontSize = 24,
+    this.fontWeight = FontWeight.w900,
+    this.fontFamily,
+    this.textColor = Colors.black,
+    this.shadowColor = const Color(0xFFE39B24),
+    this.glareColor = Colors.white,
+    this.maxTiltAngle = 35.0,
+    this.shadowSensitivity = 0.3,
+    this.movementThreshold = 2.0,
+    this.smoothingFactor = 0.1,
+  });
   final String text;
   final double fontSize;
   final FontWeight fontWeight;
@@ -16,31 +32,16 @@ class Gyro3DText extends StatefulWidget {
   final double movementThreshold;
   final double smoothingFactor;
 
-  const Gyro3DText({
-    Key? key,
-    required this.text,
-    this.fontSize = 24,
-    this.fontWeight = FontWeight.w900,
-    this.fontFamily,
-    this.textColor = Colors.black,
-    this.shadowColor = const Color(0xFFE39B24),
-    this.glareColor = Colors.white,
-    this.maxTiltAngle = 35.0,
-    this.shadowSensitivity = 0.3,
-    this.movementThreshold = 2.0,
-    this.smoothingFactor = 0.1,
-  }) : super(key: key);
-
   @override
   State<Gyro3DText> createState() => _Gyro3DTextState();
 }
 
 class _Gyro3DTextState extends State<Gyro3DText> {
   StreamSubscription<AccelerometerEvent>? _accelerometerSubscription;
-  double _xOffset = 0.0;
-  double _yOffset = 0.0;
-  double _lastXOffset = 0.0;
-  double _lastYOffset = 0.0;
+  double _xOffset = 0;
+  double _yOffset = 0;
+  double _lastXOffset = 0;
+  double _lastYOffset = 0;
 
   // Add timer for controlling log frequency
   Timer? _logTimer;
@@ -74,10 +75,8 @@ class _Gyro3DTextState extends State<Gyro3DText> {
   }
 
   String _generateAsciiArt(double pitch, double roll) {
-    final pitchChar =
-        pitch.abs() < widget.movementThreshold ? '━' : (pitch > 0 ? '╱' : '╲');
-    final rollChar =
-        roll.abs() < widget.movementThreshold ? '│' : (roll > 0 ? '╱' : '╲');
+    final pitchChar = pitch.abs() < widget.movementThreshold ? '━' : (pitch > 0 ? '╱' : '╲');
+    final rollChar = roll.abs() < widget.movementThreshold ? '│' : (roll > 0 ? '╱' : '╲');
 
     return '''
 ╭───────────────╮
@@ -99,7 +98,8 @@ class _Gyro3DTextState extends State<Gyro3DText> {
       print('├ Pitch: ${pitch.toStringAsFixed(1)}° ($pitchIntensity tilt)');
       print('├ Roll: ${roll.toStringAsFixed(1)}° ($rollIntensity tilt)');
       print(
-          '└ Movement: ${pitch.abs() > widget.movementThreshold || roll.abs() > widget.movementThreshold ? "Active" : "Stable"}\x1B[0m');
+        '└ Movement: ${pitch.abs() > widget.movementThreshold || roll.abs() > widget.movementThreshold ? "Active" : "Stable"}\x1B[0m',
+      );
     }
   }
 
@@ -108,13 +108,12 @@ class _Gyro3DTextState extends State<Gyro3DText> {
       (AccelerometerEvent event) {
         if (!mounted) return;
 
-        double x = event.x;
-        double y = event.y;
-        double z = event.z;
+        final x = event.x;
+        final y = event.y;
+        final z = event.z;
 
-        double pitch =
-            (180 / Math.pi) * Math.atan2(y, Math.sqrt(x * x + z * z));
-        double roll = (180 / Math.pi) * Math.atan2(-x, z);
+        var pitch = (180 / math.pi) * math.atan2(y, math.sqrt(x * x + z * z));
+        var roll = (180 / math.pi) * math.atan2(-x, z);
 
         // Log before applying threshold
         _logDeviceOrientation(pitch, roll);
@@ -125,11 +124,11 @@ class _Gyro3DTextState extends State<Gyro3DText> {
         pitch = pitch.clamp(-widget.maxTiltAngle, widget.maxTiltAngle);
         roll = roll.clamp(-widget.maxTiltAngle, widget.maxTiltAngle);
 
-        double newXOffset = -roll * widget.shadowSensitivity;
-        double newYOffset = -pitch * widget.shadowSensitivity;
+        final newXOffset = -roll * widget.shadowSensitivity;
+        final newYOffset = -pitch * widget.shadowSensitivity;
 
-        double smoothedX = _smoothValue(newXOffset, _lastXOffset);
-        double smoothedY = _smoothValue(newYOffset, _lastYOffset);
+        final smoothedX = _smoothValue(newXOffset, _lastXOffset);
+        final smoothedY = _smoothValue(newYOffset, _lastYOffset);
 
         if (mounted) {
           setState(() {
@@ -140,7 +139,7 @@ class _Gyro3DTextState extends State<Gyro3DText> {
           });
         }
       },
-      onError: (e) {
+      onError: (Object? e) {
         print('\x1B[31m🚨 Error from accelerometer: $e\x1B[0m');
       },
       cancelOnError: false,
@@ -149,7 +148,7 @@ class _Gyro3DTextState extends State<Gyro3DText> {
 
   double _applyThreshold(double value) {
     if (value.abs() < widget.movementThreshold) {
-      return 0.0;
+      return 0;
     }
     return value;
   }

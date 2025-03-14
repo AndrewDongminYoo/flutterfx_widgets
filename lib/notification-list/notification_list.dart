@@ -1,12 +1,6 @@
 import 'package:flutter/material.dart';
 
 class NotificationItem {
-  final String name;
-  final String description;
-  final String icon;
-  final Color color;
-  final String time;
-
   NotificationItem({
     required this.name,
     required this.description,
@@ -14,26 +8,29 @@ class NotificationItem {
     required this.color,
     required this.time,
   });
+  final String name;
+  final String description;
+  final String icon;
+  final Color color;
+  final String time;
 }
 
 class AnimatedNotificationList extends StatefulWidget {
+  const AnimatedNotificationList({
+    super.key,
+    required this.notifications,
+    this.delay = const Duration(milliseconds: 1000),
+  });
   final List<NotificationItem> notifications;
   final Duration delay;
 
-  const AnimatedNotificationList({
-    Key? key,
-    required this.notifications,
-    this.delay = const Duration(milliseconds: 1000),
-  }) : super(key: key);
-
   @override
-  State<AnimatedNotificationList> createState() =>
-      _AnimatedNotificationListState();
+  State<AnimatedNotificationList> createState() => _AnimatedNotificationListState();
 }
 
 class _AnimatedNotificationListState extends State<AnimatedNotificationList> {
   final List<NotificationItem> _visibleNotifications = [];
-  static const double cardHeight = 92.0; // Height of card + padding
+  static const double cardHeight = 92; // Height of card + padding
 
   @override
   void initState() {
@@ -41,10 +38,10 @@ class _AnimatedNotificationListState extends State<AnimatedNotificationList> {
     _startAddingNotifications();
   }
 
-  void _startAddingNotifications() async {
-    for (var notification in widget.notifications) {
+  Future<void> _startAddingNotifications() async {
+    for (final notification in widget.notifications) {
       if (!mounted) return;
-      await Future.delayed(widget.delay);
+      await Future<void>.delayed(widget.delay);
       setState(() {
         _visibleNotifications.insert(0, notification);
       });
@@ -53,7 +50,7 @@ class _AnimatedNotificationListState extends State<AnimatedNotificationList> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return DecoratedBox(
       decoration: BoxDecoration(
         color: Theme.of(context).scaffoldBackgroundColor,
         borderRadius: BorderRadius.circular(16),
@@ -80,35 +77,31 @@ class _AnimatedNotificationListState extends State<AnimatedNotificationList> {
 }
 
 class AnimatedNotificationCard extends ImplicitlyAnimatedWidget {
-  final NotificationItem item;
-  final int index;
-  final double topOffset;
-
   const AnimatedNotificationCard({
-    Key? key,
+    super.key,
     required this.item,
     required this.index,
     required this.topOffset,
   }) : super(
-          key: key,
           duration: const Duration(milliseconds: 500),
           curve: Curves.easeInOut,
         );
+  final NotificationItem item;
+  final int index;
+  final double topOffset;
 
   @override
-  AnimatedNotificationCardState createState() =>
-      AnimatedNotificationCardState();
+  AnimatedNotificationCardState createState() => AnimatedNotificationCardState();
 }
 
-class AnimatedNotificationCardState
-    extends AnimatedWidgetBaseState<AnimatedNotificationCard> {
+class AnimatedNotificationCardState extends AnimatedWidgetBaseState<AnimatedNotificationCard> {
   Tween<double>? _topTween;
   Tween<double>? _slideTween;
 
   @override
   void initState() {
     super.initState();
-    _slideTween = Tween<double>(begin: -100.0, end: 0.0);
+    _slideTween = Tween<double>(begin: -100, end: 0);
   }
 
   @override
@@ -153,14 +146,13 @@ class AnimatedNotificationCardState
 }
 
 class NotificationCard extends StatelessWidget {
-  final NotificationItem item;
-  final int index;
-
   const NotificationCard({
-    Key? key,
+    super.key,
     required this.item,
     required this.index,
-  }) : super(key: key);
+  });
+  final NotificationItem item;
+  final int index;
 
   @override
   Widget build(BuildContext context) {
@@ -174,15 +166,12 @@ class NotificationCard extends StatelessWidget {
           child: Container(
             padding: const EdgeInsets.all(14),
             decoration: BoxDecoration(
-              color: Theme.of(context).brightness == Brightness.light
-                  ? Colors.white
-                  : Colors.grey[850],
+              color: Theme.of(context).brightness == Brightness.light ? Colors.white : Colors.grey[850],
               borderRadius: BorderRadius.circular(16),
               boxShadow: [
                 BoxShadow(
                   color: Colors.black.withOpacity(0.05),
                   blurRadius: 10,
-                  spreadRadius: 0,
                 ),
               ],
             ),
@@ -251,63 +240,62 @@ class NotificationCard extends StatelessWidget {
 }
 
 class NotificationDemo extends StatelessWidget {
-  NotificationDemo({Key? key}) : super(key: key);
+  NotificationDemo({super.key});
   final List<NotificationItem> notifications = [
     NotificationItem(
-      name: "Cha-ching! 💰",
-      description:
-          "Someone actually paid! Time to buy that yacht... or maybe just coffee",
-      time: "15m ago",
-      icon: "💸",
+      name: 'Cha-ching! 💰',
+      description: 'Someone actually paid! Time to buy that yacht... or maybe just coffee',
+      time: '15m ago',
+      icon: '💸',
       color: const Color(0xFF00C9A7),
     ),
     NotificationItem(
-      name: "Fresh ..err, user!",
-      description: "Another brave soul joins our awesome chaos",
-      time: "10m ago",
-      icon: "👤",
+      name: 'Fresh ..err, user!',
+      description: 'Another brave soul joins our awesome chaos',
+      time: '10m ago',
+      icon: '👤',
       color: const Color(0xFFFFB800),
     ),
     NotificationItem(
-      name: "Inbox invasion!",
+      name: 'Inbox invasion!',
       description: "Someone's spamming... with love ❤️",
-      time: "5m ago",
-      icon: "💬",
+      time: '5m ago',
+      icon: '💬',
       color: const Color(0xFFFF3D71),
     ),
     NotificationItem(
-      name: "Plot twist ahead!",
-      description: "Breaking news: Developer finds missing semicolon",
-      time: "2m ago",
-      icon: "🗞️",
+      name: 'Plot twist ahead!',
+      description: 'Breaking news: Developer finds missing semicolon',
+      time: '2m ago',
+      icon: '🗞️',
       color: const Color(0xFF1E86FF),
     ),
     NotificationItem(
-      name: "Money shower! 🚿",
-      description: "Ka-ching! Time to make it rain... responsibly",
-      time: "15m ago",
-      icon: "💸",
+      name: 'Money shower! 🚿',
+      description: 'Ka-ching! Time to make it rain... responsibly',
+      time: '15m ago',
+      icon: '💸',
       color: const Color(0xFF00C9A7),
     ),
     NotificationItem(
-      name: "New player entered!",
-      description: "Welcome to the circus! Grab your popcorn 🍿",
-      time: "10m ago",
-      icon: "👤",
+      name: 'New player entered!',
+      description: 'Welcome to the circus! Grab your popcorn 🍿',
+      time: '10m ago',
+      icon: '👤',
       color: const Color(0xFFFFB800),
     ),
     NotificationItem(
-      name: "Urgent message!",
-      description: "Your cat posted on your behalf again",
-      time: "5m ago",
-      icon: "💬",
+      name: 'Urgent message!',
+      description: 'Your cat posted on your behalf again',
+      time: '5m ago',
+      icon: '💬',
       color: const Color(0xFFFF3D71),
     ),
     NotificationItem(
-      name: "Stop the presses!",
-      description: "Coffee machine is now accepting high-fives",
-      time: "2m ago",
-      icon: "🗞️",
+      name: 'Stop the presses!',
+      description: 'Coffee machine is now accepting high-fives',
+      time: '2m ago',
+      icon: '🗞️',
       color: const Color(0xFF1E86FF),
     ),
   ];
@@ -317,7 +305,7 @@ class NotificationDemo extends StatelessWidget {
     return Scaffold(
       body: Center(
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(8),
           child: AnimatedNotificationList(
             notifications: notifications,
           ),

@@ -1,19 +1,10 @@
 import 'dart:ui' as ui;
+
 import 'package:flutter/material.dart';
+
 import 'package:fx_2_folder/stacked-cards/stacked_card.dart';
 
 class GlowingThreadWidget extends StatefulWidget {
-  final Widget child;
-  final Color threadColor;
-  final Color glowColor;
-  final double topSpacing;
-  final double bottomSpacing;
-  final double curvature;
-  final double wrapCurvature;
-  final double duration;
-  final double glowWidth;
-  final bool debugMode;
-
   const GlowingThreadWidget({
     super.key,
     required this.child,
@@ -27,13 +18,22 @@ class GlowingThreadWidget extends StatefulWidget {
     this.glowWidth = 4.0,
     this.debugMode = false,
   });
+  final Widget child;
+  final Color threadColor;
+  final Color glowColor;
+  final double topSpacing;
+  final double bottomSpacing;
+  final double curvature;
+  final double wrapCurvature;
+  final double duration;
+  final double glowWidth;
+  final bool debugMode;
 
   @override
   State<GlowingThreadWidget> createState() => _GlowingThreadWidgetState();
 }
 
-class _GlowingThreadWidgetState extends State<GlowingThreadWidget>
-    with SingleTickerProviderStateMixin {
+class _GlowingThreadWidgetState extends State<GlowingThreadWidget> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animation;
 
@@ -88,16 +88,6 @@ class _GlowingThreadWidgetState extends State<GlowingThreadWidget>
 }
 
 class GlowingThreadPainter extends CustomPainter {
-  final double progress;
-  final Color threadColor;
-  final Color glowColor;
-  final double topSpacing;
-  final double bottomSpacing;
-  final double curvature;
-  final double wrapCurvature;
-  final double glowWidth;
-  final bool debugMode;
-
   GlowingThreadPainter({
     required this.progress,
     required this.threadColor,
@@ -109,11 +99,23 @@ class GlowingThreadPainter extends CustomPainter {
     required this.glowWidth,
     required this.debugMode,
   });
+  final double progress;
+  final Color threadColor;
+  final Color glowColor;
+  final double topSpacing;
+  final double bottomSpacing;
+  final double curvature;
+  final double wrapCurvature;
+  final double glowWidth;
+  final bool debugMode;
 
   void _drawThread(
-      Canvas canvas, Size size, Paint paint, int index, bool isGlow) {
-    const threadCount = 4;
-
+    Canvas canvas,
+    Size size,
+    Paint paint,
+    int index,
+    bool isGlow,
+  ) {
     // Calculate points
     final startPoint = Offset(
       size.width * (0.1 + index * bottomSpacing),
@@ -185,11 +187,11 @@ class GlowingThreadPainter extends CustomPainter {
       }
 
       // Create a more subtle glow effect
-      final gradientStart =
-          pathMetrics.getTangentForOffset(start)?.position ?? Offset.zero;
+      final gradientStart = pathMetrics.getTangentForOffset(start)?.position ?? Offset.zero;
       final gradientEnd = pathMetrics
               .getTangentForOffset(
-                  (start + glowSegmentLength * 0.5) % pathLength)
+                (start + glowSegmentLength * 0.5) % pathLength,
+              )
               ?.position ??
           Offset.zero;
 
@@ -204,9 +206,9 @@ class GlowingThreadPainter extends CustomPainter {
         gradientStart,
         gradientEnd,
         [
-          glowColor.withOpacity(0.0),
+          glowColor.withOpacity(0),
           glowColor.withOpacity(0.15),
-          glowColor.withOpacity(0.0),
+          glowColor.withOpacity(0),
         ],
         [0.0, 0.5, 1.0],
       );
@@ -222,9 +224,9 @@ class GlowingThreadPainter extends CustomPainter {
         gradientStart,
         gradientEnd,
         [
-          glowColor.withOpacity(0.0),
+          glowColor.withOpacity(0),
           glowColor.withOpacity(0.4),
-          glowColor.withOpacity(0.0),
+          glowColor.withOpacity(0),
         ],
         [0.0, 0.5, 1.0],
       );
@@ -240,9 +242,9 @@ class GlowingThreadPainter extends CustomPainter {
         gradientStart,
         gradientEnd,
         [
-          glowColor.withOpacity(0.0),
+          glowColor.withOpacity(0),
           glowColor.withOpacity(0.8),
-          glowColor.withOpacity(0.0),
+          glowColor.withOpacity(0),
         ],
         [0.0, 0.5, 1.0],
       );
@@ -290,8 +292,7 @@ class GlowingThreadDemo extends StatelessWidget {
         Container(
           width: double.infinity,
           height: double.infinity,
-          color:
-              const ui.Color.fromARGB(255, 0, 0, 0), // Deep purple background
+          color: const ui.Color.fromARGB(255, 0, 0, 0), // Deep purple background
           child: CustomPaint(
             painter: GridPatternPainter(isDarkMode: true),
           ),
@@ -303,14 +304,14 @@ class GlowingThreadDemo extends StatelessWidget {
             child: GlowingThreadWidget(
               threadColor: const Color(0xFF80FFDB).withOpacity(0.4),
               glowColor: const Color(0xFFFFD700), // Golden glow
-              glowWidth: 3.0,
+              glowWidth: 3,
               duration: 2,
-              child: Container(
+              child: DecoratedBox(
                 decoration: BoxDecoration(
                   color: const Color(0xFF2D00F7),
                   borderRadius: BorderRadius.circular(16),
                 ),
-                child: Container(
+                child: DecoratedBox(
                   decoration: BoxDecoration(
                     color: const Color(0xFFFF6B6B), // Coral
                     borderRadius: BorderRadius.circular(8),

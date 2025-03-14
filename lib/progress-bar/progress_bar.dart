@@ -1,4 +1,5 @@
 // progress_loader.dart
+
 import 'package:flutter/material.dart';
 
 /// Abstract class defining the contract for progress animation strategies
@@ -13,16 +14,6 @@ abstract class ProgressAnimationStrategy {
 
 /// Style configuration for progress loaders
 class ProgressStyle {
-  final Color primaryColor;
-  final Color backgroundColor;
-  final double width;
-  final double height;
-  final EdgeInsets padding;
-  final BorderRadius? borderRadius;
-  final List<Color>? gradientColors;
-  final Curve curve;
-  final Duration animationDuration;
-
   const ProgressStyle({
     this.primaryColor = Colors.blue,
     this.backgroundColor = Colors.grey,
@@ -34,6 +25,15 @@ class ProgressStyle {
     this.curve = Curves.easeInOut,
     this.animationDuration = const Duration(milliseconds: 300),
   });
+  final Color primaryColor;
+  final Color backgroundColor;
+  final double width;
+  final double height;
+  final EdgeInsets padding;
+  final BorderRadius? borderRadius;
+  final List<Color>? gradientColors;
+  final Curve curve;
+  final Duration animationDuration;
 
   ProgressStyle copyWith({
     Color? primaryColor,
@@ -62,25 +62,23 @@ class ProgressStyle {
 
 /// Main progress loader widget that uses a strategy pattern
 class ProgressLoader extends StatefulWidget {
+  const ProgressLoader({
+    super.key,
+    required this.progress,
+    required this.strategy,
+    this.style = const ProgressStyle(),
+    this.onProgressUpdate,
+  });
   final double progress;
   final ProgressAnimationStrategy strategy;
   final ProgressStyle style;
   final ValueChanged<double>? onProgressUpdate;
 
-  const ProgressLoader({
-    Key? key,
-    required this.progress,
-    required this.strategy,
-    this.style = const ProgressStyle(),
-    this.onProgressUpdate,
-  }) : super(key: key);
-
   @override
   State<ProgressLoader> createState() => _ProgressLoaderState();
 }
 
-class _ProgressLoaderState extends State<ProgressLoader>
-    with SingleTickerProviderStateMixin {
+class _ProgressLoaderState extends State<ProgressLoader> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animation;
 
@@ -94,11 +92,12 @@ class _ProgressLoaderState extends State<ProgressLoader>
     _animation = Tween<double>(
       begin: 0,
       end: widget.progress,
-    ).animate(CurvedAnimation(
-      parent: _controller,
-      curve: widget.style.curve,
-    ))
-      ..addListener(() {
+    ).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: widget.style.curve,
+      ),
+    )..addListener(() {
         if (widget.onProgressUpdate != null) {
           widget.onProgressUpdate!(_animation.value);
         }
@@ -113,10 +112,12 @@ class _ProgressLoaderState extends State<ProgressLoader>
       _animation = Tween<double>(
         begin: oldWidget.progress,
         end: widget.progress,
-      ).animate(CurvedAnimation(
-        parent: _controller,
-        curve: widget.style.curve,
-      ));
+      ).animate(
+        CurvedAnimation(
+          parent: _controller,
+          curve: widget.style.curve,
+        ),
+      );
       _controller.forward(from: 0);
     }
   }

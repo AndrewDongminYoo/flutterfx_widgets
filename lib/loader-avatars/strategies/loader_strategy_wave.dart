@@ -1,20 +1,20 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+
 import 'package:fx_2_folder/loader-avatars/loader_avatars.dart';
 
 class WaveAnimationStrategy extends AvatarAnimationStrategy {
-  final Duration animationDuration;
-  final Duration staggerDelay;
-  final bool reverseWave;
-  final double maxDisplacement;
-
   WaveAnimationStrategy({
     this.animationDuration = const Duration(milliseconds: 1200),
     this.staggerDelay = const Duration(milliseconds: 120),
     this.reverseWave = false,
     this.maxDisplacement = 12.0,
   });
+  final Duration animationDuration;
+  final Duration staggerDelay;
+  final bool reverseWave;
+  final double maxDisplacement;
 
   @override
   Duration getAnimationDuration(int index) => animationDuration;

@@ -1,16 +1,14 @@
 // Flying Characters Strategy
+
 import 'dart:math';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+
 import 'package:fx_2_folder/fx_14_text_reveal/text_reveal_widget.dart';
 
 class FlyingCharactersStrategy extends BaseAnimationStrategy {
-  final double maxOffset;
-  final bool randomDirection;
-  final double angle;
-  final bool enableBlur; // New property for blur effect
-  final double maxBlur; // Maximum blur amount
+  // Maximum blur amount
 
   const FlyingCharactersStrategy({
     this.maxOffset = 100.0,
@@ -19,6 +17,11 @@ class FlyingCharactersStrategy extends BaseAnimationStrategy {
     this.enableBlur = false, // Disabled by default
     this.maxBlur = 8.0, // Default blur amount
   }) : super();
+  final double maxOffset;
+  final bool randomDirection;
+  final double angle;
+  final bool enableBlur; // New property for blur effect
+  final double maxBlur;
 
   @override
   Widget buildAnimatedCharacter({
@@ -29,8 +32,7 @@ class FlyingCharactersStrategy extends BaseAnimationStrategy {
     return ValueListenableBuilder<double>(
       valueListenable: animation,
       builder: (context, value, _) {
-        final actualAngle =
-            randomDirection ? (Random().nextDouble() * 2 * pi) : angle;
+        final actualAngle = randomDirection ? (Random().nextDouble() * 2 * pi) : angle;
         final offset = maxOffset * (1 - value);
 
         Widget child = Text(character, style: style);

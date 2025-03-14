@@ -1,19 +1,19 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+
 import 'package:fx_2_folder/stacked-cards/stacked_card.dart';
 
 //Future note: Support different animation like blur fade to make it look better for another day!
 
 class TextMorph extends StatelessWidget {
-  final String text;
-  final TextStyle? style;
-
   const TextMorph({
     super.key,
     required this.text,
     this.style,
   });
+  final String text;
+  final TextStyle? style;
 
   @override
   Widget build(BuildContext context) {
@@ -49,21 +49,19 @@ class TextMorph extends StatelessWidget {
 }
 
 class MorphCharacter extends StatefulWidget {
-  final String character;
-  final TextStyle? style;
-
   const MorphCharacter({
     super.key,
     required this.character,
     this.style,
   });
+  final String character;
+  final TextStyle? style;
 
   @override
   State<MorphCharacter> createState() => _MorphCharacterState();
 }
 
-class _MorphCharacterState extends State<MorphCharacter>
-    with SingleTickerProviderStateMixin {
+class _MorphCharacterState extends State<MorphCharacter> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _scaleAnimation;
   late Animation<double> _opacityAnimation;
@@ -85,27 +83,31 @@ class _MorphCharacterState extends State<MorphCharacter>
 
     // Scale animation with elastic effect
     _scaleAnimation = Tween<double>(
-      begin: 0.0,
-      end: 1.0,
+      begin: 0,
+      end: 1,
     ).animate(customCurve);
 
     // Opacity animation with custom curve
     _opacityAnimation = Tween<double>(
-      begin: 0.0,
-      end: 1.0,
-    ).animate(CurvedAnimation(
-      parent: _controller,
-      curve: const Interval(0.0, 0.5, curve: Curves.easeIn),
-    ));
+      begin: 0,
+      end: 1,
+    ).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: const Interval(0, 0.5, curve: Curves.easeIn),
+      ),
+    );
 
     // Slide animation from bottom
     _slideAnimation = Tween<double>(
-      begin: 10.0,
-      end: 0.0,
-    ).animate(CurvedAnimation(
-      parent: _controller,
-      curve: Curves.easeOutQuad,
-    ));
+      begin: 10,
+      end: 0,
+    ).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: Curves.easeOutQuad,
+      ),
+    );
 
     _controller.forward();
   }

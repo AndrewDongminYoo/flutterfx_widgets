@@ -1,12 +1,12 @@
 import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 class ButterflyFlapCurve extends Curve {
   @override
   double transform(double t) {
-    final double phase = t * 2 * pi;
-    double value =
-        0.6 * sin(phase) + 0.2 * sin(2 * phase) + 0.1 * sin(3 * phase);
+    final phase = t * 2 * pi;
+    var value = 0.6 * sin(phase) + 0.2 * sin(2 * phase) + 0.1 * sin(3 * phase);
 
     if (value > 0.8) value = 0.8;
     if (value < -0.8) value = -0.8;
@@ -16,21 +16,19 @@ class ButterflyFlapCurve extends Curve {
 }
 
 class FlutterButterfly extends StatefulWidget {
-  final double width;
-  final double height;
-
   const FlutterButterfly({
-    Key? key,
+    super.key,
     required this.width,
     required this.height,
-  }) : super(key: key);
+  });
+  final double width;
+  final double height;
 
   @override
   State<FlutterButterfly> createState() => _FlutterButterflyState();
 }
 
-class _FlutterButterflyState extends State<FlutterButterfly>
-    with SingleTickerProviderStateMixin {
+class _FlutterButterflyState extends State<FlutterButterfly> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _flapAnimation;
 
@@ -61,7 +59,7 @@ class _FlutterButterflyState extends State<FlutterButterfly>
       }
     });
 
-    _controller.repeat(reverse: false);
+    _controller.repeat();
   }
 
   @override
@@ -74,14 +72,11 @@ class _FlutterButterflyState extends State<FlutterButterfly>
   Widget build(BuildContext context) {
     // Calculate wing positions based on container size
     final wingSize = widget.height * 0.5; // Wing size proportional to height
-    final wingOffset =
-        widget.width * 0.167; // Offset from center (1/6 of width)
-    final bodyWidth =
-        widget.width * 0.033; // Body width (1/30 of container width)
-    final bodyHeight =
-        widget.height * 0.3; // Body height (0.3 of container height)
+    final wingOffset = widget.width * 0.167; // Offset from center (1/6 of width)
+    final bodyWidth = widget.width * 0.033; // Body width (1/30 of container width)
+    final bodyHeight = widget.height * 0.3; // Body height (0.3 of container height)
 
-    return Container(
+    return SizedBox(
       width: widget.width,
       height: widget.height,
       child: AnimatedBuilder(
@@ -123,7 +118,6 @@ class _FlutterButterflyState extends State<FlutterButterfly>
                     ..translate(
                       0.0,
                       2.0 * sin(_controller.value * 2 * pi),
-                      0.0,
                     ),
                   child: Container(
                     width: bodyWidth,

@@ -1,16 +1,16 @@
 // work_life_slider.dart
+
 import 'package:flutter/material.dart';
 
 /// A custom slider widget that visualizes work-life balance percentage
 class WorkLifeSlider extends StatefulWidget {
-  final double value;
-  final ValueChanged<double>? onChanged;
-
   const WorkLifeSlider({
     super.key,
     this.value = 50.0,
     this.onChanged,
   });
+  final double value;
+  final ValueChanged<double>? onChanged;
 
   @override
   State<WorkLifeSlider> createState() => _WorkLifeSliderState();
@@ -39,7 +39,7 @@ class _SliderStyles {
   static const tooltipHeight = 40.0;
 
   static const animationDuration = Duration(milliseconds: 300);
-  static const animationCurve = Curves.easeOut;
+  static const Cubic animationCurve = Curves.easeOut;
 }
 
 class _WorkLifeSliderState extends State<WorkLifeSlider> {
@@ -64,7 +64,7 @@ class _WorkLifeSliderState extends State<WorkLifeSlider> {
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) => Center(
-        child: Container(
+        child: ColoredBox(
           color: _SliderStyles.backgroundColor,
           child: SizedBox(
             width: constraints.maxWidth,
@@ -98,15 +98,13 @@ class _WorkLifeSliderState extends State<WorkLifeSlider> {
               'WORK',
               _value.round(),
               _SliderStyles.workColor,
-              padding:
-                  const EdgeInsets.only(left: _SliderStyles.horizontalPadding),
+              padding: const EdgeInsets.only(left: _SliderStyles.horizontalPadding),
             ),
             _buildPercentageLabel(
               'LIFE',
               (100 - _value).round(),
               _SliderStyles.lifeColor,
-              padding:
-                  const EdgeInsets.only(right: _SliderStyles.horizontalPadding),
+              padding: const EdgeInsets.only(right: _SliderStyles.horizontalPadding),
             ),
           ],
         ),
@@ -137,9 +135,7 @@ class _WorkLifeSliderState extends State<WorkLifeSlider> {
       child: AnimatedContainer(
         duration: _SliderStyles.animationDuration,
         curve: _SliderStyles.animationCurve,
-        height: _isBalanced
-            ? _SliderStyles.expandedTrackHeight
-            : _SliderStyles.collapsedTrackHeight,
+        height: _isBalanced ? _SliderStyles.expandedTrackHeight : _SliderStyles.collapsedTrackHeight,
         child: Stack(
           clipBehavior: Clip.none,
           children: [
@@ -195,9 +191,7 @@ class _WorkLifeSliderState extends State<WorkLifeSlider> {
         child: Container(
           width: _SliderStyles.indicatorWidth,
           decoration: BoxDecoration(
-            color: _isDragging
-                ? _SliderStyles.activeIndicatorColor
-                : _SliderStyles.inactiveIndicatorColor,
+            color: _isDragging ? _SliderStyles.activeIndicatorColor : _SliderStyles.inactiveIndicatorColor,
             borderRadius: BorderRadius.circular(_SliderStyles.borderRadius),
           ),
         ),

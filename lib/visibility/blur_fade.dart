@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'dart:ui';
 
 import 'package:fx_2_folder/visibility/blur_fade_widget.dart';
 
 class BlurFadeExample extends StatefulWidget {
+  const BlurFadeExample({super.key});
+
   @override
   State<BlurFadeExample> createState() => _BlurFadeExampleState();
 }
@@ -51,7 +52,7 @@ class _BlurFadeExampleState extends State<BlurFadeExample> {
             ElevatedButton(
               onPressed: () => setState(() => _isVisible = !_isVisible),
               style: ElevatedButton.styleFrom(
-                minimumSize: Size(150, 50),
+                minimumSize: const Size(150, 50),
               ),
               child: Text(_isVisible ? 'Hide' : 'Show'),
             ),
@@ -66,14 +67,14 @@ class _BlurFadeExampleState extends State<BlurFadeExample> {
   Text normalText(String text) {
     return Text(
       text,
-      style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+      style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
     );
   }
 
   Text titleText(String title) {
     return Text(
       title,
-      style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
+      style: const TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
     );
   }
 }

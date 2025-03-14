@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+
 import 'package:fx_2_folder/light-bulb-night-mode/light_bulb.dart';
 
 class NightModeDemo extends StatefulWidget {
-  const NightModeDemo({Key? key}) : super(key: key);
+  const NightModeDemo({super.key});
 
   @override
   State<NightModeDemo> createState() => _DemoState();
@@ -21,9 +22,7 @@ class _DemoState extends State<NightModeDemo> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: isDarkMode
-          ? ThemeData.dark(useMaterial3: true)
-          : ThemeData.light(useMaterial3: true),
+      theme: isDarkMode ? ThemeData.dark(useMaterial3: true) : ThemeData.light(useMaterial3: true),
       home: Scaffold(
         body: Stack(
           children: [
@@ -42,30 +41,24 @@ class _DemoState extends State<NightModeDemo> {
 //card--------------------------------
 
 class ThemeShowcaseCard extends StatelessWidget {
-  final bool isDarkMode;
-
   const ThemeShowcaseCard({
-    Key? key,
+    super.key,
     required this.isDarkMode,
-  }) : super(key: key);
+  });
+  final bool isDarkMode;
 
   @override
   Widget build(BuildContext context) {
     return Center(
       child: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16),
         child: Card(
           elevation: isDarkMode ? 8.0 : 4.0,
-          shadowColor: isDarkMode
-              ? Colors.blue.withOpacity(0.4)
-              : Colors.grey.withOpacity(0.2),
+          shadowColor: isDarkMode ? Colors.blue.withOpacity(0.4) : Colors.grey.withOpacity(0.2),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
             side: BorderSide(
-              color: isDarkMode
-                  ? Colors.blue.withOpacity(0.2)
-                  : Colors.grey.withOpacity(0.1),
-              width: 1,
+              color: isDarkMode ? Colors.blue.withOpacity(0.2) : Colors.grey.withOpacity(0.1),
             ),
           ),
           child: Container(
@@ -78,15 +71,13 @@ class ThemeShowcaseCard extends StatelessWidget {
                 // Header with icon
                 Container(
                   decoration: BoxDecoration(
-                    color: isDarkMode
-                        ? Colors.blue.withOpacity(0.1)
-                        : Colors.orange.withOpacity(0.1),
+                    color: isDarkMode ? Colors.blue.withOpacity(0.1) : Colors.orange.withOpacity(0.1),
                     borderRadius: const BorderRadius.only(
                       topLeft: Radius.circular(20),
                       topRight: Radius.circular(20),
                     ),
                   ),
-                  padding: const EdgeInsets.all(16.0),
+                  padding: const EdgeInsets.all(16),
                   child: Row(
                     children: [
                       Container(
@@ -96,9 +87,7 @@ class ThemeShowcaseCard extends StatelessWidget {
                           shape: BoxShape.circle,
                           boxShadow: [
                             BoxShadow(
-                              color: isDarkMode
-                                  ? Colors.blue.withOpacity(0.2)
-                                  : Colors.orange.withOpacity(0.2),
+                              color: isDarkMode ? Colors.blue.withOpacity(0.2) : Colors.orange.withOpacity(0.2),
                               blurRadius: 8,
                               offset: const Offset(0, 2),
                             ),
@@ -117,29 +106,16 @@ class ThemeShowcaseCard extends StatelessWidget {
                           children: [
                             Text(
                               isDarkMode ? 'Night Mode' : 'Day Mode',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .titleLarge
-                                  ?.copyWith(
+                              style: Theme.of(context).textTheme.titleLarge?.copyWith(
                                     fontWeight: FontWeight.bold,
-                                    color: isDarkMode
-                                        ? Colors.blue
-                                        : Colors.orange,
+                                    color: isDarkMode ? Colors.blue : Colors.orange,
                                   ),
                             ),
                             const SizedBox(height: 4),
                             Text(
-                              isDarkMode
-                                  ? 'Easier on your eyes in low light'
-                                  : 'Perfect visibility in daylight',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyMedium
-                                  ?.copyWith(
-                                    color: Theme.of(context)
-                                        .textTheme
-                                        .bodySmall
-                                        ?.color,
+                              isDarkMode ? 'Easier on your eyes in low light' : 'Perfect visibility in daylight',
+                              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                    color: Theme.of(context).textTheme.bodySmall?.color,
                                   ),
                             ),
                           ],
@@ -151,33 +127,28 @@ class ThemeShowcaseCard extends StatelessWidget {
 
                 // Content section
                 Padding(
-                  padding: const EdgeInsets.all(16.0),
+                  padding: const EdgeInsets.all(16),
                   child: Column(
                     children: [
                       _buildInfoRow(
                         context,
                         icon: Icons.visibility,
                         title: 'Visibility',
-                        value: isDarkMode
-                            ? 'Optimized for dark'
-                            : 'Enhanced for daylight',
+                        value: isDarkMode ? 'Optimized for dark' : 'Enhanced for daylight',
                       ),
                       const SizedBox(height: 16),
                       _buildInfoRow(
                         context,
                         icon: Icons.battery_charging_full,
                         title: 'Battery Usage',
-                        value: isDarkMode
-                            ? 'Reduced consumption'
-                            : 'Standard consumption',
+                        value: isDarkMode ? 'Reduced consumption' : 'Standard consumption',
                       ),
                       const SizedBox(height: 16),
                       _buildInfoRow(
                         context,
                         icon: Icons.remove_red_eye,
                         title: 'Eye Comfort',
-                        value:
-                            isDarkMode ? 'Maximum comfort' : 'Balanced viewing',
+                        value: isDarkMode ? 'Maximum comfort' : 'Balanced viewing',
                       ),
                     ],
                   ),

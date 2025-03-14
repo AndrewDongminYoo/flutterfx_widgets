@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+
 import 'package:fx_2_folder/splash-reveal/splash_demo.dart';
 
 class MonochromeHomeScreen extends StatelessWidget {
-  const MonochromeHomeScreen({Key? key}) : super(key: key);
+  const MonochromeHomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -23,13 +24,17 @@ class MonochromeHomeScreen extends StatelessWidget {
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.notifications_outlined,
-                color: Colors.white70), // Lighter icon
+            icon: const Icon(
+              Icons.notifications_outlined,
+              color: Colors.white70,
+            ), // Lighter icon
             onPressed: () {},
           ),
           IconButton(
-            icon: const Icon(Icons.person_outline,
-                color: Colors.white70), // Lighter icon
+            icon: const Icon(
+              Icons.person_outline,
+              color: Colors.white70,
+            ), // Lighter icon
             onPressed: () {},
           ),
         ],
@@ -46,7 +51,6 @@ class MonochromeHomeScreen extends StatelessWidget {
               boxShadow: [
                 BoxShadow(
                   color: Colors.black.withOpacity(0.2),
-                  spreadRadius: 0,
                   blurRadius: 10,
                   offset: const Offset(0, 2),
                 ),
@@ -167,7 +171,6 @@ class MonochromeHomeScreen extends StatelessWidget {
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.2),
-            spreadRadius: 0,
             blurRadius: 10,
             offset: const Offset(0, 2),
           ),
@@ -208,7 +211,6 @@ class MonochromeHomeScreen extends StatelessWidget {
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.2),
-            spreadRadius: 0,
             blurRadius: 10,
             offset: const Offset(0, 2),
           ),
@@ -266,7 +268,7 @@ class MonochromeHomeScreen extends StatelessWidget {
 
 // Loading screen with dark theme
 class LoadingApp extends StatefulWidget {
-  const LoadingApp({Key? key}) : super(key: key);
+  const LoadingApp({super.key});
 
   @override
   State<LoadingApp> createState() => _LoadingAppState();
@@ -283,7 +285,7 @@ class _LoadingAppState extends State<LoadingApp> {
   }
 
   Future<void> _simulateLoading() async {
-    await Future.delayed(const Duration(seconds: 2));
+    await Future<void>.delayed(const Duration(seconds: 2));
     setState(() => _isLoading = false);
     await _revealController.startReveal();
   }
@@ -304,7 +306,7 @@ class _LoadingAppState extends State<LoadingApp> {
             onAnimationComplete: () {
               print('App reveal completed!');
             },
-            child: Container(
+            child: ColoredBox(
               color: const Color(0xFF121212),
               child: Center(
                 child: _isLoading

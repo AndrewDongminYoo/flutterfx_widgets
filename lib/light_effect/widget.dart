@@ -1,19 +1,19 @@
-import 'package:flutter/material.dart';
 import 'dart:ui' as ui;
 
-class LightEffectWidget extends StatelessWidget {
-  final double width;
-  final double height;
-  final Color backgroundColor;
-  final Color lightColor;
+import 'package:flutter/material.dart';
 
+class LightEffectWidget extends StatelessWidget {
   const LightEffectWidget({
-    Key? key,
+    super.key,
     this.width = 300,
     this.height = 200,
     this.backgroundColor = Colors.black,
     this.lightColor = Colors.white,
-  }) : super(key: key);
+  });
+  final double width;
+  final double height;
+  final Color backgroundColor;
+  final Color lightColor;
 
   @override
   Widget build(BuildContext context) {
@@ -35,8 +35,7 @@ class LightEffectWidget extends StatelessWidget {
           Positioned(
             top: height / 2,
             child: Transform(
-              transform: Matrix4.identity()
-                ..scale(1.0, -1.0), // Flip vertically
+              transform: Matrix4.identity()..scale(1.0, -1), // Flip vertically
               child: Stack(
                 children: [
                   CustomPaint(
@@ -49,8 +48,8 @@ class LightEffectWidget extends StatelessWidget {
                   ClipRect(
                     child: BackdropFilter(
                       filter: ui.ImageFilter.blur(
-                        sigmaX: 3.0,
-                        sigmaY: 3.0,
+                        sigmaX: 3,
+                        sigmaY: 3,
                       ),
                       child: Container(
                         width: width,
@@ -70,17 +69,16 @@ class LightEffectWidget extends StatelessWidget {
 }
 
 class TopLightEffectPainter extends CustomPainter {
-  final Color lightColor;
-  final Color backgroundColor;
-
   TopLightEffectPainter({
     required this.lightColor,
     required this.backgroundColor,
   });
+  final Color lightColor;
+  final Color backgroundColor;
 
   @override
   void paint(Canvas canvas, Size size) {
-    final Paint paint = Paint();
+    final paint = Paint();
 
     // Create the angular gradient
     final Gradient gradient = SweepGradient(
@@ -95,7 +93,7 @@ class TopLightEffectPainter extends CustomPainter {
         backgroundColor,
       ],
       stops: const [0.0, 0.25, 0.5, 0.75, 1.0],
-      transform: GradientRotation(-1.5708), // -PI/2
+      transform: const GradientRotation(-1.5708), // -PI/2
     );
 
     // Apply the gradient with a custom shader
@@ -115,16 +113,17 @@ class TopLightEffectPainter extends CustomPainter {
     );
 
     // Add fade out effect at the bottom
-    final Paint fadePaint = Paint()
+    final fadePaint = Paint()
       ..shader = LinearGradient(
         begin: Alignment.topCenter,
         end: Alignment.bottomCenter,
         colors: [
-          backgroundColor.withOpacity(0.0),
+          backgroundColor.withOpacity(0),
           backgroundColor.withOpacity(0.2),
         ],
       ).createShader(
-          Rect.fromLTWH(0, size.height * 0.7, size.width, size.height * 0.3));
+        Rect.fromLTWH(0, size.height * 0.7, size.width, size.height * 0.3),
+      );
 
     canvas.drawRect(
       Rect.fromLTWH(0, size.height * 0.7, size.width, size.height * 0.3),

@@ -3,6 +3,8 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 class WidgetViewer extends StatefulWidget {
+  const WidgetViewer({super.key});
+
   @override
   _WidgetViewerState createState() => _WidgetViewerState();
 }
@@ -19,7 +21,7 @@ class _WidgetViewerState extends State<WidgetViewer> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('3D Stacked Widget Viewer')),
+      appBar: AppBar(title: const Text('3D Stacked Widget Viewer')),
       body: Column(
         children: [
           Expanded(
@@ -40,8 +42,7 @@ class _WidgetViewerState extends State<WidgetViewer> {
                 child: Stack(
                   children: List.generate(colors.length, (index) {
                     return Transform(
-                      transform: Matrix4.identity()
-                        ..translate(0.0, 0.0, -index * 50.0), // -index * 50.0
+                      transform: Matrix4.identity()..translate(0.0, 0, -index * 50.0), // -index * 50.0
                       child: Container(
                         width: 200,
                         height: 200,
@@ -49,7 +50,7 @@ class _WidgetViewerState extends State<WidgetViewer> {
                         child: Center(
                           child: Text(
                             'Layer ${index + 1}',
-                            style: TextStyle(color: Colors.white),
+                            style: const TextStyle(color: Colors.white),
                           ),
                         ),
                       ),
@@ -60,22 +61,18 @@ class _WidgetViewerState extends State<WidgetViewer> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(16),
             child: Column(
               children: [
                 _buildSlider(
                   value: _horizontalRotation,
-                  onChanged: (value) =>
-                      setState(() => _horizontalRotation = value),
-                  label:
-                      'Horizontal Rotation: ${_horizontalRotation.toStringAsFixed(0)}°',
+                  onChanged: (value) => setState(() => _horizontalRotation = value),
+                  label: 'Horizontal Rotation: ${_horizontalRotation.toStringAsFixed(0)}°',
                 ),
                 _buildSlider(
                   value: _verticalRotation,
-                  onChanged: (value) =>
-                      setState(() => _verticalRotation = value),
-                  label:
-                      'Vertical Rotation: ${_verticalRotation.toStringAsFixed(0)}°',
+                  onChanged: (value) => setState(() => _verticalRotation = value),
+                  label: 'Vertical Rotation: ${_verticalRotation.toStringAsFixed(0)}°',
                 ),
                 _buildSlider(
                   value: _zRotation,
@@ -88,21 +85,21 @@ class _WidgetViewerState extends State<WidgetViewer> {
                   max: 0.1,
                   onChanged: (value) => setState(() {
                     _perspective = value;
-                    print("Perspective, value: $_perspective");
+                    print('Perspective, value: $_perspective');
                   }),
                   label: 'Perspective: ${_perspective.toStringAsFixed(0)}°',
                 ),
                 _buildSlider(
                   value: _zoom,
                   min: 0.5,
-                  max: 2.0,
+                  max: 2,
                   onChanged: (value) => setState(() => _zoom = value),
                   label: 'Zoom: ${_zoom.toStringAsFixed(2)}x',
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 ElevatedButton(
                   onPressed: _resetTransformations,
-                  child: Text('Reset'),
+                  child: const Text('Reset'),
                 ),
               ],
             ),
@@ -121,7 +118,7 @@ class _WidgetViewerState extends State<WidgetViewer> {
   }) {
     return Column(
       children: [
-        Text(label, style: TextStyle(fontWeight: FontWeight.bold)),
+        Text(label, style: const TextStyle(fontWeight: FontWeight.bold)),
         Slider(
           value: value,
           min: min,

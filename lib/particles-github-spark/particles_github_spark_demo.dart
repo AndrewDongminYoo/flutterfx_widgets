@@ -1,10 +1,11 @@
 // particles_demo.dart
+
 import 'package:flutter/material.dart';
+
 import 'package:fx_2_folder/particles-github-spark/particles_github_spark.dart';
-import 'package:fx_2_folder/particles/particles_widget.dart';
 
 class ParticlesGithubSparkDemo extends StatefulWidget {
-  const ParticlesGithubSparkDemo({Key? key}) : super(key: key);
+  const ParticlesGithubSparkDemo({super.key});
 
   @override
   State<ParticlesGithubSparkDemo> createState() => _ParticlesDemoState();
@@ -24,7 +25,6 @@ class _ParticlesDemoState extends State<ParticlesGithubSparkDemo> {
             Positioned.fill(
               child: RisingParticles(
                 quantity: 20,
-                maxSize: 8,
                 minSize: 5,
               ),
             ),

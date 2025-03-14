@@ -1,4 +1,5 @@
 import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 
 class Particle {
@@ -34,13 +35,13 @@ class Particle {
 
 class CoolMode extends StatefulWidget {
   const CoolMode({
-    Key? key,
+    super.key,
     required this.child,
     this.particleCount = 45,
     this.speedHorz,
     this.speedUp,
     this.particleImage,
-  }) : super(key: key);
+  });
 
   final Widget child;
   final int particleCount;
@@ -75,18 +76,17 @@ class _CoolModeState extends State<CoolMode> with TickerProviderStateMixin {
   }
 
   Offset _getWidgetPosition() {
-    final RenderBox? renderBox =
-        _childKey.currentContext?.findRenderObject() as RenderBox?;
-    final RenderBox? paintBox = context.findRenderObject() as RenderBox?;
+    final renderBox = _childKey.currentContext?.findRenderObject() as RenderBox?;
+    final paintBox = context.findRenderObject() as RenderBox?;
 
     if (renderBox == null || paintBox == null) return Offset.zero;
 
     // Get the global position of the button
-    final Offset globalPosition = renderBox.localToGlobal(Offset.zero);
-    final Size size = renderBox.size;
+    final globalPosition = renderBox.localToGlobal(Offset.zero);
+    final size = renderBox.size;
 
     // Convert global coordinates back to local coordinates relative to the CustomPaint
-    final Offset localPosition = paintBox.globalToLocal(globalPosition);
+    final localPosition = paintBox.globalToLocal(globalPosition);
 
     return Offset(
       localPosition.dx + size.width / 2,
@@ -99,13 +99,12 @@ class _CoolModeState extends State<CoolMode> with TickerProviderStateMixin {
       _addParticle();
     }
 
-    for (int i = _particles.length - 1; i >= 0; i--) {
+    for (var i = _particles.length - 1; i >= 0; i--) {
       _particles[i].update();
 
       // Remove particles that go off screen
       if (_particles[i].position.dy < -_particles[i].size ||
-          _particles[i].position.dy >
-              MediaQuery.of(context).size.height + _particles[i].size) {
+          _particles[i].position.dy > MediaQuery.of(context).size.height + _particles[i].size) {
         _particles.removeAt(i);
       }
     }
@@ -116,8 +115,8 @@ class _CoolModeState extends State<CoolMode> with TickerProviderStateMixin {
   }
 
   void _addParticle() {
-    final List<double> sizes = [15, 18, 21, 23, 26];
-    final size = sizes[_random.nextInt(sizes.length)].toDouble();
+    final sizes = <double>[15, 18, 21, 23, 26];
+    final size = sizes[_random.nextInt(sizes.length)];
     final speedHorz = widget.speedHorz ?? _random.nextDouble() * 10;
     final speedUp = widget.speedUp ?? _random.nextDouble() * 25;
     final spinVal = _random.nextDouble() * 360;
@@ -136,7 +135,7 @@ class _CoolModeState extends State<CoolMode> with TickerProviderStateMixin {
         spinSpeed: spinSpeed,
         spinVal: spinVal,
         color: HSLColor.fromAHSL(
-          1.0,
+          1,
           _random.nextDouble() * 360,
           0.7,
           0.5,
@@ -161,27 +160,28 @@ class _CoolModeState extends State<CoolMode> with TickerProviderStateMixin {
         children: [
           // First layer: The button
           Center(
-              child: GestureDetector(
-            onTapDown: (_) {
-              setState(() {
-                _isPointerDown = true;
-              });
-            },
-            onTapUp: (_) {
-              setState(() {
-                _isPointerDown = false;
-              });
-            },
-            onTapCancel: () {
-              setState(() {
-                _isPointerDown = false;
-              });
-            },
-            child: KeyedSubtree(
-              key: _childKey,
-              child: widget.child,
+            child: GestureDetector(
+              onTapDown: (_) {
+                setState(() {
+                  _isPointerDown = true;
+                });
+              },
+              onTapUp: (_) {
+                setState(() {
+                  _isPointerDown = false;
+                });
+              },
+              onTapCancel: () {
+                setState(() {
+                  _isPointerDown = false;
+                });
+              },
+              child: KeyedSubtree(
+                key: _childKey,
+                child: widget.child,
+              ),
             ),
-          )),
+          ),
           // Second layer: The particles (now on top)
           if (_particles.isNotEmpty)
             Positioned.fill(

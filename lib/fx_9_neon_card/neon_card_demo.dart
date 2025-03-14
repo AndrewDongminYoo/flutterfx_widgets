@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+
 import 'package:fx_2_folder/fx_9_neon_card/neon_card.dart';
 import 'package:fx_2_folder/fx_9_neon_card/neon_text.dart';
 
 class NeonGradientCardDemo extends StatelessWidget {
+  const NeonGradientCardDemo({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Container(
+      child: SizedBox(
         width: 300,
         height: 200,
         child: Center(

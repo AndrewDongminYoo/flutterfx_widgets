@@ -1,21 +1,24 @@
-import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
+import 'package:flutter/material.dart';
+
 class SpringAnimationsPage extends StatelessWidget {
+  const SpringAnimationsPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Spring Animations'),
+        title: const Text('Spring Animations'),
       ),
       body: GridView.count(
         crossAxisCount: 2,
-        padding: EdgeInsets.all(16),
+        padding: const EdgeInsets.all(16),
         childAspectRatio: 3,
         mainAxisSpacing: 16,
         crossAxisSpacing: 16,
         children: [
-          SpringButton(
+          const SpringButton(
             text: 'Elastic Gentle',
             curve: Curves.easeOutBack,
             duration: Duration(milliseconds: 800),
@@ -23,79 +26,79 @@ class SpringAnimationsPage extends StatelessWidget {
           SpringButton(
             text: 'Bouncy Wobble',
             curve: _BouncyWobbleCurve(),
-            duration: Duration(milliseconds: 1200),
+            duration: const Duration(milliseconds: 1200),
           ),
           SpringButton(
             text: 'Quick Oscillation',
             curve: _QuickOscillationCurve(),
-            duration: Duration(milliseconds: 600),
+            duration: const Duration(milliseconds: 600),
           ),
           SpringButton(
             text: 'Slow Rebound',
             curve: _SlowReboundCurve(),
-            duration: Duration(milliseconds: 1500),
+            duration: const Duration(milliseconds: 1500),
           ),
           SpringButton(
             text: 'Snappy Elastic',
             curve: _SnappyElasticCurve(),
-            duration: Duration(milliseconds: 700),
+            duration: const Duration(milliseconds: 700),
           ),
           SpringButton(
             text: 'Soft Bounce',
             curve: _SoftBounceCurve(),
-            duration: Duration(milliseconds: 900),
+            duration: const Duration(milliseconds: 900),
           ),
           SpringButton(
             text: 'Vibrating Spring',
             curve: _VibratingSpringCurve(),
-            duration: Duration(milliseconds: 1000),
+            duration: const Duration(milliseconds: 1000),
           ),
           SpringButton(
             text: 'Smooth Overshoot',
             curve: _SmoothOvershootCurve(),
-            duration: Duration(milliseconds: 850),
+            duration: const Duration(milliseconds: 850),
           ),
           SpringButton(
             text: 'Elastic Snap',
             curve: _ElasticSnapCurve(),
-            duration: Duration(milliseconds: 750),
+            duration: const Duration(milliseconds: 750),
           ),
           SpringButton(
             text: 'Gentle Wobble',
             curve: _GentleWobbleCurve(),
-            duration: Duration(milliseconds: 1100),
+            duration: const Duration(milliseconds: 1100),
           ),
-          SpringButton(
+          const SpringButton(
             text: 'Bouncy',
             curve: Curves.bounceOut,
             duration: Duration(milliseconds: 500),
           ),
-          SpringButton(
+          const SpringButton(
             text: 'Elastic',
             curve: Curves.elasticOut,
             duration: Duration(milliseconds: 1000),
           ),
-          SpringButton(
+          const SpringButton(
             text: 'Quick Snap',
             curve: Curves.easeOutBack,
             duration: Duration(milliseconds: 300),
           ),
-          SpringButton(
+          const SpringButton(
             text: 'Slow Spring',
             curve: Curves.elasticInOut,
             duration: Duration(milliseconds: 1500),
           ),
-          SpringButton(
+          const SpringButton(
             text: 'Overshoot',
             curve: Curves.easeOutCirc,
             duration: Duration(milliseconds: 600),
           ),
-          SpringButton(
+          const SpringButton(
             text: 'Gentle',
             curve: Curves.easeOutSine,
             duration: Duration(milliseconds: 400),
           ),
-          SpringButton(
+          const SpringButton(
             text: 'Sharp',
             curve: Curves.easeOutExpo,
             duration: Duration(milliseconds: 350),
@@ -103,17 +106,17 @@ class SpringAnimationsPage extends StatelessWidget {
           SpringButton(
             text: 'Wobble',
             curve: _WobbleCurve(),
-            duration: Duration(milliseconds: 800),
+            duration: const Duration(milliseconds: 800),
           ),
           SpringButton(
             text: 'Bouncy Elastic',
             curve: _BouncyElasticCurve(),
-            duration: Duration(milliseconds: 1200),
+            duration: const Duration(milliseconds: 1200),
           ),
           SpringButton(
             text: 'Damped',
             curve: _DampedSpringCurve(),
-            duration: Duration(milliseconds: 1000),
+            duration: const Duration(milliseconds: 1000),
           ),
         ],
       ),
@@ -122,22 +125,21 @@ class SpringAnimationsPage extends StatelessWidget {
 }
 
 class SpringButton extends StatefulWidget {
-  final String text;
-  final Curve curve;
-  final Duration duration;
-
-  SpringButton({
+  const SpringButton({
+    super.key,
     required this.text,
     required this.curve,
     required this.duration,
   });
+  final String text;
+  final Curve curve;
+  final Duration duration;
 
   @override
   _SpringButtonState createState() => _SpringButtonState();
 }
 
-class _SpringButtonState extends State<SpringButton>
-    with SingleTickerProviderStateMixin {
+class _SpringButtonState extends State<SpringButton> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animation;
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:fx_2_folder/orbit/widget/orbit_widget.dart';
 
 class OrbitDemo extends StatelessWidget {
@@ -15,15 +16,14 @@ class OrbitDemo extends StatelessWidget {
         backgroundColor: Colors.black,
         body: Center(
           child: OrbitingCircles(
+            orbitDuration: 15, // 15 seconds per orbit
+            startDelay: 0, // 5 seconds before starting
+            orbitRadius: 60, // Base radius of 60 logical pixels
             children: [
               Icon(Icons.star),
               Icon(Icons.favorite),
               Icon(Icons.music_note),
             ],
-            orbitDuration: 15, // 15 seconds per orbit
-            startDelay: 0, // 5 seconds before starting
-            orbitRadius: 60, // Base radius of 60 logical pixels
-            showOrbitPaths: true,
           ),
         ),
       ),

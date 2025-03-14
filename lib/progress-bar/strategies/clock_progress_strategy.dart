@@ -1,5 +1,6 @@
-import 'package:flutter/material.dart';
 import 'dart:math' as math;
+
+import 'package:flutter/material.dart';
 
 import 'package:fx_2_folder/progress-bar/progress_bar.dart';
 
@@ -27,15 +28,14 @@ class PizzaProgressStrategy implements ProgressAnimationStrategy {
 }
 
 class PizzaProgressPainter extends CustomPainter {
-  final double progress;
-  final Color fillColor;
-  final Color backgroundColor;
-
   PizzaProgressPainter({
     required this.progress,
     required this.fillColor,
     required this.backgroundColor,
   });
+  final double progress;
+  final Color fillColor;
+  final Color backgroundColor;
 
   @override
   void paint(Canvas canvas, Size size) {

@@ -1,10 +1,13 @@
-import 'package:flutter/material.dart';
-import 'dart:math' as math;
 import 'dart:convert';
+import 'dart:math' as math;
+
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 //make this into web tools for working quickly with flutter animation with transform
 class CameraSimulation extends StatefulWidget {
+  const CameraSimulation({super.key});
+
   @override
   _CameraSimulationState createState() => _CameraSimulationState();
 }
@@ -16,10 +19,10 @@ class _CameraSimulationState extends State<CameraSimulation> {
   double _translateX = 0;
   double _translateY = 0;
   double _translateZ = 0;
-  double _perspectiveX = 0.00;
-  double _perspectiveY = 0.00;
-  double _perspectiveZ = 0.00;
-  double _zoom = 1.0;
+  double _perspectiveX = 0;
+  double _perspectiveY = 0;
+  double _perspectiveZ = 0;
+  double _zoom = 1;
 
 // working bottom left
 // Transform(
@@ -51,11 +54,11 @@ class _CameraSimulationState extends State<CameraSimulation> {
         Stack(
           alignment: Alignment.center,
           children: [
-            Container(
+            SizedBox(
               height: 400,
               width: double.infinity,
               child: Image.asset(
-                "assets/images/tracing_cards.png",
+                'assets/images/tracing_cards.png',
                 fit: BoxFit.fitHeight,
               ),
             ),
@@ -63,7 +66,7 @@ class _CameraSimulationState extends State<CameraSimulation> {
             // ..translate(50.0, -50.0, 0.0)
             // ..rotateX(-0.3)
             // ..rotateY(-0.3);
-            Container(
+            SizedBox(
               height: 400,
               child: Transform(
                 transform: Matrix4.identity()
@@ -82,7 +85,7 @@ class _CameraSimulationState extends State<CameraSimulation> {
                 alignment: FractionalOffset.center,
                 child: _build3DScene(),
               ),
-            )
+            ),
           ],
         ),
         _buildControls(),
@@ -103,12 +106,12 @@ class _CameraSimulationState extends State<CameraSimulation> {
         ),
 
         Transform(
-          transform: Matrix4.translationValues(0, 0, 100.0),
+          transform: Matrix4.translationValues(0, 0, 100),
           child: Container(color: Colors.red, width: 200, height: 288),
         ),
 
         Transform(
-          transform: Matrix4.translationValues(0, 0, 200.0),
+          transform: Matrix4.translationValues(0, 0, 200),
           child: Container(color: Colors.yellow, width: 200, height: 288),
         ),
       ],
@@ -166,7 +169,7 @@ class _CameraSimulationState extends State<CameraSimulation> {
           onChanged: (value) => setState(() => _translateZ = value),
           label: 'Translate Z: ${_translateZ.toStringAsFixed(2)}',
         ),
-        Text("PerspectiveX"),
+        const Text('PerspectiveX'),
         Slider(
           value: _perspectiveX,
           min: -0.01, //0.0001,
@@ -175,7 +178,7 @@ class _CameraSimulationState extends State<CameraSimulation> {
           onChanged: (value) => setState(() => _perspectiveX = value),
           label: 'PerspectiveX: ${_perspectiveX.toStringAsFixed(4)}',
         ),
-        Text("PerspectiveY"),
+        const Text('PerspectiveY'),
         Slider(
           value: _perspectiveY,
           min: -0.01, //0.0001,
@@ -184,7 +187,7 @@ class _CameraSimulationState extends State<CameraSimulation> {
           onChanged: (value) => setState(() => _perspectiveY = value),
           label: 'PerspectiveY: ${_perspectiveY.toStringAsFixed(4)}',
         ),
-        Text("PerspectiveZ"),
+        const Text('PerspectiveZ'),
         Slider(
           value: _perspectiveZ,
           min: -0.01, //0.0001,
@@ -196,7 +199,7 @@ class _CameraSimulationState extends State<CameraSimulation> {
         Slider(
           value: _zoom,
           min: 0.5,
-          max: 2.0,
+          max: 2,
           divisions: 150,
           onChanged: (value) => setState(() => _zoom = value),
           label: 'Zoom: ${_zoom.toStringAsFixed(2)}',
@@ -207,8 +210,8 @@ class _CameraSimulationState extends State<CameraSimulation> {
 
   Widget _buildExportButton() {
     return ElevatedButton(
-      child: Text('Export Settings to Clipboard'),
       onPressed: _exportSettings,
+      child: const Text('Export Settings to Clipboard'),
     );
   }
 
@@ -226,11 +229,11 @@ class _CameraSimulationState extends State<CameraSimulation> {
       'zoom': _zoom,
     };
 
-    final jsonString = JsonEncoder.withIndent('  ').convert(settings);
+    final jsonString = const JsonEncoder.withIndent('  ').convert(settings);
     Clipboard.setData(ClipboardData(text: jsonString));
 
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('Settings and code copied to clipboard')),
+      const SnackBar(content: Text('Settings and code copied to clipboard')),
     );
   }
 }

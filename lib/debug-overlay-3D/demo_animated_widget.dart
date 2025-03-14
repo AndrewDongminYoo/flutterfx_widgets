@@ -1,15 +1,15 @@
-import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
+import 'package:flutter/material.dart';
+
 class LayeredAnimationDemo extends StatefulWidget {
-  const LayeredAnimationDemo({Key? key}) : super(key: key);
+  const LayeredAnimationDemo({super.key});
 
   @override
   State<LayeredAnimationDemo> createState() => _LayeredAnimationDemoState();
 }
 
-class _LayeredAnimationDemoState extends State<LayeredAnimationDemo>
-    with TickerProviderStateMixin {
+class _LayeredAnimationDemoState extends State<LayeredAnimationDemo> with TickerProviderStateMixin {
   late final AnimationController _backgroundController;
   late final AnimationController _middleController;
   late final AnimationController _frontController;
@@ -29,7 +29,7 @@ class _LayeredAnimationDemoState extends State<LayeredAnimationDemo>
     )..repeat();
 
     _backgroundRotation = Tween<double>(
-      begin: 0.0,
+      begin: 0,
       end: 2 * math.pi,
     ).animate(_backgroundController);
 
@@ -42,10 +42,12 @@ class _LayeredAnimationDemoState extends State<LayeredAnimationDemo>
     _middleScale = Tween<double>(
       begin: 0.8,
       end: 1.2,
-    ).animate(CurvedAnimation(
-      parent: _middleController,
-      curve: Curves.easeInOut,
-    ));
+    ).animate(
+      CurvedAnimation(
+        parent: _middleController,
+        curve: Curves.easeInOut,
+      ),
+    );
 
     // Front layer translation animation
     _frontController = AnimationController(
@@ -54,12 +56,14 @@ class _LayeredAnimationDemoState extends State<LayeredAnimationDemo>
     )..repeat(reverse: true);
 
     _frontTranslation = Tween<double>(
-      begin: -50.0,
-      end: 50.0,
-    ).animate(CurvedAnimation(
-      parent: _frontController,
-      curve: Curves.easeInOut,
-    ));
+      begin: -50,
+      end: 50,
+    ).animate(
+      CurvedAnimation(
+        parent: _frontController,
+        curve: Curves.easeInOut,
+      ),
+    );
   }
 
   @override
@@ -99,7 +103,7 @@ class _LayeredAnimationDemoState extends State<LayeredAnimationDemo>
                 return Transform(
                   transform: Matrix4.identity()
                     ..setEntry(3, 2, 0.001) // Add perspective
-                    ..translate(0.0, 0.0, 50.0) // Move forward in z-axis
+                    ..translate(0.0, 0, 50) // Move forward in z-axis
                     ..scale(_middleScale.value),
                   alignment: Alignment.center,
                   child: CustomPaint(
@@ -120,7 +124,7 @@ class _LayeredAnimationDemoState extends State<LayeredAnimationDemo>
                     ..translate(
                       _frontTranslation.value,
                       _frontTranslation.value,
-                      100.0, // Even further forward in z-axis
+                      100, // Even further forward in z-axis
                     ),
                   alignment: Alignment.center,
                   child: CustomPaint(

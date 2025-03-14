@@ -1,12 +1,8 @@
-import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
-class UnifiedStarAnimation extends StatefulWidget {
-  final Color color;
-  final double size;
-  final Duration totalDuration;
-  final VoidCallback? onAnimationComplete;
+import 'package:flutter/material.dart';
 
+class UnifiedStarAnimation extends StatefulWidget {
   const UnifiedStarAnimation({
     super.key,
     this.color = Colors.pink,
@@ -14,13 +10,16 @@ class UnifiedStarAnimation extends StatefulWidget {
     this.totalDuration = const Duration(milliseconds: 4800),
     this.onAnimationComplete,
   });
+  final Color color;
+  final double size;
+  final Duration totalDuration;
+  final VoidCallback? onAnimationComplete;
 
   @override
   State<UnifiedStarAnimation> createState() => _UnifiedStarAnimationState();
 }
 
-class _UnifiedStarAnimationState extends State<UnifiedStarAnimation>
-    with SingleTickerProviderStateMixin {
+class _UnifiedStarAnimationState extends State<UnifiedStarAnimation> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
 
   // Phase 1 animations (circle to star)
@@ -96,44 +95,54 @@ class _UnifiedStarAnimationState extends State<UnifiedStarAnimation>
 
     // Phase 1 Animations (0% - 40% of total duration)
     _starScale = Tween<double>(
-      begin: 0.0,
-      end: 1.0,
-    ).animate(CurvedAnimation(
-      parent: _controller,
-      curve: const Interval(0.0, 0.4, curve: Curves.easeOut),
-    ));
+      begin: 0,
+      end: 1,
+    ).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: const Interval(0, 0.4, curve: Curves.easeOut),
+      ),
+    );
 
     _circleRadius = Tween<double>(
-      begin: 0.0,
+      begin: 0,
       end: widget.size * 0.20,
-    ).animate(CurvedAnimation(
-      parent: _controller,
-      curve: const Interval(0.0, 0.25, curve: Curves.easeOut),
-    ));
+    ).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: const Interval(0, 0.25, curve: Curves.easeOut),
+      ),
+    );
 
     _circleOpacity = Tween<double>(
-      begin: 1.0,
-      end: 0.0,
-    ).animate(CurvedAnimation(
-      parent: _controller,
-      curve: const Interval(0.25, 0.4, curve: Curves.easeOut),
-    ));
+      begin: 1,
+      end: 0,
+    ).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: const Interval(0.25, 0.4, curve: Curves.easeOut),
+      ),
+    );
 
     _initialRotation = Tween<double>(
-      begin: 0.0,
+      begin: 0,
       end: math.pi / 2,
-    ).animate(CurvedAnimation(
-      parent: _controller,
-      curve: const Interval(0.0, 0.4, curve: Curves.linear),
-    ));
+    ).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: const Interval(0, 0.4),
+      ),
+    );
 
     _initialPosition = Tween<double>(
-      begin: 0.0,
-      end: -60.0,
-    ).animate(CurvedAnimation(
-      parent: _controller,
-      curve: const Interval(0.0, 0.4, curve: Curves.easeOut),
-    ));
+      begin: 0,
+      end: -60,
+    ).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: const Interval(0, 0.4, curve: Curves.easeOut),
+      ),
+    );
 
     // Phase 2 Animations (40% - 100% of total duration)
     final fallStartY = -60.0 + MediaQuery.of(context).size.height * 0.5;
@@ -142,83 +151,91 @@ class _UnifiedStarAnimationState extends State<UnifiedStarAnimation>
     _laterRotation = Tween<double>(
       begin: math.pi / 2, // starts from where _initialRotation ended
       end: math.pi, // rotates another 90 degrees
-    ).animate(CurvedAnimation(
-      parent: _controller,
-      curve: const Interval(0.4, 0.8, curve: Curves.easeOut),
-    ));
+    ).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: const Interval(0.4, 0.8, curve: Curves.easeOut),
+      ),
+    );
 
     _fallPosition = TweenSequence<double>([
       TweenSequenceItem(
-        tween: Tween<double>(begin: fallStartY, end: fallEndY - 100)
-            .chain(CurveTween(curve: Curves.easeInQuart)),
+        tween: Tween<double>(begin: fallStartY, end: fallEndY - 100).chain(CurveTween(curve: Curves.easeInQuart)),
         weight: 70,
       ),
       TweenSequenceItem(
-        tween: Tween<double>(begin: fallEndY - 100, end: fallEndY - 50)
-            .chain(CurveTween(curve: Curves.easeOut)),
+        tween: Tween<double>(begin: fallEndY - 100, end: fallEndY - 50).chain(CurveTween(curve: Curves.easeOut)),
         weight: 30,
       ),
-    ]).animate(CurvedAnimation(
-      parent: _controller,
-      curve: const Interval(0.4, 1.0),
-    ));
+    ]).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: const Interval(0.4, 1),
+      ),
+    );
 
     _blurEffect = TweenSequence<double>([
       TweenSequenceItem(
-        tween: Tween<double>(begin: 0.0, end: 25.0)
-            .chain(CurveTween(curve: Curves.easeOut)),
+        tween: Tween<double>(begin: 0, end: 25).chain(CurveTween(curve: Curves.easeOut)),
         weight: 70,
       ),
       TweenSequenceItem(
-        tween: Tween<double>(begin: 25.0, end: 35.0)
-            .chain(CurveTween(curve: Curves.easeInOut)),
+        tween: Tween<double>(begin: 25, end: 35).chain(CurveTween(curve: Curves.easeInOut)),
         weight: 30,
       ),
-    ]).animate(CurvedAnimation(
-      parent: _controller,
-      curve: const Interval(0.5, 1.0),
-    ));
+    ]).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: const Interval(0.5, 1),
+      ),
+    );
 
     _glowIntensity = TweenSequence<double>([
       TweenSequenceItem(
-        tween: Tween<double>(begin: 0.5, end: 1.0),
+        tween: Tween<double>(begin: 0.5, end: 1),
         weight: 70,
       ),
       TweenSequenceItem(
-        tween: Tween<double>(begin: 1.0, end: 1.5),
+        tween: Tween<double>(begin: 1, end: 1.5),
         weight: 30,
       ),
-    ]).animate(CurvedAnimation(
-      parent: _controller,
-      curve: const Interval(0.5, 1.0),
-    ));
+    ]).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: const Interval(0.5, 1),
+      ),
+    );
 
     _stretchFactor = TweenSequence<double>([
       TweenSequenceItem(
-        tween: Tween<double>(begin: 1.0, end: 5.0),
+        tween: Tween<double>(begin: 1, end: 5),
         weight: 70,
       ),
       TweenSequenceItem(
-        tween: Tween<double>(begin: 5.0, end: 1.0),
+        tween: Tween<double>(begin: 5, end: 1),
         weight: 30,
       ),
-    ]).animate(CurvedAnimation(
-      parent: _controller,
-      curve: const Interval(0.5, 1.0),
-    ));
+    ]).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: const Interval(0.5, 1),
+      ),
+    );
 
     _explosionProgress = CurvedAnimation(
       parent: _controller,
-      curve: const Interval(0.8, 1.0, curve: Curves.easeOutCubic),
+      curve: const Interval(0.8, 1, curve: Curves.easeOutCubic),
     );
 
     _particleSpread = Tween<double>(
-      begin: 0.0,
+      begin: 0,
       end: 1.2,
-    ).animate(CurvedAnimation(
-      parent: _controller,
-      curve: const Interval(0.8, 1.0, curve: Curves.easeOutCubic),
-    ));
+    ).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: const Interval(0.8, 1, curve: Curves.easeOutCubic),
+      ),
+    );
   }
 
   @override
@@ -236,18 +253,15 @@ class _UnifiedStarAnimationState extends State<UnifiedStarAnimation>
       builder: (context, child) {
         final screenWidth = MediaQuery.of(context).size.width;
         final xPosition = screenWidth / 2 - widget.size / 2;
-        final yPosition = _isFirstPhase
-            ? MediaQuery.of(context).size.height * 0.5 + _initialPosition.value
-            : _fallPosition.value;
+        final yPosition =
+            _isFirstPhase ? MediaQuery.of(context).size.height * 0.5 + _initialPosition.value : _fallPosition.value;
 
         return Positioned(
           left: xPosition,
           top: yPosition,
           child: SizedBox(
-            width: widget.size *
-                (1 + (_isFirstPhase ? 0 : _explosionProgress.value * 3)),
-            height: widget.size *
-                (1 + (_isFirstPhase ? 0 : _explosionProgress.value * 3)),
+            width: widget.size * (1 + (_isFirstPhase ? 0 : _explosionProgress.value * 3)),
+            height: widget.size * (1 + (_isFirstPhase ? 0 : _explosionProgress.value * 3)),
             child: _controller.value < 0.4
                 ? Stack(
                     alignment: Alignment.center,
@@ -295,9 +309,8 @@ class _UnifiedStarAnimationState extends State<UnifiedStarAnimation>
 }
 
 class StarPainter extends CustomPainter {
-  final Color color;
-
   StarPainter({required this.color});
+  final Color color;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -308,18 +321,17 @@ class StarPainter extends CustomPainter {
     final center = Offset(size.width / 2, size.height / 2);
     final path = Path();
     final radius = size.width / 2 * 0.8; // Star size
-    final controlPointDistance =
-        size.width * 0.4 * 0.5; // Control point distance
+    final controlPointDistance = size.width * 0.4 * 0.5; // Control point distance
 
-    for (int i = 0; i < 4; i++) {
-      final angle = (i * math.pi / 2);
+    for (var i = 0; i < 4; i++) {
+      final angle = i * math.pi / 2;
       final pointX = center.dx + math.cos(angle) * radius;
       final pointY = center.dy + math.sin(angle) * radius;
 
       if (i == 0) {
         path.moveTo(pointX, pointY);
       } else {
-        final prevAngle = ((i - 1) * math.pi / 2);
+        final prevAngle = (i - 1) * math.pi / 2;
         final midAngle = prevAngle + math.pi / 4;
 
         final controlX = center.dx + math.cos(midAngle) * controlPointDistance;
@@ -330,10 +342,8 @@ class StarPainter extends CustomPainter {
     }
 
     // Close the shape with the final curve
-    final controlX =
-        center.dx + math.cos(7 * math.pi / 4) * controlPointDistance;
-    final controlY =
-        center.dy + math.sin(7 * math.pi / 4) * controlPointDistance;
+    final controlX = center.dx + math.cos(7 * math.pi / 4) * controlPointDistance;
+    final controlY = center.dy + math.sin(7 * math.pi / 4) * controlPointDistance;
     path.quadraticBezierTo(controlX, controlY, center.dx + radius, center.dy);
 
     canvas.drawPath(path, paint);
@@ -346,27 +356,17 @@ class StarPainter extends CustomPainter {
 }
 
 class Particle {
-  final double angle;
-  final double speed;
-  final double size;
-
   Particle({
     required this.angle,
     this.speed = 1.0,
     this.size = 1.0,
   });
+  final double angle;
+  final double speed;
+  final double size;
 }
 
 class EnhancedStarPainter extends CustomPainter {
-  final Color primaryColor;
-  final double blur;
-  final double stretchFactor;
-  final double explosionProgress;
-  final List<Particle> particles;
-  final double particleSpread;
-  final double glowIntensity;
-  final double rotation;
-
   EnhancedStarPainter({
     required this.primaryColor,
     required this.blur,
@@ -377,6 +377,14 @@ class EnhancedStarPainter extends CustomPainter {
     required this.glowIntensity,
     required this.rotation,
   });
+  final Color primaryColor;
+  final double blur;
+  final double stretchFactor;
+  final double explosionProgress;
+  final List<Particle> particles;
+  final double particleSpread;
+  final double glowIntensity;
+  final double rotation;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -388,22 +396,21 @@ class EnhancedStarPainter extends CustomPainter {
 
     // Enhanced base glow
     final glowPaint = Paint()
-      ..color =
-          primaryColor.withOpacity(glowIntensity * 0.7) // Increased opacity
-      ..maskFilter =
-          MaskFilter.blur(BlurStyle.normal, blur * 3); // Increased blur
+      ..color = primaryColor.withOpacity(glowIntensity * 0.7) // Increased opacity
+      ..maskFilter = MaskFilter.blur(BlurStyle.normal, blur * 3); // Increased blur
 
     if (explosionProgress > 0) {
       // Draw bottom screen glow
       final screenGlowRect = Rect.fromLTWH(
-          -size.width,
-          size.height * 0.5,
-          size.width * 3, // Wider to ensure full coverage
-          size.height);
+        -size.width,
+        size.height * 0.5,
+        size.width * 3, // Wider to ensure full coverage
+        size.height,
+      );
 
       final screenGlowGradient = RadialGradient(
         center: Alignment.topCenter,
-        radius: 1.0,
+        radius: 1,
         colors: [
           primaryColor.withOpacity(0.4 * explosionProgress),
           primaryColor.withOpacity(0.1 * explosionProgress),
@@ -412,23 +419,25 @@ class EnhancedStarPainter extends CustomPainter {
         stops: const [0.0, 0.5, 1.0],
       );
 
-      canvas.drawRect(screenGlowRect,
-          Paint()..shader = screenGlowGradient.createShader(screenGlowRect));
+      canvas.drawRect(
+        screenGlowRect,
+        Paint()..shader = screenGlowGradient.createShader(screenGlowRect),
+      );
 
       // Enhanced explosion effect
-      final radius =
-          size.width / 2 * (1 + explosionProgress * 2.5); // Increased radius
+      final radius = size.width / 2 * (1 + explosionProgress * 2.5); // Increased radius
 
       // Outer glow
       canvas.drawCircle(
-          center,
-          radius,
-          Paint()
-            ..color = primaryColor.withOpacity(0.5 * (1 - explosionProgress))
-            ..maskFilter = MaskFilter.blur(BlurStyle.normal, blur * 3));
+        center,
+        radius,
+        Paint()
+          ..color = primaryColor.withOpacity(0.5 * (1 - explosionProgress))
+          ..maskFilter = MaskFilter.blur(BlurStyle.normal, blur * 3),
+      );
 
       // Enhanced particle trails
-      for (var particle in particles) {
+      for (final particle in particles) {
         final spread = radius * particleSpread;
         final dx = math.cos(particle.angle) * spread;
         final dy = math.sin(particle.angle) * spread;
@@ -438,25 +447,26 @@ class EnhancedStarPainter extends CustomPainter {
           ..lineTo(center.dx + dx, center.dy + dy);
 
         canvas.drawPath(
-            path,
-            Paint()
-              ..color = primaryColor.withOpacity(0.9 * (1 - explosionProgress))
-              ..style = PaintingStyle.stroke
-              ..strokeWidth = 3 // Increased width
-              ..maskFilter = MaskFilter.blur(BlurStyle.normal, blur * 1.5));
+          path,
+          Paint()
+            ..color = primaryColor.withOpacity(0.9 * (1 - explosionProgress))
+            ..style = PaintingStyle.stroke
+            ..strokeWidth = 3 // Increased width
+            ..maskFilter = MaskFilter.blur(BlurStyle.normal, blur * 1.5),
+        );
       }
 
       // Enhanced center glow
       canvas.drawCircle(
-          center,
-          radius * 0.4, // Increased center glow size
-          glowPaint
-            ..color = primaryColor.withOpacity(1.0 * (1 - explosionProgress)));
+        center,
+        radius * 0.4, // Increased center glow size
+        glowPaint..color = primaryColor.withOpacity(1.0 * (1 - explosionProgress)),
+      );
     } else {
       // Enhanced star glow
       canvas.save();
       canvas.translate(center.dx, center.dy);
-      canvas.scale(1.0, stretchFactor);
+      canvas.scale(1, stretchFactor);
       canvas.translate(-center.dx, -center.dy);
 
       final starPath = _createStarPath(center, size.width / 2 * 0.8);
@@ -468,10 +478,11 @@ class EnhancedStarPainter extends CustomPainter {
       // Multiple layers of glow for increased brightness
       for (var i = 3; i > 0; i--) {
         canvas.drawPath(
-            starPath,
-            Paint()
-              ..color = primaryColor.withOpacity(glowIntensity * 0.3)
-              ..maskFilter = MaskFilter.blur(BlurStyle.normal, blur * i));
+          starPath,
+          Paint()
+            ..color = primaryColor.withOpacity(glowIntensity * 0.3)
+            ..maskFilter = MaskFilter.blur(BlurStyle.normal, blur * i),
+        );
       }
       canvas.drawPath(starPath, glowPaint);
       canvas.drawPath(starPath, starPaint);
@@ -483,18 +494,16 @@ class EnhancedStarPainter extends CustomPainter {
 
   Path _createStarPath(Offset center, double radius) {
     final path = Path();
-    for (int i = 0; i < 4; i++) {
-      final angle = (i * math.pi / 2);
+    for (var i = 0; i < 4; i++) {
+      final angle = i * math.pi / 2;
       final x = center.dx + math.cos(angle) * radius;
       final y = center.dy + math.sin(angle) * radius;
 
       if (i == 0) {
         path.moveTo(x, y);
       } else {
-        final controlX =
-            center.dx + math.cos(angle - math.pi / 4) * (radius * 0.5);
-        final controlY =
-            center.dy + math.sin(angle - math.pi / 4) * (radius * 0.5);
+        final controlX = center.dx + math.cos(angle - math.pi / 4) * (radius * 0.5);
+        final controlY = center.dy + math.sin(angle - math.pi / 4) * (radius * 0.5);
         path.quadraticBezierTo(controlX, controlY, x, y);
       }
     }
@@ -502,7 +511,11 @@ class EnhancedStarPainter extends CustomPainter {
     final lastControlX = center.dx + math.cos(-math.pi / 4) * (radius * 0.5);
     final lastControlY = center.dy + math.sin(-math.pi / 4) * (radius * 0.5);
     path.quadraticBezierTo(
-        lastControlX, lastControlY, center.dx + radius, center.dy);
+      lastControlX,
+      lastControlY,
+      center.dx + radius,
+      center.dy,
+    );
 
     return path;
   }
@@ -517,15 +530,11 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       backgroundColor: Colors.black,
       body: Stack(
-        children: const [
-          UnifiedStarAnimation(
-            size: 50,
-            color: Colors.pink,
-            totalDuration: Duration(milliseconds: 4800),
-          ),
+        children: [
+          UnifiedStarAnimation(),
         ],
       ),
     );

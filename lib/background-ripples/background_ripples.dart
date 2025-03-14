@@ -1,12 +1,6 @@
 import 'package:flutter/material.dart';
 
 class Ripple extends StatefulWidget {
-  final double mainCircleSize;
-  final double mainCircleOpacity;
-  final int numCircles;
-  final Color color;
-  final Duration duration;
-
   const Ripple({
     super.key,
     this.mainCircleSize = 210,
@@ -15,6 +9,11 @@ class Ripple extends StatefulWidget {
     this.color = Colors.black,
     this.duration = const Duration(seconds: 2),
   });
+  final double mainCircleSize;
+  final double mainCircleOpacity;
+  final int numCircles;
+  final Color color;
+  final Duration duration;
 
   @override
   State<Ripple> createState() => _RippleState();
@@ -53,7 +52,7 @@ class _RippleState extends State<Ripple> with TickerProviderStateMixin {
     // Create smooth animations
     _scaleAnimations = _controllers.map((controller) {
       return Tween<double>(
-        begin: 1.0,
+        begin: 1,
         end: 0.9,
       ).animate(
         CurvedAnimation(
@@ -66,7 +65,7 @@ class _RippleState extends State<Ripple> with TickerProviderStateMixin {
 
   @override
   void dispose() {
-    for (var controller in _controllers) {
+    for (final controller in _controllers) {
       controller.dispose();
     }
     super.dispose();
@@ -102,10 +101,7 @@ class _RippleState extends State<Ripple> with TickerProviderStateMixin {
                     color: widget.color.withOpacity(opacity),
                     border: Border.all(
                       color: widget.color.withOpacity(borderOpacity),
-                      width: 1,
-                      style: index == widget.numCircles - 1
-                          ? BorderStyle.solid
-                          : BorderStyle.solid,
+                      style: index == widget.numCircles - 1 ? BorderStyle.solid : BorderStyle.solid,
                     ),
                   ),
                 ),

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
+
 import 'package:fx_2_folder/butterfly-interactive/butterfly_interactive.dart';
 import 'package:fx_2_folder/butterfly-interactive/design/grid.dart';
 
 class ButterflyInteractiveDemo extends StatefulWidget {
-  const ButterflyInteractiveDemo({Key? key}) : super(key: key);
+  const ButterflyInteractiveDemo({super.key});
 
   @override
-  State<ButterflyInteractiveDemo> createState() =>
-      _ButterflyInteractiveDemoState();
+  State<ButterflyInteractiveDemo> createState() => _ButterflyInteractiveDemoState();
 }
 
 class _ButterflyInteractiveDemoState extends State<ButterflyInteractiveDemo> {
@@ -116,11 +116,10 @@ class _ButterflyInteractiveDemoState extends State<ButterflyInteractiveDemo> {
 
 // Separate class for color constants
 class _SliderColors {
-  static final activeTrack = Colors.white.withOpacity(0.8);
-  static final inactiveTrack = Colors.white.withOpacity(0.2);
-  static const thumb = Colors.white;
-  static final overlay = Colors.white.withOpacity(0.1);
-
   // Private constructor to prevent instantiation
   _SliderColors._();
+  static final Color activeTrack = Colors.white.withOpacity(0.8);
+  static final Color inactiveTrack = Colors.white.withOpacity(0.2);
+  static const Color thumb = Colors.white;
+  static final Color overlay = Colors.white.withOpacity(0.1);
 }

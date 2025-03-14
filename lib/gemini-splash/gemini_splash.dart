@@ -1,24 +1,23 @@
-import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
-class AnimatedSparkle extends StatefulWidget {
-  final double size;
-  final Color color;
-  final Duration duration;
+import 'package:flutter/material.dart';
 
+class AnimatedSparkle extends StatefulWidget {
   const AnimatedSparkle({
     super.key,
     this.size = 50.0,
     this.color = Colors.pink,
     this.duration = const Duration(milliseconds: 1300),
   });
+  final double size;
+  final Color color;
+  final Duration duration;
 
   @override
   State<AnimatedSparkle> createState() => _AnimatedSparkleState();
 }
 
-class _AnimatedSparkleState extends State<AnimatedSparkle>
-    with SingleTickerProviderStateMixin {
+class _AnimatedSparkleState extends State<AnimatedSparkle> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _starScale;
   late Animation<double> _circleRadius;
@@ -36,48 +35,58 @@ class _AnimatedSparkleState extends State<AnimatedSparkle>
 
     // Star scale animation
     _starScale = Tween<double>(
-      begin: 0.0,
-      end: 1.0,
-    ).animate(CurvedAnimation(
-      parent: _controller,
-      curve: const Interval(0.0, 1.0, curve: Curves.easeOut),
-    ));
+      begin: 0,
+      end: 1,
+    ).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: const Interval(0, 1, curve: Curves.easeOut),
+      ),
+    );
 
     // Circle radius animation
     _circleRadius = Tween<double>(
-      begin: 0.0,
+      begin: 0,
       end: widget.size * 0.20,
-    ).animate(CurvedAnimation(
-      parent: _controller,
-      curve: const Interval(0.0, 0.6, curve: Curves.easeOut),
-    ));
+    ).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: const Interval(0, 0.6, curve: Curves.easeOut),
+      ),
+    );
 
     // Circle opacity animation
     _circleOpacity = Tween<double>(
-      begin: 1.0,
-      end: 0.0,
-    ).animate(CurvedAnimation(
-      parent: _controller,
-      curve: const Interval(0.6, 0.9, curve: Curves.easeOut),
-    ));
+      begin: 1,
+      end: 0,
+    ).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: const Interval(0.6, 0.9, curve: Curves.easeOut),
+      ),
+    );
 
     // Rotation animation (90 degrees clockwise)
     _rotationAnimation = Tween<double>(
-      begin: 0.0,
+      begin: 0,
       end: math.pi / 2,
-    ).animate(CurvedAnimation(
-      parent: _controller,
-      curve: const Interval(0.0, 1.0, curve: Curves.easeOut),
-    ));
+    ).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: const Interval(0, 1, curve: Curves.easeOut),
+      ),
+    );
 
     // Position animation (moving upward)
     _positionAnimation = Tween<double>(
-      begin: 0.0,
-      end: -60.0,
-    ).animate(CurvedAnimation(
-      parent: _controller,
-      curve: const Interval(0.0, 0.9, curve: Curves.easeOut),
-    ));
+      begin: 0,
+      end: -60,
+    ).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: const Interval(0, 0.9, curve: Curves.easeOut),
+      ),
+    );
 
     _controller.forward();
   }
@@ -134,9 +143,8 @@ class _AnimatedSparkleState extends State<AnimatedSparkle>
 }
 
 class StarPainter extends CustomPainter {
-  final Color color;
-
   StarPainter({required this.color});
+  final Color color;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -147,18 +155,17 @@ class StarPainter extends CustomPainter {
     final center = Offset(size.width / 2, size.height / 2);
     final path = Path();
     final radius = size.width / 2 * 0.8; // Star size
-    final controlPointDistance =
-        size.width * 0.4 * 0.5; // Control point distance
+    final controlPointDistance = size.width * 0.4 * 0.5; // Control point distance
 
-    for (int i = 0; i < 4; i++) {
-      final angle = (i * math.pi / 2);
+    for (var i = 0; i < 4; i++) {
+      final angle = i * math.pi / 2;
       final pointX = center.dx + math.cos(angle) * radius;
       final pointY = center.dy + math.sin(angle) * radius;
 
       if (i == 0) {
         path.moveTo(pointX, pointY);
       } else {
-        final prevAngle = ((i - 1) * math.pi / 2);
+        final prevAngle = (i - 1) * math.pi / 2;
         final midAngle = prevAngle + math.pi / 4;
 
         final controlX = center.dx + math.cos(midAngle) * controlPointDistance;
@@ -169,10 +176,8 @@ class StarPainter extends CustomPainter {
     }
 
     // Close the shape with the final curve
-    final controlX =
-        center.dx + math.cos(7 * math.pi / 4) * controlPointDistance;
-    final controlY =
-        center.dy + math.sin(7 * math.pi / 4) * controlPointDistance;
+    final controlX = center.dx + math.cos(7 * math.pi / 4) * controlPointDistance;
+    final controlY = center.dy + math.sin(7 * math.pi / 4) * controlPointDistance;
     path.quadraticBezierTo(controlX, controlY, center.dx + radius, center.dy);
 
     canvas.drawPath(path, paint);
@@ -194,8 +199,6 @@ class SparkleDemo extends StatelessWidget {
       backgroundColor: Colors.black,
       body: Center(
         child: AnimatedSparkle(
-          size: 50,
-          color: Colors.pink,
           duration: Duration(milliseconds: 1500),
         ),
       ),

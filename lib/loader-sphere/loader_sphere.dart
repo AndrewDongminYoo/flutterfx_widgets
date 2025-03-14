@@ -1,42 +1,41 @@
-import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
-class AnimatedWaveRipple extends StatefulWidget {
-  final double size;
-  final Duration duration;
-  final double opacity;
+import 'package:flutter/material.dart';
 
+class AnimatedWaveRipple extends StatefulWidget {
   const AnimatedWaveRipple({
-    Key? key,
+    super.key,
     this.size = 300,
     this.duration = const Duration(seconds: 2),
     this.opacity = 0.5,
-  }) : super(key: key);
+  });
+  final double size;
+  final Duration duration;
+  final double opacity;
 
   @override
   State<AnimatedWaveRipple> createState() => _AnimatedWaveRippleState();
 }
 
-class _AnimatedWaveRippleState extends State<AnimatedWaveRipple>
-    with SingleTickerProviderStateMixin {
+class _AnimatedWaveRippleState extends State<AnimatedWaveRipple> with SingleTickerProviderStateMixin {
   late final AnimationController _controller;
 
   // Color generation method based on the CSS implementation
   Color getColorForPosition(int index, double animationValue) {
     // CSS uses hue animation from 350 to 40
-    double startHue = 350.0;
-    double endHue = 40.0;
+    const startHue = 350.0;
+    const endHue = 40.0;
 
     // Calculate position-based offset for each ellipse
     // This creates a gradient effect across the ellipses
     final basePosition = index / 9.0; // 0 to 1 based on position
 
     // Add animation value and handle wraparound
-    double offsetValue = (basePosition - animationValue) % 1.0;
+    var offsetValue = (basePosition - animationValue) % 1.0;
     if (offsetValue < 0) offsetValue += 1.0;
 
     // Calculate current hue based on animation value and position
-    double currentHue = lerpDouble(startHue, endHue, offsetValue);
+    final currentHue = lerpDouble(startHue, endHue, offsetValue);
 
     // Convert HSL to Color with saturation: 85%, lightness: 58%
     final hslColor = HSLColor.fromAHSL(
@@ -97,10 +96,10 @@ class _AnimatedWaveRippleState extends State<AnimatedWaveRipple>
     // Add entry/exit transitions at the top and bottom
     if (position < 0.1) {
       // Entry animation at the top (0.0 to 0.1)
-      return lerpDouble(0.0, getBaseSize(0.1), position / 0.1);
+      return lerpDouble(0, getBaseSize(0.1), position / 0.1);
     } else if (position > 0.9) {
       // Exit animation at the bottom (0.9 to 1.0)
-      return lerpDouble(getBaseSize(0.9), 0.0, (position - 0.9) / 0.1);
+      return lerpDouble(getBaseSize(0.9), 0, (position - 0.9) / 0.1);
     }
     return getBaseSize(position);
   }
@@ -108,7 +107,7 @@ class _AnimatedWaveRippleState extends State<AnimatedWaveRipple>
   // Base size calculation without entry/exit animations
   double getBaseSize(double position) {
     // Convert position to angle in radians (-π/2 to π/2)
-    final angle = (position) * math.pi - (math.pi / 2);
+    final angle = position * math.pi - (math.pi / 2);
 
     // Use cosine for spherical distribution
     final baseSize = math.cos(angle);
@@ -153,7 +152,7 @@ class _AnimatedWaveRippleState extends State<AnimatedWaveRipple>
   // Calculate vertical position with animation
   double getVerticalPosition(double basePosition, double animationValue) {
     // Adjust the position based on the animation value
-    double position = (basePosition - animationValue) % 1.0;
+    var position = (basePosition - animationValue) % 1.0;
     if (position < 0) position += 1.0;
 
     // Calculate the vertical spacing
@@ -170,7 +169,7 @@ class _AnimatedWaveRippleState extends State<AnimatedWaveRipple>
       // Fade out at the bottom
       return 1.0 - ((position - 0.9) / 0.1);
     }
-    return 1.0;
+    return 1;
   }
 
   @override
@@ -202,8 +201,7 @@ class _AnimatedWaveRippleState extends State<AnimatedWaveRipple>
               final height = width * getHeightMultiplier(animatedPosition);
 
               // Calculate vertical position with animation
-              final verticalPosition =
-                  getVerticalPosition(basePosition, _controller.value);
+              final verticalPosition = getVerticalPosition(basePosition, _controller.value);
 
               // Calculate opacity for fade in/out
               final opacity = getOpacity(animatedPosition);
@@ -229,9 +227,8 @@ class _AnimatedWaveRippleState extends State<AnimatedWaveRipple>
 }
 
 class EllipsePainter extends CustomPainter {
-  final Color color;
-
   EllipsePainter({required this.color});
+  final Color color;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -256,7 +253,7 @@ class EllipsePainter extends CustomPainter {
 
 // Example usage
 class RippleDemo extends StatelessWidget {
-  const RippleDemo({Key? key}) : super(key: key);
+  const RippleDemo({super.key});
 
   @override
   Widget build(BuildContext context) {

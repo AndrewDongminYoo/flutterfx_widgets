@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+
 import 'package:fx_2_folder/slider/slider.dart';
 
 class SliderDemo extends StatefulWidget {
-  const SliderDemo({Key? key}) : super(key: key);
+  const SliderDemo({super.key});
 
   @override
   State<SliderDemo> createState() => _DemoState();
@@ -21,7 +22,6 @@ class _DemoState extends State<SliderDemo> {
           children: [
             Positioned.fill(
               child: WorkLifeSlider(
-                value: 50.0,
                 onChanged: (newValue) {
                   print('New work-life balance: $newValue%');
                 },

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/physics.dart';
 
 class CirclesHomeWidget extends StatelessWidget {
-  const CirclesHomeWidget({Key? key}) : super(key: key);
+  const CirclesHomeWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,27 +15,24 @@ class CirclesHomeWidget extends StatelessWidget {
 }
 
 class PannableCircleGrid extends StatefulWidget {
-  const PannableCircleGrid({Key? key}) : super(key: key);
+  const PannableCircleGrid({super.key});
 
   @override
   _PannableCircleGridState createState() => _PannableCircleGridState();
 }
 
-class _PannableCircleGridState extends State<PannableCircleGrid>
-    with TickerProviderStateMixin {
+class _PannableCircleGridState extends State<PannableCircleGrid> with TickerProviderStateMixin {
   static const double _circleSize = 80;
   static const double _selectedCircleMultiplier = 2;
   static const double _spacing = 10;
   static const int _columns = 1000;
 
   Offset _offset = Offset.zero;
-  Map<int, AnimationController> _animationControllers = {};
+  final Map<int, AnimationController> _animationControllers = {};
   int? _selectedIndex;
 
   late AnimationController _flingAnimationController;
   Offset _flingVelocity = Offset.zero;
-
-  Offset? _tapPosition;
 
   final SpringDescription spring = const SpringDescription(
     mass: 2,
@@ -53,13 +50,15 @@ class _PannableCircleGridState extends State<PannableCircleGrid>
   void initState() {
     super.initState();
     _flingAnimationController = AnimationController(
-        vsync: this, duration: const Duration(milliseconds: 500));
+      vsync: this,
+      duration: const Duration(milliseconds: 500),
+    );
     _flingAnimationController.addListener(_handleFlingAnimation);
   }
 
   @override
   void dispose() {
-    for (var controller in _animationControllers.values) {
+    for (final controller in _animationControllers.values) {
       controller.dispose();
     }
     _flingAnimationController.dispose();
@@ -71,7 +70,7 @@ class _PannableCircleGridState extends State<PannableCircleGrid>
     return GestureDetector(
       onPanUpdate: _handlePan,
       onPanEnd: _handlePanEnd,
-      child: Container(
+      child: ColoredBox(
         color: Colors.black,
         child: Stack(
           children: [
@@ -79,8 +78,7 @@ class _PannableCircleGridState extends State<PannableCircleGrid>
               child: Stack(
                 children: [
                   AnimatedBuilder(
-                    animation:
-                        Listenable.merge(_animationControllers.values.toList()),
+                    animation: Listenable.merge(_animationControllers.values.toList()),
                     builder: (context, child) {
                       return CustomPaint(
                         painter: CircleGridPainter(
@@ -134,7 +132,7 @@ class _PannableCircleGridState extends State<PannableCircleGrid>
                       0.7,
                       0.8,
                       0.9,
-                      1.0
+                      1.0,
                     ],
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
@@ -162,8 +160,7 @@ class _PannableCircleGridState extends State<PannableCircleGrid>
     if (speed > 50) {
       _flingVelocity = velocity * 0.006; // Adjust this factor to tune the feel
 
-      const double maxSpeed =
-          200; // Adjust this value to set the maximum fling speed
+      const double maxSpeed = 200; // Adjust this value to set the maximum fling speed
       if (_flingVelocity.distance > maxSpeed) {
         _flingVelocity = (_flingVelocity / _flingVelocity.distance) * maxSpeed;
       }
@@ -177,8 +174,8 @@ class _PannableCircleGridState extends State<PannableCircleGrid>
   void _handleFlingAnimation() {
     if (!_flingAnimationController.isAnimating) return;
 
-    final double t = _flingAnimationController.value;
-    final double easeOutFactor = Curves.decelerate.transform(1 - t);
+    final t = _flingAnimationController.value;
+    final easeOutFactor = Curves.decelerate.transform(1 - t);
 
     setState(() {
       _offset += _flingVelocity * easeOutFactor;
@@ -191,17 +188,10 @@ class _PannableCircleGridState extends State<PannableCircleGrid>
   }
 
   void _handleTap(TapUpDetails details) {
-    setState(() {
-      _tapPosition = details.localPosition;
-    });
     final tapPosition = details.localPosition;
-    int col = ((tapPosition.dx - _offset.dx + _circleSize / 2) /
-            (_circleSize + _spacing))
-        .floor();
-    int row = ((tapPosition.dy - _offset.dy + _circleSize / 2) /
-            (_circleSize + _spacing))
-        .floor();
-    int tappedIndex = row * _columns + col;
+    final col = ((tapPosition.dx - _offset.dx + _circleSize / 2) / (_circleSize + _spacing)).floor();
+    final row = ((tapPosition.dy - _offset.dy + _circleSize / 2) / (_circleSize + _spacing)).floor();
+    final tappedIndex = row * _columns + col;
 
     setState(() {
       if (_selectedIndex == tappedIndex) {
@@ -218,15 +208,13 @@ class _PannableCircleGridState extends State<PannableCircleGrid>
       } else {
         // Case 2: Tapping a different circle
         if (_selectedIndex != null) {
-          int? __selectedIndex = _selectedIndex;
+          final selectedIndex = _selectedIndex;
           // Collapse the previously selected circle
           final simulation = SpringSimulation(spring, 1, 0, -1);
-          _animationControllers[_selectedIndex]
-              ?.animateWith(simulation)
-              .then((_) {
+          _animationControllers[selectedIndex]?.animateWith(simulation).then((_) {
             if (mounted) {
               setState(() {
-                _animationControllers.remove(__selectedIndex);
+                _animationControllers.remove(selectedIndex);
               });
             }
           });
@@ -247,20 +235,7 @@ class _PannableCircleGridState extends State<PannableCircleGrid>
 }
 
 class CircleGridPainter extends CustomPainter {
-  final Offset offset;
-  final double circleSize;
-  final double selectedCircleMultiplier;
-  final double spacing;
-  final int? selectedIndex;
-  final int columns;
-  final Map<int, AnimationController> animationControllers;
-
-  static const double maxDisplacementDistance =
-      6.0; // Maximum distance for displacement effect
-  static const double fullDisplacementDistance =
-      0.5; // Distance for full displacement
-  static const double falloffExponent =
-      1.0; // Controls the steepness of falloff
+  // Controls the steepness of falloff
 
   CircleGridPainter({
     required this.offset,
@@ -271,6 +246,17 @@ class CircleGridPainter extends CustomPainter {
     this.selectedIndex,
     required this.animationControllers,
   });
+  final Offset offset;
+  final double circleSize;
+  final double selectedCircleMultiplier;
+  final double spacing;
+  final int? selectedIndex;
+  final int columns;
+  final Map<int, AnimationController> animationControllers;
+
+  static const double maxDisplacementDistance = 6; // Maximum distance for displacement effect
+  static const double fullDisplacementDistance = 0.5; // Distance for full displacement
+  static const double falloffExponent = 1;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -290,7 +276,13 @@ class CircleGridPainter extends CustomPainter {
     final displacements = _calculateDisplacements(visibleArea);
 
     _drawCircles(
-        canvas, visibleArea, displacements, paint, selectedPaint, textPainter);
+      canvas,
+      visibleArea,
+      displacements,
+      paint,
+      selectedPaint,
+      textPainter,
+    );
   }
 
   _VisibleArea _calculateVisibleArea(Size size) {
@@ -303,26 +295,28 @@ class CircleGridPainter extends CustomPainter {
   }
 
   Map<Point<int>, Offset> _calculateDisplacements(_VisibleArea visibleArea) {
-    Map<Point<int>, Offset> displacements = {};
-    for (var entry in animationControllers.entries) {
-      int selectedIndex = entry.key;
-      double animationValue = entry.value.value;
+    final displacements = <Point<int>, Offset>{};
+    for (final entry in animationControllers.entries) {
+      final selectedIndex = entry.key;
+      final animationValue = entry.value.value;
 
-      int selectedCol = selectedIndex % columns;
-      int selectedRow = selectedIndex ~/ columns;
-      double expansionAmount =
-          circleSize * (selectedCircleMultiplier - 1) / 2 * animationValue;
-      double defaultSpacing = circleSize + spacing;
+      final selectedCol = selectedIndex % columns;
+      final selectedRow = selectedIndex ~/ columns;
+      final expansionAmount = circleSize * (selectedCircleMultiplier - 1) / 2 * animationValue;
+      final defaultSpacing = circleSize + spacing;
 
-      for (int row = visibleArea.startRow - 2;
-          row <= visibleArea.endRow + 2;
-          row++) {
-        for (int col = visibleArea.startCol - 2;
-            col <= visibleArea.endCol + 2;
-            col++) {
+      for (var row = visibleArea.startRow - 2; row <= visibleArea.endRow + 2; row++) {
+        for (var col = visibleArea.startCol - 2; col <= visibleArea.endCol + 2; col++) {
           if (row != selectedRow || col != selectedCol) {
-            _calculateDisplacement(col, row, selectedCol, selectedRow,
-                expansionAmount, defaultSpacing, displacements);
+            _calculateDisplacement(
+              col,
+              row,
+              selectedCol,
+              selectedRow,
+              expansionAmount,
+              defaultSpacing,
+              displacements,
+            );
           }
         }
       }
@@ -331,35 +325,34 @@ class CircleGridPainter extends CustomPainter {
   }
 
   void _calculateDisplacement(
-      int col,
-      int row,
-      int selectedCol,
-      int selectedRow,
-      double expansionAmount,
-      double defaultSpacing,
-      Map<Point<int>, Offset> displacements) {
-    int dx = col - selectedCol;
-    int dy = row - selectedRow;
-    double distance = sqrt(dx * dx + dy * dy);
-    double angle = atan2(dy.toDouble(), dx.toDouble());
+    int col,
+    int row,
+    int selectedCol,
+    int selectedRow,
+    double expansionAmount,
+    double defaultSpacing,
+    Map<Point<int>, Offset> displacements,
+  ) {
+    final dx = col - selectedCol;
+    final dy = row - selectedRow;
+    final distance = sqrt(dx * dx + dy * dy);
+    final angle = atan2(dy.toDouble(), dx.toDouble());
 
     // Determine if the circle is diagonal or orthogonal
-    bool isDiagonal = dx != 0 && dy != 0;
+    final isDiagonal = dx != 0 && dy != 0;
 
     // Calculate the base displacement
-    double displacement =
-        _getDisplacementFixed(distance, expansionAmount, defaultSpacing);
+    var displacement = _getDisplacementFixed(distance, expansionAmount, defaultSpacing);
 
     // diagonal adjustment
     if (isDiagonal) {
-      double diagonalCorrectionFactor =
-          0.1; // or use 1 / sqrt(2) ≈ 0.707 for exact diagonal adjustment
+      const diagonalCorrectionFactor = 0.1; // or use 1 / sqrt(2) ≈ 0.707 for exact diagonal adjustment
       displacement *= diagonalCorrectionFactor;
     }
 
     if (displacement > 0) {
-      Point<int> point = Point(col, row);
-      Offset newDisplacement = Offset(
+      final point = Point<int>(col, row);
+      final newDisplacement = Offset(
         cos(angle) * displacement,
         sin(angle) * displacement,
       );
@@ -373,9 +366,12 @@ class CircleGridPainter extends CustomPainter {
   }
 
   double _getDisplacementFixed(
-      double distance, double expansionAmount, double defaultSpacing) {
+    double distance,
+    double expansionAmount,
+    double defaultSpacing,
+  ) {
     if (distance <= maxDisplacementDistance) {
-      double falloffFactor = _calculateFalloffFactor(distance);
+      final falloffFactor = _calculateFalloffFactor(distance);
       return expansionAmount * falloffFactor;
     }
     return 0;
@@ -383,28 +379,28 @@ class CircleGridPainter extends CustomPainter {
 
   double _calculateFalloffFactor(double distance) {
     if (distance <= fullDisplacementDistance) {
-      return 1.0;
+      return 1;
     } else if (distance >= maxDisplacementDistance) {
-      return 0.0;
+      return 0;
     } else {
-      double t = (distance - fullDisplacementDistance) /
-          (maxDisplacementDistance - fullDisplacementDistance);
+      final t = (distance - fullDisplacementDistance) / (maxDisplacementDistance - fullDisplacementDistance);
       return pow(1 - t, falloffExponent).toDouble();
     }
   }
 
   void _drawCircles(
-      Canvas canvas,
-      _VisibleArea visibleArea,
-      Map<Point<int>, Offset> displacements,
-      Paint paint,
-      Paint selectedPaint,
-      TextPainter textPainter) {
-    for (int row = visibleArea.startRow; row <= visibleArea.endRow; row++) {
-      for (int col = visibleArea.startCol; col <= visibleArea.endCol; col++) {
-        int index = row * columns + col;
+    Canvas canvas,
+    _VisibleArea visibleArea,
+    Map<Point<int>, Offset> displacements,
+    Paint paint,
+    Paint selectedPaint,
+    TextPainter textPainter,
+  ) {
+    for (var row = visibleArea.startRow; row <= visibleArea.endRow; row++) {
+      for (var col = visibleArea.startCol; col <= visibleArea.endCol; col++) {
+        final index = row * columns + col;
 
-        Offset circleOffset = Offset(
+        var circleOffset = Offset(
           col * (circleSize + spacing) + offset.dx,
           row * (circleSize + spacing) + offset.dy,
         );
@@ -413,16 +409,14 @@ class CircleGridPainter extends CustomPainter {
           circleOffset += displacements[Point(col, row)]!;
         }
 
-        double currentCircleSize = circleSize;
-        Paint currentPaint = paint;
+        var currentCircleSize = circleSize;
+        var currentPaint = paint;
 
         if (animationControllers.containsKey(index)) {
-          double animationValue = animationControllers[index]?.value ?? 0.0;
-          currentCircleSize +=
-              (circleSize * (selectedCircleMultiplier - 1) * animationValue);
+          final animationValue = animationControllers[index]?.value ?? 0.0;
+          currentCircleSize += circleSize * (selectedCircleMultiplier - 1) * animationValue;
           currentPaint = Paint()
-            ..color =
-                Color.lerp(paint.color, selectedPaint.color, animationValue)!
+            ..color = Color.lerp(paint.color, selectedPaint.color, animationValue)!
             ..style = PaintingStyle.fill;
         }
 
@@ -439,52 +433,25 @@ class CircleGridPainter extends CustomPainter {
     return Color.lerp(a, b, t)!;
   }
 
-  void _drawText(Canvas canvas, TextPainter textPainter, Offset position,
-      String text, bool isSelected, double? animValue) {
-    const Color startColor = Colors.white;
-    const Color endColor = Colors.black;
-    Color lerpedColor = isSelected ? endColor : startColor;
-    if (animValue != null) {
-      lerpedColor = lerpColor(startColor, endColor, animValue);
-    }
-
-    textPainter.text = TextSpan(
-      text: text,
-      style: TextStyle(color: lerpedColor, fontSize: 12),
-    );
-    textPainter.layout();
-    textPainter.paint(
-      canvas,
-      position - Offset(textPainter.width / 2, textPainter.height / 2),
-    );
-  }
-
   //Optimize this for better performance
   @override
   bool shouldRepaint(covariant CircleGridPainter oldDelegate) => true;
 }
 
 class _VisibleArea {
-  final int startCol;
-  final int endCol;
-  final int startRow;
-  final int endRow;
-
   _VisibleArea({
     required this.startCol,
     required this.endCol,
     required this.startRow,
     required this.endRow,
   });
+  final int startCol;
+  final int endCol;
+  final int startRow;
+  final int endRow;
 }
 
 class DebugPainter extends CustomPainter {
-  final Offset? tapPosition;
-  final Offset gridOffset;
-  final double circleSize;
-  final double spacing;
-  final int columns;
-
   DebugPainter({
     this.tapPosition,
     required this.gridOffset,
@@ -492,6 +459,11 @@ class DebugPainter extends CustomPainter {
     required this.spacing,
     required this.columns,
   });
+  final Offset? tapPosition;
+  final Offset gridOffset;
+  final double circleSize;
+  final double spacing;
+  final int columns;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -517,14 +489,10 @@ class DebugPainter extends CustomPainter {
       );
 
       // Calculate and draw the grid cell
-      int col = ((tapPosition!.dx - gridOffset.dx + circleSize / 2) /
-              (circleSize + spacing))
-          .floor();
-      int row = ((tapPosition!.dy - gridOffset.dy + circleSize / 2) /
-              (circleSize + spacing))
-          .floor();
+      final col = ((tapPosition!.dx - gridOffset.dx + circleSize / 2) / (circleSize + spacing)).floor();
+      final row = ((tapPosition!.dy - gridOffset.dy + circleSize / 2) / (circleSize + spacing)).floor();
 
-      Rect cellRect = Rect.fromLTWH(
+      final cellRect = Rect.fromLTWH(
         gridOffset.dx + (col - 0.5) * (circleSize + spacing),
         gridOffset.dy + (row - 0.5) * (circleSize + spacing),
         circleSize + spacing,
@@ -535,22 +503,20 @@ class DebugPainter extends CustomPainter {
       // Draw text for coordinates and calculated index
       final textPainter = TextPainter(
         text: TextSpan(
-          text:
-              'Tap: (${tapPosition!.dx.toStringAsFixed(1)}, ${tapPosition!.dy.toStringAsFixed(1)})\n'
+          text: 'Tap: (${tapPosition!.dx.toStringAsFixed(1)}, ${tapPosition!.dy.toStringAsFixed(1)})\n'
               'Cell: ($col, $row)\n'
               'Index: ${row * columns + col}',
-          style: TextStyle(color: Colors.white, fontSize: 12),
+          style: const TextStyle(color: Colors.white, fontSize: 12),
         ),
         textDirection: TextDirection.ltr,
       );
       textPainter.layout();
-      textPainter.paint(canvas, Offset(10, 10));
+      textPainter.paint(canvas, const Offset(10, 10));
     }
   }
 
   @override
   bool shouldRepaint(covariant DebugPainter oldDelegate) {
-    return tapPosition != oldDelegate.tapPosition ||
-        gridOffset != oldDelegate.gridOffset;
+    return tapPosition != oldDelegate.tapPosition || gridOffset != oldDelegate.gridOffset;
   }
 }

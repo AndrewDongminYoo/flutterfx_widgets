@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'dart:ui' as ui;
 
 enum ScrollProgressStyle {
   default_, // Default style with solid color bar
@@ -11,12 +10,11 @@ enum ScrollProgressStyle {
 }
 
 class ScrollProgressBasic extends StatefulWidget {
-  final ScrollProgressStyle style;
-
   const ScrollProgressBasic({
-    Key? key,
+    super.key,
     this.style = ScrollProgressStyle.default_,
-  }) : super(key: key);
+  });
+  final ScrollProgressStyle style;
 
   @override
   State<ScrollProgressBasic> createState() => _ScrollProgressBasicState();
@@ -24,7 +22,7 @@ class ScrollProgressBasic extends StatefulWidget {
 
 class _ScrollProgressBasicState extends State<ScrollProgressBasic> {
   final ScrollController _scrollController = ScrollController();
-  double _scrollProgress = 0.0;
+  double _scrollProgress = 0;
 
   @override
   void initState() {
@@ -42,9 +40,7 @@ class _ScrollProgressBasicState extends State<ScrollProgressBasic> {
   void _updateScrollProgress() {
     if (_scrollController.position.maxScrollExtent > 0) {
       setState(() {
-        _scrollProgress = (_scrollController.offset /
-                _scrollController.position.maxScrollExtent)
-            .clamp(0.0, 1.0);
+        _scrollProgress = (_scrollController.offset / _scrollController.position.maxScrollExtent).clamp(0.0, 1.0);
       });
     }
   }
@@ -72,8 +68,7 @@ class _ScrollProgressBasicState extends State<ScrollProgressBasic> {
         Container(
           height: 6,
           decoration: BoxDecoration(
-            color:
-                isDarkMode ? const Color(0xFF111927) : const Color(0xFFE6F4FE),
+            color: isDarkMode ? const Color(0xFF111927) : const Color(0xFFE6F4FE),
             borderRadius: BorderRadius.circular(3),
           ),
         ),
@@ -91,7 +86,7 @@ class _ScrollProgressBasicState extends State<ScrollProgressBasic> {
                     Color(0xFFFF00AA),
                     Color(0xFF00FFF1),
                   ],
-                  stops: [
+                  stops: const [
                     0.0,
                     0.5,
                     1.0,
@@ -101,7 +96,7 @@ class _ScrollProgressBasicState extends State<ScrollProgressBasic> {
               ),
             ),
           ),
-        )
+        ),
       ],
     );
   }
@@ -133,8 +128,7 @@ class _ScrollProgressBasicState extends State<ScrollProgressBasic> {
         Container(
           height: 6,
           decoration: BoxDecoration(
-            color:
-                isDarkMode ? const Color(0xFF111927) : const Color(0xFFE6F4FE),
+            color: isDarkMode ? const Color(0xFF111927) : const Color(0xFFE6F4FE),
             borderRadius: BorderRadius.circular(3),
           ),
         ),
@@ -166,8 +160,7 @@ class _ScrollProgressBasicState extends State<ScrollProgressBasic> {
         Container(
           height: 6,
           decoration: BoxDecoration(
-            color:
-                isDarkMode ? const Color(0xFF111927) : const Color(0xFFE6F4FE),
+            color: isDarkMode ? const Color(0xFF111927) : const Color(0xFFE6F4FE),
             borderRadius: BorderRadius.circular(3),
           ),
         ),
@@ -201,8 +194,7 @@ class _ScrollProgressBasicState extends State<ScrollProgressBasic> {
         Container(
           height: 8,
           decoration: BoxDecoration(
-            color:
-                isDarkMode ? const Color(0xFF111927) : const Color(0xFFE6F4FE),
+            color: isDarkMode ? const Color(0xFF111927) : const Color(0xFFE6F4FE),
           ),
         ),
         SizedBox(
@@ -293,12 +285,8 @@ class _ScrollProgressBasicState extends State<ScrollProgressBasic> {
                 begin: Alignment.bottomCenter,
                 end: Alignment.topCenter,
                 colors: [
-                  isDarkMode
-                      ? Colors.black.withOpacity(0.9)
-                      : Colors.white.withOpacity(0.9),
-                  isDarkMode
-                      ? Colors.black.withOpacity(0)
-                      : Colors.white.withOpacity(0),
+                  if (isDarkMode) Colors.black.withOpacity(0.9) else Colors.white.withOpacity(0.9),
+                  if (isDarkMode) Colors.black.withOpacity(0) else Colors.white.withOpacity(0),
                 ],
               ),
             ),

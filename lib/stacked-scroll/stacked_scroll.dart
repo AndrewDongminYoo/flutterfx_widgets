@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class StackingCardsList extends StatefulWidget {
-  const StackingCardsList({Key? key}) : super(key: key);
+  const StackingCardsList({super.key});
 
   @override
   State<StackingCardsList> createState() => _StackingCardsListState();
@@ -9,7 +9,7 @@ class StackingCardsList extends StatefulWidget {
 
 class _StackingCardsListState extends State<StackingCardsList> {
   final ScrollController _scrollController = ScrollController();
-  final double _cardHeight = 200.0;
+  final double _cardHeight = 200;
   final int _totalCards = 10;
 
   @override
@@ -67,8 +67,7 @@ class _StackingCardsListState extends State<StackingCardsList> {
               child: Card(
                 elevation: 4,
                 margin: const EdgeInsets.all(8),
-                color: Colors.blue[
-                    (index % 9 + 1) * 100], // Different colors for visibility
+                color: Colors.blue[(index % 9 + 1) * 100], // Different colors for visibility
                 child: Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,

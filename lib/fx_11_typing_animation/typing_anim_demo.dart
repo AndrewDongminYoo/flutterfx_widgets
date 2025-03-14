@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+
 import 'package:fx_2_folder/fx_11_typing_animation/typing_anim.dart';
 
 class TypingAnimationDemo extends StatefulWidget {
-  const TypingAnimationDemo({Key? key}) : super(key: key);
+  const TypingAnimationDemo({super.key});
 
   @override
   _TypingAnimationDemoState createState() => _TypingAnimationDemoState();
@@ -25,7 +26,7 @@ class _TypingAnimationDemoState extends State<TypingAnimationDemo> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             TypingAnimation(
-              text: "Typing Animation",
+              text: 'Typing Animation',
               animate: _animate,
               style: const TextStyle(
                 fontSize: 32,

@@ -1,15 +1,8 @@
 import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 
 class FlickeringGrid extends StatefulWidget {
-  final double squareSize;
-  final double gridGap;
-  final double flickerChance;
-  final Color color;
-  final double? width;
-  final double? height;
-  final double maxOpacity;
-
   const FlickeringGrid({
     super.key,
     this.squareSize = 4,
@@ -20,13 +13,19 @@ class FlickeringGrid extends StatefulWidget {
     this.height,
     this.maxOpacity = 0.3,
   });
+  final double squareSize;
+  final double gridGap;
+  final double flickerChance;
+  final Color color;
+  final double? width;
+  final double? height;
+  final double maxOpacity;
 
   @override
   State<FlickeringGrid> createState() => _FlickeringGridState();
 }
 
-class _FlickeringGridState extends State<FlickeringGrid>
-    with SingleTickerProviderStateMixin {
+class _FlickeringGridState extends State<FlickeringGrid> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   List<double> squares = [];
   Size? _size;
@@ -105,17 +104,16 @@ class _FlickeringGridState extends State<FlickeringGrid>
 }
 
 class _GridPainter extends CustomPainter {
-  final List<double> squares;
-  final double squareSize;
-  final double gridGap;
-  final Color color;
-
   _GridPainter({
     required this.squares,
     required this.squareSize,
     required this.gridGap,
     required this.color,
   });
+  final List<double> squares;
+  final double squareSize;
+  final double gridGap;
+  final Color color;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -171,7 +169,7 @@ class FlickeringGridDemo extends StatelessWidget {
             //     flickerChance: 0.1,
             //   ),
             // ),
-            Positioned.fill(child: FlickeringGridShowcase())
+            Positioned.fill(child: FlickeringGridShowcase()),
           ],
         ),
       ),
@@ -198,8 +196,7 @@ class FlickeringGridThemes {
     color: Color(0xFF00FF41), // Bright matrix green
     maxOpacity: 0.7,
     flickerChance: 0.15,
-    description:
-        'Inspired by The Matrix, creates a digital rain effect with rapid, bright flickers',
+    description: 'Inspired by The Matrix, creates a digital rain effect with rapid, bright flickers',
   );
 
   // 2. Gentle Starfield
@@ -219,8 +216,7 @@ class FlickeringGridThemes {
     color: Color(0xFF00FFFF), // Cyan
     maxOpacity: 0.4,
     flickerChance: 0.08,
-    description:
-        'Creates a cyber network feel with medium-sized nodes and moderate activity',
+    description: 'Creates a cyber network feel with medium-sized nodes and moderate activity',
   );
 
   // 4. Neon Pulse
@@ -230,8 +226,7 @@ class FlickeringGridThemes {
     color: Color(0xFFFF00FF), // Magenta
     maxOpacity: 0.6,
     flickerChance: 0.12,
-    description:
-        'Bold, neon aesthetic with larger squares and pronounced flicking',
+    description: 'Bold, neon aesthetic with larger squares and pronounced flicking',
   );
 
   // 5. Subtle Fabric
@@ -251,8 +246,7 @@ class FlickeringGridThemes {
     color: Color(0xFF4A90E2), // Blue
     maxOpacity: 0.5,
     flickerChance: 0.2,
-    description:
-        'Simulates rapid data flow with closely packed squares and frequent updates',
+    description: 'Simulates rapid data flow with closely packed squares and frequent updates',
   );
 
   // 7. Retro Gaming
@@ -262,8 +256,7 @@ class FlickeringGridThemes {
     color: Color(0xFFFFFF00), // Yellow
     maxOpacity: 0.8,
     flickerChance: 0.1,
-    description:
-        'Large, bold squares with high contrast for a retro gaming feel',
+    description: 'Large, bold squares with high contrast for a retro gaming feel',
   );
 
   // 8. Ethereal Mist
@@ -273,8 +266,7 @@ class FlickeringGridThemes {
     color: Color(0xFFB4A7D6), // Soft purple
     maxOpacity: 0.3,
     flickerChance: 0.04,
-    description:
-        'Widely spaced, soft-colored squares create a misty, ethereal effect',
+    description: 'Widely spaced, soft-colored squares create a misty, ethereal effect',
   );
 
   // 9. Circuit Board
@@ -284,8 +276,7 @@ class FlickeringGridThemes {
     color: Color(0xFF50C878), // Emerald green
     maxOpacity: 0.5,
     flickerChance: 0.06,
-    description:
-        'Mimics a circuit board with moderate spacing and steady updates',
+    description: 'Mimics a circuit board with moderate spacing and steady updates',
   );
 
   // 10. Rain Drops
@@ -301,13 +292,6 @@ class FlickeringGridThemes {
 
 // Configuration class to hold theme values
 class FlickeringGridConfig {
-  final double squareSize;
-  final double gridGap;
-  final Color color;
-  final double maxOpacity;
-  final double flickerChance;
-  final String description;
-
   const FlickeringGridConfig({
     required this.squareSize,
     required this.gridGap,
@@ -316,17 +300,22 @@ class FlickeringGridConfig {
     required this.flickerChance,
     required this.description,
   });
+  final double squareSize;
+  final double gridGap;
+  final Color color;
+  final double maxOpacity;
+  final double flickerChance;
+  final String description;
 }
 
 class FullscreenFlickeringGrid extends StatelessWidget {
-  final FlickeringGridConfig config;
-  final String title;
-
   const FullscreenFlickeringGrid({
     super.key,
     required this.config,
     required this.title,
   });
+  final FlickeringGridConfig config;
+  final String title;
 
   @override
   Widget build(BuildContext context) {
@@ -389,14 +378,13 @@ class FullscreenFlickeringGrid extends StatelessWidget {
 
 // Update the ThemePreviewCard to handle taps
 class ThemePreviewCard extends StatelessWidget {
-  final String title;
-  final FlickeringGridConfig config;
-
   const ThemePreviewCard({
     super.key,
     required this.title,
     required this.config,
   });
+  final String title;
+  final FlickeringGridConfig config;
 
   @override
   Widget build(BuildContext context) {
@@ -406,7 +394,7 @@ class ThemePreviewCard extends StatelessWidget {
       child: InkWell(
         // Add this InkWell widget
         onTap: () {
-          Navigator.of(context).push(
+          Navigator.of(context).push<void>(
             MaterialPageRoute(
               builder: (context) => FullscreenFlickeringGrid(
                 config: config,

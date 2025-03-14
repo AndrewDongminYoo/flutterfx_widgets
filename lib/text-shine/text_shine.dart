@@ -1,5 +1,6 @@
-import 'package:flutter/material.dart';
 import 'dart:math' as math;
+
+import 'package:flutter/material.dart';
 
 class TextShiningDemo extends StatelessWidget {
   const TextShiningDemo({super.key});
@@ -7,7 +8,7 @@ class TextShiningDemo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
+      body: DecoratedBox(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topLeft,
@@ -23,7 +24,7 @@ class TextShiningDemo extends StatelessWidget {
         child: Stack(
           children: [
             const GridBackground(),
-            BackgroundShimmerEffect(), // New animated background
+            const BackgroundShimmerEffect(), // New animated background
             Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -32,13 +33,12 @@ class TextShiningDemo extends StatelessWidget {
                     elevation: 30, // Increased elevation
                     shadowColor: Colors.black26, // Darker shadow
                     shape: RoundedRectangleBorder(
-                      borderRadius:
-                          BorderRadius.circular(32), // Increased radius
+                      borderRadius: BorderRadius.circular(32), // Increased radius
                     ),
                     child: Container(
                       padding: const EdgeInsets.symmetric(
-                        horizontal: 56.0,
-                        vertical: 48.0,
+                        horizontal: 56,
+                        vertical: 48,
                       ),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(32),
@@ -61,14 +61,11 @@ class TextShiningDemo extends StatelessWidget {
                       ),
                       child: Column(
                         children: [
-                          AnimatedIconContainer(), // New animated container
+                          const AnimatedIconContainer(), // New animated container
                           const SizedBox(height: 32),
                           ShimmerText(
-                            text: "Welcome to Flutter",
-                            style: Theme.of(context)
-                                .textTheme
-                                .headlineMedium
-                                ?.copyWith(
+                            text: 'Welcome to Flutter',
+                            style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                                   color: const Color(0xFF1E293B),
                                   fontWeight: FontWeight.w800, // Bolder text
                                   letterSpacing: 0.5, // Added letter spacing
@@ -82,12 +79,9 @@ class TextShiningDemo extends StatelessWidget {
                           ),
                           const SizedBox(height: 16),
                           ShimmerText(
-                            text: "Create something magical ✨",
+                            text: 'Create something magical ✨',
                             shimmerWidth: 200, // Increased width
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleMedium
-                                ?.copyWith(
+                            style: Theme.of(context).textTheme.titleMedium?.copyWith(
                                   color: const Color(0xFF64748B),
                                   height: 1.5,
                                   letterSpacing: 0.3,
@@ -115,12 +109,13 @@ class TextShiningDemo extends StatelessWidget {
 }
 
 class AnimatedIconContainer extends StatefulWidget {
+  const AnimatedIconContainer({super.key});
+
   @override
   State<AnimatedIconContainer> createState() => _AnimatedIconContainerState();
 }
 
-class _AnimatedIconContainerState extends State<AnimatedIconContainer>
-    with SingleTickerProviderStateMixin {
+class _AnimatedIconContainerState extends State<AnimatedIconContainer> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _scaleAnimation;
   late Animation<double> _rotateAnimation;
@@ -133,11 +128,11 @@ class _AnimatedIconContainerState extends State<AnimatedIconContainer>
       vsync: this,
     )..repeat(reverse: true);
 
-    _scaleAnimation = Tween<double>(begin: 1.0, end: 1.1)
-        .animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
+    _scaleAnimation =
+        Tween<double>(begin: 1, end: 1.1).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
 
-    _rotateAnimation = Tween<double>(begin: -0.05, end: 0.05)
-        .animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
+    _rotateAnimation =
+        Tween<double>(begin: -0.05, end: 0.05).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
   }
 
   @override
@@ -189,13 +184,8 @@ class _AnimatedIconContainerState extends State<AnimatedIconContainer>
 }
 
 class ShimmerText extends StatefulWidget {
-  final String text;
-  final double? shimmerWidth;
-  final TextStyle? style;
-  final List<Color> shimmerColors;
-
   const ShimmerText({
-    Key? key,
+    super.key,
     required this.text,
     this.shimmerWidth = 100.0,
     this.style,
@@ -204,14 +194,17 @@ class ShimmerText extends StatefulWidget {
       Color(0xFF818CF8),
       Color(0xFF1E293B),
     ],
-  }) : super(key: key);
+  });
+  final String text;
+  final double? shimmerWidth;
+  final TextStyle? style;
+  final List<Color> shimmerColors;
 
   @override
   State<ShimmerText> createState() => _ShimmerTextState();
 }
 
-class _ShimmerTextState extends State<ShimmerText>
-    with SingleTickerProviderStateMixin {
+class _ShimmerTextState extends State<ShimmerText> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
 
   @override
@@ -230,10 +223,10 @@ class _ShimmerTextState extends State<ShimmerText>
     super.dispose();
   }
 
-  void _startAnimation() async {
+  Future<void> _startAnimation() async {
     while (mounted) {
       await _controller.forward();
-      await Future.delayed(const Duration(milliseconds: 200)); // Shorter pause
+      await Future<void>.delayed(const Duration(milliseconds: 200)); // Shorter pause
       _controller.reset();
     }
   }
@@ -246,8 +239,6 @@ class _ShimmerTextState extends State<ShimmerText>
         return ShaderMask(
           shaderCallback: (bounds) {
             return LinearGradient(
-              begin: Alignment.centerLeft,
-              end: Alignment.centerRight,
               colors: widget.shimmerColors,
               stops: const [0.0, 0.5, 1.0],
               transform: _SlidingGradientTransform(
@@ -269,13 +260,13 @@ class _ShimmerTextState extends State<ShimmerText>
 }
 
 class BackgroundShimmerEffect extends StatefulWidget {
+  const BackgroundShimmerEffect({super.key});
+
   @override
-  State<BackgroundShimmerEffect> createState() =>
-      _BackgroundShimmerEffectState();
+  State<BackgroundShimmerEffect> createState() => _BackgroundShimmerEffectState();
 }
 
-class _BackgroundShimmerEffectState extends State<BackgroundShimmerEffect>
-    with SingleTickerProviderStateMixin {
+class _BackgroundShimmerEffectState extends State<BackgroundShimmerEffect> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
 
   @override
@@ -310,9 +301,8 @@ class _BackgroundShimmerEffectState extends State<BackgroundShimmerEffect>
 }
 
 class ShimmerBackgroundPainter extends CustomPainter {
-  final double animation;
-
   ShimmerBackgroundPainter({required this.animation});
+  final double animation;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -333,8 +323,7 @@ class ShimmerBackgroundPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(ShimmerBackgroundPainter oldDelegate) =>
-      oldDelegate.animation != animation;
+  bool shouldRepaint(ShimmerBackgroundPainter oldDelegate) => oldDelegate.animation != animation;
 }
 
 // Original GridPainter and other supporting classes remain the same...
@@ -364,8 +353,8 @@ class _SlidingGradientTransform extends GradientTransform {
   Matrix4? transform(Rect bounds, {TextDirection? textDirection}) {
     return Matrix4.translationValues(
       bounds.width * (percent * 2.0 - 1.0),
-      0.0,
-      0.0,
+      0,
+      0,
     );
   }
 }

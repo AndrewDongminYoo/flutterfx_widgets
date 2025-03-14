@@ -1,29 +1,29 @@
 import 'dart:math' as math;
 import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 class MysticalWaves extends StatefulWidget {
+  const MysticalWaves({
+    super.key,
+    this.height = 200.0,
+    this.animationDuration = const Duration(seconds: 2),
+    this.waveDuration = const Duration(seconds: 3),
+    this.waveColors,
+  });
   final double height;
   final Duration animationDuration;
   final Duration waveDuration;
   final List<Color>? waveColors;
 
-  const MysticalWaves({
-    Key? key,
-    this.height = 200.0,
-    this.animationDuration = const Duration(seconds: 2),
-    this.waveDuration = const Duration(seconds: 3),
-    this.waveColors,
-  }) : super(key: key);
-
   @override
   State<MysticalWaves> createState() => MysticalWavesState();
 }
 
-class MysticalWavesState extends State<MysticalWaves>
-    with TickerProviderStateMixin {
+class MysticalWavesState extends State<MysticalWaves> with TickerProviderStateMixin {
   late AnimationController _waveController;
   late AnimationController _visibilityController;
+  // ignore: unused_field
   bool _isVisible = false;
 
   List<Color> get _waveColors =>
@@ -80,7 +80,7 @@ class MysticalWavesState extends State<MysticalWaves>
             child: Container(
               height: widget.height * _visibilityController.value,
               width: MediaQuery.of(context).size.width,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Colors.transparent,
               ),
               child: Stack(
@@ -109,14 +109,6 @@ class MysticalWavesState extends State<MysticalWaves>
 }
 
 class _WavePainter extends CustomPainter {
-  final Color waveColor;
-  final Animation<double> animation;
-  final double waveOffset;
-  final double amplitude;
-  final double frequency;
-  final double blur;
-  final double opacity;
-
   _WavePainter({
     required this.waveColor,
     required this.animation,
@@ -126,6 +118,13 @@ class _WavePainter extends CustomPainter {
     this.blur = 30.0,
     this.opacity = 0.5,
   });
+  final Color waveColor;
+  final Animation<double> animation;
+  final double waveOffset;
+  final double amplitude;
+  final double frequency;
+  final double blur;
+  final double opacity;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -142,9 +141,7 @@ class _WavePainter extends CustomPainter {
 
     for (double x = 0; x <= width; x++) {
       final relativeX = x / width;
-      final normalizedX = (relativeX * frequency * 2 * math.pi) +
-          (animation.value * 2 * math.pi) +
-          waveOffset;
+      final normalizedX = (relativeX * frequency * 2 * math.pi) + (animation.value * 2 * math.pi) + waveOffset;
 
       final y = height - (math.sin(normalizedX) * amplitude) - (height * 0.2);
       path.lineTo(x, y);
@@ -162,6 +159,8 @@ class _WavePainter extends CustomPainter {
 
 // Usage Example:
 class MyScreen extends StatefulWidget {
+  const MyScreen({super.key});
+
   @override
   _MyScreenState createState() => _MyScreenState();
 }
@@ -183,9 +182,6 @@ class _MyScreenState extends State<MyScreen> {
             right: 0,
             child: MysticalWaves(
               key: _wavesKey,
-              height: 200,
-              animationDuration: const Duration(seconds: 2),
-              waveDuration: const Duration(seconds: 3),
             ),
           ),
         ],
@@ -195,12 +191,12 @@ class _MyScreenState extends State<MyScreen> {
         children: [
           FloatingActionButton(
             onPressed: () => _wavesKey.currentState?.startAnimation(),
-            child: Icon(Icons.play_arrow),
+            child: const Icon(Icons.play_arrow),
           ),
-          SizedBox(width: 16),
+          const SizedBox(width: 16),
           FloatingActionButton(
             onPressed: () => _wavesKey.currentState?.stopAnimation(),
-            child: Icon(Icons.stop),
+            child: const Icon(Icons.stop),
           ),
         ],
       ),

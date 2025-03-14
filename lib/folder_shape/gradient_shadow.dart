@@ -1,54 +1,162 @@
 import 'package:flutter/material.dart';
 
 class FolderBackCoverGradientPainter extends CustomPainter {
-  final Animation<double> animation;
   FolderBackCoverGradientPainter(this.animation) : super(repaint: animation);
+  final Animation<double> animation;
   @override
   void paint(Canvas canvas, Size size) {
-    Path path = Path();
+    final path = Path();
 
     path.lineTo(0, size.height * 0.08);
     path.cubicTo(
-        0, size.height * 0.03, size.width * 0.02, 0, size.width * 0.06, 0);
+      0,
+      size.height * 0.03,
+      size.width * 0.02,
+      0,
+      size.width * 0.06,
+      0,
+    );
     path.cubicTo(
-        size.width * 0.06, 0, size.width * 0.17, 0, size.width * 0.17, 0);
+      size.width * 0.06,
+      0,
+      size.width * 0.17,
+      0,
+      size.width * 0.17,
+      0,
+    );
     path.cubicTo(
-        size.width * 0.17, 0, size.width * 0.29, 0, size.width * 0.29, 0);
-    path.cubicTo(size.width * 0.31, 0, size.width / 3, size.height * 0.01,
-        size.width * 0.34, size.height * 0.03);
-    path.cubicTo(size.width * 0.34, size.height * 0.03, size.width * 0.4,
-        size.height * 0.17, size.width * 0.4, size.height * 0.17);
-    path.cubicTo(size.width * 0.41, size.height * 0.19, size.width * 0.43,
-        size.height / 5, size.width * 0.45, size.height / 5);
-    path.cubicTo(size.width * 0.45, size.height / 5, size.width * 0.57,
-        size.height / 5, size.width * 0.57, size.height / 5);
-    path.cubicTo(size.width * 0.57, size.height / 5, size.width * 0.75,
-        size.height / 5, size.width * 0.75, size.height / 5);
-    path.cubicTo(size.width * 0.75, size.height / 5, size.width * 0.94,
-        size.height / 5, size.width * 0.94, size.height / 5);
-    path.cubicTo(size.width * 0.98, size.height / 5, size.width,
-        size.height * 0.24, size.width, size.height * 0.28);
-    path.cubicTo(size.width, size.height * 0.28, size.width, size.height * 0.92,
-        size.width, size.height * 0.92);
-    path.cubicTo(size.width, size.height * 0.97, size.width * 0.98, size.height,
-        size.width * 0.94, size.height);
-    path.cubicTo(size.width * 0.94, size.height, size.width * 0.06, size.height,
-        size.width * 0.06, size.height);
-    path.cubicTo(size.width * 0.02, size.height, 0, size.height * 0.97, 0,
-        size.height * 0.92);
+      size.width * 0.17,
+      0,
+      size.width * 0.29,
+      0,
+      size.width * 0.29,
+      0,
+    );
     path.cubicTo(
-        0, size.height * 0.92, 0, size.height * 0.6, 0, size.height * 0.6);
+      size.width * 0.31,
+      0,
+      size.width / 3,
+      size.height * 0.01,
+      size.width * 0.34,
+      size.height * 0.03,
+    );
     path.cubicTo(
-        0, size.height * 0.6, 0, size.height * 0.41, 0, size.height * 0.41);
+      size.width * 0.34,
+      size.height * 0.03,
+      size.width * 0.4,
+      size.height * 0.17,
+      size.width * 0.4,
+      size.height * 0.17,
+    );
+    path.cubicTo(
+      size.width * 0.41,
+      size.height * 0.19,
+      size.width * 0.43,
+      size.height / 5,
+      size.width * 0.45,
+      size.height / 5,
+    );
+    path.cubicTo(
+      size.width * 0.45,
+      size.height / 5,
+      size.width * 0.57,
+      size.height / 5,
+      size.width * 0.57,
+      size.height / 5,
+    );
+    path.cubicTo(
+      size.width * 0.57,
+      size.height / 5,
+      size.width * 0.75,
+      size.height / 5,
+      size.width * 0.75,
+      size.height / 5,
+    );
+    path.cubicTo(
+      size.width * 0.75,
+      size.height / 5,
+      size.width * 0.94,
+      size.height / 5,
+      size.width * 0.94,
+      size.height / 5,
+    );
+    path.cubicTo(
+      size.width * 0.98,
+      size.height / 5,
+      size.width,
+      size.height * 0.24,
+      size.width,
+      size.height * 0.28,
+    );
+    path.cubicTo(
+      size.width,
+      size.height * 0.28,
+      size.width,
+      size.height * 0.92,
+      size.width,
+      size.height * 0.92,
+    );
+    path.cubicTo(
+      size.width,
+      size.height * 0.97,
+      size.width * 0.98,
+      size.height,
+      size.width * 0.94,
+      size.height,
+    );
+    path.cubicTo(
+      size.width * 0.94,
+      size.height,
+      size.width * 0.06,
+      size.height,
+      size.width * 0.06,
+      size.height,
+    );
+    path.cubicTo(
+      size.width * 0.02,
+      size.height,
+      0,
+      size.height * 0.97,
+      0,
+      size.height * 0.92,
+    );
+    path.cubicTo(
+      0,
+      size.height * 0.92,
+      0,
+      size.height * 0.6,
+      0,
+      size.height * 0.6,
+    );
+    path.cubicTo(
+      0,
+      size.height * 0.6,
+      0,
+      size.height * 0.41,
+      0,
+      size.height * 0.41,
+    );
     path.cubicTo(0, size.height * 0.41, 0, size.height / 5, 0, size.height / 5);
     path.cubicTo(
-        0, size.height / 5, 0, size.height * 0.08, 0, size.height * 0.08);
+      0,
+      size.height / 5,
+      0,
+      size.height * 0.08,
+      0,
+      size.height * 0.08,
+    );
     path.cubicTo(
-        0, size.height * 0.08, 0, size.height * 0.08, 0, size.height * 0.08);
+      0,
+      size.height * 0.08,
+      0,
+      size.height * 0.08,
+      0,
+      size.height * 0.08,
+    );
 
     final gradient = LinearGradient(
       begin: Alignment.topLeft,
-      end: Alignment(-0.8, 1),
+      end: const Alignment(-0.8, 1),
       stops: [0.0, 0.4 + 0.4 * animation.value], //from .4 to .8
       colors: [
         Colors.transparent,
@@ -56,7 +164,7 @@ class FolderBackCoverGradientPainter extends CustomPainter {
       ],
     );
 
-    Paint paint = Paint()..shader = gradient.createShader(path.getBounds());
+    final paint = Paint()..shader = gradient.createShader(path.getBounds());
     canvas.drawPath(path, paint);
   }
 
@@ -69,17 +177,17 @@ class FolderBackCoverGradientPainter extends CustomPainter {
 class SVGPathPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
-    final Paint paint = Paint()
+    final paint = Paint()
       ..color = Colors.black
       ..style = PaintingStyle.fill
       ..strokeWidth = 1;
 
-    final Path path = Path();
+    final path = Path();
 
     // Normalize coordinates
-    final double scaleX = size.width / 1080;
-    final double scaleY = size.height / 1080;
-    final double scale = scaleX < scaleY ? scaleX : scaleY;
+    final scaleX = size.width / 1080;
+    final scaleY = size.height / 1080;
+    final scale = scaleX < scaleY ? scaleX : scaleY;
 
     // Transform and scale the canvas
     canvas.translate(size.width * .1, size.height * .1);
@@ -123,24 +231,22 @@ class LightningClipper extends CustomClipper<Path> {
     final path = Path();
 
     // Calculate scale factors to fit the path within the given size
-    const double originalWidth =
-        82.679; // Approximate width of the original path
-    const double originalHeight =
-        48.2831; // Approximate height of the original path
-    final double scaleX = size.width / originalWidth;
-    final double scaleY = size.height / originalHeight;
-    final double scale = (scaleX < scaleY ? scaleX : scaleY) * .6;
+    const originalWidth = 82.679; // Approximate width of the original path
+    const originalHeight = 48.2831; // Approximate height of the original path
+    final scaleX = size.width / originalWidth;
+    final scaleY = size.height / originalHeight;
+    final scale = (scaleX < scaleY ? scaleX : scaleY) * .6;
 
     // Calculate the scaled width and height of the path
-    final double scaledWidth = originalWidth * scale;
-    final double scaledHeight = originalHeight * scale;
+    final scaledWidth = originalWidth * scale;
+    final scaledHeight = originalHeight * scale;
 
     // Calculate the offset to center the path
-    final double offsetX = (size.width - scaledWidth) / 2;
-    final double offsetY = (size.height - scaledHeight) / 2;
+    final offsetX = (size.width - scaledWidth) / 2;
+    final offsetY = (size.height - scaledHeight) / 2;
 
     // Apply scaling transform
-    final Matrix4 matrix = Matrix4.identity()
+    final matrix = Matrix4.identity()
       ..scale(scale, scale)
       ..translate(offsetX / scale, offsetY / scale);
 
@@ -177,33 +283,36 @@ class LightningClipper extends CustomClipper<Path> {
 }
 
 class BigCirclePainter extends CustomPainter {
+  BigCirclePainter(this.animation, this.shadowAnimation)
+      : super(repaint: Listenable.merge([animation, shadowAnimation]));
   final Animation<double> animation;
   final Animation<double> shadowAnimation;
 
   final Color bgLightiningColor = const Color.fromARGB(255, 112, 112, 112);
   final Color bgLightiningColorShine = const Color.fromARGB(255, 188, 188, 188);
-  BigCirclePainter(this.animation, this.shadowAnimation)
-      : super(repaint: Listenable.merge([animation, shadowAnimation]));
 
   @override
   void paint(Canvas canvas, Size size) {
-    final Paint backgroundPaint = Paint()
+    final backgroundPaint = Paint()
       ..color = Colors.black
       ..style = PaintingStyle.fill;
 
     canvas.drawRect(Offset.zero & size, backgroundPaint);
 
-    final Paint paint = Paint()
+    final paint = Paint()
       ..color = Color.lerp(
-          bgLightiningColor, bgLightiningColorShine, animation.value)!
+        bgLightiningColor,
+        bgLightiningColorShine,
+        animation.value,
+      )!
       ..style = PaintingStyle.fill;
 
     // Calculate the center of the canvas
     final offsetX = size.width - (size.width / 4 * animation.value);
     final offsetY = size.height - (size.height / 4 * animation.value);
-    final Offset center = Offset(offsetX, offsetY);
+    final center = Offset(offsetX, offsetY);
 
-    final double radius = size.width * .65;
+    final radius = size.width * .65;
 
     // Draw the circle
     canvas.drawCircle(center, radius, paint);
@@ -231,8 +340,7 @@ class BigCirclePainter extends CustomPainter {
       ],
     );
 
-    Paint gradientPaint = Paint()
-      ..shader = gradient.createShader(path.getBounds());
+    final gradientPaint = Paint()..shader = gradient.createShader(path.getBounds());
 
     canvas.drawPath(path, gradientPaint);
     // Restore the canvas to its original state
@@ -246,22 +354,21 @@ class BigCirclePainter extends CustomPainter {
 }
 
 class ReflectionWidget extends StatelessWidget {
+  const ReflectionWidget(this.animation, this.shadowAnimation, {super.key});
   final Animation<double> animation;
   final Animation<double> shadowAnimation;
-
-  ReflectionWidget(this.animation, this.shadowAnimation);
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Container(
+        const SizedBox(
           width: double.infinity,
           height: double.infinity,
         ),
         CustomPaint(
           painter: BigCirclePainter(animation, shadowAnimation),
-          child: Container(
+          child: const SizedBox(
             width: double.infinity,
             height: double.infinity,
           ),

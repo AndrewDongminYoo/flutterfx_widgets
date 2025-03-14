@@ -3,16 +3,15 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 class CosmicBackground extends StatelessWidget {
+  const CosmicBackground({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return Stack(
+    return const Stack(
       children: [
         BackgroundGradient(),
-
         ParticleEffect(),
-
         OrbitalPaths(),
-
         MovingStars(),
       ],
     );
@@ -20,13 +19,14 @@ class CosmicBackground extends StatelessWidget {
 }
 
 class BackgroundGradient extends StatelessWidget {
+  const BackgroundGradient({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         gradient: RadialGradient(
-          center:
-              Alignment(0.0, 1.5), // Centered horizontally, below the bottom
+          center: Alignment(0, 1.5), // Centered horizontally, below the bottom
           radius: 1.2,
           colors: [
             Color(0xFF441260), // Deep purple
@@ -41,12 +41,13 @@ class BackgroundGradient extends StatelessWidget {
 }
 
 class ParticleEffect extends StatefulWidget {
+  const ParticleEffect({super.key});
+
   @override
-  _ParticleEffectState createState() => _ParticleEffectState();
+  State<ParticleEffect> createState() => _ParticleEffectState();
 }
 
-class _ParticleEffectState extends State<ParticleEffect>
-    with TickerProviderStateMixin {
+class _ParticleEffectState extends State<ParticleEffect> with TickerProviderStateMixin {
   late List<Particle> particles;
   late AnimationController _controller;
 
@@ -56,7 +57,7 @@ class _ParticleEffectState extends State<ParticleEffect>
     particles = List.generate(30, (index) => Particle.random());
     _controller = AnimationController(
       vsync: this,
-      duration: Duration(seconds: 10),
+      duration: const Duration(seconds: 10),
     )..repeat();
   }
 
@@ -81,13 +82,6 @@ class _ParticleEffectState extends State<ParticleEffect>
 }
 
 class Particle {
-  double x;
-  double y;
-  double brightness;
-  double angle; // For rotation
-  double phaseOffset; // For individual timing
-  double size;
-
   Particle.random()
       : x = Random().nextDouble(),
         // Fixed positions in bottom third of screen
@@ -96,41 +90,47 @@ class Particle {
         angle = Random().nextDouble() * 2 * pi,
         phaseOffset = Random().nextDouble() * 2 * pi,
         size = Random().nextDouble() * 2.0 + 0.5;
+
+  double x;
+  double y;
+  double brightness;
+  double angle; // For rotation
+  double phaseOffset; // For individual timing
+  double size;
 }
 
 class ParticlePainter extends CustomPainter {
+  ParticlePainter(this.particles, this.animation);
+
   final List<Particle> particles;
   final double animation;
-
-  ParticlePainter(this.particles, this.animation);
 
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint();
 
-    for (var particle in particles) {
+    for (final particle in particles) {
       // Calculate current rotation angle
-      double currentAngle =
-          particle.angle + (animation * 2 * pi) + particle.phaseOffset;
+      final currentAngle = particle.angle + (animation * 2 * pi) + particle.phaseOffset;
 
       // Use angle to create shimmer effect
-      double shimmerIntensity =
-          (cos(currentAngle) + 1) / 2; // Normalized to 0-1
+      final shimmerIntensity = (cos(currentAngle) + 1) / 2; // Normalized to 0-1
 
       // Calculate position with tiny circular movement
-      double radius = 2.0;
-      double x = particle.x + (cos(currentAngle) * radius / size.width);
-      double y = particle.y + (sin(currentAngle) * radius / size.height);
+      const radius = 2;
+      final x = particle.x + (cos(currentAngle) * radius / size.width);
+      final y = particle.y + (sin(currentAngle) * radius / size.height);
 
       // Shimmer brightness varies with rotation
-      double currentBrightness =
-          particle.brightness * (0.3 + (shimmerIntensity * 0.7));
+      final currentBrightness = particle.brightness * (0.3 + (shimmerIntensity * 0.7));
 
       // Draw main glow
       paint
         ..color = Colors.white.withOpacity(currentBrightness * 0.6)
         ..maskFilter = MaskFilter.blur(
-            BlurStyle.normal, particle.size * (0.5 + shimmerIntensity));
+          BlurStyle.normal,
+          particle.size * (0.5 + shimmerIntensity),
+        );
 
       canvas.drawCircle(
         Offset(x * size.width, y * size.height),
@@ -158,6 +158,8 @@ class ParticlePainter extends CustomPainter {
 }
 
 class OrbitalPaths extends StatelessWidget {
+  const OrbitalPaths({super.key});
+
   @override
   Widget build(BuildContext context) {
     return CustomPaint(
@@ -176,12 +178,12 @@ class OrbitalPathsPainter extends CustomPainter {
 
     // Adjust center point to be closer to bottom
     final center = Offset(size.width / 2, size.height + (size.height * 0.05));
-    final numberOfPaths = 6;
+    const numberOfPaths = 6;
 
     // Start with a much smaller initial radius
-    for (int i = 0; i < numberOfPaths; i++) {
+    for (var i = 0; i < numberOfPaths; i++) {
       // Exponential growth for radius to match the image pattern
-      double radius = size.width * (0.3 + (i * i * 0.08));
+      final radius = size.width * (0.3 + (i * i * 0.08));
       paint.color = Colors.purple[100]!.withOpacity(0.15 - (i * 0.02));
 
       canvas.drawArc(
@@ -199,12 +201,13 @@ class OrbitalPathsPainter extends CustomPainter {
 }
 
 class MovingStars extends StatefulWidget {
+  const MovingStars({super.key});
+
   @override
   _MovingStarsState createState() => _MovingStarsState();
 }
 
-class _MovingStarsState extends State<MovingStars>
-    with TickerProviderStateMixin {
+class _MovingStarsState extends State<MovingStars> with TickerProviderStateMixin {
   late List<StarController> starControllers;
 
   @override
@@ -216,8 +219,8 @@ class _MovingStarsState extends State<MovingStars>
         controller: AnimationController(
           vsync: this,
           duration: Duration(
-              seconds: 3 +
-                  Random().nextInt(4)), // Random duration between 3-7 seconds
+            seconds: 3 + Random().nextInt(4),
+          ), // Random duration between 3-7 seconds
         ),
         pathIndex: index, // Each star follows a different orbital path
         brightness: 0.3 + Random().nextDouble() * 0.7, // Random brightness
@@ -248,7 +251,7 @@ class _MovingStarsState extends State<MovingStars>
 
   @override
   void dispose() {
-    for (var controller in starControllers) {
+    for (final controller in starControllers) {
       controller.controller.dispose();
     }
     super.dispose();
@@ -256,33 +259,31 @@ class _MovingStarsState extends State<MovingStars>
 }
 
 class StarController {
-  final AnimationController controller;
-  final int pathIndex;
-  final double brightness;
-
   StarController({
     required this.controller,
     required this.pathIndex,
     required this.brightness,
   });
+  final AnimationController controller;
+  final int pathIndex;
+  final double brightness;
 }
 
 class StarTrailPainter extends CustomPainter {
-  final double animation;
-  final int pathIndex;
-  final double brightness;
-
   StarTrailPainter({
     required this.animation,
     required this.pathIndex,
     required this.brightness,
   });
+  final double animation;
+  final int pathIndex;
+  final double brightness;
 
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
       ..color = Colors.white.withOpacity(brightness)
-      ..maskFilter = MaskFilter.blur(BlurStyle.normal, 1);
+      ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 1);
 
     // Calculate the path radius based on the star's assigned path
     final center = Offset(size.width / 2, size.height + (size.height * 0.05));
@@ -298,7 +299,7 @@ class StarTrailPainter extends CustomPainter {
     canvas.drawCircle(Offset(x, y), 1.5, paint);
 
     // Draw the trail
-    for (int i = 1; i <= 5; i++) {
+    for (var i = 1; i <= 5; i++) {
       final trailAngle = angle - (i * 0.1);
       final trailX = center.dx + radius * cos(trailAngle);
       final trailY = center.dy + radius * sin(trailAngle);
@@ -313,9 +314,11 @@ class StarTrailPainter extends CustomPainter {
 }
 
 class BgOrbittalStarDemo extends StatelessWidget {
+  const BgOrbittalStarDemo({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: CosmicBackground(),
     );
   }

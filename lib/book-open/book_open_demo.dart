@@ -1,12 +1,13 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+
 import 'package:fx_2_folder/book-open/book_open.dart';
 import 'package:fx_2_folder/book-open/design/book_cover.dart';
 import 'package:fx_2_folder/book-open/grid.dart';
 
 class BookOpenDemo extends StatefulWidget {
-  const BookOpenDemo({Key? key}) : super(key: key);
+  const BookOpenDemo({super.key});
 
   @override
   State<BookOpenDemo> createState() => _BookOpenState();
@@ -14,9 +15,9 @@ class BookOpenDemo extends StatefulWidget {
 
 class _BookOpenState extends State<BookOpenDemo> {
   // Initialize transform values
-  double _rotateX = 0.0;
-  double _rotateY = 0.0;
-  double _rotateZ = 0.0;
+  double _rotateX = 0;
+  double _rotateY = 0;
+  double _rotateZ = 0;
 
   Widget _buildSlider({
     required String axis,
@@ -106,14 +107,11 @@ class _BookOpenState extends State<BookOpenDemo> {
                     coverChild: MinimalistBookCover(
                       title: 'The Subtle Art\nof Not Giving\na F*ck',
                       author: 'Mark Manson',
-                      backgroundColor: Color(0xFFFF6B6B),
-                      textColor: Colors.white,
                     ),
                     pageChild: Text('Book content ..'),
                     width: 150,
                     height: 200,
                     maxOpenAngle: 89,
-                    numberOfPages: 25,
                   ),
                 ),
                 // place one at the bottom of stack
@@ -139,20 +137,17 @@ class _BookOpenState extends State<BookOpenDemo> {
                         _buildSlider(
                           axis: 'X',
                           value: _rotateX,
-                          onChanged: (value) =>
-                              setState(() => _rotateX = value),
+                          onChanged: (value) => setState(() => _rotateX = value),
                         ),
                         _buildSlider(
                           axis: 'Y',
                           value: _rotateY,
-                          onChanged: (value) =>
-                              setState(() => _rotateY = value),
+                          onChanged: (value) => setState(() => _rotateY = value),
                         ),
                         _buildSlider(
                           axis: 'Z',
                           value: _rotateZ,
-                          onChanged: (value) =>
-                              setState(() => _rotateZ = value),
+                          onChanged: (value) => setState(() => _rotateZ = value),
                         ),
                       ],
                     ),

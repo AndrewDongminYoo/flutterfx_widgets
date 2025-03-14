@@ -1,10 +1,12 @@
 // particles_demo.dart
+
 import 'package:flutter/material.dart';
+
 import 'package:fx_2_folder/button-shimmer/button_shimmer.dart';
 import 'package:fx_2_folder/stacked-expand-cards/stacked_expand_card.dart';
 
 class ButtonShimmerDemo extends StatefulWidget {
-  const ButtonShimmerDemo({Key? key}) : super(key: key);
+  const ButtonShimmerDemo({super.key});
 
   @override
   State<ButtonShimmerDemo> createState() => _ParticlesDemoState();
@@ -32,18 +34,13 @@ class _ParticlesDemoState extends State<ButtonShimmerDemo> {
                 // Handle tap
                 print('onpressed');
               },
-              shimmerColorFrom: Color.fromARGB(255, 255, 255, 255), // Orange
-              shimmerColorTo: Color.fromARGB(255, 255, 255, 255), // Purple
-              background: Colors.black,
-              borderRadius: 100,
-              shimmerDuration: Duration(seconds: 3),
-              borderWidth: 1.5,
-              padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-              child: Text(
+              shimmerColorFrom: const Color.fromARGB(255, 255, 255, 255), // Orange
+              shimmerColorTo: const Color.fromARGB(255, 255, 255, 255), // Purple
+              child: const Text(
                 'Click Me',
                 style: TextStyle(color: Colors.white, fontSize: 24),
               ),
-            )
+            ),
           ],
         ),
       ),

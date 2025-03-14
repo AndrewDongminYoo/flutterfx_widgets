@@ -1,4 +1,5 @@
 import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 
 /// A widget that displays circles orbiting around a center point.
@@ -58,7 +59,6 @@ class OrbitingCircles extends StatelessWidget {
             shape: BoxShape.circle,
             border: Border.all(
               color: _getPathColor(isDarkMode),
-              width: 1,
             ),
           ),
         ),
@@ -88,9 +88,7 @@ class OrbitingCircles extends StatelessWidget {
 
   // Helper method to get the color for paths
   Color _getPathColor(bool isDarkMode) {
-    return isDarkMode
-        ? Colors.white.withOpacity(0.1)
-        : Colors.black.withOpacity(0.1);
+    return isDarkMode ? Colors.white.withOpacity(0.1) : Colors.black.withOpacity(0.1);
   }
 }
 
@@ -117,8 +115,7 @@ class SingleOrbitingCircle extends StatefulWidget {
   State<SingleOrbitingCircle> createState() => _SingleOrbitingCircleState();
 }
 
-class _SingleOrbitingCircleState extends State<SingleOrbitingCircle>
-    with SingleTickerProviderStateMixin {
+class _SingleOrbitingCircleState extends State<SingleOrbitingCircle> with SingleTickerProviderStateMixin {
   // Animation controller for circular movement
   late AnimationController _controller;
 
@@ -171,9 +168,7 @@ class _SingleOrbitingCircleState extends State<SingleOrbitingCircle>
 
   // Helper method to build the circle
   Widget _buildCircle() {
-    final circleColor = widget.isDarkMode
-        ? Colors.white.withOpacity(0.1)
-        : Colors.black.withOpacity(0.1);
+    final circleColor = widget.isDarkMode ? Colors.white.withOpacity(0.1) : Colors.black.withOpacity(0.1);
 
     return Container(
       width: 40,

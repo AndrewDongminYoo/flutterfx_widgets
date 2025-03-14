@@ -1,18 +1,18 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+
 import 'package:fx_2_folder/loader-avatars/loader_avatars.dart';
 
 class RippleAnimationStrategy extends AvatarAnimationStrategy {
-  final Duration animationDuration;
-  final Duration staggerDelay;
-  final double maxDisplacement;
-
   RippleAnimationStrategy({
     this.animationDuration = const Duration(milliseconds: 1200),
     this.staggerDelay = const Duration(milliseconds: 120),
     this.maxDisplacement = 12.0,
   });
+  final Duration animationDuration;
+  final Duration staggerDelay;
+  final double maxDisplacement;
 
   @override
   Duration getAnimationDuration(int index) => animationDuration;

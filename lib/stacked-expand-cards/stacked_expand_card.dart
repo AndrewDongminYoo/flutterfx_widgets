@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 
-import 'widget_theme.dart';
+import 'package:fx_2_folder/stacked-expand-cards/widget_theme.dart';
 
 class StackedExpandedCardDemo extends StatefulWidget {
   const StackedExpandedCardDemo({super.key});
 
   @override
-  State<StackedExpandedCardDemo> createState() =>
-      _StackedExpandedCardDemoState();
+  State<StackedExpandedCardDemo> createState() => _StackedExpandedCardDemoState();
 }
 
 class _StackedExpandedCardDemoState extends State<StackedExpandedCardDemo> {
@@ -19,13 +18,13 @@ class _StackedExpandedCardDemoState extends State<StackedExpandedCardDemo> {
   bool isTransitioning = false;
   bool isCollapsing = false;
 
-  static const entryPosition = CardPosition(x: 0, y: 70, z: -75);
-  static const exitPosition = CardPosition(x: 0, y: 0, z: 225);
+  static const entryPosition = CardPosition(y: 70, z: -75);
+  static const exitPosition = CardPosition(z: 225);
 
   final List<CardPosition> positions = [
-    const CardPosition(x: 0.0, y: 0.0, z: 0.0),
-    const CardPosition(x: 0.0, y: -20.0, z: 90.0),
-    const CardPosition(x: 0.0, y: -40.0, z: 180.0),
+    const CardPosition(),
+    const CardPosition(y: -20, z: 90),
+    const CardPosition(y: -40, z: 180),
   ];
 
   void toggleExpanded() {
@@ -33,7 +32,7 @@ class _StackedExpandedCardDemoState extends State<StackedExpandedCardDemo> {
     setState(() {
       isTransitioning = true;
       isExpanded = !isExpanded;
-      isCollapsing = isExpanded == false;
+      isCollapsing = !isExpanded;
     });
 
     Future.delayed(const Duration(milliseconds: 300), () {
@@ -67,16 +66,13 @@ class _StackedExpandedCardDemoState extends State<StackedExpandedCardDemo> {
           final newCard = CardModel(
             content: 'Card $nextCardNumber',
             id: nextCardNumber,
-            hasCompletedEntryAnimation: false,
           );
           cards.insert(0, newCard);
           nextCardNumber++;
 
           if (cards.length > positions.length) {
             Future.delayed(const Duration(milliseconds: 300), () {
-              setState(() {
-                cards.removeLast();
-              });
+              setState(cards.removeLast);
             });
           }
         });
@@ -86,16 +82,13 @@ class _StackedExpandedCardDemoState extends State<StackedExpandedCardDemo> {
         final newCard = CardModel(
           content: 'Card $nextCardNumber',
           id: nextCardNumber,
-          hasCompletedEntryAnimation: false,
         );
         cards.insert(0, newCard);
         nextCardNumber++;
 
         if (cards.length > positions.length) {
           Future.delayed(const Duration(milliseconds: 300), () {
-            setState(() {
-              cards.removeLast();
-            });
+            setState(cards.removeLast);
           });
         }
       });
@@ -109,7 +102,7 @@ class _StackedExpandedCardDemoState extends State<StackedExpandedCardDemo> {
       theme: ThemeData(
         scaffoldBackgroundColor: Colors.transparent,
       ),
-      home: Container(
+      home: DecoratedBox(
         decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topLeft,
@@ -147,14 +140,10 @@ class _StackedExpandedCardDemoState extends State<StackedExpandedCardDemo> {
 
                               if (isExpanded) {
                                 position = CardPosition(
-                                  x: 0,
-                                  y: -index *
-                                      (AppTheme.cardHeight +
-                                          AppTheme.cardMargin * 2),
-                                  z: 0,
+                                  y: -index * (AppTheme.cardHeight + AppTheme.cardMargin * 2),
                                 );
                               } else {
-                                bool isEntering = !isTransitioning &&
+                                final isEntering = !isTransitioning &&
                                     index == 0 &&
                                     !card.hasCompletedEntryAnimation &&
                                     card.id == nextCardNumber - 1;
@@ -172,17 +161,13 @@ class _StackedExpandedCardDemoState extends State<StackedExpandedCardDemo> {
                                 key: ValueKey(card.id),
                                 card: card,
                                 position: position,
-                                duration: const Duration(milliseconds: 300),
                                 curve: Curves.easeInOut,
-                                isEntering: !card.hasCompletedEntryAnimation &&
-                                    !isTransitioning,
+                                isEntering: !card.hasCompletedEntryAnimation && !isTransitioning,
                                 onEntryAnimationComplete: () {
                                   setState(() {
-                                    final cardIndex = cards
-                                        .indexWhere((c) => c.id == card.id);
+                                    final cardIndex = cards.indexWhere((c) => c.id == card.id);
                                     if (cardIndex != -1) {
-                                      cards[cardIndex]
-                                          .hasCompletedEntryAnimation = true;
+                                      cards[cardIndex].hasCompletedEntryAnimation = true;
                                     }
                                   });
                                 },
@@ -267,9 +252,8 @@ class _StackedExpandedCardDemoState extends State<StackedExpandedCardDemo> {
 }
 
 class GridPatternPainter extends CustomPainter {
-  final bool isDarkMode;
-
   GridPatternPainter({required this.isDarkMode});
+  final bool isDarkMode;
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
@@ -300,14 +284,13 @@ class GridPatternPainter extends CustomPainter {
 }
 
 class SimpleCard extends StatelessWidget {
-  final String title;
-  final bool isDarkMode;
-
   const SimpleCard({
-    Key? key,
+    super.key,
     this.title = 'Simple Card Title',
     required this.isDarkMode,
-  }) : super(key: key);
+  });
+  final String title;
+  final bool isDarkMode;
 
   @override
   Widget build(BuildContext context) {
@@ -343,52 +326,36 @@ class SimpleCard extends StatelessWidget {
 }
 
 class CardModel {
-  final String content;
-  final int id;
-  bool hasCompletedEntryAnimation;
-
   CardModel({
     required this.content,
     required this.id,
     this.hasCompletedEntryAnimation = false,
   });
+  final String content;
+  final int id;
+  bool hasCompletedEntryAnimation;
 }
 
 class CardPosition {
-  final double x;
-  final double y;
-  final double z;
-
   const CardPosition({
     this.x = 0.0,
     this.y = 0.0,
     this.z = 0.0,
   });
+  final double x;
+  final double y;
+  final double z;
 
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is CardPosition &&
-          runtimeType == other.runtimeType &&
-          x == other.x &&
-          y == other.y &&
-          z == other.z;
+      other is CardPosition && runtimeType == other.runtimeType && x == other.x && y == other.y && z == other.z;
 
   @override
   int get hashCode => Object.hash(x, y, z);
 }
 
 class AnimatedCardWidget extends StatefulWidget {
-  final CardModel card;
-  final CardPosition position;
-  final Duration duration;
-  final Curve curve;
-  final VoidCallback? onAnimationComplete;
-  final bool exitAnimation;
-  final bool isEntering;
-  final bool isDarkMode;
-  final VoidCallback? onEntryAnimationComplete;
-
   const AnimatedCardWidget({
     required this.card,
     required this.position,
@@ -399,15 +366,23 @@ class AnimatedCardWidget extends StatefulWidget {
     this.isEntering = false,
     required this.isDarkMode,
     this.onEntryAnimationComplete,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
+  final CardModel card;
+  final CardPosition position;
+  final Duration duration;
+  final Curve curve;
+  final VoidCallback? onAnimationComplete;
+  final bool exitAnimation;
+  final bool isEntering;
+  final bool isDarkMode;
+  final VoidCallback? onEntryAnimationComplete;
 
   @override
   State<AnimatedCardWidget> createState() => _AnimatedCardWidgetState();
 }
 
-class _AnimatedCardWidgetState extends State<AnimatedCardWidget>
-    with SingleTickerProviderStateMixin {
+class _AnimatedCardWidgetState extends State<AnimatedCardWidget> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _xAnimation;
   late Animation<double> _yAnimation;
@@ -432,43 +407,48 @@ class _AnimatedCardWidgetState extends State<AnimatedCardWidget>
       _controller.forward();
     }
 
-    final begin =
-        widget.isEntering ? widget.position : (_oldPosition ?? widget.position);
-    final end = widget.isEntering
-        ? const CardPosition(x: 0.0, y: 0.0, z: 0.0)
-        : widget.position;
+    final begin = widget.isEntering ? widget.position : (_oldPosition ?? widget.position);
+    final end = widget.isEntering ? const CardPosition() : widget.position;
 
     _xAnimation = Tween<double>(
       begin: begin.x,
       end: end.x,
-    ).animate(CurvedAnimation(
-      parent: _controller,
-      curve: widget.curve,
-    ));
+    ).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: widget.curve,
+      ),
+    );
 
     _yAnimation = Tween<double>(
       begin: begin.y,
       end: end.y,
-    ).animate(CurvedAnimation(
-      parent: _controller,
-      curve: widget.curve,
-    ));
+    ).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: widget.curve,
+      ),
+    );
 
     _zAnimation = Tween<double>(
       begin: begin.z,
       end: end.z,
-    ).animate(CurvedAnimation(
-      parent: _controller,
-      curve: widget.curve,
-    ));
+    ).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: widget.curve,
+      ),
+    );
 
     _opacityAnimation = Tween<double>(
       begin: widget.isEntering ? 0.0 : 1.0,
-      end: 1.0,
-    ).animate(CurvedAnimation(
-      parent: _controller,
-      curve: Curves.easeOutQuart,
-    ));
+      end: 1,
+    ).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: Curves.easeOutQuart,
+      ),
+    );
 
     _controller.addStatusListener(_handleAnimationStatus);
   }
@@ -518,7 +498,10 @@ class _AnimatedCardWidgetState extends State<AnimatedCardWidget>
             transform: Matrix4.identity()
               ..setEntry(3, 2, 0.001)
               ..translate(
-                  _xAnimation.value, _yAnimation.value, _zAnimation.value),
+                _xAnimation.value,
+                _yAnimation.value,
+                _zAnimation.value,
+              ),
             alignment: FractionalOffset.center,
             child: child,
           ),

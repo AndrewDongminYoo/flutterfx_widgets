@@ -1,14 +1,17 @@
-import 'package:flutter/material.dart';
 import 'dart:math' as math;
 import 'dart:math';
 
+import 'package:flutter/material.dart';
+
 class SpringAnimationsDemo extends StatelessWidget {
+  const SpringAnimationsDemo({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text('Spring Animations Demo'),
+        title: const Text('Spring Animations Demo'),
       ),
       body: Center(
         child: Column(
@@ -32,7 +35,7 @@ class SpringAnimationsDemo extends StatelessWidget {
             SpringButton(
               onPressed: () => _showAnimation(context, 'Snappy Spring'),
               curve: SnappySpringCurve(),
-              child: Text('Snappy Spring', style: TextStyle(fontSize: 18)),
+              child: const Text('Snappy Spring', style: TextStyle(fontSize: 18)),
             ),
             // SpringButton(
             //   onPressed: () => _showAnimation(context, 'Elastic Snap'),
@@ -56,29 +59,28 @@ class SpringAnimationsDemo extends StatelessWidget {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text('$animationName animation triggered!'),
-        duration: Duration(milliseconds: 500),
+        duration: const Duration(milliseconds: 500),
       ),
     );
   }
 }
 
 class SpringButton extends StatefulWidget {
-  final Widget child;
-  final VoidCallback onPressed;
-  final Curve curve;
-
-  SpringButton({
+  const SpringButton({
+    super.key,
     required this.child,
     required this.onPressed,
     required this.curve,
   });
+  final Widget child;
+  final VoidCallback onPressed;
+  final Curve curve;
 
   @override
   _SpringButtonState createState() => _SpringButtonState();
 }
 
-class _SpringButtonState extends State<SpringButton>
-    with SingleTickerProviderStateMixin {
+class _SpringButtonState extends State<SpringButton> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animation;
 
@@ -87,7 +89,7 @@ class _SpringButtonState extends State<SpringButton>
     super.initState();
     _controller = AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: 300),
+      duration: const Duration(milliseconds: 300),
     );
     _animation = CurvedAnimation(parent: _controller, curve: widget.curve);
   }
@@ -106,17 +108,18 @@ class _SpringButtonState extends State<SpringButton>
         return Transform(
           transform: Matrix4.identity()
             ..setEntry(3, 2, 0.001)
-            ..rotateZ((math.sin(_animation.value * math.pi) *
-                0.5)), //(_animation.value *math.pi), //,
+            ..rotateZ(
+              math.sin(_animation.value * math.pi) * 0.5,
+            ), //(_animation.value *math.pi), //,
           alignment: Alignment.center,
           child: ElevatedButton(
             onPressed: () {
-              print("rotate pressed");
+              print('rotate pressed');
               _controller.forward(from: 0);
               widget.onPressed();
             },
             child: Padding(
-              padding: EdgeInsets.all(12),
+              padding: const EdgeInsets.all(12),
               child: widget.child,
             ),
           ),
@@ -208,9 +211,7 @@ class SoftBounceCurve extends Curve {
 class DelayedSnapCurve extends Curve {
   @override
   double transform(double t) {
-    return t < 0.5
-        ? 2 * t * t
-        : 1 - pow(-2 * t + 2, 2) / 2 + sin(t * pi) * 0.05;
+    return t < 0.5 ? 2 * t * t : 1 - pow(-2 * t + 2, 2) / 2 + sin(t * pi) * 0.05;
   }
 }
 
@@ -251,9 +252,7 @@ class SlowStartHeavyMassCurve extends Curve {
 class OvershootHeavyMassCurve extends Curve {
   @override
   double transform(double t) {
-    return t < 0.6
-        ? 1.3 * t
-        : 1 + sin((t - 0.6) * pi * 2.5) * 0.15 * pow(1 - t, 2);
+    return t < 0.6 ? 1.3 * t : 1 + sin((t - 0.6) * pi * 2.5) * 0.15 * pow(1 - t, 2);
   }
 }
 
@@ -261,25 +260,22 @@ class OvershootHeavyMassCurve extends Curve {
 class BouncyHeavyMassCurve extends Curve {
   @override
   double transform(double t) {
-    return t < 0.5
-        ? 4 * t * t * t
-        : 1 - pow(-2 * t + 2, 3) / 2 + sin(t * pi * 3) * 0.1 * (1 - t);
+    return t < 0.5 ? 4 * t * t * t : 1 - pow(-2 * t + 2, 3) / 2 + sin(t * pi * 3) * 0.1 * (1 - t);
   }
 }
 
 class HighVelocitySpringCurve extends Curve {
+  const HighVelocitySpringCurve({this.a = 0.3, this.w = 20});
   final double a;
   final double w;
-
-  HighVelocitySpringCurve({this.a = 0.3, this.w = 20});
 
   @override
   double transform(double t) {
     // Rapid initial movement
-    double initialMovement = (1 - pow(1 - t, 3)).toDouble();
+    final initialMovement = (1 - pow(1 - t, 3)).toDouble();
 
     // Small spring back effect
-    double springBack = sin(t * w) * a * pow(1 - t, 2);
+    final springBack = sin(t * w) * a * pow(1 - t, 2);
 
     return initialMovement - springBack;
   }

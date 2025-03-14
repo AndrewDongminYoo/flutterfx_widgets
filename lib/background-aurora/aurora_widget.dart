@@ -1,22 +1,21 @@
-import 'package:flutter/material.dart';
 import 'dart:ui' as ui;
-import 'dart:typed_data';
+
+import 'package:flutter/material.dart';
 
 class AuroraPainter extends CustomPainter {
-  final double progress;
-  final bool isDark;
-  final bool showRadialGradient;
-
   AuroraPainter({
     required this.progress,
     required this.isDark,
     required this.showRadialGradient,
   });
+  final double progress;
+  final bool isDark;
+  final bool showRadialGradient;
 
   @override
   void paint(Canvas canvas, Size size) {
     final rect = Offset.zero & size;
-    
+
     // Background color
     canvas.drawRect(
       rect,
@@ -87,21 +86,19 @@ class AuroraPainter extends CustomPainter {
 }
 
 class AuroraBackground extends StatefulWidget {
-  final Widget child;
-  final bool showRadialGradient;
-
   const AuroraBackground({
-    Key? key,
+    super.key,
     required this.child,
     this.showRadialGradient = true,
-  }) : super(key: key);
+  });
+  final Widget child;
+  final bool showRadialGradient;
 
   @override
   State<AuroraBackground> createState() => _AuroraBackgroundState();
 }
 
-class _AuroraBackgroundState extends State<AuroraBackground>
-    with SingleTickerProviderStateMixin {
+class _AuroraBackgroundState extends State<AuroraBackground> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animation;
 
@@ -158,7 +155,7 @@ class _AuroraBackgroundState extends State<AuroraBackground>
 
 // Example usage with text content
 class ExamplePage extends StatelessWidget {
-  const ExamplePage({Key? key}) : super(key: key);
+  const ExamplePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -166,7 +163,7 @@ class ExamplePage extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(
+          const Text(
             'Background lights are\ncool you know.',
             style: TextStyle(
               fontSize: 40,

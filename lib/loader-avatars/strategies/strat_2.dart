@@ -1,15 +1,11 @@
 import 'dart:math';
+
 import 'package:flutter/material.dart';
+
 import 'package:fx_2_folder/loader-avatars/loader_avatars.dart';
 
 // Strategy 1:
 class CoinFlipStrategy extends AvatarAnimationStrategy {
-  final Duration animationDuration;
-  final Duration staggerDelay;
-  final double maxHeight;
-  final double perspectiveValue;
-  final double rotationAngle;
-
   CoinFlipStrategy({
     this.animationDuration = const Duration(milliseconds: 1800),
     this.staggerDelay = const Duration(milliseconds: 120),
@@ -17,13 +13,17 @@ class CoinFlipStrategy extends AvatarAnimationStrategy {
     this.perspectiveValue = 0.002,
     this.rotationAngle = pi, // Full rotation
   });
+  final Duration animationDuration;
+  final Duration staggerDelay;
+  final double maxHeight;
+  final double perspectiveValue;
+  final double rotationAngle;
 
   @override
   Duration getAnimationDuration(int index) => animationDuration;
 
   @override
-  Duration getAnimationDelay(int index, int totalAvatars) =>
-      staggerDelay * index;
+  Duration getAnimationDelay(int index, int totalAvatars) => staggerDelay * index;
 
   @override
   bool get shouldReverseAnimation => true;
@@ -54,7 +54,9 @@ class CoinFlipStrategy extends AvatarAnimationStrategy {
       transform: Matrix4.identity()
         ..setEntry(3, 2, perspectiveValue) // Add perspective
         ..translate(
-            horizontalShift, -height, 0.0) // Move up and slightly sideways
+          horizontalShift,
+          -height,
+        ) // Move up and slightly sideways
         ..rotateX(currentRotation) // Flip like a coin
         ..scale(scale), // Subtle scale animation
       alignment: Alignment.center,
@@ -64,12 +66,6 @@ class CoinFlipStrategy extends AvatarAnimationStrategy {
 }
 
 class CoinRotateStrategy extends AvatarAnimationStrategy {
-  final Duration animationDuration;
-  final Duration staggerDelay;
-  final double maxHeight;
-  final double perspectiveValue;
-  final double rotationAngle;
-
   CoinRotateStrategy({
     this.animationDuration = const Duration(milliseconds: 1800),
     this.staggerDelay = const Duration(milliseconds: 120),
@@ -77,13 +73,17 @@ class CoinRotateStrategy extends AvatarAnimationStrategy {
     this.perspectiveValue = 0.002,
     this.rotationAngle = pi, // Full rotation
   });
+  final Duration animationDuration;
+  final Duration staggerDelay;
+  final double maxHeight;
+  final double perspectiveValue;
+  final double rotationAngle;
 
   @override
   Duration getAnimationDuration(int index) => animationDuration;
 
   @override
-  Duration getAnimationDelay(int index, int totalAvatars) =>
-      staggerDelay * index;
+  Duration getAnimationDelay(int index, int totalAvatars) => staggerDelay * index;
 
   @override
   bool get shouldReverseAnimation => true;
@@ -96,19 +96,12 @@ class CoinRotateStrategy extends AvatarAnimationStrategy {
   }) {
     final value = animation.value;
 
-    // Calculate height parabola for smooth up-down motion
-    final heightProgress = sin(value * pi);
-    final height = heightProgress * maxHeight;
-
     // Calculate rotation with easing
     final rotationProgress = value;
     final currentRotation = rotationProgress * rotationAngle;
 
     // Add subtle scale effect during flip
     final scale = 1.0 + (sin(value * pi) * 0.1);
-
-    // Add slight horizontal movement during flip
-    final horizontalShift = sin(value * pi * 2) * 5.0;
 
     return Transform(
       transform: Matrix4.identity()
@@ -124,12 +117,6 @@ class CoinRotateStrategy extends AvatarAnimationStrategy {
 }
 
 class CoinRotateXStrategy extends AvatarAnimationStrategy {
-  final Duration animationDuration;
-  final Duration staggerDelay;
-  final double maxHeight;
-  final double perspectiveValue;
-  final double rotationAngle;
-
   CoinRotateXStrategy({
     this.animationDuration = const Duration(milliseconds: 1800),
     this.staggerDelay = const Duration(milliseconds: 120),
@@ -137,13 +124,17 @@ class CoinRotateXStrategy extends AvatarAnimationStrategy {
     this.perspectiveValue = 0.002,
     this.rotationAngle = pi, // Full rotation
   });
+  final Duration animationDuration;
+  final Duration staggerDelay;
+  final double maxHeight;
+  final double perspectiveValue;
+  final double rotationAngle;
 
   @override
   Duration getAnimationDuration(int index) => animationDuration;
 
   @override
-  Duration getAnimationDelay(int index, int totalAvatars) =>
-      staggerDelay * index;
+  Duration getAnimationDelay(int index, int totalAvatars) => staggerDelay * index;
 
   @override
   bool get shouldReverseAnimation => true;
@@ -156,19 +147,12 @@ class CoinRotateXStrategy extends AvatarAnimationStrategy {
   }) {
     final value = animation.value;
 
-    // Calculate height parabola for smooth up-down motion
-    final heightProgress = sin(value * pi);
-    final height = heightProgress * maxHeight;
-
     // Calculate rotation with easing
     final rotationProgress = value;
     final currentRotation = rotationProgress * rotationAngle;
 
     // Add subtle scale effect during flip
     final scale = 1.0 + (sin(value * pi) * 0.1);
-
-    // Add slight horizontal movement during flip
-    final horizontalShift = sin(value * pi * 2) * 5.0;
 
     return Transform(
       transform: Matrix4.identity()
@@ -184,12 +168,6 @@ class CoinRotateXStrategy extends AvatarAnimationStrategy {
 }
 
 class CoinRotateYStrategy extends AvatarAnimationStrategy {
-  final Duration animationDuration;
-  final Duration staggerDelay;
-  final double maxHeight;
-  final double perspectiveValue;
-  final double rotationAngle;
-
   CoinRotateYStrategy({
     this.animationDuration = const Duration(milliseconds: 1800),
     this.staggerDelay = const Duration(milliseconds: 120),
@@ -197,13 +175,17 @@ class CoinRotateYStrategy extends AvatarAnimationStrategy {
     this.perspectiveValue = 0.002,
     this.rotationAngle = pi, // Full rotation
   });
+  final Duration animationDuration;
+  final Duration staggerDelay;
+  final double maxHeight;
+  final double perspectiveValue;
+  final double rotationAngle;
 
   @override
   Duration getAnimationDuration(int index) => animationDuration;
 
   @override
-  Duration getAnimationDelay(int index, int totalAvatars) =>
-      staggerDelay * index;
+  Duration getAnimationDelay(int index, int totalAvatars) => staggerDelay * index;
 
   @override
   bool get shouldReverseAnimation => true;
@@ -216,19 +198,12 @@ class CoinRotateYStrategy extends AvatarAnimationStrategy {
   }) {
     final value = animation.value;
 
-    // Calculate height parabola for smooth up-down motion
-    final heightProgress = sin(value * pi);
-    final height = heightProgress * maxHeight;
-
     // Calculate rotation with easing
     final rotationProgress = value;
     final currentRotation = rotationProgress * rotationAngle;
 
     // Add subtle scale effect during flip
     final scale = 1.0 + (sin(value * pi) * 0.1);
-
-    // Add slight horizontal movement during flip
-    final horizontalShift = sin(value * pi * 2) * 5.0;
 
     return Transform(
       transform: Matrix4.identity()
@@ -245,24 +220,22 @@ class CoinRotateYStrategy extends AvatarAnimationStrategy {
 
 // Strategy 2: Gentle Orbit Animation
 class OrbitAnimationStrategy extends AvatarAnimationStrategy {
-  final Duration animationDuration;
-  final Duration staggerDelay;
-  final double orbitRadius;
-  final double maxRotation;
-
   OrbitAnimationStrategy({
     this.animationDuration = const Duration(milliseconds: 3000),
     this.staggerDelay = const Duration(milliseconds: 200),
     this.orbitRadius = 15.0,
     this.maxRotation = pi / 6,
   });
+  final Duration animationDuration;
+  final Duration staggerDelay;
+  final double orbitRadius;
+  final double maxRotation;
 
   @override
   Duration getAnimationDuration(int index) => animationDuration;
 
   @override
-  Duration getAnimationDelay(int index, int totalAvatars) =>
-      staggerDelay * index;
+  Duration getAnimationDelay(int index, int totalAvatars) => staggerDelay * index;
 
   @override
   bool get shouldReverseAnimation => false;
@@ -292,24 +265,22 @@ class OrbitAnimationStrategy extends AvatarAnimationStrategy {
 
 // Strategy 3: Breathing Space Animation
 class BreathingSpaceStrategy extends AvatarAnimationStrategy {
-  final Duration animationDuration;
-  final Duration staggerDelay;
-  final double maxScale;
-  final double maxDistance;
-
   BreathingSpaceStrategy({
     this.animationDuration = const Duration(milliseconds: 4000),
     this.staggerDelay = const Duration(milliseconds: 300),
     this.maxScale = 1.2,
     this.maxDistance = 20.0,
   });
+  final Duration animationDuration;
+  final Duration staggerDelay;
+  final double maxScale;
+  final double maxDistance;
 
   @override
   Duration getAnimationDuration(int index) => animationDuration;
 
   @override
-  Duration getAnimationDelay(int index, int totalAvatars) =>
-      staggerDelay * index;
+  Duration getAnimationDelay(int index, int totalAvatars) => staggerDelay * index;
 
   @override
   bool get shouldReverseAnimation => true;
@@ -326,7 +297,7 @@ class BreathingSpaceStrategy extends AvatarAnimationStrategy {
 
     return Transform(
       transform: Matrix4.identity()
-        ..translate(0.0, 0.0, distance)
+        ..translate(0.0, 0, distance)
         ..scale(scale),
       alignment: Alignment.center,
       child: child,
@@ -336,24 +307,22 @@ class BreathingSpaceStrategy extends AvatarAnimationStrategy {
 
 // Strategy 4: Zen Ripple Animation
 class ZenRippleStrategy extends AvatarAnimationStrategy {
-  final Duration animationDuration;
-  final Duration staggerDelay;
-  final double maxRotation;
-  final double maxTranslation;
-
   ZenRippleStrategy({
     this.animationDuration = const Duration(milliseconds: 2500),
     this.staggerDelay = const Duration(milliseconds: 250),
     this.maxRotation = pi / 4,
     this.maxTranslation = 25.0,
   });
+  final Duration animationDuration;
+  final Duration staggerDelay;
+  final double maxRotation;
+  final double maxTranslation;
 
   @override
   Duration getAnimationDuration(int index) => animationDuration;
 
   @override
-  Duration getAnimationDelay(int index, int totalAvatars) =>
-      staggerDelay * index;
+  Duration getAnimationDelay(int index, int totalAvatars) => staggerDelay * index;
 
   @override
   bool get shouldReverseAnimation => true;
@@ -373,7 +342,7 @@ class ZenRippleStrategy extends AvatarAnimationStrategy {
       transform: Matrix4.identity()
         ..setEntry(3, 2, perspective)
         ..rotateZ(rotateZ)
-        ..translate(0.0, translateY, 0.0),
+        ..translate(0.0, translateY),
       alignment: Alignment.center,
       child: child,
     );
@@ -382,24 +351,22 @@ class ZenRippleStrategy extends AvatarAnimationStrategy {
 
 // Strategy 5: Floating Meditation Animation
 class FloatingMeditationStrategy extends AvatarAnimationStrategy {
-  final Duration animationDuration;
-  final Duration staggerDelay;
-  final double floatHeight;
-  final double rotationAngle;
-
   FloatingMeditationStrategy({
     this.animationDuration = const Duration(milliseconds: 3500),
     this.staggerDelay = const Duration(milliseconds: 180),
     this.floatHeight = 18.0,
     this.rotationAngle = pi / 8,
   });
+  final Duration animationDuration;
+  final Duration staggerDelay;
+  final double floatHeight;
+  final double rotationAngle;
 
   @override
   Duration getAnimationDuration(int index) => animationDuration;
 
   @override
-  Duration getAnimationDelay(int index, int totalAvatars) =>
-      staggerDelay * index;
+  Duration getAnimationDelay(int index, int totalAvatars) => staggerDelay * index;
 
   @override
   bool get shouldReverseAnimation => true;
@@ -418,7 +385,7 @@ class FloatingMeditationStrategy extends AvatarAnimationStrategy {
     return Transform(
       transform: Matrix4.identity()
         ..setEntry(3, 2, 0.001)
-        ..translate(0.0, -height, 0.0)
+        ..translate(0.0, -height)
         ..rotateZ(rotate)
         ..scale(scale),
       alignment: Alignment.center,

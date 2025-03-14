@@ -1,19 +1,19 @@
-import 'package:flutter/material.dart';
 import 'dart:async';
 
-class TypingAnimation extends StatefulWidget {
-  final String text;
-  final Duration duration;
-  final TextStyle? style;
-  final bool animate;
+import 'package:flutter/material.dart';
 
+class TypingAnimation extends StatefulWidget {
   const TypingAnimation({
-    Key? key,
+    super.key,
     required this.text,
     this.duration = const Duration(milliseconds: 100),
     this.style,
     this.animate = false,
-  }) : super(key: key);
+  });
+  final String text;
+  final Duration duration;
+  final TextStyle? style;
+  final bool animate;
 
   @override
   _TypingAnimationState createState() => _TypingAnimationState();

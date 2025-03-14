@@ -1,24 +1,23 @@
 import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 
 class AnimatedGridPattern extends StatefulWidget {
-  final List<List<int>> squares;
-  final double gridSize;
-  final double skewAngle;
-
   const AnimatedGridPattern({
-    Key? key,
+    super.key,
     required this.squares,
     this.gridSize = 40,
     this.skewAngle = 12,
-  }) : super(key: key);
+  });
+  final List<List<int>> squares;
+  final double gridSize;
+  final double skewAngle;
 
   @override
   State<AnimatedGridPattern> createState() => _AnimatedGridPatternState();
 }
 
-class _AnimatedGridPatternState extends State<AnimatedGridPattern>
-    with TickerProviderStateMixin {
+class _AnimatedGridPatternState extends State<AnimatedGridPattern> with TickerProviderStateMixin {
   late List<AnimationController> _controllers;
   late List<Animation<double>> _animations;
   final math.Random _random = math.Random();
@@ -62,7 +61,7 @@ class _AnimatedGridPatternState extends State<AnimatedGridPattern>
 
   @override
   void dispose() {
-    for (var controller in _controllers) {
+    for (final controller in _controllers) {
       controller.dispose();
     }
     super.dispose();
@@ -89,15 +88,14 @@ class _AnimatedGridPatternState extends State<AnimatedGridPattern>
 }
 
 class GridPatternPainter extends CustomPainter {
-  final List<List<int>> squares;
-  final double gridSize;
-  final List<Animation<double>> animations;
-
   GridPatternPainter({
     required this.squares,
     required this.gridSize,
     required this.animations,
   }) : super(repaint: Listenable.merge(animations));
+  final List<List<int>> squares;
+  final double gridSize;
+  final List<Animation<double>> animations;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -128,11 +126,11 @@ class GridPatternPainter extends CustomPainter {
     // Draw animated squares with a gradient effect
     final fillPaint = Paint()..style = PaintingStyle.fill;
 
-    for (int i = 0; i < squares.length; i++) {
+    for (var i = 0; i < squares.length; i++) {
       final square = squares[i];
 
       // Create a gradient for each square
-      final Rect squareRect = Rect.fromLTWH(
+      final squareRect = Rect.fromLTWH(
         square[0] * gridSize,
         square[1] * gridSize,
         gridSize - 1,
@@ -160,7 +158,7 @@ class GridPatternPainter extends CustomPainter {
 
 // Demo implementation with more squares
 class GridBlinkerDemo extends StatelessWidget {
-  const GridBlinkerDemo({Key? key}) : super(key: key);
+  const GridBlinkerDemo({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -178,7 +176,7 @@ class GridBlinkerDemo extends StatelessWidget {
             alignment: Alignment.center,
             children: [
               Transform.translate(
-                offset: Offset(0, -100), // Adjust this value to move up
+                offset: const Offset(0, -100), // Adjust this value to move up
                 child: AnimatedGridPattern(
                   squares: squares,
                   gridSize: 30, // Smaller grid size for more squares

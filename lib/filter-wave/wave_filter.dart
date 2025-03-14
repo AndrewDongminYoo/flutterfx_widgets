@@ -1,28 +1,27 @@
-import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
+import 'package:flutter/material.dart';
+
 class WaveWarpEffect extends StatefulWidget {
+  const WaveWarpEffect({
+    super.key,
+    required this.child,
+    this.waveHeight = 20.0,
+    this.waveWidth = 100.0,
+    this.speed = 1.0,
+    this.phase = 0.0,
+  });
   final Widget child;
   final double waveHeight;
   final double waveWidth;
   final double speed;
   final double phase;
 
-  const WaveWarpEffect({
-    Key? key,
-    required this.child,
-    this.waveHeight = 20.0,
-    this.waveWidth = 100.0,
-    this.speed = 1.0,
-    this.phase = 0.0,
-  }) : super(key: key);
-
   @override
   _WaveWarpEffectState createState() => _WaveWarpEffectState();
 }
 
-class _WaveWarpEffectState extends State<WaveWarpEffect>
-    with SingleTickerProviderStateMixin {
+class _WaveWarpEffectState extends State<WaveWarpEffect> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
 
   @override
@@ -60,17 +59,16 @@ class _WaveWarpEffectState extends State<WaveWarpEffect>
 }
 
 class WaveClipper extends CustomClipper<Path> {
-  final double animationValue;
-  final double waveHeight;
-  final double waveWidth;
-  final double phase;
-
   WaveClipper({
     required this.animationValue,
     required this.waveHeight,
     required this.waveWidth,
     required this.phase,
   });
+  final double animationValue;
+  final double waveHeight;
+  final double waveWidth;
+  final double phase;
 
   @override
   Path getClip(Size size) {
@@ -79,10 +77,10 @@ class WaveClipper extends CustomClipper<Path> {
 
     // Create wave effect
     for (double x = 0; x < size.width; x++) {
-      final double y = waveHeight *
-          math.sin((x / waveWidth) * 2 * math.pi +
-              (animationValue * 2 * math.pi) +
-              phase);
+      final y = waveHeight *
+          math.sin(
+            (x / waveWidth) * 2 * math.pi + (animationValue * 2 * math.pi) + phase,
+          );
 
       path.lineTo(x, y);
     }
@@ -96,26 +94,23 @@ class WaveClipper extends CustomClipper<Path> {
   }
 
   @override
-  bool shouldReclip(WaveClipper oldClipper) =>
-      animationValue != oldClipper.animationValue;
+  bool shouldReclip(WaveClipper oldClipper) => animationValue != oldClipper.animationValue;
 }
 
 // Usage Example:
 class WaveWarpDemo extends StatelessWidget {
+  const WaveWarpDemo({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
         child: WaveWarpEffect(
-          waveHeight: 20,
-          waveWidth: 100,
-          speed: 1.0,
-          phase: 0,
           child: Container(
             width: 300,
             height: 200,
             color: Colors.blue,
-            child: Center(
+            child: const Center(
               child: Text(
                 'Wave Warp Effect',
                 style: TextStyle(color: Colors.white),

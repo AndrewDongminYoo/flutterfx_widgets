@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+
 import 'package:fx_2_folder/loader-sphere/grid.dart';
 import 'package:fx_2_folder/loader-sphere/loader_sphere.dart';
-import 'dart:ui' as ui;
 
 class LoaderSphereDemo extends StatefulWidget {
-  const LoaderSphereDemo({Key? key}) : super(key: key);
+  const LoaderSphereDemo({super.key});
 
   @override
   State<LoaderSphereDemo> createState() => _LoaderSphereDemoState();
@@ -14,8 +14,7 @@ class _LoaderSphereDemoState extends State<LoaderSphereDemo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor:
-          Colors.transparent, // Make scaffold background transparent
+      backgroundColor: Colors.transparent, // Make scaffold background transparent
       body: Stack(
         fit: StackFit.expand, // Make stack fill the available space
         children: [
@@ -41,7 +40,7 @@ class _LoaderSphereDemoState extends State<LoaderSphereDemo> {
 }
 
 class RippleDemo extends StatelessWidget {
-  const RippleDemo({Key? key}) : super(key: key);
+  const RippleDemo({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +54,6 @@ class RippleDemo extends StatelessWidget {
           BoxShadow(
             color: Colors.black.withOpacity(0.05),
             blurRadius: 15,
-            spreadRadius: 0,
             offset: const Offset(0, 4),
           ),
           BoxShadow(
@@ -75,7 +73,6 @@ class RippleDemo extends StatelessWidget {
       child: const Center(
         child: AnimatedWaveRipple(
           size: 120,
-          duration: Duration(seconds: 2),
           opacity: 0.6,
         ),
       ),

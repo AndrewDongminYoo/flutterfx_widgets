@@ -1,5 +1,6 @@
-import 'package:flutter/material.dart';
 import 'dart:math' as math;
+
+import 'package:flutter/material.dart';
 
 class PageFlipDemo extends StatefulWidget {
   const PageFlipDemo({super.key});
@@ -8,8 +9,7 @@ class PageFlipDemo extends StatefulWidget {
   State<PageFlipDemo> createState() => _PageFlipDemoState();
 }
 
-class _PageFlipDemoState extends State<PageFlipDemo>
-    with SingleTickerProviderStateMixin {
+class _PageFlipDemoState extends State<PageFlipDemo> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animation;
   int currentIndex = 0;
@@ -18,21 +18,33 @@ class _PageFlipDemoState extends State<PageFlipDemo>
 
   // Sample pages - you can replace these with your content
   final List<Widget> pages = [
-    Container(
-        color: Colors.red,
-        child: const Center(
-            child: Text('Page 1',
-                style: TextStyle(fontSize: 24, color: Colors.white)))),
-    Container(
-        color: Colors.blue,
-        child: const Center(
-            child: Text('Page 2',
-                style: TextStyle(fontSize: 24, color: Colors.white)))),
-    Container(
-        color: Colors.green,
-        child: const Center(
-            child: Text('Page 3',
-                style: TextStyle(fontSize: 24, color: Colors.white)))),
+    const ColoredBox(
+      color: Colors.red,
+      child: Center(
+        child: Text(
+          'Page 1',
+          style: TextStyle(fontSize: 24, color: Colors.white),
+        ),
+      ),
+    ),
+    const ColoredBox(
+      color: Colors.blue,
+      child: Center(
+        child: Text(
+          'Page 2',
+          style: TextStyle(fontSize: 24, color: Colors.white),
+        ),
+      ),
+    ),
+    const ColoredBox(
+      color: Colors.green,
+      child: Center(
+        child: Text(
+          'Page 3',
+          style: TextStyle(fontSize: 24, color: Colors.white),
+        ),
+      ),
+    ),
   ];
 
   @override
@@ -90,24 +102,18 @@ class _PageFlipDemoState extends State<PageFlipDemo>
               animation: _animation,
               builder: (context, child) {
                 // Calculate rotation for current page (0 to pi)
-                double frontRotation = isFlipping
-                    ? (isForward ? _animation.value : -_animation.value) *
-                        math.pi
-                    : 0.0;
+                final frontRotation = isFlipping ? (isForward ? _animation.value : -_animation.value) * math.pi : 0.0;
 
                 // Calculate rotation for next page (pi to 0)
-                double backRotation = isFlipping
+                final backRotation = isFlipping
                     ? (isForward
-                        ? (-math.pi +
-                            (_animation.value *
-                                math.pi)) // Changed this line only
+                        ? (-math.pi + (_animation.value * math.pi)) // Changed this line only
                         : (-math.pi + (_animation.value * math.pi)))
                     : math.pi;
 
                 // Calculate next/previous page index
-                int nextIndex = isForward
-                    ? (currentIndex + 1) % pages.length
-                    : (currentIndex - 1 + pages.length) % pages.length;
+                final nextIndex =
+                    isForward ? (currentIndex + 1) % pages.length : (currentIndex - 1 + pages.length) % pages.length;
 
                 return Stack(
                   children: [
@@ -118,8 +124,7 @@ class _PageFlipDemoState extends State<PageFlipDemo>
                         ..setEntry(3, 2, 0.002) // perspective
                         ..rotateY(isForward ? backRotation : -backRotation),
                       child: Visibility(
-                        visible:
-                            isFlipping && frontRotation.abs() > math.pi / 2,
+                        visible: isFlipping && frontRotation.abs() > math.pi / 2,
                         child: pages[nextIndex],
                       ),
                     ),
@@ -130,8 +135,7 @@ class _PageFlipDemoState extends State<PageFlipDemo>
                         ..setEntry(3, 2, 0.002) // perspective
                         ..rotateY(frontRotation),
                       child: Visibility(
-                        visible:
-                            !isFlipping || frontRotation.abs() <= math.pi / 2,
+                        visible: !isFlipping || frontRotation.abs() <= math.pi / 2,
                         child: pages[currentIndex],
                       ),
                     ),
@@ -141,7 +145,7 @@ class _PageFlipDemoState extends State<PageFlipDemo>
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(16),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [

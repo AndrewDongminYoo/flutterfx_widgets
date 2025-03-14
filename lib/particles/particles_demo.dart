@@ -1,9 +1,11 @@
 // particles_demo.dart
+
 import 'package:flutter/material.dart';
+
 import 'package:fx_2_folder/particles/particles_widget.dart';
 
 class ParticlesDemo extends StatefulWidget {
-  const ParticlesDemo({Key? key}) : super(key: key);
+  const ParticlesDemo({super.key});
 
   @override
   State<ParticlesDemo> createState() => _ParticlesDemoState();
@@ -38,7 +40,6 @@ class _ParticlesDemoState extends State<ParticlesDemo> {
           children: [
             Positioned.fill(
               child: Particles(
-                quantity: 100,
                 ease: 80,
                 color: particleColor,
                 key: ValueKey(particleColor),

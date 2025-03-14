@@ -1,15 +1,11 @@
-import 'package:flutter/material.dart';
 import 'dart:math' as math;
+
+import 'package:flutter/material.dart';
 
 import 'package:fx_2_folder/progress-bar/progress_bar.dart';
 
 /// Strategy for wave-style liquid progress animation
 class DynamicWaveProgressStrategy implements ProgressAnimationStrategy {
-  // Configuration for wave animation
-  final Duration waveDuration;
-  final bool autoAnimate;
-  final Curve waveCurve;
-
   /// Creates a wave progress strategy
   /// [waveDuration] controls how fast the waves move
   /// [autoAnimate] determines if waves should animate automatically
@@ -19,6 +15,10 @@ class DynamicWaveProgressStrategy implements ProgressAnimationStrategy {
     this.autoAnimate = true,
     this.waveCurve = Curves.linear,
   });
+  // Configuration for wave animation
+  final Duration waveDuration;
+  final bool autoAnimate;
+  final Curve waveCurve;
 
   @override
   Widget buildProgressWidget({
@@ -39,27 +39,24 @@ class DynamicWaveProgressStrategy implements ProgressAnimationStrategy {
 
 /// Internal widget to handle wave animation state
 class _WaveProgressWidget extends StatefulWidget {
+  const _WaveProgressWidget({
+    required this.progress,
+    required this.style,
+    required this.waveDuration,
+    required this.autoAnimate,
+    required this.waveCurve,
+  });
   final double progress;
   final ProgressStyle style;
   final Duration waveDuration;
   final bool autoAnimate;
   final Curve waveCurve;
 
-  const _WaveProgressWidget({
-    Key? key,
-    required this.progress,
-    required this.style,
-    required this.waveDuration,
-    required this.autoAnimate,
-    required this.waveCurve,
-  }) : super(key: key);
-
   @override
   State<_WaveProgressWidget> createState() => _WaveProgressWidgetState();
 }
 
-class _WaveProgressWidgetState extends State<_WaveProgressWidget>
-    with SingleTickerProviderStateMixin {
+class _WaveProgressWidgetState extends State<_WaveProgressWidget> with SingleTickerProviderStateMixin {
   late final AnimationController _waveController;
   late final Animation<double> _waveAnimation;
 
@@ -130,27 +127,26 @@ class _WaveProgressWidgetState extends State<_WaveProgressWidget>
 
 /// Custom painter for wave progress effect with dynamic wave animation
 class WaveProgressPainter extends CustomPainter {
-  final double progress;
-  final Color color;
-  final Animation<double> animation;
-
-  // Constants for wave configuration
-  static const double _twoPi = 2 * math.pi;
-  static const int _waveCount =
-      2; // Number of overlapping waves for more natural effect
+  // Number of overlapping waves for more natural effect
 
   WaveProgressPainter({
     required this.progress,
     required this.color,
     required this.animation,
   }) : super(repaint: animation);
+  final double progress;
+  final Color color;
+  final Animation<double> animation;
+
+  // Constants for wave configuration
+  static const double _twoPi = 2 * math.pi;
+  static const int _waveCount = 2;
 
   @override
   void paint(Canvas canvas, Size size) {
     // Calculate wave parameters based on progress
     final maxWaveHeight = size.height * 0.1; // Maximum height of waves at 0%
-    final currentWaveHeight =
-        maxWaveHeight * (1 - progress); // Waves reduce as progress increases
+    final currentWaveHeight = maxWaveHeight * (1 - progress); // Waves reduce as progress increases
 
     final paint = Paint()
       ..color = color
@@ -179,17 +175,15 @@ class WaveProgressPainter extends CustomPainter {
       // Draw wave points
       for (double x = 0; x <= size.width; x++) {
         final relativeX = x / waveWidth;
-        final normalizedProgress = math.min(1.0, math.max(0.0, progress));
+        final normalizedProgress = math.min(1, math.max(0, progress));
 
         // Wave function with dynamic amplitude and frequency
         final y = waterLevel +
             currentWaveHeight *
-                math.sin((relativeX * _twoPi) +
-                    (animation.value * 2 * _twoPi) +
-                    wavePhase) *
-                (1 -
-                    normalizedProgress *
-                        0.7); // Reduce wave height as progress increases
+                math.sin(
+                  (relativeX * _twoPi) + (animation.value * 2 * _twoPi) + wavePhase,
+                ) *
+                (1 - normalizedProgress * 0.7); // Reduce wave height as progress increases
 
         wavePath.lineTo(x, y);
       }
@@ -214,7 +208,8 @@ class WaveProgressPainter extends CustomPainter {
         ],
         stops: const [0.0, 1.0],
       ).createShader(
-          Rect.fromLTWH(0, waterLevel, size.width, size.height - waterLevel));
+        Rect.fromLTWH(0, waterLevel, size.width, size.height - waterLevel),
+      );
 
     canvas.drawRect(
       Rect.fromLTWH(0, waterLevel, size.width, size.height - waterLevel),
@@ -224,8 +219,6 @@ class WaveProgressPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(WaveProgressPainter oldDelegate) {
-    return oldDelegate.progress != progress ||
-        oldDelegate.color != color ||
-        oldDelegate.animation != animation;
+    return oldDelegate.progress != progress || oldDelegate.color != color || oldDelegate.animation != animation;
   }
 }

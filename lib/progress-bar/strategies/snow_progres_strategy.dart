@@ -1,23 +1,18 @@
-import 'package:flutter/material.dart';
 import 'dart:math' as math;
+
+import 'package:flutter/material.dart';
 
 import 'package:fx_2_folder/progress-bar/progress_bar.dart';
 
-import 'package:flutter/material.dart';
-import 'dart:math' as math;
-import 'package:flutter/material.dart';
-import 'dart:math' as math;
-
 class SnowProgressStrategy implements ProgressAnimationStrategy {
-  final int snowflakeCount;
-  final double maxSnowflakeSize;
-  final Color? snowColor;
-
   const SnowProgressStrategy({
     this.snowflakeCount = 40, // Increased for smoother effect
     this.maxSnowflakeSize = 3,
     this.snowColor,
   });
+  final int snowflakeCount;
+  final double maxSnowflakeSize;
+  final Color? snowColor;
 
   @override
   Widget buildProgressWidget({
@@ -37,27 +32,24 @@ class SnowProgressStrategy implements ProgressAnimationStrategy {
 }
 
 class _SnowProgressWidget extends StatefulWidget {
+  const _SnowProgressWidget({
+    required this.progress,
+    required this.style,
+    required this.snowflakeCount,
+    required this.maxSnowflakeSize,
+    required this.snowColor,
+  });
   final double progress;
   final ProgressStyle style;
   final int snowflakeCount;
   final double maxSnowflakeSize;
   final Color snowColor;
 
-  const _SnowProgressWidget({
-    Key? key,
-    required this.progress,
-    required this.style,
-    required this.snowflakeCount,
-    required this.maxSnowflakeSize,
-    required this.snowColor,
-  }) : super(key: key);
-
   @override
   State<_SnowProgressWidget> createState() => _SnowProgressWidgetState();
 }
 
-class _SnowProgressWidgetState extends State<_SnowProgressWidget>
-    with SingleTickerProviderStateMixin {
+class _SnowProgressWidgetState extends State<_SnowProgressWidget> with SingleTickerProviderStateMixin {
   late final AnimationController _controller;
   late final List<Snowflake> snowflakes;
   final math.Random random = math.Random();
@@ -68,7 +60,8 @@ class _SnowProgressWidgetState extends State<_SnowProgressWidget>
     _controller = AnimationController(
       vsync: this,
       duration: const Duration(
-          seconds: 12), // Increased duration for slower animation
+        seconds: 12,
+      ), // Increased duration for slower animation
     )..repeat();
 
     // Initialize snowflakes with better vertical distribution
@@ -97,11 +90,12 @@ class _SnowProgressWidgetState extends State<_SnowProgressWidget>
     // Gaussian distribution for natural size variation
     final u1 = random.nextDouble();
     final u2 = random.nextDouble();
-    final normalRandom =
-        math.sqrt(-2.0 * math.log(u1)) * math.cos(2.0 * math.pi * u2);
+    final normalRandom = math.sqrt(-2.0 * math.log(u1)) * math.cos(2.0 * math.pi * u2);
     final size = (normalRandom * 0.5 + 1.0) * widget.maxSnowflakeSize;
     return math.min(
-        math.max(size, widget.maxSnowflakeSize * 0.3), widget.maxSnowflakeSize);
+      math.max(size, widget.maxSnowflakeSize * 0.3),
+      widget.maxSnowflakeSize,
+    );
   }
 
   @override
@@ -142,8 +136,7 @@ class _SnowProgressWidgetState extends State<_SnowProgressWidget>
       snowflakes[i].y += snowflakes[i].speed;
 
       // Smoother horizontal wobble
-      snowflakes[i].x += math.sin(time * snowflakes[i].wobbleFrequency + i) *
-          snowflakes[i].wobbleAmplitude;
+      snowflakes[i].x += math.sin(time * snowflakes[i].wobbleFrequency + i) * snowflakes[i].wobbleAmplitude;
 
       // Reset snowflake when it goes below container
       if (snowflakes[i].y > 1.1) {
@@ -154,14 +147,6 @@ class _SnowProgressWidgetState extends State<_SnowProgressWidget>
 }
 
 class Snowflake {
-  double x;
-  double y;
-  final double size;
-  final double speed;
-  final double wobbleFrequency;
-  final double wobbleAmplitude;
-  final double opacity;
-
   Snowflake({
     required this.x,
     required this.y,
@@ -171,15 +156,16 @@ class Snowflake {
     required this.wobbleAmplitude,
     required this.opacity,
   });
+  double x;
+  double y;
+  final double size;
+  final double speed;
+  final double wobbleFrequency;
+  final double wobbleAmplitude;
+  final double opacity;
 }
 
 class SnowProgressPainter extends CustomPainter {
-  final double progress;
-  final List<Snowflake> snowflakes;
-  final Color snowColor;
-  final Color backgroundColor;
-  final Animation<double> animation;
-
   SnowProgressPainter({
     required this.progress,
     required this.snowflakes,
@@ -187,6 +173,11 @@ class SnowProgressPainter extends CustomPainter {
     required this.backgroundColor,
     required this.animation,
   }) : super(repaint: animation);
+  final double progress;
+  final List<Snowflake> snowflakes;
+  final Color snowColor;
+  final Color backgroundColor;
+  final Animation<double> animation;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -216,10 +207,8 @@ class SnowProgressPainter extends CustomPainter {
       // Generate smooth curve points with subtle movement
       final points = List.generate(30, (i) {
         final x = size.width * (i / 29);
-        final waveFactor =
-            (1 - progress) * 0.05; // Reduce wave height as progress increases
-        final normalizedHeight =
-            math.sin(i * 0.3 + animation.value * 2) * waveFactor;
+        final waveFactor = (1 - progress) * 0.05; // Reduce wave height as progress increases
+        final normalizedHeight = math.sin(i * 0.3 + animation.value * 2) * waveFactor;
         final y = size.height - (baseSnowHeight * (1 + normalizedHeight));
         return Offset(x, y);
       });

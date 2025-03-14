@@ -1,7 +1,21 @@
-import 'package:flutter/material.dart';
 import 'dart:ui' as ui;
 
+import 'package:flutter/material.dart';
+
 class ShimmerButton extends StatefulWidget {
+  const ShimmerButton({
+    super.key,
+    required this.child,
+    this.onPressed,
+    this.shimmerColorFrom = const Color(0xFFFFAA40),
+    this.shimmerColorTo = const Color(0xFF9C40FF),
+    this.borderRadius = 100.0,
+    this.shimmerDuration = const Duration(seconds: 3),
+    this.background = Colors.black,
+    this.padding = const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+    this.borderWidth = 1.5,
+    this.staticBorderColor = const Color(0x1AFFFFFF), // 10% white
+  });
   final Widget child;
   final VoidCallback? onPressed;
   final Color shimmerColorFrom;
@@ -13,26 +27,11 @@ class ShimmerButton extends StatefulWidget {
   final double borderWidth;
   final Color staticBorderColor;
 
-  const ShimmerButton({
-    Key? key,
-    required this.child,
-    this.onPressed,
-    this.shimmerColorFrom = const Color(0xFFFFAA40),
-    this.shimmerColorTo = const Color(0xFF9C40FF),
-    this.borderRadius = 100.0,
-    this.shimmerDuration = const Duration(seconds: 3),
-    this.background = Colors.black,
-    this.padding = const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-    this.borderWidth = 1.5,
-    this.staticBorderColor = const Color(0x1AFFFFFF), // 10% white
-  }) : super(key: key);
-
   @override
   State<ShimmerButton> createState() => _ShimmerButtonState();
 }
 
-class _ShimmerButtonState extends State<ShimmerButton>
-    with SingleTickerProviderStateMixin {
+class _ShimmerButtonState extends State<ShimmerButton> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animation;
   bool _isPressed = false;
@@ -99,8 +98,7 @@ class _ShimmerButtonState extends State<ShimmerButton>
                         colorFrom: widget.shimmerColorFrom,
                         colorTo: widget.shimmerColorTo,
                         staticBorderColor: widget.staticBorderColor,
-                        borderRadius:
-                            BorderRadius.circular(widget.borderRadius),
+                        borderRadius: BorderRadius.circular(widget.borderRadius),
                       ),
                     );
                   },
@@ -132,13 +130,6 @@ class _ShimmerButtonState extends State<ShimmerButton>
 }
 
 class ShimmerBorderPainter extends CustomPainter {
-  final double progress;
-  final double borderWidth;
-  final Color colorFrom;
-  final Color colorTo;
-  final Color staticBorderColor;
-  final BorderRadius borderRadius;
-
   ShimmerBorderPainter({
     required this.progress,
     required this.borderWidth,
@@ -147,6 +138,12 @@ class ShimmerBorderPainter extends CustomPainter {
     required this.staticBorderColor,
     required this.borderRadius,
   });
+  final double progress;
+  final double borderWidth;
+  final Color colorFrom;
+  final Color colorTo;
+  final Color staticBorderColor;
+  final BorderRadius borderRadius;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -178,12 +175,8 @@ class ShimmerBorderPainter extends CustomPainter {
     }
 
     // Calculate gradient start and end points
-    final gradientStart =
-        pathMetrics.getTangentForOffset(start)?.position ?? Offset.zero;
-    final gradientEnd = pathMetrics
-            .getTangentForOffset((start + pathLength / 8) % pathLength)
-            ?.position ??
-        Offset.zero;
+    final gradientStart = pathMetrics.getTangentForOffset(start)?.position ?? Offset.zero;
+    final gradientEnd = pathMetrics.getTangentForOffset((start + pathLength / 8) % pathLength)?.position ?? Offset.zero;
 
     final paint = Paint()
       ..style = PaintingStyle.stroke
@@ -193,7 +186,7 @@ class ShimmerBorderPainter extends CustomPainter {
       gradientStart,
       gradientEnd,
       [
-        colorTo.withOpacity(0.0),
+        colorTo.withOpacity(0),
         colorTo,
         colorFrom,
       ],

@@ -1,10 +1,12 @@
 import 'dart:ui';
+
 import 'package:flutter/material.dart';
+
 import 'package:fx_2_folder/background-flicker-grid/background_flicker_grid.dart';
 
 class FancyCard extends StatelessWidget {
   const FancyCard({
-    Key? key,
+    super.key,
     this.width = 400,
     this.height = 250,
     required this.title,
@@ -12,7 +14,7 @@ class FancyCard extends StatelessWidget {
     this.icon,
     this.onTap,
     required this.colorScheme,
-  }) : super(key: key);
+  });
 
   final double width;
   final double height;
@@ -26,7 +28,7 @@ class FancyCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16),
         child: GestureDetector(
           onTap: onTap,
           child: Container(
@@ -71,7 +73,9 @@ class FancyCard extends StatelessWidget {
                   Positioned.fill(
                     child: BackdropFilter(
                       filter: ImageFilter.blur(
-                          sigmaX: 2, sigmaY: 2), // Reduced from 3
+                        sigmaX: 2,
+                        sigmaY: 2,
+                      ), // Reduced from 3
                       child: Container(
                         decoration: BoxDecoration(
                           color: colorScheme.glassColor,
@@ -82,7 +86,7 @@ class FancyCard extends StatelessWidget {
 
                   // Content
                   Padding(
-                    padding: const EdgeInsets.all(24.0),
+                    padding: const EdgeInsets.all(24),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -145,15 +149,6 @@ class FancyCard extends StatelessWidget {
 }
 
 class CardColorScheme {
-  final Color gridColor;
-  final Color borderColor;
-  final List<Color> gradientColors;
-  final Color glassColor;
-  final Color iconColor;
-  final Color titleColor;
-  final Color subtitleColor;
-  final Color accentGlowColor;
-
   const CardColorScheme({
     required this.gridColor,
     required this.borderColor,
@@ -164,6 +159,14 @@ class CardColorScheme {
     required this.subtitleColor,
     required this.accentGlowColor,
   });
+  final Color gridColor;
+  final Color borderColor;
+  final List<Color> gradientColors;
+  final Color glassColor;
+  final Color iconColor;
+  final Color titleColor;
+  final Color subtitleColor;
+  final Color accentGlowColor;
 }
 
 // Predefined color schemes
@@ -268,7 +271,7 @@ class CardThemes {
 
 // Demo Usage
 class ColorfulCardsDemo extends StatelessWidget {
-  const ColorfulCardsDemo({Key? key}) : super(key: key);
+  const ColorfulCardsDemo({super.key});
 
   @override
   Widget build(BuildContext context) {

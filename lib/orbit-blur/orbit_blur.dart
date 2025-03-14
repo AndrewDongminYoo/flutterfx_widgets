@@ -1,11 +1,12 @@
 import 'dart:math' as math;
 import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 /// Configuration class to manage animation settings
 class OrbitConfig extends ChangeNotifier {
   bool _reverse = true;
-  double _duration = 10.0;
+  double _duration = 10;
   bool _showPaths = true;
 
   bool get reverse => _reverse;
@@ -30,11 +31,8 @@ class OrbitConfig extends ChangeNotifier {
 
 /// Main widget that combines controls and orbiting circles
 class OrbitingIconsWithControls extends StatelessWidget {
+  OrbitingIconsWithControls({super.key}) : config = OrbitConfig();
   final OrbitConfig config;
-
-  OrbitingIconsWithControls({Key? key})
-      : config = OrbitConfig(),
-        super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -58,15 +56,14 @@ class OrbitingIconsWithControls extends StatelessWidget {
 
 /// Configuration panel widget
 class OrbitConfigPanel extends StatelessWidget {
+  const OrbitConfigPanel({super.key, required this.config});
   final OrbitConfig config;
-
-  const OrbitConfigPanel({Key? key, required this.config}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Card(
       child: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -111,16 +108,15 @@ class OrbitConfigPanel extends StatelessWidget {
 
 /// Main orbiting icons widget
 class OrbitingIcons extends StatelessWidget {
-  final bool reverse;
-  final double duration;
-  final bool showPaths;
-
   const OrbitingIcons({
-    Key? key,
+    super.key,
     required this.reverse,
     required this.duration,
     required this.showPaths,
-  }) : super(key: key);
+  });
+  final bool reverse;
+  final double duration;
+  final bool showPaths;
 
   @override
   Widget build(BuildContext context) {
@@ -145,58 +141,58 @@ class OrbitingIcons extends StatelessWidget {
         children: [
           // Left orbit
           Positioned(
-            left: 40,  // Adjusted position
+            left: 40, // Adjusted position
             child: OrbitingCircle(
               duration: duration,
-              radius: 60,  // Adjusted radius
+              radius: 60, // Adjusted radius
               showPath: showPaths,
               clockwise: !reverse,
-              icons: leftIcons.map((icon) => _buildIcon(icon)).toList(),
+              icons: leftIcons.map(_buildIcon).toList(),
             ),
           ),
           // Right orbit
           Positioned(
-            right: 40,  // Adjusted position
+            right: 40, // Adjusted position
             child: OrbitingCircle(
               duration: duration,
-              radius: 60,  // Adjusted radius
+              radius: 60, // Adjusted radius
               showPath: showPaths,
               clockwise: reverse,
-              icons: rightIcons.map((icon) => _buildIcon(icon)).toList(),
+              icons: rightIcons.map(_buildIcon).toList(),
             ),
           ),
           // Center blur overlay with chevron
-Center(
-  child: Stack(
-    alignment: Alignment.center,
-    children: [
-      // First BackdropFilter for the background blur
-      ClipOval(
-        child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
-          child: Container(
-            width: 70,
-            height: 70,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: Colors.grey.withOpacity(0.15),
+          Center(
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                // First BackdropFilter for the background blur
+                ClipOval(
+                  child: BackdropFilter(
+                    filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+                    child: Container(
+                      width: 70,
+                      height: 70,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Colors.grey.withOpacity(0.15),
+                      ),
+                    ),
+                  ),
+                ),
+                // Second BackdropFilter specifically for the chevron
+                ClipOval(
+                  child: BackdropFilter(
+                    filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+                    child: CustomPaint(
+                      size: const Size(35, 35),
+                      painter: ChevronPainter(),
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
-        ),
-      ),
-      // Second BackdropFilter specifically for the chevron
-      ClipOval(
-        child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
-          child: CustomPaint(
-            size: const Size(35, 35),
-            painter: ChevronPainter(),
-          ),
-        ),
-      ),
-    ],
-  ),
-),
         ],
       ),
     );
@@ -222,7 +218,7 @@ class ChevronPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = Colors.blue.withOpacity(0.6)  // Reduced opacity to blend better
+      ..color = Colors.blue.withOpacity(0.6) // Reduced opacity to blend better
       ..style = PaintingStyle.stroke
       ..strokeWidth = 2.5
       ..strokeCap = StrokeCap.round
@@ -230,7 +226,7 @@ class ChevronPainter extends CustomPainter {
       ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 0.5);
 
     final path = Path();
-    
+
     // Adjusted chevron shape
     path.moveTo(size.width * 0.3, size.height * 0.4);
     path.lineTo(size.width * 0.5, size.height * 0.6);
@@ -243,22 +239,20 @@ class ChevronPainter extends CustomPainter {
   bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }
 
-
 class OrbitingCircle extends StatelessWidget {
-  final double duration;
-  final double radius;
-  final bool showPath;
-  final bool clockwise;
-  final List<Widget> icons;
-
   const OrbitingCircle({
-    Key? key,
+    super.key,
     required this.duration,
     required this.radius,
     required this.showPath,
     required this.clockwise,
     required this.icons,
-  }) : super(key: key);
+  });
+  final double duration;
+  final double radius;
+  final bool showPath;
+  final bool clockwise;
+  final List<Widget> icons;
 
   @override
   Widget build(BuildContext context) {
@@ -282,7 +276,7 @@ class OrbitingCircle extends StatelessWidget {
               isDarkMode: isDarkMode,
               child: icon,
             );
-          }).toList(),
+          }),
         ],
       ),
     );
@@ -296,17 +290,24 @@ class OrbitingCircle extends StatelessWidget {
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           border: Border.all(
-            color: isDarkMode
-                ? Colors.black.withOpacity(0.1)
-                : Colors.white.withOpacity(0.1),
-            width: 1,
+            color: isDarkMode ? Colors.black.withOpacity(0.1) : Colors.white.withOpacity(0.1),
           ),
         ),
       ),
     );
   }
 }
+
 class SingleOrbitingCircle extends StatefulWidget {
+  const SingleOrbitingCircle({
+    super.key,
+    required this.duration,
+    required this.delay,
+    required this.radius,
+    required this.isDarkMode,
+    required this.moveClockwise,
+    this.child,
+  });
   final double duration;
   final double delay;
   final double radius;
@@ -314,22 +315,11 @@ class SingleOrbitingCircle extends StatefulWidget {
   final bool moveClockwise;
   final Widget? child;
 
-  const SingleOrbitingCircle({
-    Key? key,
-    required this.duration,
-    required this.delay,
-    required this.radius,
-    required this.isDarkMode,
-    required this.moveClockwise,
-    this.child,
-  }) : super(key: key);
-
   @override
   State<SingleOrbitingCircle> createState() => _SingleOrbitingCircleState();
 }
 
-class _SingleOrbitingCircleState extends State<SingleOrbitingCircle>
-    with SingleTickerProviderStateMixin {
+class _SingleOrbitingCircleState extends State<SingleOrbitingCircle> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
 
   @override
@@ -358,14 +348,12 @@ class _SingleOrbitingCircleState extends State<SingleOrbitingCircle>
     return AnimatedBuilder(
       animation: _controller,
       builder: (context, child) {
-        final angle = widget.moveClockwise
-            ? -_controller.value * 2 * math.pi
-            : _controller.value * 2 * math.pi;
+        final angle = widget.moveClockwise ? -_controller.value * 2 * math.pi : _controller.value * 2 * math.pi;
 
         return Transform.translate(
           offset: Offset(
-            widget.radius + (widget.radius * math.cos(angle)) - 18,  // -18 to center the 36px icon
-            widget.radius + (widget.radius * math.sin(angle)) - 18,  // -18 to center the 36px icon
+            widget.radius + (widget.radius * math.cos(angle)) - 18, // -18 to center the 36px icon
+            widget.radius + (widget.radius * math.sin(angle)) - 18, // -18 to center the 36px icon
           ),
           child: Container(
             width: 36,
@@ -375,7 +363,6 @@ class _SingleOrbitingCircleState extends State<SingleOrbitingCircle>
               color: Colors.grey[850],
               border: Border.all(
                 color: Colors.grey[800]!,
-                width: 1,
               ),
             ),
             child: Center(child: widget.child),

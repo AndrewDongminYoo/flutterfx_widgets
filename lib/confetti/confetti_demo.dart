@@ -1,5 +1,7 @@
 import 'dart:async';
+
 import 'package:flutter/material.dart';
+
 import 'package:fx_2_folder/confetti/confetti.dart';
 
 class ConfettiDemo extends StatefulWidget {
@@ -9,8 +11,7 @@ class ConfettiDemo extends StatefulWidget {
   State<ConfettiDemo> createState() => _ConfettiDemoScreenState();
 }
 
-class _ConfettiDemoScreenState extends State<ConfettiDemo>
-    with SingleTickerProviderStateMixin {
+class _ConfettiDemoScreenState extends State<ConfettiDemo> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   List<EnhancedConfettiParticle> _particles = [];
   Timer? _timer;
@@ -28,11 +29,10 @@ class _ConfettiDemoScreenState extends State<ConfettiDemo>
       Colors.orange,
     ],
     burstSpread: 180,
-    burstVelocity: -18.0,
+    burstVelocity: -18,
   );
 
-  final EnhancedConfettiOptions _celebrationConfig =
-      const EnhancedConfettiOptions(
+  final EnhancedConfettiOptions _celebrationConfig = const EnhancedConfettiOptions(
     particleCount: 200,
     shapes: [
       ParticleShape.rectangle,
@@ -42,7 +42,7 @@ class _ConfettiDemoScreenState extends State<ConfettiDemo>
     ],
     initialSpread: 20,
     burstSpread: 150,
-    burstVelocity: -12.0,
+    burstVelocity: -12,
     turbulenceFactor: 0.7,
   );
 
@@ -52,7 +52,7 @@ class _ConfettiDemoScreenState extends State<ConfettiDemo>
     colors: [Colors.blue, Colors.teal, Colors.indigo],
     initialSpread: 10,
     burstSpread: 90,
-    burstVelocity: -8.0,
+    burstVelocity: -8,
     turbulenceFactor: 0.3,
   );
 
@@ -152,15 +152,14 @@ class _ConfettiDemoScreenState extends State<ConfettiDemo>
 }
 
 class _ConfettiButton extends StatelessWidget {
-  final String label;
-  final Color color;
-  final VoidCallback onPressed;
-
   const _ConfettiButton({
     required this.label,
     required this.color,
     required this.onPressed,
   });
+  final String label;
+  final Color color;
+  final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {

@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
+
 import 'package:fx_2_folder/folder_shape/gradient_shadow.dart';
 
 class FolderHomeWidget extends StatefulWidget {
+  const FolderHomeWidget({super.key, required this.title, required this.curve});
   final String title;
   final Curve curve;
-  const FolderHomeWidget({super.key, required this.title, required this.curve});
 
   @override
   State<FolderHomeWidget> createState() => _FolderHomeWidgetState();
 }
 
-class _FolderHomeWidgetState extends State<FolderHomeWidget>
-    with TickerProviderStateMixin {
+class _FolderHomeWidgetState extends State<FolderHomeWidget> with TickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<double> _animation;
-  final Duration animationDuration = Duration(milliseconds: 800);
-  final Duration delayDuration = Duration(milliseconds: 2000);
+  final Duration animationDuration = const Duration(milliseconds: 800);
+  final Duration delayDuration = const Duration(milliseconds: 2000);
   late AnimationController _shawdowAnimationController;
   late Animation<double> _shadowAnimation;
 
@@ -30,14 +30,14 @@ class _FolderHomeWidgetState extends State<FolderHomeWidget>
 
     _shawdowAnimationController = AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: 600),
+      duration: const Duration(milliseconds: 600),
     );
 
-    _animation = Tween<double>(begin: 0.0, end: 1.0).animate(
+    _animation = Tween<double>(begin: 0, end: 1).animate(
       CurvedAnimation(parent: _animationController, curve: widget.curve),
     );
 
-    _shadowAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+    _shadowAnimation = Tween<double>(begin: 0, end: 1).animate(
       CurvedAnimation(parent: _shawdowAnimationController, curve: widget.curve),
     );
   }
@@ -57,9 +57,11 @@ class _FolderHomeWidgetState extends State<FolderHomeWidget>
       body: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Text(widget.title,
-                style: Theme.of(context).textTheme.titleMedium),
+            padding: const EdgeInsets.all(16),
+            child: Text(
+              widget.title,
+              style: Theme.of(context).textTheme.titleMedium,
+            ),
           ),
           Expanded(
             child: AnimatedBuilder(
@@ -69,13 +71,13 @@ class _FolderHomeWidgetState extends State<FolderHomeWidget>
               builder: (context, child) {
                 return GestureDetector(
                   onTap: () {
-                    print("Widget tapped!");
+                    print('Widget tapped!');
                     if (isOpen) {
                       _animationController.reverse().orCancel;
                       _shawdowAnimationController.reverse();
                     } else {
                       _animationController.forward().orCancel;
-                      Future.delayed(Duration(milliseconds: 300), () {
+                      Future.delayed(const Duration(milliseconds: 300), () {
                         _shawdowAnimationController.forward().orCancel;
                       });
                     }
@@ -97,8 +99,7 @@ class _FolderHomeWidgetState extends State<FolderHomeWidget>
                         bottom: 40, // Adjust this value to move shadow up/down
                         child: CustomPaint(
                           size: const Size(150, 120), // Adjust height as needed
-                          painter:
-                              FolderBackCoverGradientPainter(_shadowAnimation),
+                          painter: FolderBackCoverGradientPainter(_shadowAnimation),
                         ),
                       ),
                       Positioned(
@@ -117,7 +118,7 @@ class _FolderHomeWidgetState extends State<FolderHomeWidget>
   }
 
   Transform getFolderFrontCover() {
-    var transform = Transform(
+    final transform = Transform(
       transform: Matrix4.identity()
         ..setEntry(3, 2, 0.003)
         ..rotateX(1.3 * _animation.value),
@@ -137,7 +138,7 @@ class _FolderHomeWidgetState extends State<FolderHomeWidget>
             // ReflectionWidget(_animation, _shadowAnimation),
             ClipPath(
               clipper: LightningClipper(),
-              child: Container(
+              child: DecoratedBox(
                 decoration: BoxDecoration(
                   color: Colors.white, // Background color of the clipped area
                   boxShadow: [
@@ -145,7 +146,7 @@ class _FolderHomeWidgetState extends State<FolderHomeWidget>
                       color: Colors.black.withOpacity(0.8), // Shadow color
                       spreadRadius: 5, // Spread radius of the shadow
                       blurRadius: 7, // Blur radius of the shadow
-                      offset: Offset(0, 3), // Offset for the shadow
+                      offset: const Offset(0, 3), // Offset for the shadow
                     ),
                   ],
                 ),

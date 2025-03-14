@@ -4,13 +4,7 @@ import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 
 class ThreadedWidget extends StatelessWidget {
-  final Widget child;
-  final Color threadColor;
-  final double topSpacing;
-  final double bottomSpacing;
-  final double curvature;
-  final double wrapCurvature;
-  final bool debugMode; // New parameter for debug mode
+  // New parameter for debug mode
 
   const ThreadedWidget({
     super.key,
@@ -22,6 +16,13 @@ class ThreadedWidget extends StatelessWidget {
     this.wrapCurvature = 0.05,
     this.debugMode = false, // Default to false
   });
+  final Widget child;
+  final Color threadColor;
+  final double topSpacing;
+  final double bottomSpacing;
+  final double curvature;
+  final double wrapCurvature;
+  final bool debugMode;
 
   @override
   Widget build(BuildContext context) {
@@ -49,13 +50,6 @@ class ThreadedWidget extends StatelessWidget {
 }
 
 class ThreadPainter extends CustomPainter {
-  final Color threadColor;
-  final double topSpacing;
-  final double bottomSpacing;
-  final double curvature;
-  final double wrapCurvature;
-  final bool debugMode;
-
   ThreadPainter({
     required this.threadColor,
     required this.topSpacing,
@@ -64,6 +58,12 @@ class ThreadPainter extends CustomPainter {
     required this.wrapCurvature,
     required this.debugMode,
   });
+  final Color threadColor;
+  final double topSpacing;
+  final double bottomSpacing;
+  final double curvature;
+  final double wrapCurvature;
+  final bool debugMode;
 
   // Debug paint objects
   late final Paint _debugPointPaint = Paint()
@@ -80,11 +80,6 @@ class ThreadPainter extends CustomPainter {
     ..color = Colors.green
     ..strokeWidth = 4
     ..strokeCap = StrokeCap.round;
-
-  late final Paint _debugLinePaint = Paint()
-    ..color = Colors.purple.withOpacity(0.3)
-    ..strokeWidth = 1
-    ..style = PaintingStyle.stroke;
 
   void _drawDebugPoint(Canvas canvas, Offset point, String label, Paint paint) {
     canvas.drawPoints(ui.PointMode.points, [point], paint);
@@ -122,12 +117,13 @@ class ThreadPainter extends CustomPainter {
         ..strokeCap = StrokeCap.round
         // Simpler approach using just dots
         ..shader = ui.Gradient.linear(
-            start,
-            end,
-            [Colors.purple.withOpacity(0.3), Colors.transparent],
-            [0, 0.5],
-            TileMode.repeated,
-            Float64List.fromList(Matrix4.identity().storage)),
+          start,
+          end,
+          [Colors.purple.withOpacity(0.3), Colors.transparent],
+          [0, 0.5],
+          TileMode.repeated,
+          Float64List.fromList(Matrix4.identity().storage),
+        ),
     );
   }
 
@@ -138,8 +134,7 @@ class ThreadPainter extends CustomPainter {
     // Adjust control point position
     final controlPoint = Offset(
       point.dx + size.width * wrapCurvature,
-      point.dy -
-          size.height * wrapCurvature * 1.0, // Keeps the same vertical curve
+      point.dy - size.height * wrapCurvature * 1.0, // Keeps the same vertical curve
     );
 
     // Reduce the horizontal distance of the end point
@@ -171,16 +166,12 @@ class ThreadPainter extends CustomPainter {
     // Adjust control point position
     final controlPoint = Offset(
       point.dx - size.width * wrapCurvature,
-      point.dy +
-          size.height *
-              wrapCurvature *
-              1.5, // Matches top wrap's vertical proportion
+      point.dy + size.height * wrapCurvature * 1.5, // Matches top wrap's vertical proportion
     );
 
     // Modify end point to match top wrap's shorter distance
     final endPoint = Offset(
-      point.dx -
-          size.width * wrapCurvature * 1.2, // Matches top wrap's 1.2 multiplier
+      point.dx - size.width * wrapCurvature * 1.2, // Matches top wrap's 1.2 multiplier
       point.dy, // Keeps it at the bottom edge
     );
 
@@ -211,7 +202,7 @@ class ThreadPainter extends CustomPainter {
     const threadCount = 4;
 
     // Generate points
-    final List<Offset> topPoints = List.generate(
+    final topPoints = List<Offset>.generate(
       threadCount,
       (i) => Offset(
         size.width * (0.2 + i * topSpacing),
@@ -219,7 +210,7 @@ class ThreadPainter extends CustomPainter {
       ),
     );
 
-    final List<Offset> bottomPoints = List.generate(
+    final bottomPoints = List<Offset>.generate(
       threadCount,
       (i) => Offset(
         size.width * (0.1 + i * bottomSpacing),
@@ -266,14 +257,26 @@ class ThreadPainter extends CustomPainter {
       if (debugMode) {
         // Draw points
         _drawDebugPoint(
-            canvas, startPoint, 'P${i + 1}_bottom', _debugPointPaint);
+          canvas,
+          startPoint,
+          'P${i + 1}_bottom',
+          _debugPointPaint,
+        );
         _drawDebugPoint(canvas, endPoint, 'P${i + 1}_top', _debugPointPaint);
 
         // Draw control points
         _drawDebugPoint(
-            canvas, controlPoint1, 'C1_${i + 1}', _debugControlPointPaint);
+          canvas,
+          controlPoint1,
+          'C1_${i + 1}',
+          _debugControlPointPaint,
+        );
         _drawDebugPoint(
-            canvas, controlPoint2, 'C2_${i + 1}', _debugControlPointPaint);
+          canvas,
+          controlPoint2,
+          'C2_${i + 1}',
+          _debugControlPointPaint,
+        );
 
         // Draw control lines
         _drawDebugLine(canvas, startPoint, controlPoint1);
@@ -332,6 +335,8 @@ class ThreadPainter extends CustomPainter {
 
 // Example usage with debug mode:
 class DecorationThreadDemo extends StatelessWidget {
+  const DecorationThreadDemo({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -339,13 +344,7 @@ class DecorationThreadDemo extends StatelessWidget {
         width: 300,
         height: 100,
         child: ThreadedWidget(
-          threadColor: Colors.white,
-          topSpacing: 0.2,
-          bottomSpacing: 0.15,
-          curvature: 0.3,
-          wrapCurvature: 0.05,
-          debugMode: false, // Enable debug visualization
-          child: Container(
+          child: DecoratedBox(
             decoration: BoxDecoration(
               color: Colors.yellow,
               borderRadius: BorderRadius.circular(16),

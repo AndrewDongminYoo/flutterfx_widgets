@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 
 class GradientText extends StatelessWidget {
-  final String text;
-  final double fontSize;
-  final List<Color> gradientColors;
-
   const GradientText({
-    Key? key,
+    super.key,
     required this.text,
     required this.fontSize,
     required this.gradientColors,
-  }) : super(key: key);
+  });
+  final String text;
+  final double fontSize;
+  final List<Color> gradientColors;
 
   @override
   Widget build(BuildContext context) {

@@ -19,61 +19,61 @@ class _BookShelfPageState extends State<BookShelfPage> {
 
   @override
   Widget build(BuildContext context) {
-    final List<Book> books = [
+    final books = <Book>[
       Book(
-          coverAsset: 'assets/images/1_stoic.png',
-          spineAsset: 'assets/images/1_stoic_spine.png',
-          isOpen: false),
+        coverAsset: 'assets/images/1_stoic.png',
+        spineAsset: 'assets/images/1_stoic_spine.png',
+      ),
       Book(
-          coverAsset: 'assets/images/2_moon.png',
-          spineAsset: 'assets/images/2_moon_spine.png',
-          isOpen: false),
+        coverAsset: 'assets/images/2_moon.png',
+        spineAsset: 'assets/images/2_moon_spine.png',
+      ),
       Book(
-          coverAsset: 'assets/images/3_dog.png',
-          spineAsset: 'assets/images/3_dog_spine.png',
-          isOpen: false),
+        coverAsset: 'assets/images/3_dog.png',
+        spineAsset: 'assets/images/3_dog_spine.png',
+      ),
       Book(
-          coverAsset: 'assets/images/4_bird.png',
-          spineAsset: 'assets/images/4_bird_spine.png',
-          isOpen: false),
+        coverAsset: 'assets/images/4_bird.png',
+        spineAsset: 'assets/images/4_bird_spine.png',
+      ),
       Book(
-          coverAsset: 'assets/images/1_stoic.png',
-          spineAsset: 'assets/images/1_stoic_spine.png',
-          isOpen: false),
+        coverAsset: 'assets/images/1_stoic.png',
+        spineAsset: 'assets/images/1_stoic_spine.png',
+      ),
       Book(
-          coverAsset: 'assets/images/2_moon.png',
-          spineAsset: 'assets/images/2_moon_spine.png',
-          isOpen: false),
+        coverAsset: 'assets/images/2_moon.png',
+        spineAsset: 'assets/images/2_moon_spine.png',
+      ),
       Book(
-          coverAsset: 'assets/images/3_dog.png',
-          spineAsset: 'assets/images/3_dog_spine.png',
-          isOpen: false),
+        coverAsset: 'assets/images/3_dog.png',
+        spineAsset: 'assets/images/3_dog_spine.png',
+      ),
       Book(
-          coverAsset: 'assets/images/4_bird.png',
-          spineAsset: 'assets/images/4_bird_spine.png',
-          isOpen: false),
+        coverAsset: 'assets/images/4_bird.png',
+        spineAsset: 'assets/images/4_bird_spine.png',
+      ),
       Book(
-          coverAsset: 'assets/images/1_stoic.png',
-          spineAsset: 'assets/images/1_stoic_spine.png',
-          isOpen: false),
+        coverAsset: 'assets/images/1_stoic.png',
+        spineAsset: 'assets/images/1_stoic_spine.png',
+      ),
       Book(
-          coverAsset: 'assets/images/2_moon.png',
-          spineAsset: 'assets/images/2_moon_spine.png',
-          isOpen: false),
+        coverAsset: 'assets/images/2_moon.png',
+        spineAsset: 'assets/images/2_moon_spine.png',
+      ),
       Book(
-          coverAsset: 'assets/images/3_dog.png',
-          spineAsset: 'assets/images/3_dog_spine.png',
-          isOpen: false),
+        coverAsset: 'assets/images/3_dog.png',
+        spineAsset: 'assets/images/3_dog_spine.png',
+      ),
       Book(
-          coverAsset: 'assets/images/4_bird.png',
-          spineAsset: 'assets/images/4_bird_spine.png',
-          isOpen: false),
+        coverAsset: 'assets/images/4_bird.png',
+        spineAsset: 'assets/images/4_bird_spine.png',
+      ),
     ];
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         body: Center(
-          child: Container(
+          child: SizedBox(
             height: 300, // Adjust as needed
             child: BookshelfWidget(books: books),
           ),
@@ -84,21 +84,19 @@ class _BookShelfPageState extends State<BookShelfPage> {
 }
 
 class BookWidget extends StatefulWidget {
-  final Book book;
-  final bool isOpen;
-
   const BookWidget({
-    Key? key,
+    super.key,
     required this.book,
     required this.isOpen,
-  }) : super(key: key);
+  });
+  final Book book;
+  final bool isOpen;
 
   @override
   _BookWidgetState createState() => _BookWidgetState();
 }
 
-class _BookWidgetState extends State<BookWidget>
-    with SingleTickerProviderStateMixin {
+class _BookWidgetState extends State<BookWidget> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animation;
 
@@ -109,9 +107,7 @@ class _BookWidgetState extends State<BookWidget>
       duration: const Duration(milliseconds: 500),
       vsync: this,
     );
-    _animation = Tween<double>(begin: -pi / 2, end: 0)
-        .chain(CurveTween(curve: Curves.easeInOut))
-        .animate(_controller);
+    _animation = Tween<double>(begin: -pi / 2, end: 0).chain(CurveTween(curve: Curves.easeInOut)).animate(_controller);
     _updateAnimationState();
   }
 
@@ -138,7 +134,7 @@ class _BookWidgetState extends State<BookWidget>
   @override
   Widget build(BuildContext context) {
     return Transform.translate(
-      offset: Offset(_BookShelfPageState.spineWidth, 0),
+      offset: const Offset(_BookShelfPageState.spineWidth, 0),
       child: AnimatedBuilder(
         animation: _animation,
         builder: (context, child) {
@@ -146,7 +142,7 @@ class _BookWidgetState extends State<BookWidget>
             transform: Matrix4.identity()
               ..setEntry(3, 2, 0.002)
               ..rotateY(_animation.value)
-              ..translate(0.0, 0.0, 0.0),
+              ..translate(0.0),
             alignment: Alignment.centerLeft,
             child: _buildBookContent(),
           );
@@ -159,7 +155,7 @@ class _BookWidgetState extends State<BookWidget>
     return Stack(
       children: [
         // Cover image
-        Container(
+        SizedBox(
           width: _BookShelfPageState.coverWidth,
           height: _BookShelfPageState.fixedHeight,
           child: Image.asset(
@@ -171,9 +167,9 @@ class _BookWidgetState extends State<BookWidget>
         Transform(
           transform: Matrix4.identity()
             ..rotateY(pi / 2)
-            ..translate(-_BookShelfPageState.spineWidth, 0.0, 0.0),
+            ..translate(-_BookShelfPageState.spineWidth),
           alignment: Alignment.centerLeft,
-          child: Container(
+          child: SizedBox(
             width: _BookShelfPageState.spineWidth,
             height: _BookShelfPageState.fixedHeight,
             child: Image.asset(
@@ -188,21 +184,19 @@ class _BookWidgetState extends State<BookWidget>
 }
 
 class Book {
-  final String coverAsset;
-  final String spineAsset;
-  bool isOpen;
-
   Book({
     required this.coverAsset,
     required this.spineAsset,
     this.isOpen = false,
   });
+  final String coverAsset;
+  final String spineAsset;
+  bool isOpen;
 }
 
 class BookshelfWidget extends StatefulWidget {
+  const BookshelfWidget({super.key, required this.books});
   final List<Book> books;
-
-  const BookshelfWidget({Key? key, required this.books}) : super(key: key);
 
   @override
   _BookshelfWidgetState createState() => _BookshelfWidgetState();
@@ -218,9 +212,9 @@ class _BookshelfWidgetState extends State<BookshelfWidget> {
   }
 
   void _toggleBook(int index) {
-    print("on tap gesture");
+    print('on tap gesture');
     setState(() {
-      for (int i = 0; i < _books.length; i++) {
+      for (var i = 0; i < _books.length; i++) {
         if (i == index) {
           _books[i].isOpen = !_books[i].isOpen;
         } else {
@@ -233,7 +227,7 @@ class _BookshelfWidgetState extends State<BookshelfWidget> {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      padding: EdgeInsets.only(left: 20.0),
+      padding: const EdgeInsets.only(left: 20),
       clipBehavior: Clip.none,
       scrollDirection: Axis.horizontal,
       itemCount: widget.books.length,
@@ -242,7 +236,7 @@ class _BookshelfWidgetState extends State<BookshelfWidget> {
           onTap: () => _toggleBook(index),
           behavior: HitTestBehavior.opaque,
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 0.0),
+            padding: const EdgeInsets.symmetric(),
             child: AnimatedBookWrapper(
               isOpen: _books[index].isOpen,
               child: BookWidget(
@@ -258,16 +252,15 @@ class _BookshelfWidgetState extends State<BookshelfWidget> {
 }
 
 class AnimatedBookWrapper extends StatelessWidget {
-  final Widget child;
-  final bool isOpen;
-  final Duration duration;
-
   const AnimatedBookWrapper({
-    Key? key,
+    super.key,
     required this.child,
     required this.isOpen,
     this.duration = const Duration(milliseconds: 300),
-  }) : super(key: key);
+  });
+  final Widget child;
+  final bool isOpen;
+  final Duration duration;
 
   @override
   Widget build(BuildContext context) {

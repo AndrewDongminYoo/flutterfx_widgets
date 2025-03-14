@@ -1,20 +1,11 @@
 import 'dart:ui' as ui;
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/foundation.dart' show kIsWeb;
 
 class ScratchToReveal extends StatefulWidget {
-  final Widget child;
-  final double width;
-  final double height;
-  final double minScratchPercentage;
-  final List<Color> gradientColors;
-  final VoidCallback? onComplete;
-  final bool enableHapticFeedback;
-  final bool enableSoundEffects;
-
   const ScratchToReveal({
-    Key? key,
+    super.key,
     required this.child,
     required this.width,
     required this.height,
@@ -27,14 +18,21 @@ class ScratchToReveal extends StatefulWidget {
     this.onComplete,
     this.enableHapticFeedback = true,
     this.enableSoundEffects = false,
-  }) : super(key: key);
+  });
+  final Widget child;
+  final double width;
+  final double height;
+  final double minScratchPercentage;
+  final List<Color> gradientColors;
+  final VoidCallback? onComplete;
+  final bool enableHapticFeedback;
+  final bool enableSoundEffects;
 
   @override
   State<ScratchToReveal> createState() => _ScratchToRevealState();
 }
 
-class _ScratchToRevealState extends State<ScratchToReveal>
-    with SingleTickerProviderStateMixin {
+class _ScratchToRevealState extends State<ScratchToReveal> with SingleTickerProviderStateMixin {
   late ui.Image? _scratchImage;
   final _path = Path();
   bool _isComplete = false;
@@ -56,14 +54,14 @@ class _ScratchToRevealState extends State<ScratchToReveal>
     );
 
     _scaleAnimation = TweenSequence([
-      TweenSequenceItem(tween: Tween(begin: 1.0, end: 1.5), weight: 1),
-      TweenSequenceItem(tween: Tween(begin: 1.5, end: 1.0), weight: 1),
+      TweenSequenceItem<double>(tween: Tween(begin: 1, end: 1.5), weight: 1),
+      TweenSequenceItem<double>(tween: Tween(begin: 1.5, end: 1), weight: 1),
     ]).animate(_animationController);
 
     _rotationAnimation = TweenSequence([
-      TweenSequenceItem(tween: Tween(begin: 0.0, end: 0.1), weight: 1),
-      TweenSequenceItem(tween: Tween(begin: 0.1, end: -0.1), weight: 1),
-      TweenSequenceItem(tween: Tween(begin: -0.1, end: 0.0), weight: 1),
+      TweenSequenceItem<double>(tween: Tween(begin: 0, end: 0.1), weight: 1),
+      TweenSequenceItem<double>(tween: Tween(begin: 0.1, end: -0.1), weight: 1),
+      TweenSequenceItem<double>(tween: Tween(begin: -0.1, end: 0), weight: 1),
     ]).animate(_animationController);
   }
 
@@ -167,13 +165,12 @@ class _ScratchToRevealState extends State<ScratchToReveal>
 }
 
 class ScratchPainter extends CustomPainter {
-  final ui.Image scratchImage;
-  final Path path;
-
   ScratchPainter({
     required this.scratchImage,
     required this.path,
   });
+  final ui.Image scratchImage;
+  final Path path;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -205,7 +202,7 @@ class ScratchPainter extends CustomPainter {
 }
 
 class ScratchToRevealDemo extends StatelessWidget {
-  const ScratchToRevealDemo({Key? key}) : super(key: key);
+  const ScratchToRevealDemo({super.key});
 
   @override
   Widget build(BuildContext context) {

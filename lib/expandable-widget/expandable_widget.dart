@@ -1,30 +1,29 @@
 import 'package:flutter/material.dart';
+
 import 'package:fx_2_folder/stacked-cards/stacked_card.dart';
 
 class DisclosureConfig {
-  final Duration expandDuration;
-  final Duration collapseDuration;
-  final Curve expandCurve;
-  final Curve collapseCurve;
-
   const DisclosureConfig({
     this.expandDuration = const Duration(milliseconds: 200),
     this.collapseDuration = const Duration(milliseconds: 200),
     this.expandCurve = Curves.easeOut,
     this.collapseCurve = Curves.easeIn,
   });
+  final Duration expandDuration;
+  final Duration collapseDuration;
+  final Curve expandCurve;
+  final Curve collapseCurve;
 }
 
 class DisclosureState extends InheritedWidget {
-  final bool isExpanded;
-  final VoidCallback toggleExpansion;
-
   const DisclosureState({
     super.key,
     required this.isExpanded,
     required this.toggleExpansion,
     required super.child,
   });
+  final bool isExpanded;
+  final VoidCallback toggleExpansion;
 
   static DisclosureState? of(BuildContext context) {
     return context.dependOnInheritedWidgetOfExactType<DisclosureState>();
@@ -38,14 +37,6 @@ class DisclosureState extends InheritedWidget {
 
 /// Main Disclosure widget that manages state and animations
 class Disclosure extends StatefulWidget {
-  final Widget? trigger;
-  final Widget content;
-  final bool initiallyExpanded;
-  final ValueChanged<bool>? onExpandedChanged;
-  final DisclosureConfig? config;
-  final BoxDecoration? decoration;
-  final EdgeInsetsGeometry padding;
-
   const Disclosure({
     super.key,
     this.trigger,
@@ -56,13 +47,19 @@ class Disclosure extends StatefulWidget {
     this.decoration,
     this.padding = const EdgeInsets.all(16),
   });
+  final Widget? trigger;
+  final Widget content;
+  final bool initiallyExpanded;
+  final ValueChanged<bool>? onExpandedChanged;
+  final DisclosureConfig? config;
+  final BoxDecoration? decoration;
+  final EdgeInsetsGeometry padding;
 
   @override
   State<Disclosure> createState() => _DisclosureState();
 }
 
-class _DisclosureState extends State<Disclosure>
-    with SingleTickerProviderStateMixin {
+class _DisclosureState extends State<Disclosure> with SingleTickerProviderStateMixin {
   late final AnimationController _controller;
   late final Animation<double> _heightFactor;
   late bool _isExpanded;
@@ -72,17 +69,17 @@ class _DisclosureState extends State<Disclosure>
     super.initState();
     _isExpanded = widget.initiallyExpanded;
     _controller = AnimationController(
-      duration:
-          widget.config?.expandDuration ?? const Duration(milliseconds: 200),
-      reverseDuration:
-          widget.config?.collapseDuration ?? const Duration(milliseconds: 200),
+      duration: widget.config?.expandDuration ?? const Duration(milliseconds: 200),
+      reverseDuration: widget.config?.collapseDuration ?? const Duration(milliseconds: 200),
       vsync: this,
     );
-    _heightFactor = _controller.drive(CurveTween(
-      curve: _isExpanded
-          ? (widget.config?.expandCurve ?? Curves.easeOut)
-          : (widget.config?.collapseCurve ?? Curves.easeIn),
-    ));
+    _heightFactor = _controller.drive(
+      CurveTween(
+        curve: _isExpanded
+            ? (widget.config?.expandCurve ?? Curves.easeOut)
+            : (widget.config?.collapseCurve ?? Curves.easeIn),
+      ),
+    );
 
     if (_isExpanded) {
       _controller.value = 1.0;
@@ -114,7 +111,7 @@ class _DisclosureState extends State<Disclosure>
     return DisclosureState(
       isExpanded: _isExpanded,
       toggleExpansion: _handleTap,
-      child: Container(
+      child: DecoratedBox(
         decoration: widget.decoration ??
             BoxDecoration(
               border: Border.all(color: theme.dividerColor),
@@ -134,10 +131,8 @@ class _DisclosureState extends State<Disclosure>
                       AnimatedRotation(
                         turns: _isExpanded ? 0.5 : 0,
                         duration: _isExpanded
-                            ? (widget.config?.expandDuration ??
-                                const Duration(milliseconds: 200))
-                            : (widget.config?.collapseDuration ??
-                                const Duration(milliseconds: 200)),
+                            ? (widget.config?.expandDuration ?? const Duration(milliseconds: 200))
+                            : (widget.config?.collapseDuration ?? const Duration(milliseconds: 200)),
                         child: const Icon(Icons.keyboard_arrow_down),
                       ),
                     ],
@@ -167,14 +162,13 @@ class _DisclosureState extends State<Disclosure>
 }
 
 class DisclosureTrigger extends StatelessWidget {
-  final Widget child;
-  final EdgeInsetsGeometry padding;
-
   const DisclosureTrigger({
     super.key,
     required this.child,
     this.padding = const EdgeInsets.all(16),
   });
+  final Widget child;
+  final EdgeInsetsGeometry padding;
 
   @override
   Widget build(BuildContext context) {
@@ -205,7 +199,7 @@ class DisclosureTrigger extends StatelessWidget {
 }
 
 class ExpandableWidgetDemo extends StatefulWidget {
-  const ExpandableWidgetDemo({Key? key}) : super(key: key);
+  const ExpandableWidgetDemo({super.key});
 
   @override
   State<ExpandableWidgetDemo> createState() => _ExpandableWidgetDemoState();
@@ -229,18 +223,13 @@ class _ExpandableWidgetDemoState extends State<ExpandableWidgetDemo> {
             children: [
               SafeArea(
                 child: Padding(
-                  padding: const EdgeInsets.all(16.0),
+                  padding: const EdgeInsets.all(16),
                   child: Disclosure(
                     trigger: const Text(
                       'Show more',
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
-                    config: const DisclosureConfig(
-                      expandDuration: Duration(milliseconds: 200),
-                      collapseDuration: Duration(milliseconds: 200),
-                      expandCurve: Curves.easeOut,
-                      collapseCurve: Curves.easeIn,
-                    ),
+                    config: const DisclosureConfig(),
                     content: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [

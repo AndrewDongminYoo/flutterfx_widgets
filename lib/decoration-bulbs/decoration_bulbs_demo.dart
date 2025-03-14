@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+
 import 'package:fx_2_folder/decoration-bulbs/decoration_bulbs.dart';
 
 class DecorationBulbsDemo extends StatefulWidget {
-  const DecorationBulbsDemo({Key? key}) : super(key: key);
+  const DecorationBulbsDemo({super.key});
 
   @override
   State<DecorationBulbsDemo> createState() => _InteractiveLightsShowcaseState();
@@ -31,7 +32,6 @@ class _InteractiveLightsShowcaseState extends State<DecorationBulbsDemo> {
       title: 'Premium Card',
       builder: (showLights, strategy) => showLights
           ? DecorativeLightsDecorator(
-              numberOfLights: 10,
               colors: const [
                 Colors.purple,
                 Colors.pink,
@@ -275,8 +275,7 @@ class _InteractiveLightsShowcaseState extends State<DecorationBulbsDemo> {
                   horizontal: 24,
                   vertical: 32,
                 ),
-                child: _items[_currentIndex]
-                    .builder(_showLights, _currentStrategy),
+                child: _items[_currentIndex].builder(_showLights, _currentStrategy),
               ),
             ),
           ),
@@ -299,9 +298,9 @@ class _InteractiveLightsShowcaseState extends State<DecorationBulbsDemo> {
                     children: [
                       IconButton(
                         onPressed: _toggleLights,
-                        icon: Icon(_showLights
-                            ? Icons.lightbulb
-                            : Icons.lightbulb_outline),
+                        icon: Icon(
+                          _showLights ? Icons.lightbulb : Icons.lightbulb_outline,
+                        ),
                         iconSize: 32,
                         color: _showLights ? Colors.yellow : Colors.white,
                       ),
@@ -318,14 +317,10 @@ class _InteractiveLightsShowcaseState extends State<DecorationBulbsDemo> {
                     ],
                   ),
                   IconButton(
-                    onPressed: _currentIndex < _items.length - 1
-                        ? _navigateRight
-                        : null,
+                    onPressed: _currentIndex < _items.length - 1 ? _navigateRight : null,
                     icon: const Icon(Icons.arrow_forward),
                     iconSize: 32,
-                    color: _currentIndex < _items.length - 1
-                        ? Colors.white
-                        : Colors.grey,
+                    color: _currentIndex < _items.length - 1 ? Colors.white : Colors.grey,
                   ),
                 ],
               ),
@@ -385,12 +380,10 @@ class _InteractiveLightsShowcaseState extends State<DecorationBulbsDemo> {
 }
 
 class ShowcaseItem {
-  final String title;
-  final Widget Function(bool showLights, LightAnimationStrategy strategy)
-      builder;
-
   ShowcaseItem({
     required this.title,
     required this.builder,
   });
+  final String title;
+  final Widget Function(bool showLights, LightAnimationStrategy strategy) builder;
 }

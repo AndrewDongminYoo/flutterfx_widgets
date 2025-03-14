@@ -1,10 +1,9 @@
 import 'dart:math';
-import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
 class TextOnPathEditor extends StatefulWidget {
-  const TextOnPathEditor({Key? key}) : super(key: key);
+  const TextOnPathEditor({super.key});
 
   @override
   State<TextOnPathEditor> createState() => _TextOnPathEditorState();
@@ -12,17 +11,17 @@ class TextOnPathEditor extends StatefulWidget {
 
 class _TextOnPathEditorState extends State<TextOnPathEditor> {
   // Text properties
-  String text = "TEXT ON PATH";
-  double fontSize = 52.0;
-  double spread = 1.0;
-  double magnify = 1.0;
+  String text = 'TEXT ON PATH';
+  double fontSize = 52;
+  double spread = 1;
+  double magnify = 1;
 
   // Control points
   List<Offset> controlPoints = [
-    Offset(100, 200),
-    Offset(200, 100),
-    Offset(300, 300),
-    Offset(400, 200),
+    const Offset(100, 200),
+    const Offset(200, 100),
+    const Offset(300, 300),
+    const Offset(400, 200),
   ];
 
   int? selectedPointIndex;
@@ -59,8 +58,8 @@ class _TextOnPathEditorState extends State<TextOnPathEditor> {
 
   Widget _buildControlPanel() {
     return Container(
-      padding: EdgeInsets.all(16),
-      decoration: BoxDecoration(
+      padding: const EdgeInsets.all(16),
+      decoration: const BoxDecoration(
         color: Colors.black,
         boxShadow: [
           BoxShadow(
@@ -75,18 +74,18 @@ class _TextOnPathEditorState extends State<TextOnPathEditor> {
           // Text Input
           TextField(
             controller: textController,
-            style: TextStyle(color: Colors.white),
+            style: const TextStyle(color: Colors.white),
             decoration: InputDecoration(
               labelText: 'Text on Path',
-              labelStyle: TextStyle(color: Colors.white),
+              labelStyle: const TextStyle(color: Colors.white),
               suffixIcon: IconButton(
-                icon: Icon(Icons.clear, color: Colors.white),
+                icon: const Icon(Icons.clear, color: Colors.white),
                 onPressed: () => textController.clear(),
               ),
-              enabledBorder: UnderlineInputBorder(
+              enabledBorder: const UnderlineInputBorder(
                 borderSide: BorderSide(color: Colors.white),
               ),
-              focusedBorder: UnderlineInputBorder(
+              focusedBorder: const UnderlineInputBorder(
                 borderSide: BorderSide(color: Colors.white),
               ),
             ),
@@ -96,7 +95,7 @@ class _TextOnPathEditorState extends State<TextOnPathEditor> {
               });
             },
           ),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
 
           // Font Size Slider
           _buildSliderControl(
@@ -116,7 +115,7 @@ class _TextOnPathEditorState extends State<TextOnPathEditor> {
             label: 'Spread',
             value: spread,
             min: 0.5,
-            max: 2.0,
+            max: 2,
             onChanged: (value) {
               setState(() {
                 spread = value;
@@ -129,7 +128,7 @@ class _TextOnPathEditorState extends State<TextOnPathEditor> {
             label: 'Magnify',
             value: magnify,
             min: 0.5,
-            max: 2.0,
+            max: 2,
             onChanged: (value) {
               setState(() {
                 magnify = value;
@@ -154,9 +153,11 @@ class _TextOnPathEditorState extends State<TextOnPathEditor> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(label, style: TextStyle(color: Colors.white)),
-            Text(value.toStringAsFixed(1),
-                style: TextStyle(color: Colors.white)),
+            Text(label, style: const TextStyle(color: Colors.white)),
+            Text(
+              value.toStringAsFixed(1),
+              style: const TextStyle(color: Colors.white),
+            ),
           ],
         ),
         SliderTheme(
@@ -204,9 +205,9 @@ class _TextOnPathEditorState extends State<TextOnPathEditor> {
   }
 
   void _handlePanDown(DragDownDetails details, BoxConstraints constraints) {
-    final Offset localPosition = details.localPosition;
+    final localPosition = details.localPosition;
 
-    for (int i = 0; i < controlPoints.length; i++) {
+    for (var i = 0; i < controlPoints.length; i++) {
       if ((localPosition - controlPoints[i]).distance < 20) {
         setState(() {
           selectedPointIndex = i;
@@ -232,13 +233,6 @@ class _TextOnPathEditorState extends State<TextOnPathEditor> {
 }
 
 class TextOnPathPainter extends CustomPainter {
-  final String text;
-  final double fontSize;
-  final double spread;
-  final double magnify;
-  final List<Offset> controlPoints;
-  final int? selectedPointIndex;
-
   TextOnPathPainter({
     required this.text,
     required this.fontSize,
@@ -247,6 +241,12 @@ class TextOnPathPainter extends CustomPainter {
     required this.controlPoints,
     this.selectedPointIndex,
   });
+  final String text;
+  final double fontSize;
+  final double spread;
+  final double magnify;
+  final List<Offset> controlPoints;
+  final int? selectedPointIndex;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -280,7 +280,7 @@ class TextOnPathPainter extends CustomPainter {
   }
 
   void _drawControlPoints(Canvas canvas) {
-    for (int i = 0; i < controlPoints.length; i++) {
+    for (var i = 0; i < controlPoints.length; i++) {
       final paint = Paint()
         ..color = i == selectedPointIndex ? Colors.white : Colors.white70
         ..style = PaintingStyle.fill;
@@ -311,15 +311,15 @@ class TextOnPathPainter extends CustomPainter {
       controlPoints[3].dy,
     );
 
-    final PathMetric pathMetric = path.computeMetrics().first;
-    final double pathLength = pathMetric.length;
+    final pathMetric = path.computeMetrics().first;
+    final pathLength = pathMetric.length;
 
     final textStyle = TextStyle(
       fontSize: fontSize * magnify,
       color: Colors.white,
     );
 
-    final textSpan = TextSpan(text: "A", style: textStyle);
+    final textSpan = TextSpan(text: 'A', style: textStyle);
     final textPainter = TextPainter(
       text: textSpan,
       textDirection: TextDirection.ltr,
@@ -329,14 +329,14 @@ class TextOnPathPainter extends CustomPainter {
     final charWidth = textPainter.width * spread;
     final totalTextLength = charWidth * text.length;
 
-    double startOffset = (pathLength - totalTextLength) / 2;
+    var startOffset = (pathLength - totalTextLength) / 2;
     if (startOffset < 0) startOffset = 0;
 
-    for (int i = 0; i < text.length; i++) {
-      final double charOffset = startOffset + (i * charWidth);
+    for (var i = 0; i < text.length; i++) {
+      final charOffset = startOffset + (i * charWidth);
       if (charOffset > pathLength) break;
 
-      final Tangent? tangent = pathMetric.getTangentForOffset(charOffset);
+      final tangent = pathMetric.getTangentForOffset(charOffset);
       if (tangent == null) continue;
 
       final charTextPainter = TextPainter(

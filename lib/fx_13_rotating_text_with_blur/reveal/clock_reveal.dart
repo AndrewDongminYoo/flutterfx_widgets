@@ -1,11 +1,12 @@
 import 'dart:math' as math;
 import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 // Keep existing ClockHandRevealClipper unchanged
 class ClockHandRevealClipper extends CustomClipper<Path> {
-  final double progress;
   ClockHandRevealClipper({required this.progress});
+  final double progress;
 
   @override
   Path getClip(Size size) {
@@ -16,7 +17,7 @@ class ClockHandRevealClipper extends CustomClipper<Path> {
       return Path()..addRect(Rect.fromLTWH(0, 0, size.width, size.height));
     }
 
-    final startAngle = -math.pi / 2;
+    const startAngle = -math.pi / 2;
     final sweepAngle = 2 * math.pi * progress;
 
     final path = Path();
@@ -33,21 +34,19 @@ class ClockHandRevealClipper extends CustomClipper<Path> {
   }
 
   @override
-  bool shouldReclip(ClockHandRevealClipper oldClipper) =>
-      oldClipper.progress != progress;
+  bool shouldReclip(ClockHandRevealClipper oldClipper) => oldClipper.progress != progress;
 }
 
 // Clipper for the blur wedge
 class BlurWedgeClipper extends CustomClipper<Path> {
-  final double progress;
-  final double wedgeAngle;
-  final double bandWidth;
-
   BlurWedgeClipper({
     required this.progress,
     required this.wedgeAngle,
     required this.bandWidth,
   });
+  final double progress;
+  final double wedgeAngle;
+  final double bandWidth;
 
   @override
   Path getClip(Size size) {
@@ -70,24 +69,21 @@ class BlurWedgeClipper extends CustomClipper<Path> {
 
   @override
   bool shouldReclip(BlurWedgeClipper oldClipper) =>
-      oldClipper.progress != progress ||
-      oldClipper.wedgeAngle != wedgeAngle ||
-      oldClipper.bandWidth != bandWidth;
+      oldClipper.progress != progress || oldClipper.wedgeAngle != wedgeAngle || oldClipper.bandWidth != bandWidth;
 }
 
 // Gradient mask painter
 class GradientMaskPainter extends CustomPainter {
-  final double progress;
-  final double wedgeAngle;
-  final double bandWidth;
-  final double wedgeOpacity;
-
   GradientMaskPainter({
     required this.progress,
     required this.wedgeAngle,
     required this.bandWidth,
     required this.wedgeOpacity,
   });
+  final double progress;
+  final double wedgeAngle;
+  final double bandWidth;
+  final double wedgeOpacity;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -133,6 +129,17 @@ class GradientMaskPainter extends CustomPainter {
 }
 
 class ClockHandRevealWidget extends StatefulWidget {
+  const ClockHandRevealWidget({
+    super.key,
+    required this.child,
+    this.duration = const Duration(seconds: 2),
+    this.autoStart = true,
+    this.onAnimationComplete,
+    this.blurSigma = 5.0,
+    this.wedgeAngleDegrees = 10.0,
+    this.wedgeOpacity = 0.7,
+    this.blurBandWidth = 0.15,
+  });
   final Widget child;
   final Duration duration;
   final bool autoStart;
@@ -142,24 +149,11 @@ class ClockHandRevealWidget extends StatefulWidget {
   final double wedgeOpacity;
   final double blurBandWidth;
 
-  const ClockHandRevealWidget({
-    Key? key,
-    required this.child,
-    this.duration = const Duration(seconds: 2),
-    this.autoStart = true,
-    this.onAnimationComplete,
-    this.blurSigma = 5.0,
-    this.wedgeAngleDegrees = 10.0,
-    this.wedgeOpacity = 0.7,
-    this.blurBandWidth = 0.15,
-  }) : super(key: key);
-
   @override
   ClockHandRevealWidgetState createState() => ClockHandRevealWidgetState();
 }
 
-class ClockHandRevealWidgetState extends State<ClockHandRevealWidget>
-    with SingleTickerProviderStateMixin {
+class ClockHandRevealWidgetState extends State<ClockHandRevealWidget> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animation;
 
@@ -176,19 +170,21 @@ class ClockHandRevealWidgetState extends State<ClockHandRevealWidget>
       });
 
     _animation = Tween<double>(
-      begin: 0.0,
-      end: 1.0,
-    ).animate(CurvedAnimation(
-      parent: _controller,
-      curve: Curves.linear,
-    ));
+      begin: 0,
+      end: 1,
+    ).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: Curves.linear,
+      ),
+    );
 
     if (widget.autoStart) {
       _controller.forward();
     }
   }
 
-  void startReveal() => _controller.forward(from: 0.0);
+  void startReveal() => _controller.forward(from: 0);
   void reverseReveal() => _controller.reverse();
   double get progress => _controller.value;
 
@@ -231,8 +227,7 @@ class ClockHandRevealWidgetState extends State<ClockHandRevealWidget>
                       child: CustomPaint(
                         painter: GradientMaskPainter(
                           progress: _animation.value,
-                          wedgeAngle:
-                              widget.wedgeAngleDegrees * (math.pi / 180),
+                          wedgeAngle: widget.wedgeAngleDegrees * (math.pi / 180),
                           bandWidth: widget.blurBandWidth,
                           wedgeOpacity: widget.wedgeOpacity,
                         ),
@@ -251,17 +246,14 @@ class ClockHandRevealWidgetState extends State<ClockHandRevealWidget>
 
 // Example usage remains the same
 class ExampleUsage extends StatelessWidget {
-  const ExampleUsage({Key? key}) : super(key: key);
+  const ExampleUsage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Center(
       child: ClockHandRevealWidget(
-        duration: const Duration(seconds: 2),
-        blurSigma: 10.0,
-        wedgeAngleDegrees: 15.0,
-        wedgeOpacity: 0.7,
-        blurBandWidth: 0.15,
+        blurSigma: 10,
+        wedgeAngleDegrees: 15,
         child: Container(
           width: 300,
           height: 300,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:fx_2_folder/progress-bar/progress_bar.dart';
 
 class LinearProgressStrategy implements ProgressAnimationStrategy {
@@ -26,8 +27,6 @@ class LinearProgressStrategy implements ProgressAnimationStrategy {
                   gradient: style.gradientColors != null
                       ? LinearGradient(
                           colors: style.gradientColors!,
-                          begin: Alignment.centerLeft,
-                          end: Alignment.centerRight,
                         )
                       : null,
                 ),

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+
 import 'package:fx_2_folder/background-exploding-beam/background_beam_explosion.dart';
 
 class ExplodingBeamDemo extends StatefulWidget {
-  const ExplodingBeamDemo({Key? key}) : super(key: key);
+  const ExplodingBeamDemo({super.key});
 
   @override
   State<ExplodingBeamDemo> createState() => _DemoState();
@@ -21,10 +22,13 @@ class _DemoState extends State<ExplodingBeamDemo> {
           children: [
             Positioned.fill(
               child: BackgroundBeamsWithCollision(
-                child: Text("Exploding Beam!",
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 34)), // Optional child widget
+                child: Text(
+                  'Exploding Beam!',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 34,
+                  ),
+                ), // Optional child widget
               ),
             ),
           ],

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+
 import 'package:fx_2_folder/bottom-sheet/bottom_sheet.dart';
 import 'package:fx_2_folder/bottom-sheet/grid.dart';
 
 class BottomSheetDemo extends StatefulWidget {
-  const BottomSheetDemo({Key? key}) : super(key: key);
+  const BottomSheetDemo({super.key});
 
   @override
   State<BottomSheetDemo> createState() => _BottomSheetDemoState();
@@ -15,7 +16,6 @@ class _BottomSheetDemoState extends State<BottomSheetDemo> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        top: true,
         bottom: false,
         left: false,
         right: false,
@@ -51,12 +51,11 @@ class _BottomSheetDemoState extends State<BottomSheetDemo> {
                     const SizedBox(width: 12),
                     Text(
                       'Your App',
-                      style:
-                          Theme.of(context).textTheme.headlineMedium?.copyWith(
-                                color: Colors.grey[900],
-                                fontWeight: FontWeight.bold,
-                                letterSpacing: 0.5,
-                              ),
+                      style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                            color: Colors.grey[900],
+                            fontWeight: FontWeight.bold,
+                            letterSpacing: 0.5,
+                          ),
                     ),
                   ],
                 ),
@@ -74,10 +73,7 @@ class _BottomSheetDemoState extends State<BottomSheetDemo> {
                       const SizedBox(height: 24),
                       Text(
                         'Show bottomsheet',
-                        style: Theme.of(context)
-                            .textTheme
-                            .headlineMedium
-                            ?.copyWith(
+                        style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                               color: Colors.grey[800],
                               fontWeight: FontWeight.w500,
                               letterSpacing: 0.8,
@@ -93,7 +89,7 @@ class _BottomSheetDemoState extends State<BottomSheetDemo> {
                       ),
                       const SizedBox(height: 32),
                       ElevatedButton(
-                        onPressed: () => _drawerController.toggle(),
+                        onPressed: _drawerController.toggle,
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.grey[800],
                           foregroundColor: Colors.white,
@@ -103,7 +99,8 @@ class _BottomSheetDemoState extends State<BottomSheetDemo> {
                           ),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(
-                                12), // More modern, squared corners
+                              12,
+                            ), // More modern, squared corners
                           ),
                           elevation: 0,
                         ),

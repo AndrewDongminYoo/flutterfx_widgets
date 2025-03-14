@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
+import 'package:google_fonts/google_fonts.dart';
+
 import 'package:fx_2_folder/avatar-circles/avatar_circles.dart';
-import 'package:fx_2_folder/background-aurora/aurora_widget.dart';
 import 'package:fx_2_folder/background-aurora/aurora_widget_demo.dart';
 import 'package:fx_2_folder/background-beam/background_beam_demo.dart';
 import 'package:fx_2_folder/background-exploding-beam/background_beam_explosion_demo.dart';
@@ -9,85 +11,73 @@ import 'package:fx_2_folder/background-flicker-grid/background_flicker_grid.dart
 import 'package:fx_2_folder/background-flickering-card/background_flickering_card.dart';
 import 'package:fx_2_folder/background-grid-blinker/background_grid_blinker.dart';
 import 'package:fx_2_folder/background-grid-motion/background_grid_motion.dart';
-import 'package:fx_2_folder/background-orbiral-star/background_orbital_star.dart';
+import 'package:fx_2_folder/background-orbital-star/background_orbital_star.dart';
 import 'package:fx_2_folder/background-ripples/background_ripples.dart';
-import 'package:fx_2_folder/butterfly-interactive/butterfly_interactive_demo.dart';
-import 'package:fx_2_folder/debug-overlay-3D/debug_overlay_3d.dart';
-import 'package:fx_2_folder/decoration-bulbs/decoration_bulbs_demo.dart';
-import 'package:fx_2_folder/decoration-thread/decoration_thread.dart';
-import 'package:fx_2_folder/decoration-thread/decoration_thread_demo_1.dart';
-import 'package:fx_2_folder/expandable-widget/expandable_widget.dart';
-import 'package:fx_2_folder/filter-wave/wave_filter.dart';
-import 'package:fx_2_folder/fractal-glass/fractal_glass.dart';
-import 'package:fx_2_folder/fx_14_text_chaotic_spring/demo.dart';
-import 'package:fx_2_folder/gemini-splash/gemini_splash_demo.dart';
-import 'package:fx_2_folder/grid-animated/grid_animated.dart';
-import 'package:fx_2_folder/infinite-scrolling/infinite_scrolling.dart';
-import 'package:fx_2_folder/infinite-scrolling/infinite_scrolling_3d.dart';
-import 'package:fx_2_folder/loader-avatars/loader_avatars_demo.dart';
-import 'package:fx_2_folder/loader-avatars/loader_avatars_demo_2.dart';
-import 'package:fx_2_folder/loader-square/loader_square_demo.dart';
-import 'package:fx_2_folder/motion-blur/motion_blur_demo.dart';
-import 'package:fx_2_folder/noise/noise.dart';
-import 'package:fx_2_folder/noise/noise_demo.dart';
-import 'package:fx_2_folder/notification-list/notification_list.dart';
-import 'package:fx_2_folder/orbit-blur/orbit_blur.dart';
-import 'package:fx_2_folder/orbit-blur/orbit_blur_demo.dart';
 import 'package:fx_2_folder/book-open/book_open_demo.dart';
 import 'package:fx_2_folder/books/books.dart';
 import 'package:fx_2_folder/bottom-sheet/bottom_sheet_demo.dart';
+import 'package:fx_2_folder/butterfly-interactive/butterfly_interactive_demo.dart';
 import 'package:fx_2_folder/butterfly/butterfly_demo.dart';
 import 'package:fx_2_folder/button-shimmer/button_shimmer_demo.dart';
 import 'package:fx_2_folder/celebrate/celebrate_demo.dart';
 import 'package:fx_2_folder/circles_selector/CirclesHomeWidget.dart';
 import 'package:fx_2_folder/confetti/confetti_demo.dart';
+import 'package:fx_2_folder/debug-overlay-3D/debug_overlay_3d.dart';
+import 'package:fx_2_folder/decoration-bulbs/decoration_bulbs_demo.dart';
+import 'package:fx_2_folder/decoration-thread/decoration_thread_demo_1.dart';
 import 'package:fx_2_folder/dots/dots_demo.dart';
+import 'package:fx_2_folder/expandable-widget/expandable_widget.dart';
 import 'package:fx_2_folder/folder_shape/folder_home.dart';
+import 'package:fx_2_folder/fractal-glass/fractal_glass.dart';
 import 'package:fx_2_folder/frosty_card/frosty_card.dart';
 import 'package:fx_2_folder/fx_10_hyper_text/hyper_text_demo.dart';
 import 'package:fx_2_folder/fx_11_typing_animation/typing_anim_demo.dart';
 import 'package:fx_2_folder/fx_12_rotating_text/text_rotate_demo.dart';
 import 'package:fx_2_folder/fx_13_rotating_text_with_blur/text_rotate_blur_demo.dart';
+import 'package:fx_2_folder/fx_14_text_chaotic_spring/demo.dart';
 import 'package:fx_2_folder/fx_14_text_reveal/text_reveal_demo.dart';
-import 'package:fx_2_folder/fx_7_border_beam/border_beam.dart';
 import 'package:fx_2_folder/fx_7_border_beam/border_beam_demo.dart';
 import 'package:fx_2_folder/fx_8_meteor_border/meteors_demo.dart';
 import 'package:fx_2_folder/fx_9_neon_card/neon_card_demo.dart';
-import 'package:fx_2_folder/globe/3d_cloude_demo.dart';
+import 'package:fx_2_folder/gemini-splash/gemini_splash_demo.dart';
+import 'package:fx_2_folder/globe/3d_cloud_demo.dart';
+import 'package:fx_2_folder/grid-animated/grid_animated.dart';
+import 'package:fx_2_folder/infinite-scrolling/infinite_scrolling.dart';
+import 'package:fx_2_folder/infinite-scrolling/infinite_scrolling_3d.dart';
+import 'package:fx_2_folder/light-bulb-night-mode/light_bulb_demo.dart';
 import 'package:fx_2_folder/light_effect/light_effect_demo.dart';
+import 'package:fx_2_folder/loader-avatars/loader_avatars_demo.dart';
+import 'package:fx_2_folder/loader-avatars/loader_avatars_demo_2.dart';
 import 'package:fx_2_folder/loader-sphere/loader_sphere_demo.dart';
+import 'package:fx_2_folder/loader-square/loader_square_demo.dart';
+import 'package:fx_2_folder/noise/noise_demo.dart';
+import 'package:fx_2_folder/notification-list/notification_list.dart';
+import 'package:fx_2_folder/orbit-blur/orbit_blur_demo.dart';
 import 'package:fx_2_folder/orbit/orbit_demo.dart';
 import 'package:fx_2_folder/page-flip/page_flip.dart';
 import 'package:fx_2_folder/particles-github-spark/particles_github_spark_demo.dart';
 import 'package:fx_2_folder/particles-spark-loader/particles_spark_loader_demo.dart';
 import 'package:fx_2_folder/particles/particles_demo.dart';
 import 'package:fx_2_folder/primitives/primitives_demo.dart';
-import 'package:fx_2_folder/progress-bar/progress_bar_demo.dart';
-import 'package:fx_2_folder/progress-bar/progress_bar_demo_2.dart';
 import 'package:fx_2_folder/scratch-to-reveal/scratch_to_reveal.dart';
 import 'package:fx_2_folder/scroll-progress/scroll_progress_demo.dart';
 import 'package:fx_2_folder/shader-learning/shader_1.dart';
-import 'package:fx_2_folder/slider/slider.dart';
 import 'package:fx_2_folder/slider/slider_demo.dart';
 import 'package:fx_2_folder/smoke/smoke.dart';
 import 'package:fx_2_folder/splash-door-open/splash_door_open.dart';
-import 'package:fx_2_folder/splash-reveal/sample_home_screen.dart';
 import 'package:fx_2_folder/splash-reveal/splash_demo.dart';
+import 'package:fx_2_folder/stacked-cards/stacked_card.dart';
 import 'package:fx_2_folder/stacked-expand-cards/stacked_expand_card.dart';
 import 'package:fx_2_folder/stacked-scroll/stacked_scroll_demo.dart';
-import 'package:fx_2_folder/light-bulb-night-mode/light_bulb_demo.dart';
 import 'package:fx_2_folder/text-3d-pop/text_3d_pop_demo.dart';
 import 'package:fx_2_folder/text-morph/text_morph.dart';
 import 'package:fx_2_folder/text-on-path/text_on_path_demo.dart';
-import 'package:fx_2_folder/stacked-cards/stacked_card.dart';
 import 'package:fx_2_folder/text-shine/text_shine.dart';
-import 'package:fx_2_folder/thanos-snap/thanos_snap_demo.dart';
 import 'package:fx_2_folder/ticker/ticker.dart';
 import 'package:fx_2_folder/toolbar-search/toolbar_search.dart';
 import 'package:fx_2_folder/tree/tree.dart';
 import 'package:fx_2_folder/vinyl/vinyl.dart';
 import 'package:fx_2_folder/visibility/blur_fade.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 void main() => runApp(const AnimationShowcaseApp());
 
@@ -101,7 +91,7 @@ class AnimationShowcaseApp extends StatelessWidget {
       title: 'fx-widget Showcase',
       theme: ThemeData.dark().copyWith(
         primaryColor: const Color(0xFF1E1E1E),
-        scaffoldBackgroundColor: Color.fromARGB(255, 0, 0, 0),
+        scaffoldBackgroundColor: const Color.fromARGB(255, 0, 0, 0),
         cardColor: const Color(0xFF2C2C2C),
         textTheme: GoogleFonts.robotoMonoTextTheme(
           Theme.of(context).textTheme,
@@ -113,25 +103,27 @@ class AnimationShowcaseApp extends StatelessWidget {
 }
 
 class AnimationExample {
-  final String title;
-  final Widget Function(BuildContext) builder;
-  final Color? appBarColor;
-  final bool isFullScreen;
-
   AnimationExample({
     required this.title,
     required this.builder,
     this.appBarColor,
     this.isFullScreen = false,
   });
+  final String title;
+  final Widget Function(BuildContext) builder;
+  final Color? appBarColor;
+  final bool isFullScreen;
 }
 
 class HomeScreen extends StatelessWidget {
+  HomeScreen({super.key});
   final List<AnimationExample> examples = [
     AnimationExample(
       title: 'Folder',
       builder: (context) => const FolderHomeWidget(
-          curve: Curves.easeInOutBack, title: 'EaseInOutBack'),
+        curve: Curves.easeInOutBack,
+        title: 'EaseInOutBack',
+      ),
     ),
     AnimationExample(
       title: 'Smoke',
@@ -141,8 +133,7 @@ class HomeScreen extends StatelessWidget {
     ),
     AnimationExample(
       title: 'Books',
-      builder: (context) =>
-          const BookShelfPage(title: 'Flutter Demo Home Page'),
+      builder: (context) => const BookShelfPage(title: 'Flutter Demo Home Page'),
     ),
     AnimationExample(
       title: 'CircleSelector',
@@ -156,72 +147,72 @@ class HomeScreen extends StatelessWidget {
     ),
     AnimationExample(
       title: 'BlurFade',
-      builder: (context) => BlurFadeExample(),
+      builder: (context) => const BlurFadeExample(),
       appBarColor: Colors.black,
     ),
     AnimationExample(
       title: 'FrostyCard[WIP]',
-      builder: (context) => FrostyCardDemo(),
+      builder: (context) => const FrostyCardDemo(),
       appBarColor: Colors.black,
     ),
     AnimationExample(
       title: 'Border beam',
-      builder: (context) => BorderBeamHomeWidget(),
+      builder: (context) => const BorderBeamHomeWidget(),
       appBarColor: Colors.black,
     ),
     AnimationExample(
       title: 'Meteors',
-      builder: (context) => MeteorDemo(),
+      builder: (context) => const MeteorDemo(),
       appBarColor: Colors.black,
     ),
     AnimationExample(
       title: 'Neon Card',
-      builder: (context) => NeonGradientCardDemo(),
+      builder: (context) => const NeonGradientCardDemo(),
       appBarColor: Colors.black,
     ),
     AnimationExample(
       title: 'Hyper Text',
-      builder: (context) => HyperTextDemo(),
+      builder: (context) => const HyperTextDemo(),
       appBarColor: Colors.black,
     ),
     AnimationExample(
       title: 'Typing animation',
-      builder: (context) => TypingAnimationDemo(),
+      builder: (context) => const TypingAnimationDemo(),
       appBarColor: Colors.black,
     ),
     AnimationExample(
       title: 'RotatingText',
-      builder: (context) => TextRotateDemo(),
+      builder: (context) => const TextRotateDemo(),
       appBarColor: Colors.black,
     ),
     AnimationExample(
       title: 'TextReveal',
-      builder: (context) => AnimationDemoScreen(),
+      builder: (context) => const AnimationDemoScreen(),
       appBarColor: Colors.black,
     ),
     AnimationExample(
       title: 'Globe of Logos',
-      builder: (context) => TechStackDemo(),
+      builder: (context) => const TechStackDemo(),
       appBarColor: Colors.black,
     ),
     AnimationExample(
       title: 'Celebrate',
-      builder: (context) => CelebrateHomeWidget(),
+      builder: (context) => const CelebrateHomeWidget(),
       appBarColor: Colors.black,
     ),
     AnimationExample(
       title: 'LightEffect',
-      builder: (context) => LightEffectWidgetDemo(),
+      builder: (context) => const LightEffectWidgetDemo(),
       appBarColor: Colors.black,
     ),
     AnimationExample(
       title: 'Orbit',
-      builder: (context) => OrbitDemo(),
+      builder: (context) => const OrbitDemo(),
       appBarColor: Colors.black,
     ),
     AnimationExample(
       title: 'Particles',
-      builder: (context) => ParticlesDemo(),
+      builder: (context) => const ParticlesDemo(),
       appBarColor: Colors.black,
     ),
     AnimationExample(
@@ -231,329 +222,314 @@ class HomeScreen extends StatelessWidget {
     ),
     AnimationExample(
       title: 'GithubSpark Loader',
-      builder: (context) => ParticlesSparkLoaderDemo(),
+      builder: (context) => const ParticlesSparkLoaderDemo(),
       appBarColor: Colors.black,
     ),
     AnimationExample(
       title: 'DotPattern',
-      builder: (context) => DotPatternWidget(),
+      builder: (context) => const DotPatternWidget(),
       appBarColor: Colors.black,
     ),
     AnimationExample(
       title: 'Text On Path',
-      builder: (context) => TextOnPathDemo(),
+      builder: (context) => const TextOnPathDemo(),
       appBarColor: Colors.black,
     ),
     AnimationExample(
       title: 'Background Beams',
-      builder: (context) => BackgroundBeamDemo(),
+      builder: (context) => const BackgroundBeamDemo(),
       appBarColor: Colors.black,
     ),
     AnimationExample(
       title: 'Exploding Beams',
-      builder: (context) => ExplodingBeamDemo(),
+      builder: (context) => const ExplodingBeamDemo(),
       appBarColor: Colors.black,
     ),
     AnimationExample(
       title: 'Motion Primitives[wip]',
-      builder: (context) => MotionPrimitiveDemo(),
+      builder: (context) => const MotionPrimitiveDemo(),
       appBarColor: Colors.black,
     ),
     AnimationExample(
       title: 'Work Life Slider',
-      builder: (context) => SliderDemo(),
+      builder: (context) => const SliderDemo(),
       appBarColor: Colors.black,
     ),
     AnimationExample(
       title: 'Stacked Scroll [WIP]',
-      builder: (context) => StackedScrollDemo(),
+      builder: (context) => const StackedScrollDemo(),
       appBarColor: Colors.black,
     ),
     AnimationExample(
       title: 'Night Mode Bulb',
-      builder: (context) => NightModeDemo(),
+      builder: (context) => const NightModeDemo(),
       appBarColor: Colors.black,
       isFullScreen: true,
     ),
     AnimationExample(
       title: 'Stacked Cards',
-      builder: (context) => StackedCardDemo(),
+      builder: (context) => const StackedCardDemo(),
       appBarColor: Colors.black,
     ),
     AnimationExample(
       title: 'Stacked Expand Cards',
-      builder: (context) => StackedExpandedCardDemo(),
+      builder: (context) => const StackedExpandedCardDemo(),
       appBarColor: Colors.black,
     ),
     AnimationExample(
       title: 'Confetti [WIP]',
-      builder: (context) => ConfettiDemo(),
+      builder: (context) => const ConfettiDemo(),
       appBarColor: Colors.black,
     ),
     AnimationExample(
       title: 'Shimmer Button',
-      builder: (context) => ButtonShimmerDemo(),
+      builder: (context) => const ButtonShimmerDemo(),
       appBarColor: Colors.black,
     ),
     AnimationExample(
       title: 'BottomSheet',
-      builder: (context) => BottomSheetDemo(),
+      builder: (context) => const BottomSheetDemo(),
       appBarColor: Colors.black,
       isFullScreen: true,
     ),
     AnimationExample(
       title: 'ButterFly',
-      builder: (context) => ButterflyDemo(),
+      builder: (context) => const ButterflyDemo(),
       appBarColor: Colors.black,
       isFullScreen: true,
     ),
     AnimationExample(
       title: 'BookOpen',
-      builder: (context) => BookOpenDemo(),
+      builder: (context) => const BookOpenDemo(),
       appBarColor: Colors.black,
       isFullScreen: true,
     ),
     AnimationExample(
       title: 'RotatingBlurText [WIP]',
-      builder: (context) => TextRotateBlurDemo(),
+      builder: (context) => const TextRotateBlurDemo(),
       appBarColor: Colors.black,
     ),
     AnimationExample(
       title: 'Scroll Progress',
-      builder: (context) => ScrollProgressDemo(),
+      builder: (context) => const ScrollProgressDemo(),
       appBarColor: Colors.black,
     ),
     AnimationExample(
       title: 'Sphere Loader',
-      builder: (context) => LoaderSphereDemo(),
+      builder: (context) => const LoaderSphereDemo(),
       appBarColor: Colors.black,
     ),
     AnimationExample(
       title: 'Text 3D Pop',
-      builder: (context) => Text3dPopDemo(),
+      builder: (context) => const Text3dPopDemo(),
       appBarColor: Colors.black,
     ),
     AnimationExample(
       title: 'Aurora Background [WIP]',
-      builder: (context) => AuroraDemo(),
+      builder: (context) => const AuroraDemo(),
       appBarColor: Colors.black,
     ),
     AnimationExample(
       title: 'Orbit with Blur',
-      builder: (context) => OrbitExtendedDemo(),
+      builder: (context) => const OrbitExtendedDemo(),
       appBarColor: Colors.black,
     ),
     AnimationExample(
       title: 'Gemini Splash',
-      builder: (context) => SparkleDemo(),
+      builder: (context) => const SparkleDemo(),
       appBarColor: Colors.black,
     ),
     AnimationExample(
-      title: 'Motion blur with Shader[wip]',
-      builder: (context) => MotionStreakingDemo(),
+      title: 'Text Chaotic Spring',
+      builder: (context) => const TextChaoticSpringDemo(),
       appBarColor: Colors.black,
     ),
     AnimationExample(
-      title: "Text Chaotic Spring",
-      builder: (context) => TextChaoticSpringDemo(),
+      title: 'Interactive Butterfly',
+      builder: (context) => const ButterflyInteractiveDemo(),
       appBarColor: Colors.black,
     ),
     AnimationExample(
-      title: "Interactive Butterfly",
-      builder: (context) => ButterflyInteractiveDemo(),
+      title: 'Avatar Loader',
+      builder: (context) => const LoaderAvatarsDemo(),
       appBarColor: Colors.black,
     ),
     AnimationExample(
-      title: "ProgressBar",
-      builder: (context) => ProgressBarDemo(),
+      title: 'Avatar Loader - 2',
+      builder: (context) => const LoaderAvatarsDemo2(),
       appBarColor: Colors.black,
     ),
     AnimationExample(
-      title: "Avatar Loader",
-      builder: (context) => LoaderAvatarsDemo(),
+      title: 'Noise [WIP]',
+      builder: (context) => const PracticalNoiseShowcase(),
       appBarColor: Colors.black,
     ),
     AnimationExample(
-      title: "ProgressBar - 2",
-      builder: (context) => ProgressBarDemo2(),
-      appBarColor: Colors.black,
-    ),
-    AnimationExample(
-      title: "Avatar Loader - 2",
-      builder: (context) => LoaderAvatarsDemo2(),
-      appBarColor: Colors.black,
-    ),
-    AnimationExample(
-      title: "Noise [WIP]",
-      builder: (context) => PracticalNoiseShowcase(),
-      appBarColor: Colors.black,
-    ),
-    AnimationExample(
-      title: "Splash Circular Reveal",
-      builder: (context) => LoadingApp1(),
+      title: 'Splash Circular Reveal',
+      builder: (context) => const LoadingApp1(),
       appBarColor: Colors.black,
       isFullScreen: true,
     ),
     AnimationExample(
-      title: "Oribtal Star",
-      builder: (context) => BgOrbittalStarDemo(),
+      title: 'Oribital Star',
+      builder: (context) => const BgOrbittalStarDemo(),
       appBarColor: Colors.black,
       isFullScreen: true,
     ),
     AnimationExample(
-      title: "Loader Square",
-      builder: (context) => LoaderSquareDemo(),
+      title: 'Loader Square',
+      builder: (context) => const LoaderSquareDemo(),
       appBarColor: Colors.black,
       isFullScreen: true,
     ),
     AnimationExample(
-      title: "DecorationBulbsDemo",
-      builder: (context) => DecorationBulbsDemo(),
+      title: 'DecorationBulbsDemo',
+      builder: (context) => const DecorationBulbsDemo(),
       appBarColor: Colors.black,
     ),
     AnimationExample(
-      title: "DecorationThreadDemo",
-      builder: (context) => GlowingThreadDemo(),
+      title: 'DecorationThreadDemo',
+      builder: (context) => const GlowingThreadDemo(),
       appBarColor: Colors.black,
     ),
     AnimationExample(
-      title: "Grid Animation",
-      builder: (context) => GridAnimatedDemo(),
+      title: 'Grid Animation',
+      builder: (context) => const GridAnimatedDemo(),
       appBarColor: Colors.black,
     ),
     AnimationExample(
-      title: "Grid in Motion",
-      builder: (context) => RetroGridDemo(),
+      title: 'Grid in Motion',
+      builder: (context) => const RetroGridDemo(),
       appBarColor: Colors.black,
     ),
     AnimationExample(
-      title: "Flickering Grid Demo",
-      builder: (context) => FlickeringGridDemo(),
-      appBarColor: Colors.black,
-      isFullScreen: true,
-    ),
-    AnimationExample(
-      title: "Flickering Cards Demo",
-      builder: (context) => ColorfulCardsDemo(),
-      appBarColor: Colors.black,
-    ),
-    AnimationExample(
-      title: "[WIP] FractalGLass Effect",
-      builder: (context) => FractalGlassDemo(),
-      appBarColor: Colors.black,
-    ),
-    AnimationExample(
-      title: "Moving Ticker Effect",
-      builder: (context) => LayeredTickers(),
+      title: 'Flickering Grid Demo',
+      builder: (context) => const FlickeringGridDemo(),
       appBarColor: Colors.black,
       isFullScreen: true,
     ),
     AnimationExample(
-      title: "Simple Shader",
-      builder: (context) => SimpleShaderExample(),
+      title: 'Flickering Cards Demo',
+      builder: (context) => const ColorfulCardsDemo(),
+      appBarColor: Colors.black,
+    ),
+    AnimationExample(
+      title: '[WIP] FractalGLass Effect',
+      builder: (context) => const FractalGlassDemo(),
+      appBarColor: Colors.black,
+    ),
+    AnimationExample(
+      title: 'Moving Ticker Effect',
+      builder: (context) => const LayeredTickers(),
       appBarColor: Colors.black,
       isFullScreen: true,
     ),
     AnimationExample(
-      title: "Infinite Scrolling",
+      title: 'Simple Shader',
+      builder: (context) => const SimpleShaderExample(),
+      appBarColor: Colors.black,
+      isFullScreen: true,
+    ),
+    AnimationExample(
+      title: 'Infinite Scrolling',
       builder: (context) => MarqueeDemo(),
       appBarColor: Colors.black,
       isFullScreen: true,
     ),
     AnimationExample(
-      title: "Infinite Scrolling 3D",
+      title: 'Infinite Scrolling 3D',
       builder: (context) => Marquee3D(),
       appBarColor: Colors.black,
       isFullScreen: true,
     ),
     AnimationExample(
-      title: "Page Flip",
+      title: 'Page Flip',
       builder: (context) => const PageFlipDemo(),
       appBarColor: Colors.black,
       isFullScreen: true,
     ),
     AnimationExample(
-      title: "Avatar Circles",
+      title: 'Avatar Circles',
       builder: (context) => AvatarCirclesShowcase(),
       appBarColor: Colors.black,
       isFullScreen: true,
     ),
     AnimationExample(
-      title: "Notification List",
+      title: 'Notification List',
       builder: (context) => NotificationDemo(),
       appBarColor: Colors.black,
       isFullScreen: true,
     ),
     AnimationExample(
-      title: "Splash Door Open Reveal",
-      builder: (context) => SplashDoorOpenRevealDemo(),
+      title: 'Splash Door Open Reveal',
+      builder: (context) => const SplashDoorOpenRevealDemo(),
       appBarColor: Colors.black,
       isFullScreen: true,
     ),
     AnimationExample(
-      title: "Background Ripples",
-      builder: (context) => BackgroundRippleDemo(),
+      title: 'Background Ripples',
+      builder: (context) => const BackgroundRippleDemo(),
       appBarColor: Colors.black,
       isFullScreen: true,
     ),
     AnimationExample(
-      title: "Scratch to Reveal",
-      builder: (context) => ScratchToRevealDemo(),
+      title: 'Scratch to Reveal',
+      builder: (context) => const ScratchToRevealDemo(),
       appBarColor: Colors.black,
       isFullScreen: true,
     ),
     AnimationExample(
-      title: "Shining Text",
-      builder: (context) => TextShiningDemo(),
+      title: 'Shining Text',
+      builder: (context) => const TextShiningDemo(),
       appBarColor: Colors.black,
     ),
     AnimationExample(
-      title: "Debug Overlay",
-      builder: (context) => OverlayDebugDemo(),
-      appBarColor: Colors.black,
-      isFullScreen: true,
-    ),
-    AnimationExample(
-      title: "Grid Blinker",
-      builder: (context) => GridBlinkerDemo(),
+      title: 'Debug Overlay',
+      builder: (context) => const OverlayDebugDemo(),
       appBarColor: Colors.black,
       isFullScreen: true,
     ),
     AnimationExample(
-      title: "Tree",
-      builder: (context) => TreeDemo(),
+      title: 'Grid Blinker',
+      builder: (context) => const GridBlinkerDemo(),
       appBarColor: Colors.black,
       isFullScreen: true,
     ),
     AnimationExample(
-      title: "Expandable Widget",
-      builder: (context) => ExpandableWidgetDemo(),
+      title: 'Tree',
+      builder: (context) => const TreeDemo(),
       appBarColor: Colors.black,
       isFullScreen: true,
     ),
     AnimationExample(
-      title: "Text Morph",
-      builder: (context) => TextMorphDemo(),
+      title: 'Expandable Widget',
+      builder: (context) => const ExpandableWidgetDemo(),
       appBarColor: Colors.black,
       isFullScreen: true,
     ),
     AnimationExample(
-      title: "[WIP] Toolbar Search ",
-      builder: (context) => ToolbarSearchDemo(),
+      title: 'Text Morph',
+      builder: (context) => const TextMorphDemo(),
+      appBarColor: Colors.black,
+      isFullScreen: true,
+    ),
+    AnimationExample(
+      title: '[WIP] Toolbar Search ',
+      builder: (context) => const ToolbarSearchDemo(),
       appBarColor: Colors.black,
       isFullScreen: true,
     ),
   ];
-
-  HomeScreen({super.key});
 
   void enterFullScreen() {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
   }
 
   void exitFullScreen() {
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
-        overlays: SystemUiOverlay.values);
+    SystemChrome.setEnabledSystemUIMode(
+      SystemUiMode.manual,
+      overlays: SystemUiOverlay.values,
+    );
   }
 
   @override
@@ -561,7 +537,7 @@ class HomeScreen extends StatelessWidget {
     // Automatically navigate to the first example on launch (e.g., "Folder").
     Future.microtask(() {
       if (examples.isNotEmpty) {
-        Navigator.push(
+        Navigator.push<void>(
           context,
           MaterialPageRoute(
             builder: (context) {
@@ -582,7 +558,6 @@ class HomeScreen extends StatelessWidget {
         padding: const EdgeInsets.all(16),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
-          childAspectRatio: 1,
           crossAxisSpacing: 16,
           mainAxisSpacing: 16,
         ),
@@ -598,16 +573,20 @@ class HomeScreen extends StatelessWidget {
                 ),
                 child: InkWell(
                   onTap: () {
-                    Navigator.push(
+                    Navigator.push<void>(
                       context,
                       MaterialPageRoute(
                         builder: (context) {
                           if (examples[index].isFullScreen) {
                             return FullScreen(
-                                key: UniqueKey(), example: examples[index]);
+                              key: UniqueKey(),
+                              example: examples[index],
+                            );
                           } else {
                             return DetailScreen(
-                                key: UniqueKey(), example: examples[index]);
+                              key: UniqueKey(),
+                              example: examples[index],
+                            );
                           }
                         },
                       ),
@@ -616,8 +595,11 @@ class HomeScreen extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Icon(Icons.animation,
-                          size: 48, color: Colors.white70),
+                      const Icon(
+                        Icons.animation,
+                        size: 48,
+                        color: Colors.white70,
+                      ),
                       const SizedBox(height: 8),
                       Text(
                         examples[index].title,
@@ -631,9 +613,7 @@ class HomeScreen extends StatelessWidget {
             );
           } else {
             return SizedBox(
-              height: MediaQuery.of(context)
-                  .size
-                  .height, // Adjust this value as needed
+              height: MediaQuery.of(context).size.height, // Adjust this value as needed
               child: Container(), // Empty container for spacing
             );
           }
@@ -644,9 +624,8 @@ class HomeScreen extends StatelessWidget {
 }
 
 class DetailScreen extends StatelessWidget {
-  final AnimationExample example;
-
   const DetailScreen({super.key, required this.example});
+  final AnimationExample example;
 
   @override
   Widget build(BuildContext context) {
@@ -665,9 +644,8 @@ class DetailScreen extends StatelessWidget {
 }
 
 class FullScreen extends StatelessWidget {
-  final AnimationExample example;
-
   const FullScreen({super.key, required this.example});
+  final AnimationExample example;
 
   @override
   Widget build(BuildContext context) {

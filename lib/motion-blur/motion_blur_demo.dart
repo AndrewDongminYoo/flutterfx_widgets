@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fx_2_folder/motion-blur/motion_blur.dart';
+
 import 'package:fx_2_folder/motion-blur/motion_blur_1.dart';
 
 class MotionStreakingDemo extends StatefulWidget {
@@ -11,13 +11,10 @@ class MotionStreakingDemo extends StatefulWidget {
 
 class _MotionStreakingDemoState extends State<MotionStreakingDemo> {
   Key _sparkleKey = UniqueKey();
-  Key _starFallKey = UniqueKey();
 
   void _replayAnimation() {
     setState(() {
-      _sparkleKey =
-          UniqueKey(); // This will recreate the AnimatedSparkle widget
-      _starFallKey = UniqueKey();
+      _sparkleKey = UniqueKey(); // This will recreate the AnimatedSparkle widget
     });
   }
 
@@ -30,12 +27,13 @@ class _MotionStreakingDemoState extends State<MotionStreakingDemo> {
         alignment: Alignment.center,
         clipBehavior: Clip.none,
         children: [
-          ExampleScreen(),
+          const ExampleScreen(),
           Positioned(
             bottom: 50,
             child: IconButton(
               onPressed: _replayAnimation,
-              icon: const Icon(
+              icon: Icon(
+                key: _sparkleKey,
                 Icons.replay_circle_filled_rounded,
                 color: Colors.white,
                 size: 48,

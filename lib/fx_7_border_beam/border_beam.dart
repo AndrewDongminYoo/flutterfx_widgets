@@ -1,8 +1,19 @@
-import 'package:flutter/material.dart';
-import 'dart:math' as math;
 import 'dart:ui' as ui;
 
+import 'package:flutter/material.dart';
+
 class BorderBeam extends StatefulWidget {
+  const BorderBeam({
+    super.key,
+    required this.child,
+    this.duration = 15,
+    this.borderWidth = 1.5,
+    this.colorFrom = const Color(0xFFFFAA40),
+    this.colorTo = const Color(0xFF9C40FF),
+    this.staticBorderColor = const Color(0xFFCCCCCC),
+    this.borderRadius = const BorderRadius.all(Radius.circular(12)),
+    this.padding = EdgeInsets.zero,
+  });
   final Widget child;
   final double duration;
   final double borderWidth;
@@ -12,24 +23,11 @@ class BorderBeam extends StatefulWidget {
   final BorderRadius borderRadius;
   final EdgeInsetsGeometry padding;
 
-  const BorderBeam({
-    Key? key,
-    required this.child,
-    this.duration = 15,
-    this.borderWidth = 1.5,
-    this.colorFrom = const Color(0xFFFFAA40),
-    this.colorTo = const Color(0xFF9C40FF),
-    this.staticBorderColor = const Color(0xFFCCCCCC),
-    this.borderRadius = const BorderRadius.all(Radius.circular(12)),
-    this.padding = EdgeInsets.zero,
-  }) : super(key: key);
-
   @override
   _BorderBeamState createState() => _BorderBeamState();
 }
 
-class _BorderBeamState extends State<BorderBeam>
-    with SingleTickerProviderStateMixin {
+class _BorderBeamState extends State<BorderBeam> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animation;
 
@@ -75,13 +73,6 @@ class _BorderBeamState extends State<BorderBeam>
 }
 
 class BorderBeamPainter extends CustomPainter {
-  final double progress;
-  final double borderWidth;
-  final Color colorFrom;
-  final Color colorTo;
-  final Color staticBorderColor;
-  final BorderRadius borderRadius;
-
   BorderBeamPainter({
     required this.progress,
     required this.borderWidth,
@@ -90,6 +81,12 @@ class BorderBeamPainter extends CustomPainter {
     required this.staticBorderColor,
     required this.borderRadius,
   });
+  final double progress;
+  final double borderWidth;
+  final Color colorFrom;
+  final Color colorTo;
+  final Color staticBorderColor;
+  final BorderRadius borderRadius;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -122,12 +119,8 @@ class BorderBeamPainter extends CustomPainter {
     }
 
     // Calculate gradient start and end points
-    final gradientStart =
-        pathMetrics.getTangentForOffset(start)?.position ?? Offset.zero;
-    final gradientEnd = pathMetrics
-            .getTangentForOffset((start + pathLength / 8) % pathLength)
-            ?.position ??
-        Offset.zero;
+    final gradientStart = pathMetrics.getTangentForOffset(start)?.position ?? Offset.zero;
+    final gradientEnd = pathMetrics.getTangentForOffset((start + pathLength / 8) % pathLength)?.position ?? Offset.zero;
 
     final paint = Paint()
       ..style = PaintingStyle.stroke
@@ -137,7 +130,7 @@ class BorderBeamPainter extends CustomPainter {
       gradientStart,
       gradientEnd,
       [
-        colorTo.withOpacity(0.0), // Transparent color for fading effect
+        colorTo.withOpacity(0), // Transparent color for fading effect
         colorTo,
         colorFrom,
       ],

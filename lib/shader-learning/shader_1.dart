@@ -4,12 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
 class SimpleShaderExample extends StatefulWidget {
+  const SimpleShaderExample({super.key});
+
   @override
   State<SimpleShaderExample> createState() => _SimpleShaderExampleState();
 }
 
-class _SimpleShaderExampleState extends State<SimpleShaderExample>
-    with SingleTickerProviderStateMixin {
+class _SimpleShaderExampleState extends State<SimpleShaderExample> with SingleTickerProviderStateMixin {
   late final Ticker _ticker;
   final Stopwatch _stopwatch = Stopwatch()..start();
 
@@ -54,8 +55,7 @@ class _SimpleShaderExampleState extends State<SimpleShaderExample>
                 return CustomPaint(
                   painter: ShaderPainter(
                     snapshot.data!,
-                    resolution:
-                        Size(constraints.maxWidth, constraints.maxHeight),
+                    resolution: Size(constraints.maxWidth, constraints.maxHeight),
                     time: _stopwatch.elapsedMilliseconds / 1000.0,
                   ),
                   size: Size(constraints.maxWidth, constraints.maxHeight),
@@ -75,15 +75,14 @@ class _SimpleShaderExampleState extends State<SimpleShaderExample>
 }
 
 class ShaderPainter extends CustomPainter {
-  final FragmentShader shader;
-  final Size resolution;
-  final double time;
-
   ShaderPainter(
     this.shader, {
     required this.resolution,
     required this.time,
   });
+  final FragmentShader shader;
+  final Size resolution;
+  final double time;
 
   @override
   void paint(Canvas canvas, Size size) {

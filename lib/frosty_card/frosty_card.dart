@@ -1,17 +1,18 @@
 import 'dart:math';
 import 'dart:ui';
+
 import 'package:flutter/material.dart';
+
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 
 class FrostyCardDemo extends StatefulWidget {
-  const FrostyCardDemo({Key? key}) : super(key: key);
+  const FrostyCardDemo({super.key});
 
   @override
   _FrostyCardDemoState createState() => _FrostyCardDemoState();
 }
 
-class _FrostyCardDemoState extends State<FrostyCardDemo>
-    with SingleTickerProviderStateMixin {
+class _FrostyCardDemoState extends State<FrostyCardDemo> with SingleTickerProviderStateMixin {
   double _borderRadius = 20;
   double _blurValue = 10;
   double _opacity = 0.2;
@@ -89,8 +90,13 @@ class _FrostyCardDemoState extends State<FrostyCardDemo>
     );
   }
 
-  Widget _buildSlider(String label, double value, double min, double max,
-      ValueChanged<double> onChanged) {
+  Widget _buildSlider(
+    String label,
+    double value,
+    double min,
+    double max,
+    ValueChanged<double> onChanged,
+  ) {
     return Row(
       children: [
         Text(label),
@@ -119,7 +125,6 @@ class _FrostyCardDemoState extends State<FrostyCardDemo>
               onColorChanged: (Color color) {
                 setState(() => _color = color.withOpacity(_opacity));
               },
-              showLabel: true,
               pickerAreaHeightPercent: 0.8,
             ),
           ),
@@ -138,18 +143,17 @@ class _FrostyCardDemoState extends State<FrostyCardDemo>
 }
 
 class FrostyCard extends StatelessWidget {
-  final double borderRadius;
-  final double blurValue;
-  final double opacity;
-  final Color color;
-
   const FrostyCard({
-    Key? key,
+    super.key,
     required this.borderRadius,
     required this.blurValue,
     required this.opacity,
     required this.color,
-  }) : super(key: key);
+  });
+  final double borderRadius;
+  final double blurValue;
+  final double opacity;
+  final Color color;
 
   @override
   Widget build(BuildContext context) {
@@ -178,9 +182,8 @@ class FrostyCard extends StatelessWidget {
 }
 
 class BackgroundPainter extends CustomPainter {
-  final double animationValue;
-
   BackgroundPainter(this.animationValue);
+  final double animationValue;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -203,11 +206,10 @@ class BackgroundPainter extends CustomPainter {
       Colors.pink.withOpacity(0.7),
     ];
 
-    for (int i = 0; i < 3; i++) {
+    for (var i = 0; i < 3; i++) {
       final center = Offset(
         size.width * (0.2 + 0.6 * ((animationValue + i / 3) % 1)),
-        size.height *
-            (0.2 + 0.6 * sin(2 * pi * ((animationValue + i / 3) % 1))),
+        size.height * (0.2 + 0.6 * sin(2 * pi * ((animationValue + i / 3) % 1))),
       );
       final radius = size.width * 0.2;
       paint.color = circleColors[i];

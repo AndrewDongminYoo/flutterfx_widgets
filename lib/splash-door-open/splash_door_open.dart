@@ -1,24 +1,23 @@
-import 'package:flutter/material.dart';
 import 'dart:math' as math;
+
+import 'package:flutter/material.dart';
 
 import 'package:fx_2_folder/splash-door-open/sample_welcome_screen.dart';
 
 class DoorSplashScreen extends StatefulWidget {
-  final Widget child; // The widget to reveal after animation
-  final Duration animationDuration;
-
   const DoorSplashScreen({
-    Key? key,
+    super.key,
     required this.child,
     this.animationDuration = const Duration(seconds: 3),
-  }) : super(key: key);
+  });
+  final Widget child; // The widget to reveal after animation
+  final Duration animationDuration;
 
   @override
   State<DoorSplashScreen> createState() => _DoorSplashScreenState();
 }
 
-class _DoorSplashScreenState extends State<DoorSplashScreen>
-    with SingleTickerProviderStateMixin {
+class _DoorSplashScreenState extends State<DoorSplashScreen> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animation;
   bool _isLoading = true;
@@ -34,10 +33,12 @@ class _DoorSplashScreenState extends State<DoorSplashScreen>
     _animation = Tween<double>(
       begin: 0,
       end: math.pi / 2,
-    ).animate(CurvedAnimation(
-      parent: _controller,
-      curve: Curves.easeInOut,
-    ));
+    ).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: Curves.easeInOut,
+      ),
+    );
 
     // Simulate loading time
     Future.delayed(const Duration(seconds: 3), () {
@@ -69,12 +70,8 @@ class _DoorSplashScreenState extends State<DoorSplashScreen>
             decoration: BoxDecoration(
               color: Colors.white,
               border: Border(
-                left: isLeft
-                    ? BorderSide.none
-                    : const BorderSide(color: Colors.grey, width: 1),
-                right: isLeft
-                    ? const BorderSide(color: Colors.grey, width: 1)
-                    : BorderSide.none,
+                left: isLeft ? BorderSide.none : const BorderSide(color: Colors.grey),
+                right: isLeft ? const BorderSide(color: Colors.grey) : BorderSide.none,
               ),
             ),
             child: Stack(
@@ -89,7 +86,7 @@ class _DoorSplashScreenState extends State<DoorSplashScreen>
                       border: Border.all(color: Colors.grey),
                     ),
                     child: const Padding(
-                      padding: EdgeInsets.all(8.0),
+                      padding: EdgeInsets.all(8),
                       child: CircularProgressIndicator(
                         strokeWidth: 2,
                       ),
@@ -124,9 +121,11 @@ class _DoorSplashScreenState extends State<DoorSplashScreen>
 
 // Usage example:
 class SplashDoorOpenRevealDemo extends StatelessWidget {
+  const SplashDoorOpenRevealDemo({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       //remove debug banner
       debugShowCheckedModeBanner: false,
       home: DoorSplashScreen(

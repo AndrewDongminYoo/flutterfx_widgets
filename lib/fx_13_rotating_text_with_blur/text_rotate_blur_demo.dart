@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:fx_2_folder/fx_13_rotating_text_with_blur/reveal/clock_reveal.dart';
-import 'package:fx_2_folder/fx_13_rotating_text_with_blur/strategies/all_strategies.dart';
-import 'package:fx_2_folder/fx_13_rotating_text_with_blur/text_rotate_blur.dart';
-import 'package:fx_2_folder/fx_14_text_reveal/strategies/FadeBlurStrategy.dart';
 
-import '../fx_14_text_reveal/text_reveal_widget.dart';
+import 'package:fx_2_folder/fx_13_rotating_text_with_blur/reveal/clock_reveal.dart';
+import 'package:fx_2_folder/fx_13_rotating_text_with_blur/text_rotate_blur.dart';
+import 'package:fx_2_folder/fx_14_text_reveal/text_reveal_widget.dart';
 
 class TextRotateBlurDemo extends StatefulWidget {
   const TextRotateBlurDemo({super.key});
@@ -27,23 +25,21 @@ class _TextRotateBlurDemoState extends State<TextRotateBlurDemo> {
         child: Column(
           children: [
             // Example 1: Fade in, Wave rotation, Fade out
-            RotatingTextWidget(
+            const RotatingTextWidget(
               text: 'Your rotating text here',
-              radius: 100.0,
+              radius: 100,
               textStyle: TextStyle(fontSize: 18, color: Colors.blue),
               rotationDuration: Duration(seconds: 15),
             ),
             ClockHandRevealWidget(
-              duration: const Duration(seconds: 2),
-              blurSigma: 5.0, // Stronger blur
               wedgeOpacity: 0.50, // 70% opacity
-              wedgeAngleDegrees: 30.0,
+              wedgeAngleDegrees: 30,
               onAnimationComplete: () {
                 print('Reveal complete!');
               },
-              child: RotatingTextWidget(
+              child: const RotatingTextWidget(
                 text: 'Your rotating text here',
-                radius: 100.0,
+                radius: 100,
                 textStyle: TextStyle(fontSize: 18, color: Colors.black),
                 rotationDuration: Duration(seconds: 15),
               ),
@@ -131,9 +127,8 @@ class _TextRotateBlurDemoState extends State<TextRotateBlurDemo> {
 
 // Let's also create a simpler FadeBlurStrategy for testing
 class FadeBlurStrategy extends TextAnimationStrategy {
-  final double maxBlur;
-
   const FadeBlurStrategy({this.maxBlur = 8.0}) : super();
+  final double maxBlur;
 
   @override
   Widget buildAnimatedCharacter({
@@ -155,11 +150,12 @@ class FadeBlurStrategy extends TextAnimationStrategy {
   }
 
   @override
-  Animation<double> createAnimation(
-      {required AnimationController controller,
-      required double startTime,
-      required double endTime,
-      required Curve curve}) {
+  Animation<double> createAnimation({
+    required AnimationController controller,
+    required double startTime,
+    required double endTime,
+    required Curve curve,
+  }) {
     // TODO: implement createAnimation
     throw UnimplementedError();
   }

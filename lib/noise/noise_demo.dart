@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:fx_2_folder/noise/noise.dart';
 import 'package:fx_2_folder/noise/strategy_noise.dart';
 
@@ -11,7 +12,7 @@ class PracticalNoiseShowcase extends StatefulWidget {
 
 class _PracticalNoiseShowcaseState extends State<PracticalNoiseShowcase> {
   NoiseType _selectedType = NoiseType.perlin;
-  double _scale = 1.0;
+  double _scale = 1;
   double _frequency = 0.1;
   double _opacity = 0.3;
 
@@ -66,7 +67,7 @@ class _PracticalNoiseShowcaseState extends State<PracticalNoiseShowcase> {
               'Scale',
               _scale,
               0.1,
-              2.0,
+              2,
               (value) => setState(() => _scale = value),
             ),
             _buildSlider(
@@ -79,8 +80,8 @@ class _PracticalNoiseShowcaseState extends State<PracticalNoiseShowcase> {
             _buildSlider(
               'Opacity',
               _opacity,
-              0.0,
-              1.0,
+              0,
+              1,
               (value) => setState(() => _opacity = value),
             ),
           ],

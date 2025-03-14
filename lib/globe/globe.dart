@@ -1,16 +1,11 @@
-import 'dart:async';
 import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 import 'package:flutter/physics.dart';
+
 import 'package:vector_math/vector_math.dart' as vector;
 
 class IconItem {
-  final String name;
-  final IconData icon;
-  vector.Vector3 position;
-  double scale;
-  final Color color;
-
   IconItem({
     required this.name,
     required this.icon,
@@ -18,33 +13,38 @@ class IconItem {
     required this.color,
     this.scale = 1.0,
   });
+  final String name;
+  final IconData icon;
+  vector.Vector3 position;
+  double scale;
+  final Color color;
 }
 
 class GlobeOfLogos extends StatefulWidget {
-  final List<IconData> icons;
-  final double radius;
-  final Color defaultIconColor;
-
   const GlobeOfLogos({
-    Key? key,
+    super.key,
     required this.icons,
     this.radius = 150.0,
     this.defaultIconColor = Colors.white,
-  }) : super(key: key);
+  });
+  final List<IconData> icons;
+  final double radius;
+  final Color defaultIconColor;
 
   @override
   State<GlobeOfLogos> createState() => _GlobeOfLogosState();
 }
 
-class _GlobeOfLogosState extends State<GlobeOfLogos>
-    with SingleTickerProviderStateMixin {
+class _GlobeOfLogosState extends State<GlobeOfLogos> with SingleTickerProviderStateMixin {
   List<IconItem> iconItems = [];
   late AnimationController _controller;
-  double _lastControllerValue = 0.0;
-  double _lastInteractionValue = 0.0;
+  double _lastControllerValue = 0;
+  // ignore: unused_field
+  double _lastInteractionValue = 0;
 
   // Physics-based animation
-  SpringDescription _springDescription = const SpringDescription(
+  // ignore: unused_field
+  final SpringDescription _springDescription = const SpringDescription(
     mass: 1,
     stiffness: 50,
     damping: 10,
@@ -79,7 +79,6 @@ class _GlobeOfLogosState extends State<GlobeOfLogos>
         icon: widget.icons[index],
         position: vector.Vector3(x, y, z),
         color: widget.defaultIconColor,
-        scale: 1.0,
       );
     });
   }
@@ -98,10 +97,10 @@ class _GlobeOfLogosState extends State<GlobeOfLogos>
 
     // Don't auto-rotate if we recently had user interaction
     if (_lastInteractionTime != null) {
-      final timeSinceInteraction =
-          DateTime.now().difference(_lastInteractionTime!);
-      if (timeSinceInteraction.inMilliseconds < 500)
+      final timeSinceInteraction = DateTime.now().difference(_lastInteractionTime!);
+      if (timeSinceInteraction.inMilliseconds < 500) {
         return; // Wait for interaction to settle
+      }
     }
 
     setState(() {
@@ -110,22 +109,17 @@ class _GlobeOfLogosState extends State<GlobeOfLogos>
       final deltaValue = currentValue - _lastControllerValue;
 
       // Handle wrap-around case
-      final adjustedDelta = deltaValue.abs() > 0.5
-          ? deltaValue.sign * (1 - deltaValue.abs())
-          : deltaValue;
+      final adjustedDelta = deltaValue.abs() > 0.5 ? deltaValue.sign * (1 - deltaValue.abs()) : deltaValue;
 
       if (adjustedDelta.abs() > 0.0001) {
         // Calculate delta rotation in radians
-        final deltaRotation = adjustedDelta *
-            2 *
-            math.pi *
-            0.1; // Reduced speed for smoother motion
+        final deltaRotation = adjustedDelta * 2 * math.pi * 0.1; // Reduced speed for smoother motion
 
         // Create rotation matrix for just the delta
         final deltaRotationMatrix = vector.Matrix4.rotationY(deltaRotation);
 
         // Apply delta rotation to each item's current position
-        for (var item in iconItems) {
+        for (final item in iconItems) {
           // Transform the current position by the delta rotation
           final transformed = deltaRotationMatrix.transform3(item.position);
           item.position
@@ -165,7 +159,7 @@ class _GlobeOfLogosState extends State<GlobeOfLogos>
       final combinedMatrix = deltaMatrixY..multiply(deltaMatrixX);
 
       // Apply the delta rotation to each item's current position
-      for (var item in iconItems) {
+      for (final item in iconItems) {
         final transformed = combinedMatrix.transform3(item.position);
         item.position
           ..x = transformed.x
@@ -175,8 +169,7 @@ class _GlobeOfLogosState extends State<GlobeOfLogos>
 
       // Store velocity for physics simulation
       _rotationVelocity = vector.Vector2(deltaY, deltaX);
-      _lastInteractionValue +=
-          deltaY; // Track total rotation for smooth transition
+      _lastInteractionValue += deltaY; // Track total rotation for smooth transition
     });
 
     _lastPanPosition = details.localPosition;
@@ -189,56 +182,55 @@ class _GlobeOfLogosState extends State<GlobeOfLogos>
     // Calculate initial velocity for physics simulation
     final velocity = _rotationVelocity.length;
 
-    // if (velocity > 0.001) {
-    //   // Start physics simulation
-    //   final simulation = SpringSimulation(
-    //     _springDescription,
-    //     0,
-    //     1,
-    //     velocity,
-    //   );
+    if (velocity > 0.001) {
+      // Start physics simulation
+      final simulation = SpringSimulation(
+        _springDescription,
+        0,
+        1,
+        velocity,
+      );
 
-    // Create animation for smooth transition
-    // Animation<double> animation = _controller.drive(
-    //   Tween<double>(
-    //     begin: _lastInteractionValue,
-    //     end: 0,
-    //   ),
-    // );
+      // Create animation for smooth transition
+      final animation = _controller.drive(
+        Tween<double>(
+          begin: _lastInteractionValue,
+          end: 0,
+        ),
+      );
 
-    // animation.addListener(() {
-    //   if (!mounted) return;
-    //   setState(() {
-    //     final deltaRotation = _lastInteractionValue - animation.value;
-    //     final deltaMatrix = vector.Matrix4.rotationY(deltaRotation);
+      animation.addListener(() {
+        if (!mounted) return;
+        setState(() {
+          final deltaRotation = _lastInteractionValue - animation.value;
+          final deltaMatrix = vector.Matrix4.rotationY(deltaRotation);
 
-    //     for (var item in iconItems) {
-    //       final transformed = deltaMatrix.transform3(item.position);
-    //       item.position
-    //         ..x = transformed.x
-    //         ..y = transformed.y
-    //         ..z = transformed.z;
-    //     }
-    //     _lastInteractionValue = animation.value;
-    //   });
-    // });
+          for (final item in iconItems) {
+            final transformed = deltaMatrix.transform3(item.position);
+            item.position
+              ..x = transformed.x
+              ..y = transformed.y
+              ..z = transformed.z;
+          }
+          _lastInteractionValue = animation.value;
+        });
+      });
 
-    // Animate to rest using physics
-    //   _controller.animateWith(simulation).then((_) {
-    //     if (mounted) {
-    //       // Instead of resetting, continue from current value
-    //       _controller.value =
-    //           _controller.value; // Ensure we're at the current value
-    //       _controller.repeat(); // Resume auto-rotation
-    //       _lastControllerValue = _controller.value; // Maintain continuity
-    //     }
-    //   });
-    // } else {
-    //   // If velocity is very low, just resume auto-rotation smoothly
-    //   _controller.value = _controller.value; // Maintain current position
-    //   _controller.repeat();
-    //   _lastControllerValue = _controller.value;
-    // }
+      // Animate to rest using physics
+      _controller.animateWith(simulation).then((_) {
+        if (mounted) {
+          // Instead of resetting, continue from current value
+          _controller.value = _controller.value; // Ensure we're at the current value
+          _controller.repeat(); // Resume auto-rotation
+          _lastControllerValue = _controller.value; // Maintain continuity
+        }
+      });
+    } else {
+      // If velocity is very low, just resume auto-rotation smoothly
+      _controller.value = _controller.value; // Maintain current position
+      _controller.repeat();
+      _lastControllerValue = _controller.value;
+    }
   }
 
   @override
@@ -275,27 +267,27 @@ class _GlobeOfLogosState extends State<GlobeOfLogos>
 }
 
 class IconCloudPainter extends CustomPainter {
-  final List<IconItem> iconItems;
-  final double radius;
-
   IconCloudPainter({
     required this.iconItems,
     required this.radius,
   });
+  final List<IconItem> iconItems;
+  final double radius;
 
   @override
   void paint(Canvas canvas, Size size) {
-    final sortedIcons = List<IconItem>.from(iconItems)
-      ..sort((a, b) => b.position.z.compareTo(a.position.z));
+    final sortedIcons = List<IconItem>.from(iconItems)..sort((a, b) => b.position.z.compareTo(a.position.z));
 
-    for (var item in sortedIcons) {
+    for (final item in sortedIcons) {
       final center = Offset(
         size.width / 2 + item.position.x,
         size.height / 2 + item.position.y,
       );
 
       final opacity = math.max(
-          0.4, math.min(1.0, (item.position.z + radius) / (radius * 2)));
+        0.4,
+        math.min(1, (item.position.z + radius) / (radius * 2)),
+      );
 
       final iconPainter = TextPainter(
         text: TextSpan(
@@ -304,7 +296,7 @@ class IconCloudPainter extends CustomPainter {
             fontSize: 24 * item.scale,
             fontFamily: item.icon.fontFamily,
             package: item.icon.fontPackage,
-            color: item.color.withOpacity(opacity),
+            color: item.color.withOpacity(opacity.toDouble()),
           ),
         ),
         textDirection: TextDirection.ltr,

@@ -1,5 +1,7 @@
 import 'dart:math';
+
 import 'package:flutter/material.dart';
+
 import 'package:fx_2_folder/splash-reveal/sample_home_screen.dart';
 
 class SplashRevealController {
@@ -24,27 +26,25 @@ class SplashRevealController {
 }
 
 class SplashRevealWidget extends StatefulWidget {
+  const SplashRevealWidget({
+    super.key,
+    required this.child,
+    required this.controller,
+    this.duration = const Duration(milliseconds: 1000),
+    this.overlayColor = Colors.white,
+    this.onAnimationComplete,
+  });
   final Widget child;
   final Duration duration;
   final Color overlayColor;
   final VoidCallback? onAnimationComplete;
   final SplashRevealController controller;
 
-  const SplashRevealWidget({
-    Key? key,
-    required this.child,
-    required this.controller,
-    this.duration = const Duration(milliseconds: 1000),
-    this.overlayColor = Colors.white,
-    this.onAnimationComplete,
-  }) : super(key: key);
-
   @override
   State<SplashRevealWidget> createState() => _SplashRevealWidgetState();
 }
 
-class _SplashRevealWidgetState extends State<SplashRevealWidget>
-    with SingleTickerProviderStateMixin {
+class _SplashRevealWidgetState extends State<SplashRevealWidget> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animation;
 
@@ -115,7 +115,7 @@ class _SplashRevealWidgetState extends State<SplashRevealWidget>
                         color: const Color.fromARGB(255, 155, 155, 155),
                         borderRadius: BorderRadius.circular(30),
                       ),
-                      child: Icon(
+                      child: const Icon(
                         Icons.dashboard_rounded,
                         size: 36,
                         color: Colors.white,
@@ -126,7 +126,7 @@ class _SplashRevealWidgetState extends State<SplashRevealWidget>
                     const Text(
                       'Dashboard',
                       style: TextStyle(
-                        color: const Color.fromARGB(255, 155, 155, 155),
+                        color: Color.fromARGB(255, 155, 155, 155),
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
                       ),
@@ -144,16 +144,13 @@ class _SplashRevealWidgetState extends State<SplashRevealWidget>
 }
 
 class CircularRevealClipper extends CustomClipper<Path> {
-  final double revealPercent;
-
   CircularRevealClipper({required this.revealPercent});
+  final double revealPercent;
 
   @override
   Path getClip(Size size) {
     final center = Offset(size.width / 2, size.height / 2);
-    final maxRadius =
-        sqrt((size.width * size.width + size.height * size.height).toDouble()) +
-            20;
+    final maxRadius = sqrt(size.width * size.width + size.height * size.height) + 20;
     final radius = maxRadius * revealPercent;
 
     final path = Path()
@@ -169,7 +166,7 @@ class CircularRevealClipper extends CustomClipper<Path> {
 }
 
 class LoadingApp1 extends StatefulWidget {
-  const LoadingApp1({Key? key}) : super(key: key);
+  const LoadingApp1({super.key});
 
   @override
   State<LoadingApp1> createState() => _LoadingAppState();
@@ -186,7 +183,7 @@ class _LoadingAppState extends State<LoadingApp1> {
   }
 
   Future<void> _initializeApp() async {
-    await Future.delayed(const Duration(seconds: 1));
+    await Future<void>.delayed(const Duration(seconds: 1));
     setState(() => _isLoading = false);
     await _revealController.startReveal();
   }
@@ -197,7 +194,6 @@ class _LoadingAppState extends State<LoadingApp1> {
       body: SplashRevealWidget(
         controller: _revealController,
         duration: const Duration(milliseconds: 1500),
-        overlayColor: Colors.white,
         onAnimationComplete: () {
           print('Reveal completed!');
         },
@@ -205,9 +201,9 @@ class _LoadingAppState extends State<LoadingApp1> {
           children: [
             const MonochromeHomeScreen(),
             if (_isLoading)
-              Container(
+              const ColoredBox(
                 color: Colors.white,
-                child: const Center(
+                child: Center(
                   child: CircularProgressIndicator(
                     color: Color(0xFF757575),
                   ),

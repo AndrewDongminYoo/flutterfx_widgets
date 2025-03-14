@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 class HyperText extends StatefulWidget {
@@ -34,8 +35,7 @@ class _HyperTextState extends State<HyperText> {
   @override
   void didUpdateWidget(HyperText oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (widget.animationTrigger != oldWidget.animationTrigger &&
-        widget.animationTrigger) {
+    if (widget.animationTrigger != oldWidget.animationTrigger && widget.animationTrigger) {
       _startAnimation();
     }
   }
@@ -62,16 +62,14 @@ class _HyperTextState extends State<HyperText> {
     final currentAnimationCount = animationCount;
 
     _timer = Timer.periodic(
-      widget.duration ~/
-          (widget.text.isNotEmpty ? widget.text.length * 10 : 10),
+      widget.duration ~/ (widget.text.isNotEmpty ? widget.text.length * 10 : 10),
       (timer) {
         if (!widget.animateOnLoad && isFirstRender) {
           timer.cancel();
           isFirstRender = false;
           return;
         }
-        if (iterations < widget.text.length &&
-            currentAnimationCount == animationCount) {
+        if (iterations < widget.text.length && currentAnimationCount == animationCount) {
           setState(() {
             displayText = List.generate(
               widget.text.length,

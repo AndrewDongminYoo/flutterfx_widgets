@@ -1,7 +1,7 @@
+import 'dart:math' as math;
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'dart:math' as math;
 
 import 'package:fx_2_folder/stacked-cards/stacked_card.dart';
 
@@ -12,8 +12,7 @@ class BouncingSquare extends StatefulWidget {
   State<BouncingSquare> createState() => _BouncingSquareState();
 }
 
-class _BouncingSquareState extends State<BouncingSquare>
-    with TickerProviderStateMixin {
+class _BouncingSquareState extends State<BouncingSquare> with TickerProviderStateMixin {
   late AnimationController _mainController;
   late AnimationController _radiusController;
   late Animation<double> _jumpAnimation;
@@ -69,13 +68,11 @@ class _BouncingSquareState extends State<BouncingSquare>
 
     _jumpAnimation = TweenSequence<double>([
       TweenSequenceItem(
-        tween: Tween<double>(begin: 0, end: -100)
-            .chain(CurveTween(curve: Curves.easeOut)),
+        tween: Tween<double>(begin: 0, end: -100).chain(CurveTween(curve: Curves.easeOut)),
         weight: 50,
       ),
       TweenSequenceItem(
-        tween: Tween<double>(begin: -100, end: 0)
-            .chain(CurveTween(curve: Curves.easeIn)),
+        tween: Tween<double>(begin: -100, end: 0).chain(CurveTween(curve: Curves.easeIn)),
         weight: 50,
       ),
     ]).animate(_mainController);
@@ -83,13 +80,11 @@ class _BouncingSquareState extends State<BouncingSquare>
     // New scale animation
     _scaleAnimation = TweenSequence<double>([
       TweenSequenceItem(
-        tween: Tween<double>(begin: 1.0, end: 1.2)
-            .chain(CurveTween(curve: Curves.easeOut)),
+        tween: Tween<double>(begin: 1, end: 1.2).chain(CurveTween(curve: Curves.easeOut)),
         weight: 50,
       ),
       TweenSequenceItem(
-        tween: Tween<double>(begin: 1.2, end: 1.0)
-            .chain(CurveTween(curve: Curves.easeIn)),
+        tween: Tween<double>(begin: 1.2, end: 1).chain(CurveTween(curve: Curves.easeIn)),
         weight: 50,
       ),
     ]).animate(_mainController);
@@ -97,13 +92,11 @@ class _BouncingSquareState extends State<BouncingSquare>
     // Shadow size animation - make it more dynamic
     _shadowSizeAnimation = TweenSequence<double>([
       TweenSequenceItem(
-        tween: Tween<double>(begin: 200, end: 40)
-            .chain(CurveTween(curve: Curves.easeOut)),
+        tween: Tween<double>(begin: 200, end: 40).chain(CurveTween(curve: Curves.easeOut)),
         weight: 50,
       ),
       TweenSequenceItem(
-        tween: Tween<double>(begin: 40, end: 200)
-            .chain(CurveTween(curve: Curves.easeIn)),
+        tween: Tween<double>(begin: 40, end: 200).chain(CurveTween(curve: Curves.easeIn)),
         weight: 50,
       ),
     ]).animate(_mainController);
@@ -111,13 +104,11 @@ class _BouncingSquareState extends State<BouncingSquare>
     // Shadow opacity animation - make it more subtle
     _shadowOpacityAnimation = TweenSequence<double>([
       TweenSequenceItem(
-        tween: Tween<double>(begin: 0.1, end: 0.05)
-            .chain(CurveTween(curve: Curves.easeOut)),
+        tween: Tween<double>(begin: 0.1, end: 0.05).chain(CurveTween(curve: Curves.easeOut)),
         weight: 50,
       ),
       TweenSequenceItem(
-        tween: Tween<double>(begin: 0.05, end: 0.1)
-            .chain(CurveTween(curve: Curves.easeIn)),
+        tween: Tween<double>(begin: 0.05, end: 0.1).chain(CurveTween(curve: Curves.easeIn)),
         weight: 50,
       ),
     ]).animate(_mainController);
@@ -186,7 +177,7 @@ class _BouncingSquareState extends State<BouncingSquare>
                 ),
                 // Animated shadow
                 Transform.translate(
-                  offset: Offset(0, 80),
+                  offset: const Offset(0, 80),
                   child: Transform.scale(
                     scaleX: 0.7,
                     scaleY: 0.2,
@@ -197,8 +188,7 @@ class _BouncingSquareState extends State<BouncingSquare>
                           width: _shadowSizeAnimation.value,
                           height: _shadowSizeAnimation.value,
                           decoration: BoxDecoration(
-                            color: Colors.black
-                                .withOpacity(_shadowOpacityAnimation.value),
+                            color: Colors.black.withOpacity(_shadowOpacityAnimation.value),
                             shape: BoxShape.circle,
                           ),
                         ),

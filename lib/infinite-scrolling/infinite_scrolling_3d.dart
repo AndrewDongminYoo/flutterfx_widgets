@@ -1,39 +1,40 @@
-import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
+import 'package:flutter/material.dart';
+
 class Marquee3D extends StatelessWidget {
-  Marquee3D({Key? key}) : super(key: key);
+  Marquee3D({super.key});
 
   final List<Map<String, String>> logos = [
     {
-      "name": "Microsoft",
-      "img": "https://picsum.photos/id/1/200/300",
+      'name': 'Microsoft',
+      'img': 'https://picsum.photos/id/1/200/300',
     },
     {
-      "name": "Apple",
-      "img": "https://picsum.photos/id/2/200/300",
+      'name': 'Apple',
+      'img': 'https://picsum.photos/id/2/200/300',
     },
     {
-      "name": "Google",
-      "img": "https://picsum.photos/id/3/200/300",
+      'name': 'Google',
+      'img': 'https://picsum.photos/id/3/200/300',
     },
     {
-      "name": "Facebook",
-      "img": "https://picsum.photos/id/4/200/300",
+      'name': 'Facebook',
+      'img': 'https://picsum.photos/id/4/200/300',
     },
     {
-      "name": "LinkedIn",
-      "img": "https://picsum.photos/id/5/200/300",
+      'name': 'LinkedIn',
+      'img': 'https://picsum.photos/id/5/200/300',
     },
     {
-      "name": "Twitter",
-      "img": "https://picsum.photos/id/6/200/300",
+      'name': 'Twitter',
+      'img': 'https://picsum.photos/id/6/200/300',
     },
   ];
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: double.infinity,
       height: double.infinity,
       child: Row(
@@ -48,7 +49,7 @@ class Marquee3D extends StatelessWidget {
                 ..rotateX(0)
                 ..rotateY(-20 * math.pi / 180)
                 ..rotateZ(10 * math.pi / 180)
-                ..translate(0.0, 0.0, -50.0)
+                ..translate(0.0, 0, -50)
                 ..scale(1.2),
               alignment: Alignment.center,
               child: SizedBox(
@@ -71,7 +72,7 @@ class Marquee3D extends StatelessWidget {
                 ..rotateX(0)
                 ..rotateY(-20 * math.pi / 180)
                 ..rotateZ(10 * math.pi / 180)
-                ..translate(0.0, 0.0, -50.0)
+                ..translate(0.0, 0, -50)
                 ..scale(1.2),
               alignment: Alignment.center,
               child: SizedBox(
@@ -93,7 +94,7 @@ class Marquee3D extends StatelessWidget {
                 ..rotateX(0)
                 ..rotateY(-20 * math.pi / 180)
                 ..rotateZ(10 * math.pi / 180)
-                ..translate(0.0, 0.0, -50.0)
+                ..translate(0.0, 0, -50)
                 ..scale(1.2),
               alignment: Alignment.center,
               child: SizedBox(
@@ -112,21 +113,19 @@ class Marquee3D extends StatelessWidget {
 }
 
 class Marquee3DContent extends StatefulWidget {
-  final List<Map<String, String>> logos;
-  final int durationInSeconds;
-
   const Marquee3DContent({
-    Key? key,
+    super.key,
     required this.logos,
     required this.durationInSeconds,
-  }) : super(key: key);
+  });
+  final List<Map<String, String>> logos;
+  final int durationInSeconds;
 
   @override
   State<Marquee3DContent> createState() => _Marquee3DContentState();
 }
 
-class _Marquee3DContentState extends State<Marquee3DContent>
-    with SingleTickerProviderStateMixin {
+class _Marquee3DContentState extends State<Marquee3DContent> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late ScrollController _scrollController;
 
@@ -163,13 +162,15 @@ class _Marquee3DContentState extends State<Marquee3DContent>
             child: Column(
               children: [
                 for (int i = 0; i < 4; i++)
-                  ...widget.logos.map((logo) => Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: LogoCard(
-                          imageUrl: logo['img']!,
-                          name: logo['name']!,
-                        ),
-                      )),
+                  ...widget.logos.map(
+                    (logo) => Padding(
+                      padding: const EdgeInsets.all(8),
+                      child: LogoCard(
+                        imageUrl: logo['img']!,
+                        name: logo['name']!,
+                      ),
+                    ),
+                  ),
               ],
             ),
           );
@@ -180,14 +181,13 @@ class _Marquee3DContentState extends State<Marquee3DContent>
 }
 
 class LogoCard extends StatefulWidget {
-  final String imageUrl;
-  final String name;
-
   const LogoCard({
-    Key? key,
+    super.key,
     required this.imageUrl,
     required this.name,
-  }) : super(key: key);
+  });
+  final String imageUrl;
+  final String name;
 
   @override
   State<LogoCard> createState() => _LogoCardState();
@@ -216,7 +216,7 @@ class _LogoCardState extends State<LogoCard> {
                     color: Theme.of(context).dividerColor.withOpacity(0.5),
                     blurRadius: 4,
                     spreadRadius: 2,
-                  )
+                  ),
                 ]
               : [],
         ),
@@ -230,8 +230,7 @@ class _LogoCardState extends State<LogoCard> {
               return Center(
                 child: CircularProgressIndicator(
                   value: loadingProgress.expectedTotalBytes != null
-                      ? loadingProgress.cumulativeBytesLoaded /
-                          loadingProgress.expectedTotalBytes!
+                      ? loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes!
                       : null,
                 ),
               );

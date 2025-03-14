@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:fx_2_folder/loader-avatars/design/grid.dart';
 import 'package:fx_2_folder/loader-avatars/loader_avatars.dart';
 import 'package:fx_2_folder/loader-avatars/strategies/loader_strategy_pulse.dart';
@@ -7,7 +8,7 @@ import 'package:fx_2_folder/loader-avatars/strategies/loader_strategy_ripple.dar
 import 'package:fx_2_folder/loader-avatars/strategies/loader_strategy_wave.dart';
 
 class LoaderAvatarsDemo extends StatelessWidget {
-  const LoaderAvatarsDemo({Key? key}) : super(key: key);
+  const LoaderAvatarsDemo({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -22,9 +23,8 @@ class LoaderAvatarsDemo extends StatelessWidget {
           ),
           Center(
             child: SingleChildScrollView(
-              padding: EdgeInsets.all(16),
+              padding: const EdgeInsets.all(16),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   _DemoSection(
                     title: 'Pulse',
@@ -40,7 +40,7 @@ class LoaderAvatarsDemo extends StatelessWidget {
                     ),
                   ),
 
-                  SizedBox(height: 32),
+                  const SizedBox(height: 32),
 
                   _DemoSection(
                     title: 'Wave',
@@ -52,7 +52,7 @@ class LoaderAvatarsDemo extends StatelessWidget {
                     ),
                   ),
 
-                  SizedBox(height: 32),
+                  const SizedBox(height: 32),
                   _DemoSection(
                     title: 'Ripple',
                     child: AnimatedAvatarRow(
@@ -63,7 +63,7 @@ class LoaderAvatarsDemo extends StatelessWidget {
                     ),
                   ),
 
-                  SizedBox(height: 32),
+                  const SizedBox(height: 32),
 
                   // Random chaotic movement
                   _DemoSection(
@@ -87,19 +87,16 @@ class LoaderAvatarsDemo extends StatelessWidget {
 
 /// Widget to display a demo section with title and description
 class _DemoSection extends StatelessWidget {
-  final String title;
-  final Widget child;
-
   const _DemoSection({
-    Key? key,
     required this.title,
     required this.child,
-  }) : super(key: key);
+  });
+  final String title;
+  final Widget child;
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         child,
         Text(

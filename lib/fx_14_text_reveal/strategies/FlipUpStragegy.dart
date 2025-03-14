@@ -1,17 +1,19 @@
 import 'dart:math';
+
 import 'package:flutter/material.dart';
+
 import 'package:fx_2_folder/fx_14_text_reveal/text_reveal_widget.dart';
 
 class FlipUpStrategy extends BaseAnimationStrategy {
-  final double rotationAngle; // Maximum rotation angle in radians
-  final double
-      perspectiveValue; // Controls the intensity of the perspective effect
+  // Controls the intensity of the perspective effect
 
   const FlipUpStrategy({
     this.rotationAngle = -pi / 2, // Start flat (-90 degrees)
     this.perspectiveValue = 0.003,
     super.synchronizeAnimation = false,
   });
+  final double rotationAngle; // Maximum rotation angle in radians
+  final double perspectiveValue;
 
   @override
   Widget buildAnimatedCharacter({
@@ -23,7 +25,7 @@ class FlipUpStrategy extends BaseAnimationStrategy {
       valueListenable: animation,
       builder: (context, value, _) {
         // Simple rotation calculation
-        final double currentRotation = rotationAngle * (1 - value);
+        final currentRotation = rotationAngle * (1 - value);
 
         // Simple transform with just perspective and rotation
         final transform = Matrix4.identity()

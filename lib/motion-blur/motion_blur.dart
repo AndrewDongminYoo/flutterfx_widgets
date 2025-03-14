@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 
 class MotionBlurDemo extends StatefulWidget {
-  const MotionBlurDemo({Key? key}) : super(key: key);
+  const MotionBlurDemo({super.key});
 
   @override
   State<MotionBlurDemo> createState() => _MotionBlurDemoState();
 }
 
-class _MotionBlurDemoState extends State<MotionBlurDemo>
-    with TickerProviderStateMixin {
+class _MotionBlurDemoState extends State<MotionBlurDemo> with TickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animation;
 
@@ -25,13 +24,15 @@ class _MotionBlurDemoState extends State<MotionBlurDemo>
     );
 
     _animation = Tween<double>(
-      begin: 0.0,
-      end: 1.0,
-    ).animate(CurvedAnimation(
-      parent: _controller,
-      // Using easeInOut for smooth acceleration and deceleration
-      curve: Curves.easeInOut,
-    ));
+      begin: 0,
+      end: 1,
+    ).animate(
+      CurvedAnimation(
+        parent: _controller,
+        // Using easeInOut for smooth acceleration and deceleration
+        curve: Curves.easeInOut,
+      ),
+    );
   }
 
   @override
@@ -55,13 +56,13 @@ class _MotionBlurDemoState extends State<MotionBlurDemo>
             child: Stack(
               children: [
                 // Title and Description
-                Positioned(
+                const Positioned(
                   top: 40,
                   left: 20,
                   right: 20,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
+                    children: [
                       Text(
                         'Motion Blur Demonstration',
                         style: TextStyle(
@@ -107,8 +108,7 @@ class _MotionBlurDemoState extends State<MotionBlurDemo>
 
                         // Main square
                         Positioned(
-                          left: _animation.value *
-                              (MediaQuery.of(context).size.width - 70),
+                          left: _animation.value * (MediaQuery.of(context).size.width - 70),
                           top: 200,
                           child: Container(
                             width: 50,
@@ -184,16 +184,14 @@ class _MotionBlurDemoState extends State<MotionBlurDemo>
     if (!_controller.isAnimating) return 0;
 
     // Current position
-    double currentPos =
-        _animation.value * (MediaQuery.of(context).size.width - 70);
+    final currentPos = _animation.value * (MediaQuery.of(context).size.width - 70);
 
     // Calculate how far behind this copy should be based on velocity
-    double velocity = _controller.velocity;
-    double trailDistance =
-        velocity * 100; // Adjust this multiplier to change trail length
+    final velocity = _controller.velocity;
+    final trailDistance = velocity * 100; // Adjust this multiplier to change trail length
 
     // Each copy is increasingly further behind
-    double offset = (trailDistance * index) / numberOfCopies;
+    final offset = (trailDistance * index) / numberOfCopies;
 
     return currentPos - offset;
   }
@@ -203,12 +201,11 @@ class _MotionBlurDemoState extends State<MotionBlurDemo>
     if (!_controller.isAnimating) return 0;
 
     // Base opacity decreases for each trailing copy
-    double baseOpacity = 1 - (index / numberOfCopies);
+    final baseOpacity = 1 - (index / numberOfCopies);
 
     // Modify opacity based on velocity
-    double velocity = _controller.velocity.abs();
-    double velocityFactor =
-        velocity * 2; // Adjust this multiplier to change opacity sensitivity
+    final velocity = _controller.velocity.abs();
+    final velocityFactor = velocity * 2; // Adjust this multiplier to change opacity sensitivity
 
     return (baseOpacity * velocityFactor).clamp(0.0, 0.3);
   }

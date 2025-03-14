@@ -1,16 +1,17 @@
 // lib/background_beams.dart
+
 import 'dart:async';
 import 'dart:math';
-
-import 'package:flutter/material.dart';
 import 'dart:ui' as ui;
 
+import 'package:flutter/material.dart';
+
 class BorderBeamsBackground extends StatelessWidget {
-  final int numberOfSimultaneousBeams;
   const BorderBeamsBackground({
     super.key,
     this.numberOfSimultaneousBeams = 10,
   });
+  final int numberOfSimultaneousBeams;
 
   @override
   Widget build(BuildContext context) {
@@ -34,31 +35,28 @@ class BorderBeamsBackground extends StatelessWidget {
 }
 
 class BeamAnimation {
-  final int beamIndex;
-  final AnimationController controller;
-  final DateTime startTime;
-
   BeamAnimation({
     required this.beamIndex,
     required this.controller,
     required this.startTime,
   });
+  final int beamIndex;
+  final AnimationController controller;
+  final DateTime startTime;
 }
 
 class BackgroundBeams extends StatefulWidget {
-  final int numberOfBeams;
-
   const BackgroundBeams({
-    Key? key,
+    super.key,
     required this.numberOfBeams,
-  }) : super(key: key);
+  });
+  final int numberOfBeams;
 
   @override
   State<BackgroundBeams> createState() => _BackgroundBeamsState();
 }
 
-class _BackgroundBeamsState extends State<BackgroundBeams>
-    with TickerProviderStateMixin {
+class _BackgroundBeamsState extends State<BackgroundBeams> with TickerProviderStateMixin {
   final List<BeamAnimation> _activeBeams = [];
   final Random random = Random();
   Timer? _spawnTimer;
@@ -128,7 +126,7 @@ class _BackgroundBeamsState extends State<BackgroundBeams>
   @override
   void dispose() {
     _spawnTimer?.cancel();
-    for (var beam in _activeBeams) {
+    for (final beam in _activeBeams) {
       beam.controller.dispose();
     }
     super.dispose();
@@ -159,11 +157,10 @@ class _BackgroundBeamsState extends State<BackgroundBeams>
 }
 
 class BeamsPainter extends CustomPainter {
-  final List<BeamAnimation> activeBeams;
-
   BeamsPainter({
     required this.activeBeams,
   });
+  final List<BeamAnimation> activeBeams;
 
   List<Path> getBeamPaths(Size size) {
     const numberOfBeams = 25;
@@ -175,7 +172,7 @@ class BeamsPainter extends CustomPainter {
     final availableHeight = size.height - (beamPadding * 2);
 
     // Calculate spacing using expanded width
-    final double spacing = totalWidth / (numberOfBeams - 1);
+    final spacing = totalWidth / (numberOfBeams - 1);
 
     return List.generate(numberOfBeams, (index) {
       // Shift startX left by extraWidth to start before viewport
@@ -187,12 +184,13 @@ class BeamsPainter extends CustomPainter {
       final horizontalOffset = size.width * 0.3;
 
       path.cubicTo(
-          startX + horizontalOffset,
-          availableHeight * 0.3 + beamPadding,
-          startX - horizontalOffset,
-          availableHeight * 0.7 + beamPadding,
-          startX,
-          size.height + beamPadding);
+        startX + horizontalOffset,
+        availableHeight * 0.3 + beamPadding,
+        startX - horizontalOffset,
+        availableHeight * 0.7 + beamPadding,
+        startX,
+        size.height + beamPadding,
+      );
 
       return path;
     });
@@ -215,12 +213,12 @@ class BeamsPainter extends CustomPainter {
       ],
     );
 
-    for (var path in beamPaths) {
+    for (final path in beamPaths) {
       canvas.drawPath(path, paint);
     }
 
     // Draw each active beam
-    for (var beam in activeBeams) {
+    for (final beam in activeBeams) {
       final selectedPath = beamPaths[beam.beamIndex];
       final pathMetrics = selectedPath.computeMetrics().single;
       final pathLength = pathMetrics.length;
@@ -237,15 +235,12 @@ class BeamsPainter extends CustomPainter {
       }
 
       //random number between 12 and 18
-      final pathSegmentLength =
-          pathLength / (12 + Random().nextInt(6)); // Add this line
+      final pathSegmentLength = pathLength / (12 + Random().nextInt(6)); // Add this line
       final gradientPosition = pathMetrics.getTangentForOffset(start);
       if (gradientPosition != null) {
         final gradientStart = gradientPosition.position;
-        final gradientEnd = pathMetrics
-                .getTangentForOffset(start + pathSegmentLength)
-                ?.position ??
-            gradientPosition.position;
+        final gradientEnd =
+            pathMetrics.getTangentForOffset(start + pathSegmentLength)?.position ?? gradientPosition.position;
 
         final shootingStarPaint = Paint()
           ..style = PaintingStyle.stroke
@@ -258,7 +253,7 @@ class BeamsPainter extends CustomPainter {
             gradientStart,
             gradientEnd,
             [
-              const Color(0xFFAE48FF).withOpacity(0.0), // Transparent start
+              const Color(0xFFAE48FF).withOpacity(0), // Transparent start
               // const Color.fromARGB(255, 79, 41, 250), // Deep blue
               // const Color.fromARGB(255, 107, 75, 253), // Medium blue
               // const Color.fromARGB(255, 107, 75, 253), // Cyan
@@ -281,13 +276,6 @@ class BeamsPainter extends CustomPainter {
 }
 
 class BeamPath {
-  final double startX;
-  final double startY;
-  final double controlX;
-  final double controlY;
-  final double endX;
-  final double endY;
-
   BeamPath({
     required this.startX,
     required this.startY,
@@ -296,4 +284,10 @@ class BeamPath {
     required this.endX,
     required this.endY,
   });
+  final double startX;
+  final double startY;
+  final double controlX;
+  final double controlY;
+  final double endX;
+  final double endY;
 }

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
 class SimpleWelcomeScreen extends StatelessWidget {
-  const SimpleWelcomeScreen({Key? key}) : super(key: key);
+  const SimpleWelcomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        decoration: BoxDecoration(
+      body: DecoratedBox(
+        decoration: const BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
@@ -21,13 +21,13 @@ class SimpleWelcomeScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(
+              const Icon(
                 Icons.auto_awesome,
                 size: 100,
                 color: Colors.white,
               ),
-              SizedBox(height: 40),
-              Text(
+              const SizedBox(height: 40),
+              const Text(
                 'Hello!',
                 style: TextStyle(
                   fontSize: 64,
@@ -36,15 +36,15 @@ class SimpleWelcomeScreen extends StatelessWidget {
                   letterSpacing: 2,
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Container(
-                padding: EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+                padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
                 decoration: BoxDecoration(
                   color: Colors.white.withOpacity(0.2),
                   borderRadius: BorderRadius.circular(50),
                 ),
-                child: Text(
-                  'Let\'s Begin',
+                child: const Text(
+                  "Let's Begin",
                   style: TextStyle(
                     fontSize: 24,
                     color: Colors.white,

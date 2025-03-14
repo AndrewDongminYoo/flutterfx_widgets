@@ -1,15 +1,10 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+
 import 'package:fx_2_folder/loader-avatars/loader_avatars.dart';
 
 class PulseAnimationStrategy extends AvatarAnimationStrategy {
-  final Duration animationDuration;
-  final double baseScale;
-  final double scaleAmount;
-  final double waveWidth;
-  final double phaseShiftFactor;
-
   PulseAnimationStrategy({
     this.animationDuration = const Duration(milliseconds: 800),
     this.baseScale = 1.0,
@@ -17,6 +12,11 @@ class PulseAnimationStrategy extends AvatarAnimationStrategy {
     this.waveWidth = 1.0,
     this.phaseShiftFactor = 0.35,
   });
+  final Duration animationDuration;
+  final double baseScale;
+  final double scaleAmount;
+  final double waveWidth;
+  final double phaseShiftFactor;
 
   @override
   Duration getAnimationDuration(int index) => animationDuration;
@@ -42,10 +42,12 @@ class PulseAnimationStrategy extends AvatarAnimationStrategy {
 
   double _calculatePulseScale(double animationValue, int index) {
     final phaseShift = index * phaseShiftFactor;
-    double shiftedValue = animationValue - phaseShift;
-    while (shiftedValue < 0) shiftedValue += pi * 2;
+    var shiftedValue = animationValue - phaseShift;
+    while (shiftedValue < 0) {
+      shiftedValue += pi * 2;
+    }
 
-    double normalizedSine = (sin(shiftedValue) + 1) / 2;
+    var normalizedSine = (sin(shiftedValue) + 1) / 2;
     normalizedSine = pow(normalizedSine, 1 / waveWidth) as double;
 
     return baseScale + normalizedSine * scaleAmount;

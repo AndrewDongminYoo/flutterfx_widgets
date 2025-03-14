@@ -1,7 +1,19 @@
 import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 
 class AnimatedBook extends StatefulWidget {
+  const AnimatedBook({
+    super.key,
+    required this.coverChild,
+    required this.pageChild,
+    this.width,
+    this.height,
+    this.animationDuration = const Duration(milliseconds: 400),
+    this.maxOpenAngle = 180,
+    this.aspectRatio = 0.7,
+    this.numberOfPages = 25,
+  });
   final Widget coverChild;
   final Widget pageChild;
   final double? width;
@@ -11,28 +23,14 @@ class AnimatedBook extends StatefulWidget {
   final double aspectRatio;
   final int numberOfPages;
 
-  const AnimatedBook({
-    Key? key,
-    required this.coverChild,
-    required this.pageChild,
-    this.width,
-    this.height,
-    this.animationDuration = const Duration(milliseconds: 400),
-    this.maxOpenAngle = 180,
-    this.aspectRatio = 0.7,
-    this.numberOfPages = 25,
-  }) : super(key: key);
-
   @override
   State<AnimatedBook> createState() => _AnimatedBookState();
 }
 
-class _AnimatedBookState extends State<AnimatedBook>
-    with SingleTickerProviderStateMixin {
+class _AnimatedBookState extends State<AnimatedBook> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animation;
   bool _isOpen = false;
-  late List<Color> _colorList;
 
   Size _getBookDimensions(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
@@ -44,14 +42,13 @@ class _AnimatedBookState extends State<AnimatedBook>
     final maxAllowedHeight = safeHeight * 0.8;
 
     if (widget.width != null && widget.height != null) {
-      if (widget.width! <= maxAllowedWidth &&
-          widget.height! <= maxAllowedHeight) {
+      if (widget.width! <= maxAllowedWidth && widget.height! <= maxAllowedHeight) {
         return Size(widget.width!, widget.height!);
       }
     }
 
-    double width = maxAllowedWidth;
-    double height = width / widget.aspectRatio;
+    var width = maxAllowedWidth;
+    var height = width / widget.aspectRatio;
 
     if (height > maxAllowedHeight) {
       height = maxAllowedHeight;
@@ -75,7 +72,7 @@ class _AnimatedBookState extends State<AnimatedBook>
       curve: Curves.linearToEaseOut,
     );
 
-    _colorList = initColors(widget.numberOfPages);
+    initColors(widget.numberOfPages);
   }
 
   @override
@@ -130,17 +127,16 @@ class _AnimatedBookState extends State<AnimatedBook>
                       children: [
                         // Base page
                         Positioned.fill(
-                          child: Container(
+                          child: DecoratedBox(
                             decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(8),
                               boxShadow: [
                                 BoxShadow(
-                                  color: Colors.black
-                                      .withOpacity(_clampOpacity(0.2)),
+                                  color: Colors.black.withOpacity(_clampOpacity(0.2)),
                                   spreadRadius: 1,
                                   blurRadius: 8,
-                                  offset: Offset(0, 2),
+                                  offset: const Offset(0, 2),
                                 ),
                               ],
                             ),
@@ -150,8 +146,7 @@ class _AnimatedBookState extends State<AnimatedBook>
 
                         // Pages
                         ...List.generate(widget.numberOfPages, (index) {
-                          final pageAngle =
-                              _getPageAngle(index, _animation.value);
+                          final pageAngle = _getPageAngle(index, _animation.value);
                           final normalizedIndex = index / widget.numberOfPages;
 
                           return Transform(
@@ -168,26 +163,28 @@ class _AnimatedBookState extends State<AnimatedBook>
                                 boxShadow: [
                                   BoxShadow(
                                     color: Colors.black.withOpacity(
-                                        _clampOpacity(
-                                            0.8 * (1 - normalizedIndex))),
+                                      _clampOpacity(
+                                        0.8 * (1 - normalizedIndex),
+                                      ),
+                                    ),
                                     spreadRadius: 1,
                                     blurRadius: 5,
-                                    offset: Offset(1, 1),
+                                    offset: const Offset(1, 1),
                                   ),
                                 ],
                               ),
                             ),
                           );
-                        }).reversed.toList(),
+                        }).reversed,
 
                         // Front cover
                         Transform(
                           alignment: Alignment.centerLeft,
                           transform: Matrix4.identity()
                             ..setEntry(3, 2, 0.001)
-                            ..rotateY(_getPageAngle(0, _animation.value) *
-                                math.pi /
-                                180),
+                            ..rotateY(
+                              _getPageAngle(0, _animation.value) * math.pi / 180,
+                            ),
                           child: Container(
                             width: bookDimensions.width,
                             height: bookDimensions.height,
@@ -195,8 +192,11 @@ class _AnimatedBookState extends State<AnimatedBook>
                               borderRadius: BorderRadius.circular(8),
                               boxShadow: [
                                 BoxShadow(
-                                  color: Colors.black.withOpacity(_clampOpacity(
-                                      0.3 * (1 - _animation.value))),
+                                  color: Colors.black.withOpacity(
+                                    _clampOpacity(
+                                      0.3 * (1 - _animation.value),
+                                    ),
+                                  ),
                                   spreadRadius: 2,
                                   blurRadius: 10,
                                   offset: Offset(2 * (1 - _animation.value), 2),
@@ -222,20 +222,20 @@ class _AnimatedBookState extends State<AnimatedBook>
   }
 
   List<Color> initColors(int n) {
-    List<Color> colors = [];
-    for (int i = 0; i < n; i++) {
+    final colors = <Color>[];
+    for (var i = 0; i < n; i++) {
       colors.add(getRandomColor());
     }
     return colors;
   }
 
   Color getRandomColor() {
-    math.Random random = math.Random();
+    final random = math.Random();
     return Color.fromRGBO(
       random.nextInt(256), // Red
       random.nextInt(256), // Green
       random.nextInt(256), // Blue
-      1.0, // Opacity (1.0 is fully opaque)
+      1, // Opacity (1.0 is fully opaque)
     );
   }
 }

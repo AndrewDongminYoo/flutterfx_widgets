@@ -1,5 +1,7 @@
 import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
+
 import 'package:fx_2_folder/noise/strategy_noise.dart';
 
 // Abstract Strategy Interface
@@ -11,10 +13,8 @@ abstract class NoiseStrategy {
 
 // Perlin Noise Implementation
 class PerlinNoiseStrategy implements NoiseStrategy {
-  final List<int> p = List.generate(512, (i) => 0);
-
   PerlinNoiseStrategy() {
-    final List<int> permutation = [
+    final permutation = <int>[
       151,
       160,
       137,
@@ -270,38 +270,42 @@ class PerlinNoiseStrategy implements NoiseStrategy {
       215,
       61,
       156,
-      180
+      180,
     ];
 
-    for (int i = 0; i < 256; i++) {
+    for (var i = 0; i < 256; i++) {
       p[i] = permutation[i];
       p[256 + i] = permutation[i];
     }
   }
+  final List<int> p = List.generate(512, (i) => 0);
 
   @override
   String get name => 'Perlin Noise';
 
   @override
   double noise2D(double x, double y) {
-    int X = x.floor() & 255;
-    int Y = y.floor() & 255;
+    final X = x.floor() & 255;
+    final Y = y.floor() & 255;
 
     x -= x.floor();
     y -= y.floor();
 
-    double u = _fade(x);
-    double v = _fade(y);
+    final u = _fade(x);
+    final v = _fade(y);
 
-    int A = p[X] + Y;
-    int AA = p[A];
-    int AB = p[A + 1];
-    int B = p[X + 1] + Y;
-    int BA = p[B];
-    int BB = p[B + 1];
+    final A = p[X] + Y;
+    final AA = p[A];
+    final AB = p[A + 1];
+    final B = p[X + 1] + Y;
+    final BA = p[B];
+    final BB = p[B + 1];
 
-    double result = _lerp(_lerp(_grad(p[AA], x, y), _grad(p[BA], x - 1, y), u),
-        _lerp(_grad(p[AB], x, y - 1), _grad(p[BB], x - 1, y - 1), u), v);
+    final result = _lerp(
+      _lerp(_grad(p[AA], x, y), _grad(p[BA], x - 1, y), u),
+      _lerp(_grad(p[AB], x, y - 1), _grad(p[BB], x - 1, y - 1), u),
+      v,
+    );
 
     return (result + 1) / 2; // Normalize to 0-1
   }
@@ -311,9 +315,9 @@ class PerlinNoiseStrategy implements NoiseStrategy {
   double _lerp(double a, double b, double t) => a + t * (b - a);
 
   double _grad(int hash, double x, double y) {
-    int h = hash & 15;
-    double u = h < 8 ? x : y;
-    double v = h < 4
+    final h = hash & 15;
+    final u = h < 8 ? x : y;
+    final v = h < 4
         ? y
         : h == 12 || h == 14
             ? x
@@ -323,18 +327,13 @@ class PerlinNoiseStrategy implements NoiseStrategy {
 
   @override
   Color getColor(double value) {
-    int intensity = (value * 255).round();
+    final intensity = (value * 255).round();
     return Color.fromRGBO(intensity, intensity, intensity, 1);
   }
 }
 
 // Noise Visualization Widget
 class NoiseVisualizer extends StatelessWidget {
-  final NoiseStrategy noiseStrategy;
-  final double scale;
-  final double frequency;
-  final double opacity;
-
   const NoiseVisualizer({
     super.key,
     required this.noiseStrategy,
@@ -342,6 +341,10 @@ class NoiseVisualizer extends StatelessWidget {
     this.frequency = 0.05,
     this.opacity = 1.0,
   });
+  final NoiseStrategy noiseStrategy;
+  final double scale;
+  final double frequency;
+  final double opacity;
 
   @override
   Widget build(BuildContext context) {
@@ -353,7 +356,7 @@ class NoiseVisualizer extends StatelessWidget {
           style: Theme.of(context).textTheme.titleLarge,
         ),
         const SizedBox(height: 8),
-        Container(
+        DecoratedBox(
           decoration: BoxDecoration(
             border: Border.all(color: Colors.grey),
             borderRadius: BorderRadius.circular(8),
@@ -375,28 +378,27 @@ class NoiseVisualizer extends StatelessWidget {
 
 // Custom Painter for Noise Visualization
 class NoisePainter extends CustomPainter {
-  final NoiseStrategy noiseStrategy;
-  final double scale;
-  final double frequency;
-  final double opacity;
-
   NoisePainter({
     required this.noiseStrategy,
     required this.scale,
     required this.frequency,
     required this.opacity,
   });
+  final NoiseStrategy noiseStrategy;
+  final double scale;
+  final double frequency;
+  final double opacity;
 
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint();
 
-    for (int x = 0; x < size.width; x++) {
-      for (int y = 0; y < size.height; y++) {
-        double nx = x * frequency * scale;
-        double ny = y * frequency * scale;
+    for (var x = 0; x < size.width; x++) {
+      for (var y = 0; y < size.height; y++) {
+        final nx = x * frequency * scale;
+        final ny = y * frequency * scale;
 
-        double noiseValue = noiseStrategy.noise2D(nx, ny);
+        final noiseValue = noiseStrategy.noise2D(nx, ny);
         paint.color = noiseStrategy.getColor(noiseValue);
 
         paint.color = paint.color.withOpacity(opacity);
@@ -411,9 +413,7 @@ class NoisePainter extends CustomPainter {
 
   @override
   bool shouldRepaint(NoisePainter oldDelegate) =>
-      oldDelegate.noiseStrategy != noiseStrategy ||
-      oldDelegate.scale != scale ||
-      oldDelegate.frequency != frequency;
+      oldDelegate.noiseStrategy != noiseStrategy || oldDelegate.scale != scale || oldDelegate.frequency != frequency;
 }
 
 class ValueNoiseStrategy implements NoiseStrategy {
@@ -426,28 +426,28 @@ class ValueNoiseStrategy implements NoiseStrategy {
   @override
   double noise2D(double x, double y) {
     // Get grid cell coordinates
-    int x0 = x.floor();
-    int y0 = y.floor();
+    final x0 = x.floor();
+    final y0 = y.floor();
 
     // Get relative coordinates within grid cell
-    double sx = x - x0;
-    double sy = y - y0;
+    final sx = x - x0;
+    final sy = y - y0;
 
     // Get random values for corners
-    double v00 = _getGridValue(x0, y0);
-    double v10 = _getGridValue(x0 + 1, y0);
-    double v01 = _getGridValue(x0, y0 + 1);
-    double v11 = _getGridValue(x0 + 1, y0 + 1);
+    final v00 = _getGridValue(x0, y0);
+    final v10 = _getGridValue(x0 + 1, y0);
+    final v01 = _getGridValue(x0, y0 + 1);
+    final v11 = _getGridValue(x0 + 1, y0 + 1);
 
     // Interpolate values
-    double ix0 = _smoothstep(v00, v10, sx);
-    double ix1 = _smoothstep(v01, v11, sx);
+    final ix0 = _smoothstep(v00, v10, sx);
+    final ix1 = _smoothstep(v01, v11, sx);
     return _smoothstep(ix0, ix1, sy);
   }
 
   double _getGridValue(int x, int y) {
-    String key = '$x,$y';
-    return _valueGrid.putIfAbsent(key, () => _random.nextDouble());
+    final key = '$x,$y';
+    return _valueGrid.putIfAbsent(key, _random.nextDouble);
   }
 
   double _smoothstep(double a, double b, double t) {
@@ -458,8 +458,8 @@ class ValueNoiseStrategy implements NoiseStrategy {
   @override
   Color getColor(double value) {
     // Create a more colorful visualization
-    double hue = (value + 1) * 180; // Map [-1,1] to [0,360]
-    return HSVColor.fromAHSV(1.0, hue, 0.8, 0.9).toColor();
+    final hue = (value + 1) * 180; // Map [-1,1] to [0,360]
+    return HSVColor.fromAHSV(1, hue, 0.8, 0.9).toColor();
   }
 }
 
@@ -477,8 +477,6 @@ class NoiseDemo extends StatelessWidget {
             children: [
               NoiseVisualizer(
                 noiseStrategy: PerlinNoiseStrategy(),
-                scale: 1.0,
-                frequency: 0.05,
               ),
               const SizedBox(height: 20),
               // Add more noise visualizers with different strategies here
@@ -502,19 +500,15 @@ class NoiseGallery extends StatelessWidget {
           children: [
             NoiseVisualizer(
               noiseStrategy: PerlinNoiseStrategy(),
-              scale: 1.0,
-              frequency: 0.05,
             ),
             const SizedBox(height: 20),
             NoiseVisualizer(
               noiseStrategy: ValueNoiseStrategy(),
-              scale: 1.0,
               frequency: 0.1,
             ),
             const SizedBox(height: 20),
             NoiseVisualizer(
               noiseStrategy: VoronoiNoiseStrategy(),
-              scale: 1.0,
               frequency: 0.1,
             ),
           ],

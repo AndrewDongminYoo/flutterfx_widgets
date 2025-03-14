@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:fx_2_folder/progress-bar/progress_bar.dart';
 
 class TypingProgressStrategy implements ProgressAnimationStrategy {
@@ -18,26 +19,22 @@ class TypingProgressStrategy implements ProgressAnimationStrategy {
 }
 
 class _TypingProgressWidget extends StatefulWidget {
-  final double progress;
-  final Animation<double> animation;
-  final ProgressStyle style;
-
   const _TypingProgressWidget({
-    Key? key,
     required this.progress,
     required this.animation,
     required this.style,
-  }) : super(key: key);
+  });
+  final double progress;
+  final Animation<double> animation;
+  final ProgressStyle style;
 
   @override
   State<_TypingProgressWidget> createState() => _TypingProgressWidgetState();
 }
 
-class _TypingProgressWidgetState extends State<_TypingProgressWidget>
-    with SingleTickerProviderStateMixin {
+class _TypingProgressWidgetState extends State<_TypingProgressWidget> with SingleTickerProviderStateMixin {
   late AnimationController _cursorController;
   late String _currentText = '';
-  late int _visibleChars = 0;
 
   @override
   void initState() {
@@ -58,7 +55,6 @@ class _TypingProgressWidgetState extends State<_TypingProgressWidget>
 
     setState(() {
       _currentText = _getProgressText(widget.animation.value);
-      _visibleChars = _currentText.length;
     });
   }
 

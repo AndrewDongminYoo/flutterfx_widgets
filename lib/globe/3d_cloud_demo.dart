@@ -1,43 +1,42 @@
-// lib/widgets/tech_stack_cloud.dart
 import 'package:flutter/material.dart';
+
 import 'package:fx_2_folder/globe/globe.dart';
 import 'package:fx_2_folder/globe/icon_helper.dart';
 
 class TechStackCloud extends StatelessWidget {
+  TechStackCloud({super.key});
   final List<String> slugs = [
-    "typescript",
-    "javascript",
-    "dart",
-    "java",
-    "react",
-    "flutter",
-    "android",
-    "html5",
-    "css3",
-    "nodedotjs",
-    "express",
-    "nextdotjs",
-    "prisma",
-    "amazonaws",
-    "postgresql",
-    "firebase",
-    "nginx",
-    "vercel",
-    "testinglibrary",
-    "jest",
-    "cypress",
-    "docker",
-    "git",
-    "jira",
-    "github",
-    "gitlab",
-    "visualstudiocode",
-    "androidstudio",
-    "sonarqube",
-    "figma",
+    'typescript',
+    'javascript',
+    'dart',
+    'java',
+    'react',
+    'flutter',
+    'android',
+    'html5',
+    'css3',
+    'nodedotjs',
+    'express',
+    'nextdotjs',
+    'prisma',
+    'amazonaws',
+    'postgresql',
+    'firebase',
+    'nginx',
+    'vercel',
+    'testinglibrary',
+    'jest',
+    'cypress',
+    'docker',
+    'git',
+    'jira',
+    'github',
+    'gitlab',
+    'visualstudiocode',
+    'androidstudio',
+    'sonarqube',
+    'figma',
   ];
-
-  TechStackCloud({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +63,7 @@ class TechStackCloud extends StatelessWidget {
 
 // Example page using the TechStackCloud
 class TechStackDemo extends StatelessWidget {
-  const TechStackDemo({Key? key}) : super(key: key);
+  const TechStackDemo({super.key});
 
   @override
   Widget build(BuildContext context) {

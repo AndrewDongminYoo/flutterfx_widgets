@@ -1,6 +1,6 @@
 import 'dart:math';
+
 import 'package:flutter/material.dart';
-import 'package:vector_math/vector_math.dart' as vector;
 
 enum ParticleShape { rectangle, circle, strip, diamond, star, triangle, heart }
 
@@ -9,18 +9,22 @@ class ParticleShapeFactory {
     switch (shape) {
       case ParticleShape.rectangle:
         return Path()
-          ..addRect(Rect.fromCenter(
-            center: Offset.zero,
-            width: size,
-            height: size * 1.5,
-          ));
+          ..addRect(
+            Rect.fromCenter(
+              center: Offset.zero,
+              width: size,
+              height: size * 1.5,
+            ),
+          );
 
       case ParticleShape.circle:
         return Path()
-          ..addOval(Rect.fromCircle(
-            center: Offset.zero,
-            radius: size * 0.5,
-          ));
+          ..addOval(
+            Rect.fromCircle(
+              center: Offset.zero,
+              radius: size * 0.5,
+            ),
+          );
 
       case ParticleShape.strip:
         return Path()
@@ -40,7 +44,7 @@ class ParticleShapeFactory {
 
       case ParticleShape.star:
         final path = Path();
-        final points = 5;
+        const points = 5;
         final innerRadius = size * 0.4;
         final outerRadius = size;
 
@@ -104,6 +108,22 @@ enum ParticleState {
 
 // Enhanced particle class with more realistic physics properties
 class EnhancedConfettiParticle {
+  EnhancedConfettiParticle({
+    required this.position,
+    required this.velocity,
+    required this.color,
+    required this.shape,
+    required this.size,
+  })  : mass = 0.8 + Random().nextDouble() * 0.4,
+        turbulence = Random().nextDouble() * 0.6,
+        flutterSpeed = 2 + Random().nextDouble() * 3,
+        flutterAmount = Random().nextDouble() * 2.5,
+        rotationSpeed = Random().nextDouble() * 0.15 - 0.075,
+        rotationAcceleration = Random().nextDouble() * 0.01 - 0.005,
+        lifespan = 1.0,
+        state = ParticleState.launch {
+    _initializeBezierPoints();
+  }
   Offset position;
   Offset velocity;
   final Color color;
@@ -128,48 +148,23 @@ class EnhancedConfettiParticle {
   // Time tracking for state transitions
   double stateTime = 0;
 
-  EnhancedConfettiParticle({
-    required this.position,
-    required this.velocity,
-    required this.color,
-    required this.shape,
-    required this.size,
-  })  : mass = 0.8 + Random().nextDouble() * 0.4,
-        turbulence = Random().nextDouble() * 0.6,
-        flutterSpeed = 2 + Random().nextDouble() * 3,
-        flutterAmount = Random().nextDouble() * 2.5,
-        rotationSpeed = Random().nextDouble() * 0.15 - 0.075,
-        rotationAcceleration = Random().nextDouble() * 0.01 - 0.005,
-        lifespan = 1.0,
-        state = ParticleState.launch {
-    _initializeBezierPoints();
-  }
-
   void _initializeBezierPoints() {
     // Initialize control points for bezier curve motion
     final random = Random();
-    controlPoint1 = Offset(position.dx + (random.nextDouble() - 0.5) * 100,
-        position.dy - random.nextDouble() * 50);
-    controlPoint2 = Offset(position.dx + (random.nextDouble() - 0.5) * 200,
-        position.dy - random.nextDouble() * 100);
+    controlPoint1 = Offset(
+      position.dx + (random.nextDouble() - 0.5) * 100,
+      position.dy - random.nextDouble() * 50,
+    );
+    controlPoint2 = Offset(
+      position.dx + (random.nextDouble() - 0.5) * 200,
+      position.dy - random.nextDouble() * 100,
+    );
   }
 }
 
 // Enhanced options class with more customization
 class EnhancedConfettiOptions {
-  final int particleCount;
-  final double initialSpread; // Initial spread angle
-  final double burstSpread; // Spread after burst
-  final double baseVelocity; // Base velocity for particles
-  final double burstVelocity; // Velocity during burst phase
-  final double gravity;
-  final double airResistance;
-  final double turbulenceFactor;
-  final List<Color> colors;
-  final List<ParticleShape> shapes;
-  final double launchDuration; // Duration of launch phase
-  final double burstDuration; // Duration of burst phase
-  final double floatDuration; // Duration of float phase
+  // Duration of float phase
 
   const EnhancedConfettiOptions({
     this.particleCount = 100,
@@ -199,24 +194,35 @@ class EnhancedConfettiOptions {
     this.burstDuration = 0.3, // 300ms
     this.floatDuration = 1.5, // 1.5s
   });
+  final int particleCount;
+  final double initialSpread; // Initial spread angle
+  final double burstSpread; // Spread after burst
+  final double baseVelocity; // Base velocity for particles
+  final double burstVelocity; // Velocity during burst phase
+  final double gravity;
+  final double airResistance;
+  final double turbulenceFactor;
+  final List<Color> colors;
+  final List<ParticleShape> shapes;
+  final double launchDuration; // Duration of launch phase
+  final double burstDuration; // Duration of burst phase
+  final double floatDuration;
 }
 
 // Enhanced painter class with improved physics and rendering
 class EnhancedConfettiPainter extends CustomPainter {
+  EnhancedConfettiPainter({
+    required this.particles,
+    required this.progress,
+    required this.options,
+  });
   final List<EnhancedConfettiParticle> particles;
   final double progress;
   final EnhancedConfettiOptions options;
   final Random random = Random();
 
   // Perlin noise for smooth random motion
-  final List<double> perlinSeed =
-      List.generate(1000, (index) => Random().nextDouble() * 2 - 1);
-
-  EnhancedConfettiPainter({
-    required this.particles,
-    required this.progress,
-    required this.options,
-  });
+  final List<double> perlinSeed = List.generate(1000, (index) => Random().nextDouble() * 2 - 1);
 
   double _perlinNoise(double x) {
     final i = x.floor() % perlinSeed.length;
@@ -231,39 +237,38 @@ class EnhancedConfettiPainter extends CustomPainter {
     // Initial tight grouping with upward momentum
     final normalizedTime = particle.stateTime / options.launchDuration;
 
-    // Gradually increase spread during launch
-    final spreadFactor = normalizedTime * options.initialSpread;
-
     // Calculate initial trajectory
     particle.velocity = Offset(
-        particle.velocity.dx * (1 - options.airResistance),
-        options.baseVelocity * (1 - normalizedTime * 0.5));
+      particle.velocity.dx * (1 - options.airResistance),
+      options.baseVelocity * (1 - normalizedTime * 0.5),
+    );
 
     // Add slight random movement
-    particle.velocity += Offset(_perlinNoise(particle.stateTime * 5) * 0.5,
-        _perlinNoise(particle.stateTime * 5 + 100) * 0.5);
+    particle.velocity += Offset(
+      _perlinNoise(particle.stateTime * 5) * 0.5,
+      _perlinNoise(particle.stateTime * 5 + 100) * 0.5,
+    );
   }
 
   void _applyBurstPhysics(EnhancedConfettiParticle particle) {
     // Rapid divergence with high energy
     final normalizedTime = particle.stateTime / options.burstDuration;
 
-    // Exponential spread increase
-    final burstPower = pow(normalizedTime, 2);
-    final spreadAngle = options.burstSpread * burstPower;
-
     // Calculate burst velocity
     final angle = random.nextDouble() * pi * 2;
     final speed = options.burstVelocity * (1 - normalizedTime);
 
-    particle.velocity = Offset(cos(angle) * speed * (1 + random.nextDouble()),
-        sin(angle) * speed + options.baseVelocity);
+    particle.velocity = Offset(
+      cos(angle) * speed * (1 + random.nextDouble()),
+      sin(angle) * speed + options.baseVelocity,
+    );
 
     // Add turbulence
     final turbulence = options.turbulenceFactor * (1 - normalizedTime);
     particle.velocity += Offset(
-        _perlinNoise(particle.stateTime * 3) * turbulence,
-        _perlinNoise(particle.stateTime * 3 + 50) * turbulence);
+      _perlinNoise(particle.stateTime * 3) * turbulence,
+      _perlinNoise(particle.stateTime * 3 + 50) * turbulence,
+    );
   }
 
   void _applyFloatPhysics(EnhancedConfettiParticle particle) {
@@ -275,22 +280,25 @@ class EnhancedConfettiPainter extends CustomPainter {
 
     // Apply air resistance
     particle.velocity = Offset(
-        particle.velocity.dx * (1 - options.airResistance),
-        particle.velocity.dy * (1 - options.airResistance) + gravityEffect);
+      particle.velocity.dx * (1 - options.airResistance),
+      particle.velocity.dy * (1 - options.airResistance) + gravityEffect,
+    );
 
     // Add smooth turbulence using perlin noise
     final turbulenceStrength = options.turbulenceFactor * (1 - normalizedTime);
     particle.velocity += Offset(
-        _perlinNoise(particle.stateTime * 2) * turbulenceStrength,
-        _perlinNoise(particle.stateTime * 2 + 100) * turbulenceStrength * 0.5);
+      _perlinNoise(particle.stateTime * 2) * turbulenceStrength,
+      _perlinNoise(particle.stateTime * 2 + 100) * turbulenceStrength * 0.5,
+    );
   }
 
   void _applyFallPhysics(EnhancedConfettiParticle particle) {
     // Gravity-dominated descent
     // Apply stronger gravity
     particle.velocity = Offset(
-        particle.velocity.dx * (1 - options.airResistance * 0.5),
-        particle.velocity.dy + options.gravity * particle.mass);
+      particle.velocity.dx * (1 - options.airResistance * 0.5),
+      particle.velocity.dy + options.gravity * particle.mass,
+    );
 
     // Add subtle horizontal drift
     final drift = _perlinNoise(particle.stateTime) * 0.3;
@@ -299,21 +307,17 @@ class EnhancedConfettiPainter extends CustomPainter {
 
   void _applyRotation(EnhancedConfettiParticle particle) {
     // Update rotation based on state
-    double rotationMultiplier = 1.0;
+    var rotationMultiplier = 1.0;
 
     switch (particle.state) {
       case ParticleState.launch:
         rotationMultiplier = 0.5;
-        break;
       case ParticleState.burst:
         rotationMultiplier = 2.0;
-        break;
       case ParticleState.float:
         rotationMultiplier = 1.0;
-        break;
       case ParticleState.fall:
         rotationMultiplier = 0.7;
-        break;
     }
 
     // Apply rotation speed and acceleration
@@ -332,22 +336,16 @@ class EnhancedConfettiPainter extends CustomPainter {
     switch (particle.state) {
       case ParticleState.launch:
         flutterStrength = 0.2;
-        break;
       case ParticleState.burst:
         flutterStrength = 1.0;
-        break;
       case ParticleState.float:
         flutterStrength = 0.8;
-        break;
       case ParticleState.fall:
         flutterStrength = 0.4;
-        break;
     }
 
     // Apply horizontal flutter using perlin noise
-    final flutter = _perlinNoise(particle.stateTime * particle.flutterSpeed) *
-        particle.flutterAmount *
-        flutterStrength;
+    final flutter = _perlinNoise(particle.stateTime * particle.flutterSpeed) * particle.flutterAmount * flutterStrength;
 
     particle.velocity += Offset(flutter, 0);
   }
@@ -360,17 +358,23 @@ class EnhancedConfettiPainter extends CustomPainter {
     final normalizedTime = particle.stateTime.clamp(0.0, 1.0);
     if (particle.state != ParticleState.fall) {
       final bezierPoint = _calculateBezierPoint(
-          normalizedTime,
-          particle.position,
-          particle.controlPoint1,
-          particle.controlPoint2,
-          particle.position + Offset(0, size.height * 0.5));
+        normalizedTime,
+        particle.position,
+        particle.controlPoint1,
+        particle.controlPoint2,
+        particle.position + Offset(0, size.height * 0.5),
+      );
       particle.position = particle.position * 0.9 + bezierPoint * 0.1;
     }
   }
 
   Offset _calculateBezierPoint(
-      double t, Offset p0, Offset p1, Offset p2, Offset p3) {
+    double t,
+    Offset p0,
+    Offset p1,
+    Offset p2,
+    Offset p3,
+  ) {
     final u = 1 - t;
     final tt = t * t;
     final uu = u * u;
@@ -378,8 +382,9 @@ class EnhancedConfettiPainter extends CustomPainter {
     final ttt = tt * t;
 
     return Offset(
-        uuu * p0.dx + 3 * uu * t * p1.dx + 3 * u * tt * p2.dx + ttt * p3.dx,
-        uuu * p0.dy + 3 * uu * t * p1.dy + 3 * u * tt * p2.dy + ttt * p3.dy);
+      uuu * p0.dx + 3 * uu * t * p1.dx + 3 * u * tt * p2.dx + ttt * p3.dx,
+      uuu * p0.dy + 3 * uu * t * p1.dy + 3 * u * tt * p2.dy + ttt * p3.dy,
+    );
   }
 
   double _calculateOpacity(EnhancedConfettiParticle particle) {
@@ -388,17 +393,13 @@ class EnhancedConfettiPainter extends CustomPainter {
     switch (particle.state) {
       case ParticleState.launch:
         baseOpacity = particle.stateTime / options.launchDuration;
-        break;
       case ParticleState.burst:
         baseOpacity = 1.0;
-        break;
       case ParticleState.float:
         baseOpacity = 1.0;
-        break;
       case ParticleState.fall:
         // Fade out during fall
         baseOpacity = 1.0 - (particle.stateTime / 2.0).clamp(0.0, 1.0);
-        break;
     }
 
     // Add flickering effect
@@ -407,7 +408,10 @@ class EnhancedConfettiPainter extends CustomPainter {
   }
 
   void _drawParticleShape(
-      Canvas canvas, Paint paint, EnhancedConfettiParticle particle) {
+    Canvas canvas,
+    Paint paint,
+    EnhancedConfettiParticle particle,
+  ) {
     // Get shape path from factory
     final path = ParticleShapeFactory.getPath(particle.shape, particle.size);
 
@@ -415,18 +419,15 @@ class EnhancedConfettiPainter extends CustomPainter {
     switch (particle.state) {
       case ParticleState.launch:
         // Stretch effect during launch
-        canvas.scale(1.0, 1.0 + particle.velocity.distance * 0.02);
-        break;
+        canvas.scale(1, 1.0 + particle.velocity.distance * 0.02);
       case ParticleState.burst:
         // Scale effect during burst
         final scaleFactor = 1.0 + sin(particle.stateTime * 10) * 0.1;
         canvas.scale(scaleFactor, scaleFactor);
-        break;
       case ParticleState.float:
         // Gentle pulsing during float
         final pulseFactor = 1.0 + sin(particle.stateTime * 3) * 0.05;
         canvas.scale(pulseFactor, pulseFactor);
-        break;
       case ParticleState.fall:
         // No special transformation during fall
         break;
@@ -439,10 +440,11 @@ class EnhancedConfettiPainter extends CustomPainter {
     if (particle.state == ParticleState.burst) {
       paint.color = paint.color.withOpacity(0.3);
       canvas.drawPath(
-          path,
-          paint
-            ..style = PaintingStyle.stroke
-            ..strokeWidth = 1);
+        path,
+        paint
+          ..style = PaintingStyle.stroke
+          ..strokeWidth = 1,
+      );
     }
   }
 
@@ -450,7 +452,7 @@ class EnhancedConfettiPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     final paint = Paint()..style = PaintingStyle.fill;
 
-    for (var particle in particles) {
+    for (final particle in particles) {
       _updateParticleState(particle, size);
       _updateParticlePhysics(particle, size);
       _renderParticle(canvas, paint, particle, size);
@@ -462,16 +464,13 @@ class EnhancedConfettiPainter extends CustomPainter {
     particle.stateTime += 0.016; // Assuming 60fps
 
     // Update particle state based on timing
-    if (particle.state == ParticleState.launch &&
-        particle.stateTime >= options.launchDuration) {
+    if (particle.state == ParticleState.launch && particle.stateTime >= options.launchDuration) {
       particle.state = ParticleState.burst;
       particle.stateTime = 0;
-    } else if (particle.state == ParticleState.burst &&
-        particle.stateTime >= options.burstDuration) {
+    } else if (particle.state == ParticleState.burst && particle.stateTime >= options.burstDuration) {
       particle.state = ParticleState.float;
       particle.stateTime = 0;
-    } else if (particle.state == ParticleState.float &&
-        particle.stateTime >= options.floatDuration) {
+    } else if (particle.state == ParticleState.float && particle.stateTime >= options.floatDuration) {
       particle.state = ParticleState.fall;
       particle.stateTime = 0;
     }
@@ -482,16 +481,12 @@ class EnhancedConfettiPainter extends CustomPainter {
     switch (particle.state) {
       case ParticleState.launch:
         _applyLaunchPhysics(particle);
-        break;
       case ParticleState.burst:
         _applyBurstPhysics(particle);
-        break;
       case ParticleState.float:
         _applyFloatPhysics(particle);
-        break;
       case ParticleState.fall:
         _applyFallPhysics(particle);
-        break;
     }
 
     // Apply common physics updates
@@ -500,8 +495,12 @@ class EnhancedConfettiPainter extends CustomPainter {
     _updatePosition(particle, size);
   }
 
-  void _renderParticle(Canvas canvas, Paint paint,
-      EnhancedConfettiParticle particle, Size size) {
+  void _renderParticle(
+    Canvas canvas,
+    Paint paint,
+    EnhancedConfettiParticle particle,
+    Size size,
+  ) {
     // Enhanced rendering with shadows and effects
     final opacity = _calculateOpacity(particle);
     paint.color = particle.color.withOpacity(opacity);

@@ -1,15 +1,13 @@
 import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
+
 import 'package:fx_2_folder/noise/noise.dart';
 
 class SimplexNoiseStrategy implements NoiseStrategy {
-  final List<int> p = List.generate(512, (i) => 0);
-  static double F2 = 0.5 * (math.sqrt(3.0) - 1.0);
-  static double G2 = (3.0 - math.sqrt(3.0)) / 6.0;
-
   SimplexNoiseStrategy() {
     // Initialize permutation table (same as Perlin)
-    final List<int> permutation = [
+    final permutation = <int>[
       151,
       160,
       137,
@@ -17,29 +15,34 @@ class SimplexNoiseStrategy implements NoiseStrategy {
       90,
       15, /*...*/
     ]; // Same as Perlin
-    for (int i = 0; i < 256; i++) {
+    for (var i = 0; i < 256; i++) {
       p[i] = permutation[i];
       p[256 + i] = permutation[i];
     }
   }
+  final List<int> p = List.generate(512, (i) => 0);
+  static double F2 = 0.5 * (math.sqrt(3.0) - 1.0);
+  static double G2 = (3.0 - math.sqrt(3.0)) / 6.0;
 
   @override
   String get name => 'Simplex Noise';
 
   @override
   double noise2D(double xin, double yin) {
-    double n0, n1, n2;
+    double n0;
+    double n1;
+    double n2;
 
     // Skew the input space to determine which simplex cell we're in
-    double s = (xin + yin) * F2;
-    int i = (xin + s).floor();
-    int j = (yin + s).floor();
+    final s = (xin + yin) * F2;
+    final i = (xin + s).floor();
+    final j = (yin + s).floor();
 
-    double t = (i + j) * G2;
-    double X0 = i - t;
-    double Y0 = j - t;
-    double x0 = xin - X0;
-    double y0 = yin - Y0;
+    final t = (i + j) * G2;
+    final X0 = i - t;
+    final Y0 = j - t;
+    final x0 = xin - X0;
+    final y0 = yin - Y0;
 
     // Determine which simplex we are in
     int i1, j1;
@@ -51,13 +54,13 @@ class SimplexNoiseStrategy implements NoiseStrategy {
       j1 = 1;
     }
 
-    double x1 = x0 - i1 + G2;
-    double y1 = y0 - j1 + G2;
-    double x2 = x0 - 1.0 + 2.0 * G2;
-    double y2 = y0 - 1.0 + 2.0 * G2;
+    final x1 = x0 - i1 + G2;
+    final y1 = y0 - j1 + G2;
+    final x2 = x0 - 1.0 + 2.0 * G2;
+    final y2 = y0 - 1.0 + 2.0 * G2;
 
     // Calculate contribution from three corners
-    double t0 = 0.5 - x0 * x0 - y0 * y0;
+    var t0 = 0.5 - x0 * x0 - y0 * y0;
     if (t0 < 0) {
       n0 = 0.0;
     } else {
@@ -65,7 +68,7 @@ class SimplexNoiseStrategy implements NoiseStrategy {
       n0 = t0 * t0 * _grad(p[(i + p[j & 255]) & 255], x0, y0);
     }
 
-    double t1 = 0.5 - x1 * x1 - y1 * y1;
+    var t1 = 0.5 - x1 * x1 - y1 * y1;
     if (t1 < 0) {
       n1 = 0.0;
     } else {
@@ -73,7 +76,7 @@ class SimplexNoiseStrategy implements NoiseStrategy {
       n1 = t1 * t1 * _grad(p[(i + i1 + p[(j + j1) & 255]) & 255], x1, y1);
     }
 
-    double t2 = 0.5 - x2 * x2 - y2 * y2;
+    var t2 = 0.5 - x2 * x2 - y2 * y2;
     if (t2 < 0) {
       n2 = 0.0;
     } else {
@@ -88,9 +91,9 @@ class SimplexNoiseStrategy implements NoiseStrategy {
 
   double _grad(int hash, double x, double y) {
     // Same as Perlin noise grad
-    int h = hash & 15;
-    double u = h < 8 ? x : y;
-    double v = h < 4
+    final h = hash & 15;
+    final u = h < 8 ? x : y;
+    final v = h < 4
         ? y
         : h == 12 || h == 14
             ? x
@@ -102,36 +105,39 @@ class SimplexNoiseStrategy implements NoiseStrategy {
   Color getColor(double value) {
     value = (value + 1) / 2; // Normalize to 0-1
     return Color.fromRGBO(
-        (value * 255).round(), (value * 255).round(), (value * 255).round(), 1);
+      (value * 255).round(),
+      (value * 255).round(),
+      (value * 255).round(),
+      1,
+    );
   }
 }
 
 // 2. Worley (Cellular) Noise Strategy
 class WorleyNoiseStrategy implements NoiseStrategy {
-  final math.Random _random = math.Random(42);
-  final List<Offset> _points = [];
-  final int numPoints;
-
   WorleyNoiseStrategy({this.numPoints = 20}) {
     // Generate random feature points
-    for (int i = 0; i < numPoints; i++) {
+    for (var i = 0; i < numPoints; i++) {
       _points.add(Offset(_random.nextDouble(), _random.nextDouble()));
     }
   }
+  final math.Random _random = math.Random(42);
+  final List<Offset> _points = [];
+  final int numPoints;
 
   @override
   String get name => 'Worley Noise';
 
   @override
   double noise2D(double x, double y) {
-    double minDist = double.infinity;
-    double secondMinDist = double.infinity;
+    var minDist = double.infinity;
+    var secondMinDist = double.infinity;
 
     // Find distances to the closest points
     for (final point in _points) {
-      double dx = x - point.dx;
-      double dy = y - point.dy;
-      double dist = math.sqrt(dx * dx + dy * dy);
+      final dx = x - point.dx;
+      final dy = y - point.dy;
+      final dist = math.sqrt(dx * dx + dy * dy);
 
       if (dist < minDist) {
         secondMinDist = minDist;
@@ -148,36 +154,39 @@ class WorleyNoiseStrategy implements NoiseStrategy {
   @override
   Color getColor(double value) {
     value = value.clamp(0, 1);
-    return Color.fromRGBO((value * 255).round(), ((1 - value) * 255).round(),
-        (value * 128).round(), 1);
+    return Color.fromRGBO(
+      (value * 255).round(),
+      ((1 - value) * 255).round(),
+      (value * 128).round(),
+      1,
+    );
   }
 }
 
 // 3. Fractional Brownian Motion Strategy
 class FBMNoiseStrategy implements NoiseStrategy {
-  final NoiseStrategy baseNoise;
-  final int octaves;
-  final double persistence;
-  final double lacunarity;
-
   FBMNoiseStrategy({
     NoiseStrategy? baseNoise,
     this.octaves = 6,
     this.persistence = 0.5,
     this.lacunarity = 2.0,
   }) : baseNoise = baseNoise ?? SimplexNoiseStrategy();
+  final NoiseStrategy baseNoise;
+  final int octaves;
+  final double persistence;
+  final double lacunarity;
 
   @override
   String get name => 'Fractional Brownian Motion';
 
   @override
   double noise2D(double x, double y) {
-    double total = 0.0;
-    double frequency = 1.0;
-    double amplitude = 1.0;
-    double maxValue = 0.0;
+    var total = 0.0;
+    var frequency = 1.0;
+    var amplitude = 1.0;
+    var maxValue = 0.0;
 
-    for (int i = 0; i < octaves; i++) {
+    for (var i = 0; i < octaves; i++) {
       total += baseNoise.noise2D(x * frequency, y * frequency) * amplitude;
       maxValue += amplitude;
       amplitude *= persistence;
@@ -190,34 +199,33 @@ class FBMNoiseStrategy implements NoiseStrategy {
   @override
   Color getColor(double value) {
     value = (value + 1) / 2;
-    return HSVColor.fromAHSV(1.0, value * 360, 0.7, value).toColor();
+    return HSVColor.fromAHSV(1, value * 360, 0.7, value).toColor();
   }
 }
 
 // 4. Voronoi Noise Strategy
 class VoronoiNoiseStrategy implements NoiseStrategy {
-  final math.Random _random = math.Random(42);
-  final List<Offset> _points = [];
-  final int numPoints;
-
   VoronoiNoiseStrategy({this.numPoints = 20}) {
-    for (int i = 0; i < numPoints; i++) {
+    for (var i = 0; i < numPoints; i++) {
       _points.add(Offset(_random.nextDouble(), _random.nextDouble()));
     }
   }
+  final math.Random _random = math.Random(42);
+  final List<Offset> _points = [];
+  final int numPoints;
 
   @override
   String get name => 'Voronoi Noise';
 
   @override
   double noise2D(double x, double y) {
-    double minDist = double.infinity;
-    int closestIndex = 0;
+    var minDist = double.infinity;
+    var closestIndex = 0;
 
-    for (int i = 0; i < _points.length; i++) {
-      double dx = x - _points[i].dx;
-      double dy = y - _points[i].dy;
-      double dist = dx * dx + dy * dy; // Square distance is enough
+    for (var i = 0; i < _points.length; i++) {
+      final dx = x - _points[i].dx;
+      final dy = y - _points[i].dy;
+      final dist = dx * dx + dy * dy; // Square distance is enough
 
       if (dist < minDist) {
         minDist = dist;
@@ -232,6 +240,6 @@ class VoronoiNoiseStrategy implements NoiseStrategy {
   @override
   Color getColor(double value) {
     // Create distinct colors for different cells
-    return HSVColor.fromAHSV(1.0, value * 360, 0.8, 0.9).toColor();
+    return HSVColor.fromAHSV(1, value * 360, 0.8, 0.9).toColor();
   }
 }

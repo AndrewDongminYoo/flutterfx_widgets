@@ -1,22 +1,20 @@
 import 'dart:async';
 import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 class BackgroundBeamsWithCollision extends StatefulWidget {
+  const BackgroundBeamsWithCollision({
+    super.key,
+    this.child,
+  });
   final Widget? child;
 
-  const BackgroundBeamsWithCollision({
-    Key? key,
-    this.child,
-  }) : super(key: key);
-
   @override
-  State<BackgroundBeamsWithCollision> createState() =>
-      _BackgroundBeamsWithCollisionState();
+  State<BackgroundBeamsWithCollision> createState() => _BackgroundBeamsWithCollisionState();
 }
 
-class _BackgroundBeamsWithCollisionState
-    extends State<BackgroundBeamsWithCollision> {
+class _BackgroundBeamsWithCollisionState extends State<BackgroundBeamsWithCollision> {
   late List<BeamConfig> beams;
   late double containerWidth;
   late double containerHeight;
@@ -32,30 +30,33 @@ class _BackgroundBeamsWithCollisionState
   void _initializeBeams() {
     final random = Random();
     beams = List.generate(
-        7,
-        (index) => BeamConfig(
-              initialX: random.nextDouble() * containerWidth,
-              duration: random.nextDouble() * 3 + 1,
-              repeatDelay: random.nextDouble() * 3,
-              delay: random.nextDouble() * 4,
-              height: [24.0, 48.0, 80.0][random.nextInt(3)],
-            ));
+      7,
+      (index) => BeamConfig(
+        initialX: random.nextDouble() * containerWidth,
+        duration: random.nextDouble() * 3 + 1,
+        repeatDelay: random.nextDouble() * 3,
+        delay: random.nextDouble() * 4,
+        height: [24.0, 48.0, 80.0][random.nextInt(3)],
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: containerHeight,
       width: containerWidth,
       child: Stack(
         clipBehavior: Clip.none,
         children: [
-          ...beams.map((beam) => CollisionMechanism(
-                key: ValueKey('${beam.initialX}-beam'),
-                beamOptions: beam,
-                containerHeight: containerHeight,
-              )),
-          if (widget.child != null) Center(child: widget.child!),
+          ...beams.map(
+            (beam) => CollisionMechanism(
+              key: ValueKey('${beam.initialX}-beam'),
+              beamOptions: beam,
+              containerHeight: containerHeight,
+            ),
+          ),
+          if (widget.child != null) Center(child: widget.child),
           Positioned(
             bottom: 0,
             left: 0,
@@ -82,12 +83,6 @@ class _BackgroundBeamsWithCollisionState
 }
 
 class BeamConfig {
-  final double initialX;
-  final double duration;
-  final double repeatDelay;
-  final double delay;
-  final double height;
-
   BeamConfig({
     required this.initialX,
     required this.duration,
@@ -95,22 +90,25 @@ class BeamConfig {
     this.delay = 0,
     this.height = 56,
   });
+  final double initialX;
+  final double duration;
+  final double repeatDelay;
+  final double delay;
+  final double height;
 }
 
 class SimpleExplosion extends StatefulWidget {
-  final Offset position;
-
   const SimpleExplosion({
-    Key? key,
+    super.key,
     required this.position,
-  }) : super(key: key);
+  });
+  final Offset position;
 
   @override
   State<SimpleExplosion> createState() => _SimpleExplosionState();
 }
 
-class _SimpleExplosionState extends State<SimpleExplosion>
-    with SingleTickerProviderStateMixin {
+class _SimpleExplosionState extends State<SimpleExplosion> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   final List<ExplosionParticle> _particles = [];
 
@@ -124,17 +122,19 @@ class _SimpleExplosionState extends State<SimpleExplosion>
 
     // Create more particles with larger spread
     final random = Random();
-    for (int i = 0; i < 20; i++) {
+    for (var i = 0; i < 20; i++) {
       // Increased number of particles
       final angle = (i * pi * 2) / 20;
       final speed = random.nextDouble() * 40 + 60; // Increased speed
       final radius = random.nextDouble() * 4 + 3; // Increased size
 
-      _particles.add(ExplosionParticle(
-        angle: angle,
-        speed: speed,
-        radius: radius,
-      ));
+      _particles.add(
+        ExplosionParticle(
+          angle: angle,
+          speed: speed,
+          radius: radius,
+        ),
+      );
     }
 
     _controller.forward();
@@ -169,27 +169,25 @@ class _SimpleExplosionState extends State<SimpleExplosion>
 }
 
 class ExplosionParticle {
-  final double angle;
-  final double speed;
-  final double radius;
-
   ExplosionParticle({
     required this.angle,
     required this.speed,
     required this.radius,
   });
+  final double angle;
+  final double speed;
+  final double radius;
 }
 
 class ExplosionPainter extends CustomPainter {
-  final Offset position;
-  final double progress;
-  final List<ExplosionParticle> particles;
-
   ExplosionPainter({
     required this.position,
     required this.progress,
     required this.particles,
   });
+  final Offset position;
+  final double progress;
+  final List<ExplosionParticle> particles;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -232,21 +230,19 @@ class ExplosionPainter extends CustomPainter {
 }
 
 class CollisionMechanism extends StatefulWidget {
-  final BeamConfig beamOptions;
-  final double containerHeight;
-
   const CollisionMechanism({
-    Key? key,
+    super.key,
     required this.beamOptions,
     required this.containerHeight,
-  }) : super(key: key);
+  });
+  final BeamConfig beamOptions;
+  final double containerHeight;
 
   @override
   State<CollisionMechanism> createState() => _CollisionMechanismState();
 }
 
-class _CollisionMechanismState extends State<CollisionMechanism>
-    with SingleTickerProviderStateMixin {
+class _CollisionMechanismState extends State<CollisionMechanism> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   bool _isColliding = false;
   late Animation<double> _beamAnimation;
@@ -259,16 +255,14 @@ class _CollisionMechanismState extends State<CollisionMechanism>
 
   void _setupAnimation() {
     _controller = AnimationController(
-      duration:
-          Duration(milliseconds: (widget.beamOptions.duration * 1000).toInt()),
+      duration: Duration(milliseconds: (widget.beamOptions.duration * 1000).toInt()),
       vsync: this,
     );
 
     // Change animation to go beyond container height
     _beamAnimation = Tween<double>(
       begin: 0,
-      end: widget.containerHeight +
-          widget.beamOptions.height * 2, // Go past bottom
+      end: widget.containerHeight + widget.beamOptions.height * 2, // Go past bottom
     ).animate(_controller);
 
     // Listen for when beam reaches bottom
@@ -295,7 +289,8 @@ class _CollisionMechanismState extends State<CollisionMechanism>
       if (_controller.status == AnimationStatus.completed) {
         Future.delayed(
           Duration(
-              milliseconds: (widget.beamOptions.repeatDelay * 1000).toInt()),
+            milliseconds: (widget.beamOptions.repeatDelay * 1000).toInt(),
+          ),
           () {
             if (mounted) {
               _controller.reset();

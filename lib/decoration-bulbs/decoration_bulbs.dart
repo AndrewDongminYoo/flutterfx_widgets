@@ -1,7 +1,8 @@
-import 'package:flutter/material.dart';
-import 'dart:math' show pi;
-import 'dart:math' as math;
 import 'dart:async';
+import 'dart:math' as math;
+import 'dart:math' show pi;
+
+import 'package:flutter/material.dart';
 
 abstract class LightAnimationStrategy {
   void initAnimation(List<AnimationController> controllers);
@@ -11,17 +12,16 @@ abstract class LightAnimationStrategy {
 }
 
 class SynchronizedBlinkStrategy implements LightAnimationStrategy {
-  final List<AnimationController> _controllers = [];
-  final Duration duration;
-
   SynchronizedBlinkStrategy({
     this.duration = const Duration(milliseconds: 1200),
   });
+  final List<AnimationController> _controllers = [];
+  final Duration duration;
 
   @override
   void initAnimation(List<AnimationController> controllers) {
     _controllers.addAll(controllers);
-    for (var controller in _controllers) {
+    for (final controller in _controllers) {
       controller.duration = duration;
       controller.value = 0;
     }
@@ -29,10 +29,10 @@ class SynchronizedBlinkStrategy implements LightAnimationStrategy {
 
   @override
   void startAnimation() {
-    bool isOn = false;
+    var isOn = false;
     Timer.periodic(duration, (_) {
       isOn = !isOn;
-      for (var controller in _controllers) {
+      for (final controller in _controllers) {
         controller.value = isOn ? 1 : 0;
       }
     });
@@ -40,7 +40,7 @@ class SynchronizedBlinkStrategy implements LightAnimationStrategy {
 
   @override
   void stopAnimation() {
-    for (var controller in _controllers) {
+    for (final controller in _controllers) {
       controller.value = 0;
     }
   }
@@ -53,19 +53,18 @@ class SynchronizedBlinkStrategy implements LightAnimationStrategy {
 }
 
 class SequentialBlinkStrategy implements LightAnimationStrategy {
+  SequentialBlinkStrategy({
+    this.duration = const Duration(milliseconds: 300),
+  });
   final List<AnimationController> _controllers = [];
   final Duration duration;
   Timer? _sequenceTimer;
   int _currentIndex = 0;
 
-  SequentialBlinkStrategy({
-    this.duration = const Duration(milliseconds: 300),
-  });
-
   @override
   void initAnimation(List<AnimationController> controllers) {
     _controllers.addAll(controllers);
-    for (var controller in _controllers) {
+    for (final controller in _controllers) {
       controller.duration = duration;
       controller.value = 0;
     }
@@ -99,7 +98,7 @@ class SequentialBlinkStrategy implements LightAnimationStrategy {
   @override
   void stopAnimation() {
     _sequenceTimer?.cancel();
-    for (var controller in _controllers) {
+    for (final controller in _controllers) {
       controller.value = 0;
     }
   }
@@ -112,18 +111,17 @@ class SequentialBlinkStrategy implements LightAnimationStrategy {
 }
 
 class WaveBlinkStrategy implements LightAnimationStrategy {
+  WaveBlinkStrategy({
+    this.duration = const Duration(milliseconds: 1500),
+  });
   final List<AnimationController> _controllers = [];
   final Duration duration;
   Timer? _waveTimer;
 
-  WaveBlinkStrategy({
-    this.duration = const Duration(milliseconds: 1500),
-  });
-
   @override
   void initAnimation(List<AnimationController> controllers) {
     _controllers.addAll(controllers);
-    for (var controller in _controllers) {
+    for (final controller in _controllers) {
       controller.duration = duration;
       controller.value = 0;
     }
@@ -134,7 +132,7 @@ class WaveBlinkStrategy implements LightAnimationStrategy {
     if (_controllers.isEmpty) return;
 
     final segmentDuration = duration ~/ _controllers.length;
-    int currentIndex = 0;
+    var currentIndex = 0;
 
     _waveTimer = Timer.periodic(segmentDuration, (_) {
       // Turn off all lights that are more than 2 positions behind
@@ -156,7 +154,7 @@ class WaveBlinkStrategy implements LightAnimationStrategy {
   @override
   void stopAnimation() {
     _waveTimer?.cancel();
-    for (var controller in _controllers) {
+    for (final controller in _controllers) {
       controller.value = 0;
     }
   }
@@ -169,6 +167,16 @@ class WaveBlinkStrategy implements LightAnimationStrategy {
 }
 
 class DecorativeLightsDecorator extends StatefulWidget {
+  const DecorativeLightsDecorator({
+    super.key,
+    required this.child,
+    this.numberOfLights = 10,
+    this.bulbHeight = 15.0,
+    this.bulbWidth = 8.0,
+    this.colors = const [Colors.red, Colors.green],
+    this.enableAnimation = true,
+    required this.animationStrategy,
+  });
   final Widget child;
   final int numberOfLights;
   final double bulbHeight;
@@ -177,24 +185,11 @@ class DecorativeLightsDecorator extends StatefulWidget {
   final bool enableAnimation;
   final LightAnimationStrategy animationStrategy;
 
-  const DecorativeLightsDecorator({
-    Key? key,
-    required this.child,
-    this.numberOfLights = 10,
-    this.bulbHeight = 15.0,
-    this.bulbWidth = 8.0,
-    this.colors = const [Colors.red, Colors.green],
-    this.enableAnimation = true,
-    required this.animationStrategy,
-  }) : super(key: key);
-
   @override
-  State<DecorativeLightsDecorator> createState() =>
-      _DecorativeLightsDecoratorState();
+  State<DecorativeLightsDecorator> createState() => _DecorativeLightsDecoratorState();
 }
 
-class _DecorativeLightsDecoratorState extends State<DecorativeLightsDecorator>
-    with TickerProviderStateMixin {
+class _DecorativeLightsDecoratorState extends State<DecorativeLightsDecorator> with TickerProviderStateMixin {
   late List<AnimationController> _controllers;
 
   @override
@@ -222,8 +217,7 @@ class _DecorativeLightsDecoratorState extends State<DecorativeLightsDecorator>
   @override
   void didUpdateWidget(DecorativeLightsDecorator oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (oldWidget.animationStrategy != widget.animationStrategy ||
-        oldWidget.numberOfLights != widget.numberOfLights) {
+    if (oldWidget.animationStrategy != widget.animationStrategy || oldWidget.numberOfLights != widget.numberOfLights) {
       _disposeControllers();
       _initializeControllers();
     }
@@ -231,7 +225,7 @@ class _DecorativeLightsDecoratorState extends State<DecorativeLightsDecorator>
 
   void _disposeControllers() {
     widget.animationStrategy.disposeAnimation();
-    for (var controller in _controllers) {
+    for (final controller in _controllers) {
       controller.dispose();
     }
   }
@@ -257,8 +251,7 @@ class _DecorativeLightsDecoratorState extends State<DecorativeLightsDecorator>
             child: LayoutBuilder(
               builder: (context, constraints) {
                 final availableWidth = constraints.maxWidth;
-                final calculatedSpacing =
-                    availableWidth / (widget.numberOfLights - 1);
+                final calculatedSpacing = availableWidth / (widget.numberOfLights - 1);
 
                 return Stack(
                   clipBehavior: Clip.none,
@@ -286,6 +279,13 @@ class _DecorativeLightsDecoratorState extends State<DecorativeLightsDecorator>
 }
 
 class LightBulb extends StatelessWidget {
+  LightBulb({
+    super.key,
+    required this.color,
+    required this.height,
+    required this.width,
+    required this.controller,
+  }) : tiltAngle = math.Random().nextDouble() * 30 - 15;
   final Color color;
   final double height;
   final double width;
@@ -293,21 +293,9 @@ class LightBulb extends StatelessWidget {
   // Add a random tilt angle between -15 and +15 degrees
   final double tiltAngle;
 
-  LightBulb({
-    Key? key,
-    required this.color,
-    required this.height,
-    required this.width,
-    required this.controller,
-  })  : tiltAngle = math.Random().nextDouble() * 30 -
-            15, // Random angle between -15 and +15 degrees
-        super(key: key);
-
   Color get offStateColor {
     final hslColor = HSLColor.fromColor(color);
-    return hslColor
-        .withLightness((hslColor.lightness * 0.3).clamp(0.0, 1.0))
-        .toColor();
+    return hslColor.withLightness((hslColor.lightness * 0.3).clamp(0.0, 1.0)).toColor();
   }
 
   Color get onStateColor {
@@ -382,7 +370,7 @@ class LightBulb extends StatelessWidget {
 }
 
 class ExampleUsage extends StatelessWidget {
-  const ExampleUsage({Key? key}) : super(key: key);
+  const ExampleUsage({super.key});
 
   @override
   Widget build(BuildContext context) {

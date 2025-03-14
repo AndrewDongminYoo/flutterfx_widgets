@@ -1,12 +1,8 @@
 import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 
 class StepRotatingShape extends StatefulWidget {
-  final double size;
-  final Duration rotationDuration;
-  final Duration pauseDuration;
-  final Color color;
-
   const StepRotatingShape({
     super.key,
     this.size = 100,
@@ -14,13 +10,16 @@ class StepRotatingShape extends StatefulWidget {
     this.pauseDuration = const Duration(milliseconds: 200),
     this.color = const Color(0xFF8157E8),
   });
+  final double size;
+  final Duration rotationDuration;
+  final Duration pauseDuration;
+  final Color color;
 
   @override
   State<StepRotatingShape> createState() => _StepRotatingShapeState();
 }
 
-class _StepRotatingShapeState extends State<StepRotatingShape>
-    with SingleTickerProviderStateMixin {
+class _StepRotatingShapeState extends State<StepRotatingShape> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _rotationAnimation;
   int _currentStep = 0;
@@ -36,10 +35,12 @@ class _StepRotatingShapeState extends State<StepRotatingShape>
     _rotationAnimation = Tween<double>(
       begin: 0,
       end: math.pi / 2,
-    ).animate(CurvedAnimation(
-      parent: _controller,
-      curve: Curves.easeOutBack,
-    ));
+    ).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: Curves.easeOutBack,
+      ),
+    );
 
     _controller.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
@@ -50,8 +51,8 @@ class _StepRotatingShapeState extends State<StepRotatingShape>
     _startRotation();
   }
 
-  void _startNextRotation() async {
-    await Future.delayed(widget.pauseDuration);
+  Future<void> _startNextRotation() async {
+    await Future<void>.delayed(widget.pauseDuration);
     if (!mounted) return;
 
     _currentStep = (_currentStep + 1) % 4;
@@ -84,8 +85,7 @@ class _StepRotatingShapeState extends State<StepRotatingShape>
           return CustomPaint(
             size: Size(widget.size, widget.size),
             painter: StarPainter(
-              rotationAngle:
-                  _currentStep * (math.pi / 2) + _rotationAnimation.value,
+              rotationAngle: _currentStep * (math.pi / 2) + _rotationAnimation.value,
               color: widget.color,
             ),
           );
@@ -96,27 +96,25 @@ class _StepRotatingShapeState extends State<StepRotatingShape>
 }
 
 class StarPainter extends CustomPainter {
-  final double rotationAngle;
-  final Color color;
-
   StarPainter({
     required this.rotationAngle,
     required this.color,
   });
+  final double rotationAngle;
+  final Color color;
 
   void _drawStar(Canvas canvas, Offset center, double size, Paint paint) {
     final path = Path();
-    final double fullSize =
-        size * 0.8; // Adjust size to 80% of the container to ensure it fits
-    final double controlPointDistance = fullSize * 0.4;
+    final fullSize = size * 0.8; // Adjust size to 80% of the container to ensure it fits
+    final controlPointDistance = fullSize * 0.4;
 
     canvas.save();
     canvas.translate(center.dx, center.dy);
     canvas.rotate(rotationAngle);
     canvas.translate(-center.dx, -center.dy);
 
-    for (int i = 0; i < 4; i++) {
-      final angle = (i * math.pi / 2);
+    for (var i = 0; i < 4; i++) {
+      final angle = i * math.pi / 2;
 
       final pointX = center.dx + math.cos(angle) * fullSize;
       final pointY = center.dy + math.sin(angle) * fullSize;
@@ -124,7 +122,7 @@ class StarPainter extends CustomPainter {
       if (i == 0) {
         path.moveTo(pointX, pointY);
       } else {
-        final prevAngle = ((i - 1) * math.pi / 2);
+        final prevAngle = (i - 1) * math.pi / 2;
         final midAngle = prevAngle + math.pi / 4;
 
         final controlX = center.dx + math.cos(midAngle) * controlPointDistance;
@@ -134,10 +132,8 @@ class StarPainter extends CustomPainter {
       }
     }
 
-    final controlX =
-        center.dx + math.cos(7 * math.pi / 4) * controlPointDistance;
-    final controlY =
-        center.dy + math.sin(7 * math.pi / 4) * controlPointDistance;
+    final controlX = center.dx + math.cos(7 * math.pi / 4) * controlPointDistance;
+    final controlY = center.dy + math.sin(7 * math.pi / 4) * controlPointDistance;
 
     path.quadraticBezierTo(controlX, controlY, center.dx + fullSize, center.dy);
 
@@ -153,15 +149,13 @@ class StarPainter extends CustomPainter {
       ..style = PaintingStyle.fill;
 
     final center = Offset(size.width / 2, size.height / 2);
-    final shapeSize = size.width /
-        2; // Use half of the width directly, since we're working with radius
+    final shapeSize = size.width / 2; // Use half of the width directly, since we're working with radius
 
     _drawStar(canvas, center, shapeSize, paint);
   }
 
   @override
   bool shouldRepaint(StarPainter oldDelegate) {
-    return oldDelegate.rotationAngle != rotationAngle ||
-        oldDelegate.color != color;
+    return oldDelegate.rotationAngle != rotationAngle || oldDelegate.color != color;
   }
 }

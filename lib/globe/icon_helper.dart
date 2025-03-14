@@ -1,4 +1,5 @@
 // lib/helpers/tech_icons.dart
+
 import 'package:flutter/material.dart';
 
 class TechStackIcons {
@@ -45,6 +46,6 @@ class TechStackIcons {
 
   // Method to get specific icons from a list of slugs
   static List<IconData> getIconsFromSlugs(List<String> slugs) {
-    return slugs.map((slug) => getIcon(slug)).toList();
+    return slugs.map(getIcon).toList();
   }
 }

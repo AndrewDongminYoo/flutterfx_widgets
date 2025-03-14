@@ -1,4 +1,5 @@
 import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 
 class MotionDemo extends StatefulWidget {
@@ -8,15 +9,14 @@ class MotionDemo extends StatefulWidget {
   State<MotionDemo> createState() => _MotionDemoState();
 }
 
-class _MotionDemoState extends State<MotionDemo>
-    with SingleTickerProviderStateMixin {
+class _MotionDemoState extends State<MotionDemo> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _rotationAnimation;
-  double _currentRotation = 0.0;
-  double _lastSliderValue = 0.0;
-  double _lastUpdateTime = 0.0;
+  double _currentRotation = 0;
+  double _lastSliderValue = 0;
+  double _lastUpdateTime = 0;
   bool _isSliding = false;
-  double _velocity = 0.0;
+  double _velocity = 0;
 
   @override
   void initState() {
@@ -27,13 +27,14 @@ class _MotionDemoState extends State<MotionDemo>
     );
 
     _rotationAnimation = Tween<double>(
-      begin: 0.0,
-      end: 0.0,
-    ).animate(CurvedAnimation(
-      parent: _controller,
-      curve: Curves.decelerate,
-    ))
-      ..addListener(() {
+      begin: 0,
+      end: 0,
+    ).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: Curves.decelerate,
+      ),
+    )..addListener(() {
         setState(() {
           _currentRotation = _rotationAnimation.value;
         });
@@ -74,21 +75,22 @@ class _MotionDemoState extends State<MotionDemo>
     if (_velocity.abs() > 50) {
       // Threshold for "fast" movement
       final velocityDirection = _velocity.sign;
-      final momentumDistance =
-          _velocity.abs() * 0.5; // Scale factor for momentum
+      final momentumDistance = _velocity.abs() * 0.5; // Scale factor for momentum
 
       _rotationAnimation = Tween<double>(
         begin: _currentRotation,
         end: _currentRotation + (momentumDistance * velocityDirection),
-      ).animate(CurvedAnimation(
-        parent: _controller,
-        // Use a physics-based curve for momentum
-        curve: Curves.easeOutCubic,
-      ));
+      ).animate(
+        CurvedAnimation(
+          parent: _controller,
+          // Use a physics-based curve for momentum
+          curve: Curves.easeOutCubic,
+        ),
+      );
 
       _controller
         ..duration = Duration(milliseconds: (momentumDistance * 2).round())
-        ..forward(from: 0.0);
+        ..forward(from: 0);
     }
 
     // Reset velocity
@@ -121,7 +123,7 @@ class _MotionDemoState extends State<MotionDemo>
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(24.0),
+              padding: const EdgeInsets.all(24),
               child: Column(
                 children: [
                   Row(

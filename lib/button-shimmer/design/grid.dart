@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+
 import 'package:fx_2_folder/button-shimmer/design/widget_theme.dart';
 
 class GridPatternPainter extends CustomPainter {
-  final bool isDarkMode;
-
   GridPatternPainter({required this.isDarkMode});
+  final bool isDarkMode;
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()

@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
+
 import 'package:fx_2_folder/progress-bar/design/grid.dart';
 import 'package:fx_2_folder/progress-bar/progress_bar.dart';
-import 'package:fx_2_folder/progress-bar/strategies/circlula_progress_strategy.dart';
 import 'package:fx_2_folder/progress-bar/strategies/clock_progress_strategy.dart';
 import 'package:fx_2_folder/progress-bar/strategies/snow_progres_strategy.dart';
 import 'package:fx_2_folder/progress-bar/strategies/typing_progress_strategy.dart';
-import 'package:fx_2_folder/progress-bar/strategies/wave_progress_strategy.dart';
 
 class ProgressBarDemo2 extends StatefulWidget {
-  const ProgressBarDemo2({Key? key}) : super(key: key);
+  const ProgressBarDemo2({super.key});
 
   @override
   State<ProgressBarDemo2> createState() => _ProgressBarDemo2State();
@@ -22,8 +21,6 @@ class _ProgressBarDemo2State extends State<ProgressBarDemo2> {
   static const Color _primaryWhite = Color(0xFFFFFFFF);
   static const Color _softWhite = Color(0xFFE0E0E0);
   static const Color _mediumGray = Color(0xFF808080);
-  static const Color _darkGray = Color(0xFF333333);
-  static const Color _deepBlack = Color(0xFF1A1A1A);
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +38,7 @@ class _ProgressBarDemo2State extends State<ProgressBarDemo2> {
           ),
           // Main content
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24.0),
+            padding: const EdgeInsets.symmetric(horizontal: 24),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -51,12 +48,11 @@ class _ProgressBarDemo2State extends State<ProgressBarDemo2> {
                   progress: _progress,
                   strategy: TypingProgressStrategy(),
                   style: ProgressStyle(
-                    width: 200,
                     height: 48,
                     primaryColor: Colors.black87,
                     backgroundColor: Colors.grey[200]!,
                     borderRadius: BorderRadius.circular(8),
-                    animationDuration: Duration(milliseconds: 1000),
+                    animationDuration: const Duration(milliseconds: 1000),
                   ),
                 ),
 
@@ -79,11 +75,9 @@ class _ProgressBarDemo2State extends State<ProgressBarDemo2> {
                   progress: _progress,
                   strategy: const SnowProgressStrategy(
                     snowflakeCount: 30,
-                    maxSnowflakeSize: 3,
                     snowColor: Colors.white,
                   ),
                   style: ProgressStyle(
-                    width: 200,
                     height: 150,
                     primaryColor: Colors.white,
                     backgroundColor: Colors.blue.shade900,

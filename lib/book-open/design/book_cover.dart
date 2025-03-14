@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 
 class MinimalistBookCover extends StatelessWidget {
-  final String title;
-  final String author;
-  final Color backgroundColor;
-  final Color textColor;
-
   const MinimalistBookCover({
-    Key? key,
+    super.key,
     required this.title,
     required this.author,
     this.backgroundColor = const Color(0xFFFF6B6B),
     this.textColor = Colors.white,
-  }) : super(key: key);
+  });
+  final String title;
+  final String author;
+  final Color backgroundColor;
+  final Color textColor;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +25,7 @@ class MinimalistBookCover extends StatelessWidget {
         final titleFontSize = maxHeight * 0.12; // 12% of height
         final authorFontSize = maxHeight * 0.05; // 5% of height
 
-        return Container(
+        return DecoratedBox(
           decoration: BoxDecoration(
             color: backgroundColor,
             borderRadius: BorderRadius.circular(8),
@@ -40,7 +39,6 @@ class MinimalistBookCover extends StatelessWidget {
                   flex: 7,
                   child: Center(
                     child: FittedBox(
-                      fit: BoxFit.contain,
                       child: Container(
                         constraints: BoxConstraints(
                           maxWidth: maxWidth * 0.9,
@@ -65,10 +63,9 @@ class MinimalistBookCover extends StatelessWidget {
                 SizedBox(height: maxHeight * 0.02),
 
                 // Author section at bottom
-                Container(
+                SizedBox(
                   height: maxHeight * 0.1, // 10% of height for author section
                   child: FittedBox(
-                    fit: BoxFit.contain,
                     child: Text(
                       author.toUpperCase(),
                       style: TextStyle(
@@ -90,17 +87,17 @@ class MinimalistBookCover extends StatelessWidget {
 }
 
 class BookCoverPresets {
-  static const coral = (
+  static const ({Color background, Color text}) coral = (
     background: Color(0xFFFF6B6B),
     text: Colors.white,
   );
 
-  static const orange = (
+  static const ({Color background, Color text}) orange = (
     background: Color(0xFFFF8C42),
     text: Colors.white,
   );
 
-  static const mint = (
+  static const ({Color background, Color text}) mint = (
     background: Color(0xFF2FBF71),
     text: Colors.white,
   );

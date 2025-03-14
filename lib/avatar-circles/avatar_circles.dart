@@ -1,28 +1,38 @@
 // avatar_circles.dart
 
 import 'package:flutter/material.dart';
-import 'package:fx_2_folder/stacked-cards/stacked_card.dart';
+
 import 'package:url_launcher/url_launcher.dart';
+
+import 'package:fx_2_folder/stacked-cards/stacked_card.dart';
 
 // avatar_circles.dart
 
-import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
-
 /// Represents an individual avatar with its image and profile URLs
 class Avatar {
-  final String imageUrl;
-  final String profileUrl;
-
   const Avatar({
     required this.imageUrl,
     required this.profileUrl,
   });
+  final String imageUrl;
+  final String profileUrl;
 }
 
 /// A widget that displays a row of overlapping circular avatars with an optional
 /// count indicator for additional people
 class AvatarCircles extends StatelessWidget {
+  const AvatarCircles({
+    super.key,
+    required this.avatars,
+    this.additionalPeople,
+    this.size = 40,
+    this.borderWidth = 2,
+    this.countBackgroundColor,
+    this.countTextColor,
+    this.borderColor,
+    this.overlap = 16,
+  });
+
   /// List of avatars to display
   final List<Avatar> avatars;
 
@@ -46,18 +56,6 @@ class AvatarCircles extends StatelessWidget {
 
   /// Overlap amount between avatars (positive value)
   final double overlap;
-
-  const AvatarCircles({
-    Key? key,
-    required this.avatars,
-    this.additionalPeople,
-    this.size = 40,
-    this.borderWidth = 2,
-    this.countBackgroundColor,
-    this.countTextColor,
-    this.borderColor,
-    this.overlap = 16,
-  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -93,10 +91,7 @@ class AvatarCircles extends StatelessWidget {
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     border: Border.all(
-                      color: borderColor ??
-                          (isDark
-                              ? theme.colorScheme.surface
-                              : theme.colorScheme.background),
+                      color: borderColor ?? (isDark ? theme.colorScheme.surface : theme.colorScheme.surface),
                       width: borderWidth,
                     ),
                   ),
@@ -123,24 +118,17 @@ class AvatarCircles extends StatelessWidget {
                 height: size,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: countBackgroundColor ??
-                      (isDark ? theme.colorScheme.surface : Colors.black),
+                  color: countBackgroundColor ?? (isDark ? theme.colorScheme.surface : Colors.black),
                   border: Border.all(
-                    color: borderColor ??
-                        (isDark
-                            ? theme.colorScheme.surface
-                            : theme.colorScheme.background),
+                    color: borderColor ?? (isDark ? theme.colorScheme.surface : theme.colorScheme.surface),
                     width: borderWidth,
                   ),
                 ),
                 child: Center(
                   child: Text(
-                    '+${additionalPeople}',
+                    '+$additionalPeople',
                     style: theme.textTheme.labelSmall?.copyWith(
-                      color: countTextColor ??
-                          (isDark
-                              ? Colors.black
-                              : theme.colorScheme.background),
+                      color: countTextColor ?? (isDark ? Colors.black : theme.colorScheme.surface),
                       fontWeight: FontWeight.w500,
                     ),
                   ),
@@ -154,6 +142,7 @@ class AvatarCircles extends StatelessWidget {
 }
 
 class AvatarCirclesShowcase extends StatelessWidget {
+  AvatarCirclesShowcase({super.key});
   final List<Avatar> sampleAvatars = [
     const Avatar(
       imageUrl:
@@ -177,8 +166,6 @@ class AvatarCirclesShowcase extends StatelessWidget {
     ),
   ];
 
-  AvatarCirclesShowcase({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -190,9 +177,8 @@ class AvatarCirclesShowcase extends StatelessWidget {
           ),
           Center(
             child: Padding(
-              padding: const EdgeInsets.all(16.0),
+              padding: const EdgeInsets.all(16),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   _buildShowcaseSection(
@@ -243,8 +229,6 @@ class AvatarCirclesShowcase extends StatelessWidget {
                     AvatarCircles(
                       avatars: sampleAvatars.take(4).toList(),
                       overlap: 8,
-                      borderWidth: 2,
-                      size: 40,
                     ),
                   ),
                 ],
@@ -258,9 +242,8 @@ class AvatarCirclesShowcase extends StatelessWidget {
 
   Widget _buildShowcaseSection(String title, Widget content) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 16.0),
+      padding: const EdgeInsets.symmetric(vertical: 16),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text(
             title,

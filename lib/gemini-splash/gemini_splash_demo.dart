@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:fx_2_folder/gemini-splash/combined_.dart';
 import 'package:fx_2_folder/gemini-splash/glowing_fog.dart';
 
@@ -37,9 +38,8 @@ class _SparkleDemoState extends State<SparkleDemo> {
         children: [
           UnifiedStarAnimation(
             key: _combinedKey,
-            size: 50,
             color: Colors.yellow,
-            totalDuration: Duration(milliseconds: 2000),
+            totalDuration: const Duration(milliseconds: 2000),
             onAnimationComplete: _onStarAnimationComplete,
           ),
           Positioned(
@@ -47,15 +47,14 @@ class _SparkleDemoState extends State<SparkleDemo> {
             left: 0,
             right: 0,
             child: MysticalWaves(
-                key: _wavesKey,
-                height: 200,
-                animationDuration: const Duration(milliseconds: 400),
-                waveDuration: const Duration(seconds: 3),
-                waveColors: [
-                  Color(0xFFFFD700).withOpacity(0.5), // Radiant gold
-                  Color(0xFFFFA500).withOpacity(0.4), // Glowing orange
-                  Color(0xFFFFE4B5).withOpacity(0.3), // Soft moccasin
-                ]),
+              key: _wavesKey,
+              animationDuration: const Duration(milliseconds: 400),
+              waveColors: [
+                const Color(0xFFFFD700).withOpacity(0.5), // Radiant gold
+                const Color(0xFFFFA500).withOpacity(0.4), // Glowing orange
+                const Color(0xFFFFE4B5).withOpacity(0.3), // Soft moccasin
+              ],
+            ),
           ),
           Positioned(
             bottom: 50,

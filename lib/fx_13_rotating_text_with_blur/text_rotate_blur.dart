@@ -1,4 +1,5 @@
 import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 
 /// A widget that displays text rotating in a circular pattern.
@@ -20,25 +21,23 @@ import 'package:flutter/material.dart';
 ///      Bottom (π/2)
 /// ```
 class RotatingTextWidget extends StatefulWidget {
+  const RotatingTextWidget({
+    super.key,
+    required this.text,
+    required this.radius,
+    required this.textStyle,
+    required this.rotationDuration,
+  });
   final String text;
   final double radius;
   final TextStyle textStyle;
   final Duration rotationDuration;
 
-  const RotatingTextWidget({
-    Key? key,
-    required this.text,
-    required this.radius,
-    required this.textStyle,
-    required this.rotationDuration,
-  }) : super(key: key);
-
   @override
   _RotatingTextWidgetState createState() => _RotatingTextWidgetState();
 }
 
-class _RotatingTextWidgetState extends State<RotatingTextWidget>
-    with SingleTickerProviderStateMixin {
+class _RotatingTextWidgetState extends State<RotatingTextWidget> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
 
   @override
@@ -77,6 +76,12 @@ class _RotatingTextWidgetState extends State<RotatingTextWidget>
 
 /// Handles the actual drawing of text in a circular pattern
 class _CircularTextPainter extends CustomPainter {
+  _CircularTextPainter({
+    required this.text,
+    required this.radius,
+    required this.textStyle,
+    required this.progress,
+  });
   final String text;
   final double radius;
   final TextStyle textStyle;
@@ -86,19 +91,12 @@ class _CircularTextPainter extends CustomPainter {
   late final double _centerX;
   late final double _centerY;
 
-  _CircularTextPainter({
-    required this.text,
-    required this.radius,
-    required this.textStyle,
-    required this.progress,
-  });
-
   @override
   void paint(Canvas canvas, Size size) {
     _centerX = size.width / 2;
     _centerY = size.height / 2;
 
-    final RotationCalculator calculator = RotationCalculator(
+    final calculator = RotationCalculator(
       text: text,
       radius: radius,
       textStyle: textStyle,
@@ -106,8 +104,7 @@ class _CircularTextPainter extends CustomPainter {
     );
 
     // Get all the measurements we need
-    final SegmentMeasurements measurements =
-        calculator.calculateSegmentMeasurements();
+    final measurements = calculator.calculateSegmentMeasurements();
 
     // Draw the text segments around the circle
     _drawRepeatingSegments(canvas, measurements);
@@ -115,9 +112,9 @@ class _CircularTextPainter extends CustomPainter {
 
   /// Draws all segments of text around the circle
   void _drawRepeatingSegments(Canvas canvas, SegmentMeasurements measurements) {
-    double startAngle = measurements.initialStartAngle;
+    var startAngle = measurements.initialStartAngle;
 
-    for (int rep = 0; rep < measurements.repetitions; rep++) {
+    for (var rep = 0; rep < measurements.repetitions; rep++) {
       // 1. Draw the dot
       _drawDot(canvas, startAngle);
 
@@ -142,11 +139,11 @@ class _CircularTextPainter extends CustomPainter {
     double segmentAngle,
   ) {
     // 1. Calculate character widths
-    final CharacterMeasurements charMeasurements = _measureCharacters();
+    final charMeasurements = _measureCharacters();
 
     // 2. Draw each character
-    double currentAngle = startAngle;
-    for (int i = 0; i < text.length; i++) {
+    var currentAngle = startAngle;
+    for (var i = 0; i < text.length; i++) {
       _drawCharacter(
         canvas,
         text[i],
@@ -157,8 +154,7 @@ class _CircularTextPainter extends CustomPainter {
       );
 
       // Move angle for next character
-      double charProportion =
-          charMeasurements.charWidths[i] / charMeasurements.totalWidth;
+      final charProportion = charMeasurements.charWidths[i] / charMeasurements.totalWidth;
       currentAngle += textAngle * charProportion;
     }
   }
@@ -175,16 +171,21 @@ class _CircularTextPainter extends CustomPainter {
     final textPainter = _createTextPainter(char);
 
     // Calculate character's angle and position
-    double charProportion = charWidth / totalCharWidth;
-    double charAngle = textAngle * charProportion;
-    double charCenterAngle = currentAngle + (charAngle / 2);
+    final charProportion = charWidth / totalCharWidth;
+    final charAngle = textAngle * charProportion;
+    final charCenterAngle = currentAngle + (charAngle / 2);
 
     // Calculate position on circle
     final position = _calculatePositionOnCircle(charCenterAngle);
 
     // Draw the character
     _paintRotatedCharacter(
-        canvas, textPainter, position, charCenterAngle, charWidth);
+      canvas,
+      textPainter,
+      position,
+      charCenterAngle,
+      charWidth,
+    );
   }
 
   /// Creates a TextPainter for a single character
@@ -233,10 +234,10 @@ class _CircularTextPainter extends CustomPainter {
 
   /// Measures all characters in the text
   CharacterMeasurements _measureCharacters() {
-    List<double> charWidths = [];
+    final charWidths = <double>[];
     double totalWidth = 0;
 
-    for (int i = 0; i < text.length; i++) {
+    for (var i = 0; i < text.length; i++) {
       final painter = _createTextPainter(text[i]);
       charWidths.add(painter.width);
       totalWidth += painter.width;
@@ -254,36 +255,35 @@ class _CircularTextPainter extends CustomPainter {
 
 /// Handles calculations for text rotation and spacing
 class RotationCalculator {
-  final String text;
-  final double radius;
-  final TextStyle textStyle;
-  final double progress;
-
   RotationCalculator({
     required this.text,
     required this.radius,
     required this.textStyle,
     required this.progress,
   });
+  final String text;
+  final double radius;
+  final TextStyle textStyle;
+  final double progress;
 
   /// Calculates all measurements needed for text segments
   SegmentMeasurements calculateSegmentMeasurements() {
-    final double totalAngle = 2 * math.pi;
-    final double startAngle = -math.pi / 2 + (progress * totalAngle);
+    const totalAngle = 2 * math.pi;
+    final startAngle = -math.pi / 2 + (progress * totalAngle);
 
     // Calculate text and dot sizes
-    double textWidth = _calculateTextWidth();
-    double dotWidth = textStyle.fontSize!;
-    double totalWidth = textWidth + dotWidth;
+    final textWidth = _calculateTextWidth();
+    final dotWidth = textStyle.fontSize!;
+    final totalWidth = textWidth + dotWidth;
 
     // Calculate repetitions
-    int repetitions = (totalAngle * radius / totalWidth).floor();
+    var repetitions = (totalAngle * radius / totalWidth).floor();
     repetitions = math.max(1, repetitions);
 
     // Calculate angles
-    double segmentAngle = totalAngle / repetitions;
-    double textAngle = (textWidth / totalWidth) * segmentAngle;
-    double dotAngle = segmentAngle - textAngle;
+    final segmentAngle = totalAngle / repetitions;
+    final textAngle = (textWidth / totalWidth) * segmentAngle;
+    final dotAngle = segmentAngle - textAngle;
 
     return SegmentMeasurements(
       initialStartAngle: startAngle,
@@ -308,23 +308,16 @@ class RotationCalculator {
 
 /// Stores measurements for text characters
 class CharacterMeasurements {
-  final List<double> charWidths;
-  final double totalWidth;
-
   CharacterMeasurements({
     required this.charWidths,
     required this.totalWidth,
   });
+  final List<double> charWidths;
+  final double totalWidth;
 }
 
 /// Stores measurements for text segments
 class SegmentMeasurements {
-  final double initialStartAngle;
-  final int repetitions;
-  final double segmentAngle;
-  final double textAngle;
-  final double dotAngle;
-
   SegmentMeasurements({
     required this.initialStartAngle,
     required this.repetitions,
@@ -332,4 +325,9 @@ class SegmentMeasurements {
     required this.textAngle,
     required this.dotAngle,
   });
+  final double initialStartAngle;
+  final int repetitions;
+  final double segmentAngle;
+  final double textAngle;
+  final double dotAngle;
 }

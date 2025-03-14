@@ -1,16 +1,13 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 
 class TextOnPathWidget extends StatelessWidget {
-  final String text;
-  final double fontSize;
-
   const TextOnPathWidget({
-    Key? key,
+    super.key,
     required this.text,
     this.fontSize = 20,
-  }) : super(key: key);
+  });
+  final String text;
+  final double fontSize;
 
   @override
   Widget build(BuildContext context) {
@@ -37,27 +34,28 @@ class TextOnPathWidget extends StatelessWidget {
 }
 
 class TextOnPathPainter extends CustomPainter {
-  final String text;
-  final Path path;
-  final double fontSize;
-  final TextStyle textStyle;
-
   TextOnPathPainter({
     required this.text,
     required this.path,
     this.fontSize = 20,
     required this.textStyle,
   });
+  final String text;
+  final Path path;
+  final double fontSize;
+  final TextStyle textStyle;
 
   @override
   void paint(Canvas canvas, Size size) {
     // First, get path metrics to measure distances along the path
-    final PathMetric pathMetric = path.computeMetrics().first;
-    final double pathLength = pathMetric.length;
+    final pathMetric = path.computeMetrics().first;
+    final pathLength = pathMetric.length;
 
     // Calculate spacing between characters
     final textSpan = TextSpan(
-        text: "A", style: textStyle); // Sample character for measurement
+      text: 'A',
+      style: textStyle,
+    ); // Sample character for measurement
     final textPainter = TextPainter(
       text: textSpan,
       textDirection: TextDirection.ltr,
@@ -72,12 +70,12 @@ class TextOnPathPainter extends CustomPainter {
     final startOffset = (pathLength - totalTextLength) / 2;
 
     // Draw each character
-    for (int i = 0; i < text.length; i++) {
-      final double charOffset = startOffset + (i * charWidth);
+    for (var i = 0; i < text.length; i++) {
+      final charOffset = startOffset + (i * charWidth);
       if (charOffset < 0 || charOffset > pathLength) continue;
 
       // Get position and tangent angle at this point
-      final Tangent? tangent = pathMetric.getTangentForOffset(charOffset);
+      final tangent = pathMetric.getTangentForOffset(charOffset);
       if (tangent == null) continue;
 
       // Save canvas state
@@ -111,14 +109,13 @@ class TextOnPathPainter extends CustomPainter {
 
 //---- bezier
 class BezierTextOnPath extends StatefulWidget {
-  final String text;
-  final double fontSize;
-
   const BezierTextOnPath({
-    Key? key,
+    super.key,
     required this.text,
     this.fontSize = 20,
-  }) : super(key: key);
+  });
+  final String text;
+  final double fontSize;
 
   @override
   State<BezierTextOnPath> createState() => _BezierTextOnPathState();
@@ -134,10 +131,10 @@ class _BezierTextOnPathState extends State<BezierTextOnPath> {
     super.initState();
     // Initialize control points
     _controlPoints = [
-      Offset(100, 200), // Start point
-      Offset(200, 100), // Control point 1
-      Offset(300, 300), // Control point 2
-      Offset(400, 200), // End point
+      const Offset(100, 200), // Start point
+      const Offset(200, 100), // Control point 1
+      const Offset(300, 300), // Control point 2
+      const Offset(400, 200), // End point
     ];
   }
 
@@ -169,7 +166,7 @@ class _BezierTextOnPathState extends State<BezierTextOnPath> {
           controlPoints: _controlPoints,
           path: _createPath(),
         ),
-        child: Container(
+        child: const SizedBox(
           width: double.infinity,
           height: double.infinity,
         ),
@@ -178,11 +175,11 @@ class _BezierTextOnPathState extends State<BezierTextOnPath> {
   }
 
   void _handlePanStart(DragStartDetails details) {
-    final RenderBox renderBox = context.findRenderObject() as RenderBox;
+    final renderBox = context.findRenderObject()! as RenderBox;
     final position = renderBox.globalToLocal(details.globalPosition);
 
     // Find if we're near any control point
-    for (int i = 0; i < _controlPoints.length; i++) {
+    for (var i = 0; i < _controlPoints.length; i++) {
       if ((position - _controlPoints[i]).distance < 20) {
         setState(() {
           _draggedPointIndex = i;
@@ -208,12 +205,6 @@ class _BezierTextOnPathState extends State<BezierTextOnPath> {
 }
 
 class BezierTextPainter extends CustomPainter {
-  final String text;
-  final double fontSize;
-  final List<Offset> controlPoints;
-  final Path path;
-  final Paint _paint;
-
   BezierTextPainter({
     required this.text,
     required this.fontSize,
@@ -223,6 +214,11 @@ class BezierTextPainter extends CustomPainter {
           ..color = Colors.white70
           ..style = PaintingStyle.stroke
           ..strokeWidth = 2;
+  final String text;
+  final double fontSize;
+  final List<Offset> controlPoints;
+  final Path path;
+  final Paint _paint;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -259,12 +255,12 @@ class BezierTextPainter extends CustomPainter {
   }
 
   void _drawTextOnPath(Canvas canvas) {
-    final PathMetric pathMetric = path.computeMetrics().first;
-    final double pathLength = pathMetric.length;
+    final pathMetric = path.computeMetrics().first;
+    final pathLength = pathMetric.length;
 
     // Calculate text metrics
     final textSpan = TextSpan(
-      text: "A",
+      text: 'A',
       style: TextStyle(fontSize: fontSize, color: Colors.white70),
     );
     final textPainter = TextPainter(
@@ -278,11 +274,11 @@ class BezierTextPainter extends CustomPainter {
     final startOffset = (pathLength - totalTextLength) / 2;
 
     // Draw each character along the path
-    for (int i = 0; i < text.length; i++) {
-      final double charOffset = startOffset + (i * charWidth);
+    for (var i = 0; i < text.length; i++) {
+      final charOffset = startOffset + (i * charWidth);
       if (charOffset < 0 || charOffset > pathLength) continue;
 
-      final Tangent? tangent = pathMetric.getTangentForOffset(charOffset);
+      final tangent = pathMetric.getTangentForOffset(charOffset);
       if (tangent == null) continue;
 
       canvas.save();
@@ -300,7 +296,9 @@ class BezierTextPainter extends CustomPainter {
 
       charTextPainter.layout();
       charTextPainter.paint(
-          canvas, Offset(-charTextPainter.width / 2, -fontSize));
+        canvas,
+        Offset(-charTextPainter.width / 2, -fontSize),
+      );
 
       canvas.restore();
     }

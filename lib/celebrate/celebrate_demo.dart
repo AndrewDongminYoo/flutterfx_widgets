@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+
 import 'package:fx_2_folder/celebrate/celebrate.dart';
 
 class CelebrateHomeWidget extends StatelessWidget {
-  const CelebrateHomeWidget({Key? key}) : super(key: key);
+  const CelebrateHomeWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -10,10 +11,10 @@ class CelebrateHomeWidget extends StatelessWidget {
       body: Center(
         // Or any other positioning widget
         child: CoolMode(
-          particleImage: "your_image_url",
+          particleImage: 'your_image_url',
           child: ElevatedButton(
             onPressed: () {},
-            child: Text('LONG PRESS!'),
+            child: const Text('LONG PRESS!'),
           ),
         ),
       ),

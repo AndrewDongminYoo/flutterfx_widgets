@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fx_2_folder/orbit/widget/orbit_widget.dart';
-import 'package:fx_2_folder/text-on-path/text_on_path.dart';
+
 import 'package:fx_2_folder/text-on-path/text_on_path_editor.dart';
 
 class TextOnPathDemo extends StatelessWidget {

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+
 import 'package:fx_2_folder/scroll-progress/design/widget_theme.dart';
 import 'package:fx_2_folder/scroll-progress/scroll_progress.dart';
 
 class ScrollProgressDemo extends StatefulWidget {
-  const ScrollProgressDemo({Key? key}) : super(key: key);
+  const ScrollProgressDemo({super.key});
 
   @override
   State<ScrollProgressDemo> createState() => _ScrollProgressBasicState();
@@ -53,8 +54,7 @@ class _ScrollProgressBasicState extends State<ScrollProgressDemo> {
                       children: [
                         _StyleButton(
                           title: 'Default',
-                          isSelected:
-                              _currentStyle == ScrollProgressStyle.default_,
+                          isSelected: _currentStyle == ScrollProgressStyle.default_,
                           onTap: () => setState(() {
                             _currentStyle = ScrollProgressStyle.default_;
                           }),
@@ -62,8 +62,7 @@ class _ScrollProgressBasicState extends State<ScrollProgressDemo> {
                         const SizedBox(width: 8),
                         _StyleButton(
                           title: 'Gradient',
-                          isSelected:
-                              _currentStyle == ScrollProgressStyle.gradient,
+                          isSelected: _currentStyle == ScrollProgressStyle.gradient,
                           onTap: () => setState(() {
                             _currentStyle = ScrollProgressStyle.gradient;
                           }),
@@ -71,8 +70,7 @@ class _ScrollProgressBasicState extends State<ScrollProgressDemo> {
                         const SizedBox(width: 8),
                         _StyleButton(
                           title: 'Rounded',
-                          isSelected:
-                              _currentStyle == ScrollProgressStyle.rounded,
+                          isSelected: _currentStyle == ScrollProgressStyle.rounded,
                           onTap: () => setState(() {
                             _currentStyle = ScrollProgressStyle.rounded;
                           }),
@@ -80,8 +78,7 @@ class _ScrollProgressBasicState extends State<ScrollProgressDemo> {
                         const SizedBox(width: 8),
                         _StyleButton(
                           title: 'Thick',
-                          isSelected:
-                              _currentStyle == ScrollProgressStyle.thick,
+                          isSelected: _currentStyle == ScrollProgressStyle.thick,
                           onTap: () => setState(() {
                             _currentStyle = ScrollProgressStyle.thick;
                           }),
@@ -97,8 +94,7 @@ class _ScrollProgressBasicState extends State<ScrollProgressDemo> {
                         const SizedBox(width: 8),
                         _StyleButton(
                           title: 'Shimmer',
-                          isSelected:
-                              _currentStyle == ScrollProgressStyle.shimmer,
+                          isSelected: _currentStyle == ScrollProgressStyle.shimmer,
                           onTap: () => setState(() {
                             _currentStyle = ScrollProgressStyle.shimmer;
                           }),
@@ -117,15 +113,14 @@ class _ScrollProgressBasicState extends State<ScrollProgressDemo> {
 }
 
 class _StyleButton extends StatelessWidget {
-  final String title;
-  final bool isSelected;
-  final VoidCallback onTap;
-
   const _StyleButton({
     required this.title,
     required this.isSelected,
     required this.onTap,
   });
+  final String title;
+  final bool isSelected;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -167,9 +162,8 @@ class _StyleButton extends StatelessWidget {
 }
 
 class GridPatternPainter extends CustomPainter {
-  final bool isDarkMode;
-
   GridPatternPainter({required this.isDarkMode});
+  final bool isDarkMode;
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()

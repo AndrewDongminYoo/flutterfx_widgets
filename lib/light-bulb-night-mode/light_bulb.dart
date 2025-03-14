@@ -1,5 +1,6 @@
-import 'package:flutter/material.dart';
 import 'dart:math' as math;
+
+import 'package:flutter/material.dart';
 
 import 'package:fx_2_folder/light-bulb-night-mode/vintage_lightbulb.dart';
 
@@ -13,26 +14,24 @@ class ThemeProvider extends ChangeNotifier {
 }
 
 class ThemeLightBulb extends StatefulWidget {
-  final Function(bool) onThemeChanged;
-  final bool initialState;
-
   const ThemeLightBulb({
-    Key? key,
+    super.key,
     required this.onThemeChanged,
     this.initialState = true,
-  }) : super(key: key);
+  });
+  final ValueChanged<bool> onThemeChanged;
+  final bool initialState;
 
   @override
   State<ThemeLightBulb> createState() => _ThemeLightBulbState();
 }
 
-class _ThemeLightBulbState extends State<ThemeLightBulb>
-    with SingleTickerProviderStateMixin {
+class _ThemeLightBulbState extends State<ThemeLightBulb> with SingleTickerProviderStateMixin {
   bool isOn = false;
   late AnimationController _controller;
   late Animation<double> _pullAnimation;
   Offset? _dragStart;
-  final double _dragThreshold = 30.0;
+  final double _dragThreshold = 30;
 
   @override
   void initState() {
@@ -45,12 +44,14 @@ class _ThemeLightBulbState extends State<ThemeLightBulb>
     );
 
     _pullAnimation = Tween<double>(
-      begin: 0.0,
-      end: 1.0,
-    ).animate(CurvedAnimation(
-      parent: _controller,
-      curve: Curves.easeInOut,
-    ));
+      begin: 0,
+      end: 1,
+    ).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: Curves.easeInOut,
+      ),
+    );
 
     _controller.addListener(() {
       setState(() {});
@@ -78,7 +79,7 @@ class _ThemeLightBulbState extends State<ThemeLightBulb>
   void _handleDragEnd(DragEndDetails details) {
     if (_dragStart == null) return;
 
-    final distance = (_controller.value * _dragThreshold);
+    final distance = _controller.value * _dragThreshold;
     if (distance >= _dragThreshold * 0.5) {
       _controller.forward().then((_) {
         setState(() {
@@ -117,11 +118,8 @@ class _ThemeLightBulbState extends State<ThemeLightBulb>
                 ),
                 LightbulbIcon(
                   size: 60,
-                  color: isOn
-                      ? const Color.fromARGB(255, 255, 230, 0)
-                      : const Color(0xFF757575),
-                  strokeWidth: 2,
-                )
+                  color: isOn ? const Color.fromARGB(255, 255, 230, 0) : const Color(0xFF757575),
+                ),
               ],
             ),
           ),
@@ -132,13 +130,12 @@ class _ThemeLightBulbState extends State<ThemeLightBulb>
 }
 
 class LightBulbPainter extends CustomPainter {
-  final bool isOn;
-  final double pullProgress;
-
   LightBulbPainter({
     required this.isOn,
     required this.pullProgress,
   });
+  final bool isOn;
+  final double pullProgress;
 
   @override
   void paint(Canvas canvas, Size size) {

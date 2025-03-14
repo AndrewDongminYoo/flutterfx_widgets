@@ -1,17 +1,17 @@
 import 'dart:math' as math;
 import 'dart:ui' as ui;
+
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
 class MotionBlurWidget extends StatefulWidget {
-  final Widget child;
-  final String shaderAsset;
-
   const MotionBlurWidget({
-    Key? key,
+    super.key,
     required this.child,
     required this.shaderAsset,
-  }) : super(key: key);
+  });
+  final Widget child;
+  final String shaderAsset;
 
   @override
   State<MotionBlurWidget> createState() => _MotionBlurWidgetState();
@@ -54,12 +54,12 @@ class _MotionBlurWidgetState extends State<MotionBlurWidget> {
 
   Future<void> _captureChildImage() async {
     try {
-      final RenderRepaintBoundary? boundary = _childKey.currentContext
-          ?.findRenderObject() as RenderRepaintBoundary?;
+      final boundary = _childKey.currentContext?.findRenderObject() as RenderRepaintBoundary?;
 
       if (boundary != null && boundary.hasSize) {
-        final ui.Image image = await boundary.toImage(
-            pixelRatio: MediaQuery.of(context).devicePixelRatio);
+        final image = await boundary.toImage(
+          pixelRatio: MediaQuery.of(context).devicePixelRatio,
+        );
         if (mounted) {
           setState(() {
             _childImage?.dispose();
@@ -80,128 +80,125 @@ class _MotionBlurWidgetState extends State<MotionBlurWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(builder: (context, constraints) {
-      // Calculate bounds to keep the widget within the screen
-      final maxX =
-          constraints.maxWidth - 100; // 100 is the width of the container
-      final maxY =
-          constraints.maxHeight - 100; // 100 is the height of the container
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        // Calculate bounds to keep the widget within the screen
+        final maxX = constraints.maxWidth - 100; // 100 is the width of the container
+        final maxY = constraints.maxHeight - 100; // 100 is the height of the container
 
-      _position = Offset(
-        _position.dx.clamp(0, maxX),
-        _position.dy.clamp(0, maxY),
-      );
+        _position = Offset(
+          _position.dx.clamp(0, maxX),
+          _position.dy.clamp(0, maxY),
+        );
 
-      return Stack(
-        children: [
-          Positioned(
-            left: _position.dx,
-            top: _position.dy,
-            child: GestureDetector(
-              onPanStart: (details) async {
-                setState(() {
-                  _isDragging = true;
-                  _lastUpdateTime =
-                      DateTime.now().millisecondsSinceEpoch.toDouble();
-                  _dragStartPosition = details.globalPosition - _position;
-                });
-                await _captureChildImage();
-              },
-              onPanUpdate: (details) {
-                final now = DateTime.now().millisecondsSinceEpoch.toDouble();
-                final dt = (now - _lastUpdateTime) / 1000.0;
-
-                if (dt > 0) {
+        return Stack(
+          children: [
+            Positioned(
+              left: _position.dx,
+              top: _position.dy,
+              child: GestureDetector(
+                onPanStart: (details) async {
                   setState(() {
-                    // More aggressive velocity calculation for pronounced motion blur
-                    _velocity =
-                        (details.delta / dt) * 3.5; // Increased amplification
-
-                    // Only show blur for significant movement
-                    if (_velocity.distance < 150) {
-                      _velocity = Offset.zero;
-                    }
-
-                    _lastUpdateTime = now;
-
-                    // Update position based on drag
-                    final newPosition =
-                        details.globalPosition - _dragStartPosition;
-                    _position = Offset(
-                      newPosition.dx.clamp(0, maxX),
-                      newPosition.dy.clamp(0, maxY),
-                    );
+                    _isDragging = true;
+                    _lastUpdateTime = DateTime.now().millisecondsSinceEpoch.toDouble();
+                    _dragStartPosition = details.globalPosition - _position;
                   });
-                }
-              },
-              onPanEnd: (details) {
-                setState(() {
-                  _isDragging = false;
-                  _velocity = Offset.zero;
-                  _childImage?.dispose();
-                  _childImage = null;
-                });
-              },
-              child: Stack(
-                children: [
-                  // Original child in RepaintBoundary for capture
-                  RepaintBoundary(
-                    key: _childKey,
-                    child: widget.child,
-                  ),
+                  await _captureChildImage();
+                },
+                onPanUpdate: (details) {
+                  final now = DateTime.now().millisecondsSinceEpoch.toDouble();
+                  final dt = (now - _lastUpdateTime) / 1000.0;
 
-                  // Shader overlay when dragging
-                  if (_isDragging && shader != null && _childImage != null)
+                  if (dt > 0) {
+                    setState(() {
+                      // More aggressive velocity calculation for pronounced motion blur
+                      _velocity = (details.delta / dt) * 3.5; // Increased amplification
+
+                      // Only show blur for significant movement
+                      if (_velocity.distance < 150) {
+                        _velocity = Offset.zero;
+                      }
+
+                      _lastUpdateTime = now;
+
+                      // Update position based on drag
+                      final newPosition = details.globalPosition - _dragStartPosition;
+                      _position = Offset(
+                        newPosition.dx.clamp(0, maxX),
+                        newPosition.dy.clamp(0, maxY),
+                      );
+                    });
+                  }
+                },
+                onPanEnd: (details) {
+                  setState(() {
+                    _isDragging = false;
+                    _velocity = Offset.zero;
+                    _childImage?.dispose();
+                    _childImage = null;
+                  });
+                },
+                child: Stack(
+                  children: [
+                    // Original child in RepaintBoundary for capture
+                    RepaintBoundary(
+                      key: _childKey,
+                      child: widget.child,
+                    ),
+
+                    // Shader overlay when dragging
                     if (_isDragging && shader != null && _childImage != null)
-                      Positioned.fill(
-                        child: LayoutBuilder(
-                          builder: (context, constraints) {
-                            print(
-                                'Applying shader with velocity: ${_velocity.distance}'); // Debug print
-                            return CustomPaint(
-                              size: Size(
-                                  constraints.maxWidth, constraints.maxHeight),
-                              painter: ShaderPainter(
-                                shader: shader!,
-                                strength: (_velocity.distance / 200.0)
-                                    .clamp(0.0, 0.95),
-                                angle: _velocity != Offset.zero
-                                    ? math.atan2(_velocity.dy, _velocity.dx)
-                                    : 0.0,
-                                image: _childImage!,
-                              ),
-                            );
-                          },
+                      if (_isDragging && shader != null && _childImage != null)
+                        Positioned.fill(
+                          child: LayoutBuilder(
+                            builder: (context, constraints) {
+                              print(
+                                'Applying shader with velocity: ${_velocity.distance}',
+                              ); // Debug print
+                              return CustomPaint(
+                                size: Size(
+                                  constraints.maxWidth,
+                                  constraints.maxHeight,
+                                ),
+                                painter: ShaderPainter(
+                                  shader: shader!,
+                                  strength: (_velocity.distance / 200.0).clamp(0.0, 0.95),
+                                  angle: _velocity != Offset.zero ? math.atan2(_velocity.dy, _velocity.dx) : 0.0,
+                                  image: _childImage!,
+                                ),
+                              );
+                            },
+                          ),
                         ),
-                      ),
-                ],
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
-      );
-    });
+          ],
+        );
+      },
+    );
   }
 }
 
 class ShaderPainter extends CustomPainter {
-  final ui.FragmentShader shader;
-  final double strength;
-  final double angle;
-  final ui.Image image;
-
   ShaderPainter({
     required this.shader,
     required this.strength,
     required this.angle,
     required this.image,
   });
+  final ui.FragmentShader shader;
+  final double strength;
+  final double angle;
+  final ui.Image image;
 
   @override
   void paint(Canvas canvas, Size size) {
     try {
       print(
-          'Painting with shader - Size: $size, Strength: $strength, Angle: $angle'); // Debug print
+        'Painting with shader - Size: $size, Strength: $strength, Angle: $angle',
+      ); // Debug print
 
       shader
         ..setFloat(0, size.width)
@@ -225,19 +222,18 @@ class ShaderPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant ShaderPainter oldDelegate) {
-    return oldDelegate.strength != strength ||
-        oldDelegate.angle != angle ||
-        oldDelegate.image != image;
+    return oldDelegate.strength != strength || oldDelegate.angle != angle || oldDelegate.image != image;
   }
 }
 
 class ExampleScreen extends StatefulWidget {
+  const ExampleScreen({super.key});
+
   @override
   _ExampleScreenState createState() => _ExampleScreenState();
 }
 
-class _ExampleScreenState extends State<ExampleScreen>
-    with TickerProviderStateMixin {
+class _ExampleScreenState extends State<ExampleScreen> with TickerProviderStateMixin {
   late AnimationController _demoController;
   bool _showAutomatedDemo = false;
 
@@ -331,8 +327,7 @@ class _ExampleScreenState extends State<ExampleScreen>
                       icon: const Icon(Icons.touch_app),
                       label: const Text('Interactive'),
                       style: ElevatedButton.styleFrom(
-                        backgroundColor:
-                            !_showAutomatedDemo ? Colors.blue : Colors.grey,
+                        backgroundColor: !_showAutomatedDemo ? Colors.blue : Colors.grey,
                       ),
                     ),
                     ElevatedButton.icon(
@@ -356,6 +351,8 @@ class _ExampleScreenState extends State<ExampleScreen>
 
 // Main App
 class MotionBlurDemo extends StatelessWidget {
+  const MotionBlurDemo({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -365,7 +362,7 @@ class MotionBlurDemo extends StatelessWidget {
         primarySwatch: Colors.blue,
         scaffoldBackgroundColor: Colors.grey[200],
       ),
-      home: ExampleScreen(),
+      home: const ExampleScreen(),
     );
   }
 }

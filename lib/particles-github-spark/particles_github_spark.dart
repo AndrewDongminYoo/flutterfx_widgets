@@ -1,16 +1,12 @@
 import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 
 enum ParticleShape { circle, star, diamond }
 
 class RisingParticles extends StatefulWidget {
-  final int quantity;
-  final List<Color> colors;
-  final double maxSize;
-  final double minSize;
-
   const RisingParticles({
-    Key? key,
+    super.key,
     this.quantity = 50,
     this.colors = const [
       Color(0xFF4C40BB), // Deep purple/blue
@@ -20,14 +16,17 @@ class RisingParticles extends StatefulWidget {
     ],
     this.maxSize = 8,
     this.minSize = 3,
-  }) : super(key: key);
+  });
+  final int quantity;
+  final List<Color> colors;
+  final double maxSize;
+  final double minSize;
 
   @override
   State<RisingParticles> createState() => _RisingParticlesState();
 }
 
-class _RisingParticlesState extends State<RisingParticles>
-    with SingleTickerProviderStateMixin {
+class _RisingParticlesState extends State<RisingParticles> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   List<RisingParticle> particles = [];
   Size canvasSize = Size.zero;
@@ -51,7 +50,7 @@ class _RisingParticlesState extends State<RisingParticles>
 
   void _initParticles() {
     particles.clear();
-    for (int i = 0; i < widget.quantity; i++) {
+    for (var i = 0; i < widget.quantity; i++) {
       particles.add(_createParticle());
     }
   }
@@ -59,20 +58,15 @@ class _RisingParticlesState extends State<RisingParticles>
   RisingParticle _createParticle({double initialProgress = 0.0}) {
     // Random starting position at bottom of screen
     final x = random.nextDouble() * canvasSize.width;
-    final y = canvasSize.height +
-        random.nextDouble() * 20; // Slight variance in start
+    final y = canvasSize.height + random.nextDouble() * 20; // Slight variance in start
 
     // Control points for moderately pronounced S-curve
     // First control point - creates the bottom curve of S
-    final cp1x = x +
-        (random.nextDouble() * 60 + 30) *
-            (random.nextBool() ? 1 : -1); // Moderate horizontal displacement
+    final cp1x = x + (random.nextDouble() * 60 + 30) * (random.nextBool() ? 1 : -1); // Moderate horizontal displacement
     final cp1y = canvasSize.height * 0.8; // Slightly higher first control point
 
     // Second control point - creates the top curve of S
-    final cp2x = x +
-        (random.nextDouble() * 60 + 30) *
-            (cp1x < x ? 1 : -1); // Opposite direction, moderate displacement
+    final cp2x = x + (random.nextDouble() * 60 + 30) * (cp1x < x ? 1 : -1); // Opposite direction, moderate displacement
     final cp2y = canvasSize.height * 0.65; // Adjusted second control point
 
     return RisingParticle(
@@ -82,8 +76,7 @@ class _RisingParticlesState extends State<RisingParticles>
       controlPoint2: Offset(cp2x, cp2y),
       endX: x + (random.nextDouble() - 0.5) * 50,
       endY: canvasSize.height * 0.5, // Half screen height
-      size: random.nextDouble() * (widget.maxSize - widget.minSize) +
-          widget.minSize,
+      size: random.nextDouble() * (widget.maxSize - widget.minSize) + widget.minSize,
       color: widget.colors[random.nextInt(widget.colors.length)],
       shape: ParticleShape.values[random.nextInt(ParticleShape.values.length)],
       progress: initialProgress, // Random initial progress
@@ -125,9 +118,8 @@ class _RisingParticlesState extends State<RisingParticles>
 }
 
 class RisingParticlesPainter extends CustomPainter {
-  final List<RisingParticle> particles;
-
   RisingParticlesPainter({required this.particles});
+  final List<RisingParticle> particles;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -136,7 +128,6 @@ class RisingParticlesPainter extends CustomPainter {
         ..color = particle.color.withOpacity(easedOpacity(particle.progress))
         ..style = PaintingStyle.fill;
 
-      final path = Path();
       final currentPoint = _calculateBezierPoint(
         particle.progress,
         Offset(particle.startX, particle.startY),
@@ -157,13 +148,10 @@ class RisingParticlesPainter extends CustomPainter {
       switch (particle.shape) {
         case ParticleShape.circle:
           canvas.drawCircle(currentPoint, easedSizeValue, paint);
-          break;
         case ParticleShape.star:
           _drawStar(canvas, currentPoint, easedSizeValue, paint);
-          break;
         case ParticleShape.diamond:
           _drawDiamond(canvas, currentPoint, easedSizeValue, paint);
-          break;
       }
 
       // Restore the canvas state
@@ -175,14 +163,19 @@ class RisingParticlesPainter extends CustomPainter {
     return 1.0 - Curves.easeIn.transform(progress);
   }
 
-  double easedSize(double progress, size) {
+  double easedSize(double progress, num size) {
     const minSize = 0.3; // Minimum scale (30%)
     final easedProgress = Curves.easeIn.transform(progress);
     return size * (1.0 - ((1.0 - minSize) * easedProgress));
   }
 
   Offset _calculateBezierPoint(
-      double t, Offset start, Offset c1, Offset c2, Offset end) {
+    double t,
+    Offset start,
+    Offset c1,
+    Offset c2,
+    Offset end,
+  ) {
     final t1 = math.pow(1 - t, 3).toDouble();
     final t2 = 3 * math.pow(1 - t, 2) * t;
     final t3 = 3 * (1 - t) * math.pow(t, 2);
@@ -196,14 +189,14 @@ class RisingParticlesPainter extends CustomPainter {
 
   void _drawStar(Canvas canvas, Offset center, double size, Paint paint) {
     final path = Path();
-    final double fullSize = size;
+    final fullSize = size;
 
     // Control point distance for the quadratic curves
     // This controls how much the sides curve inward
-    final double controlPointDistance = fullSize * 0.4;
+    final controlPointDistance = fullSize * 0.4;
 
-    for (int i = 0; i < 4; i++) {
-      final angle = (i * math.pi / 2); // 90 degree rotation for each point
+    for (var i = 0; i < 4; i++) {
+      final angle = i * math.pi / 2; // 90 degree rotation for each point
 
       // Calculate point position
       final pointX = center.dx + math.cos(angle) * fullSize;
@@ -213,7 +206,7 @@ class RisingParticlesPainter extends CustomPainter {
         path.moveTo(pointX, pointY);
       } else {
         // Calculate control point for the quadratic curve
-        final prevAngle = ((i - 1) * math.pi / 2);
+        final prevAngle = (i - 1) * math.pi / 2;
         final midAngle = prevAngle + math.pi / 4; // Halfway between points
 
         final controlX = center.dx + math.cos(midAngle) * controlPointDistance;
@@ -225,10 +218,8 @@ class RisingParticlesPainter extends CustomPainter {
     }
 
     // Close the path with final curve
-    final controlX =
-        center.dx + math.cos(7 * math.pi / 4) * controlPointDistance;
-    final controlY =
-        center.dy + math.sin(7 * math.pi / 4) * controlPointDistance;
+    final controlX = center.dx + math.cos(7 * math.pi / 4) * controlPointDistance;
+    final controlY = center.dy + math.sin(7 * math.pi / 4) * controlPointDistance;
 
     path.quadraticBezierTo(controlX, controlY, center.dx + fullSize, center.dy);
 
@@ -251,18 +242,6 @@ class RisingParticlesPainter extends CustomPainter {
 }
 
 class RisingParticle {
-  final double startX;
-  final double startY;
-  final Offset controlPoint1;
-  final Offset controlPoint2;
-  final double endX;
-  final double endY;
-  final double size;
-  final Color color;
-  final ParticleShape shape;
-  double progress;
-  final double speed;
-
   RisingParticle({
     required this.startX,
     required this.startY,
@@ -276,4 +255,15 @@ class RisingParticle {
     required this.progress,
     required this.speed,
   });
+  final double startX;
+  final double startY;
+  final Offset controlPoint1;
+  final Offset controlPoint2;
+  final double endX;
+  final double endY;
+  final double size;
+  final Color color;
+  final ParticleShape shape;
+  double progress;
+  final double speed;
 }

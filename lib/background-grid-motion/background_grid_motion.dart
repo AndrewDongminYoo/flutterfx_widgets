@@ -1,22 +1,21 @@
-import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
-class RetroGridBackground extends StatefulWidget {
-  final double angle;
-  final Widget? child;
+import 'package:flutter/material.dart';
 
+class RetroGridBackground extends StatefulWidget {
   const RetroGridBackground({
-    Key? key,
+    super.key,
     this.angle = 65,
     this.child,
-  }) : super(key: key);
+  });
+  final double angle;
+  final Widget? child;
 
   @override
   State<RetroGridBackground> createState() => _RetroGridBackgroundState();
 }
 
-class _RetroGridBackgroundState extends State<RetroGridBackground>
-    with SingleTickerProviderStateMixin {
+class _RetroGridBackgroundState extends State<RetroGridBackground> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _gridAnimation;
 
@@ -29,8 +28,8 @@ class _RetroGridBackgroundState extends State<RetroGridBackground>
     )..repeat();
 
     _gridAnimation = Tween<double>(
-      begin: 0.0, // Start position
-      end: 1.0, // End position
+      begin: 0, // Start position
+      end: 1, // End position
     ).animate(_controller);
   }
 
@@ -51,7 +50,7 @@ class _RetroGridBackgroundState extends State<RetroGridBackground>
         return Container(
           clipBehavior: Clip.hardEdge,
           decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.background,
+            color: Theme.of(context).colorScheme.surface,
             borderRadius: BorderRadius.circular(12),
           ),
           child: Stack(
@@ -68,10 +67,10 @@ class _RetroGridBackgroundState extends State<RetroGridBackground>
                   builder: (context, child) => Transform(
                     transform: Matrix4.identity()
                       ..setEntry(3, 2, 0.004) // Adjusted perspective
-                      ..rotateX(-30 *
-                          math.pi /
-                          180) // Adjusted angle for better bottom alignment
-                      ..scale(2.0, 2.0, 2.0),
+                      ..rotateX(
+                        -30 * math.pi / 180,
+                      ) // Adjusted angle for better bottom alignment
+                      ..scale(2.0, 2, 2),
                     alignment: Alignment.bottomCenter,
                     child: CustomPaint(
                       size: Size(size.width, size.height),
@@ -93,9 +92,7 @@ class _RetroGridBackgroundState extends State<RetroGridBackground>
                       end: Alignment.center,
                       colors: [
                         Colors.transparent,
-                        isDark
-                            ? Colors.black.withOpacity(0.95)
-                            : Colors.white.withOpacity(0.95),
+                        if (isDark) Colors.black.withOpacity(0.95) else Colors.white.withOpacity(0.95),
                       ],
                       stops: const [0.6, 0.8], // Adjusted stops for better fade
                     ),
@@ -114,7 +111,7 @@ class _RetroGridBackgroundState extends State<RetroGridBackground>
                         Color(0xFF8C1EFF),
                       ],
                     ).createShader(bounds),
-                    child: widget.child!,
+                    child: widget.child,
                   ),
                 ),
             ],
@@ -126,20 +123,20 @@ class _RetroGridBackgroundState extends State<RetroGridBackground>
 }
 
 class GridPainter extends CustomPainter {
-  final double offset;
-  final bool isDark;
-  final double gridSize = 40.0; // Increased grid size for better visibility
+  // Increased grid size for better visibility
 
   GridPainter({
     required this.offset,
     required this.isDark,
   });
+  final double offset;
+  final bool isDark;
+  final double gridSize = 40;
 
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color =
-          isDark ? Colors.white.withOpacity(0.3) : Colors.black.withOpacity(0.4)
+      ..color = isDark ? Colors.white.withOpacity(0.3) : Colors.black.withOpacity(0.4)
       ..strokeWidth = 1.5;
 
     // Calculate grid lines with animation offset
@@ -158,8 +155,7 @@ class GridPainter extends CustomPainter {
 
     // Draw horizontal lines with animation
     for (var i = 0; i < horizontalLines; i++) {
-      final y =
-          (i * gridSize) - (offset * gridSize * 2); // Modified animation offset
+      final y = (i * gridSize) - (offset * gridSize * 2); // Modified animation offset
       canvas.drawLine(
         Offset(0, y),
         Offset(size.width, y),
@@ -169,13 +165,12 @@ class GridPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(GridPainter oldDelegate) =>
-      offset != oldDelegate.offset || isDark != oldDelegate.isDark;
+  bool shouldRepaint(GridPainter oldDelegate) => offset != oldDelegate.offset || isDark != oldDelegate.isDark;
 }
 
 // Usage Example
 class RetroGridDemo extends StatelessWidget {
-  const RetroGridDemo({Key? key}) : super(key: key);
+  const RetroGridDemo({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:fx_2_folder/progress-bar/design/grid.dart';
 import 'package:fx_2_folder/progress-bar/progress_bar.dart';
 import 'package:fx_2_folder/progress-bar/strategies/circlula_progress_strategy.dart';
@@ -6,7 +7,7 @@ import 'package:fx_2_folder/progress-bar/strategies/linear_progress_strategy.dar
 import 'package:fx_2_folder/progress-bar/strategies/wave_progress_strategy.dart';
 
 class ProgressBarDemo extends StatefulWidget {
-  const ProgressBarDemo({Key? key}) : super(key: key);
+  const ProgressBarDemo({super.key});
 
   @override
   State<ProgressBarDemo> createState() => _ProgressBarDemoState();
@@ -21,7 +22,6 @@ class _ProgressBarDemoState extends State<ProgressBarDemo> {
   static const Color _softWhite = Color(0xFFE0E0E0);
   static const Color _mediumGray = Color(0xFF808080);
   static const Color _darkGray = Color(0xFF333333);
-  static const Color _deepBlack = Color(0xFF1A1A1A);
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +39,7 @@ class _ProgressBarDemoState extends State<ProgressBarDemo> {
           ),
           // Main content
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24.0),
+            padding: const EdgeInsets.symmetric(horizontal: 24),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -75,8 +75,6 @@ class _ProgressBarDemoState extends State<ProgressBarDemo> {
                   progress: _progress,
                   strategy: const DynamicWaveProgressStrategy(
                     waveDuration: Duration(milliseconds: 2500),
-                    autoAnimate: true,
-                    waveCurve: Curves.linear,
                   ),
                   style: ProgressStyle(
                     height: 130,

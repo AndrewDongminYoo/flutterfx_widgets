@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 
 class LightbulbIconPainter extends CustomPainter {
-  final Color color;
-  final double strokeWidth;
-
   LightbulbIconPainter({
     this.color = Colors.black,
     this.strokeWidth = 2.0,
   });
+  final Color color;
+  final double strokeWidth;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -18,20 +17,19 @@ class LightbulbIconPainter extends CustomPainter {
       ..strokeCap = StrokeCap.round
       ..strokeJoin = StrokeJoin.round;
 
-    final double width = size.width;
-    final double height = size.height;
+    final width = size.width;
+    final height = size.height;
 
     // Scale factors to maintain proportions at any size
-    final double scaleX = width / 24;
-    final double scaleY = height / 24;
-
-    // Create a path for the lightbulb
-    final path = Path();
+    final scaleX = width / 24;
+    final scaleY = height / 24;
 
     // Draw bulb body (circle with base)
     canvas.drawArc(
       Rect.fromCircle(
-          center: Offset(12 * scaleX, 12 * scaleY), radius: 5 * scaleX),
+        center: Offset(12 * scaleX, 12 * scaleY),
+        radius: 5 * scaleX,
+      ),
       0,
       2 * 3.14159,
       false,
@@ -94,16 +92,15 @@ class LightbulbIconPainter extends CustomPainter {
 }
 
 class LightbulbIcon extends StatelessWidget {
-  final double size;
-  final Color color;
-  final double strokeWidth;
-
   const LightbulbIcon({
-    Key? key,
+    super.key,
     this.size = 24,
     this.color = Colors.black,
     this.strokeWidth = 2.0,
-  }) : super(key: key);
+  });
+  final double size;
+  final Color color;
+  final double strokeWidth;
 
   @override
   Widget build(BuildContext context) {

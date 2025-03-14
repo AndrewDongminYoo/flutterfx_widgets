@@ -1,9 +1,11 @@
 // particles_demo.dart
+
 import 'package:flutter/material.dart';
+
 import 'package:fx_2_folder/background-beam/background_beam.dart';
 
 class BackgroundBeamDemo extends StatefulWidget {
-  const BackgroundBeamDemo({Key? key}) : super(key: key);
+  const BackgroundBeamDemo({super.key});
 
   @override
   State<BackgroundBeamDemo> createState() => _DemoState();

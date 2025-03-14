@@ -1,26 +1,27 @@
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
+
 import 'package:fx_2_folder/fx_14_text_reveal/strategies/FadeBlurStrategy.dart';
 import 'package:fx_2_folder/fx_14_text_reveal/strategies/FlipUpStragegy.dart';
 import 'package:fx_2_folder/fx_14_text_reveal/strategies/FlyingCharactersStrategy.dart';
 import 'package:fx_2_folder/fx_14_text_reveal/strategies/SwirlFloatStrategy.dart';
 import 'package:fx_2_folder/fx_14_text_reveal/text_reveal_widget.dart';
-import 'dart:math' as math;
 
 // Animation Strategy Selection Model
 class AnimationPreset {
-  final String name;
-  final TextAnimationStrategy strategy;
-  final String description;
-
   const AnimationPreset({
     required this.name,
     required this.strategy,
     required this.description,
   });
+  final String name;
+  final TextAnimationStrategy strategy;
+  final String description;
 }
 
 class AnimationDemoScreen extends StatefulWidget {
-  const AnimationDemoScreen({Key? key}) : super(key: key);
+  const AnimationDemoScreen({super.key});
 
   @override
   State<AnimationDemoScreen> createState() => _AnimationDemoScreenState();
@@ -28,86 +29,83 @@ class AnimationDemoScreen extends StatefulWidget {
 
 class _AnimationDemoScreenState extends State<AnimationDemoScreen> {
   bool _isAnimating = false;
-  String _demoText = "Flutter is pure magic! ✨";
+  final String _demoText = 'Flutter is pure magic! ✨';
   AnimationUnit _selectedUnit = AnimationUnit.character;
   AnimationDirection _direction = AnimationDirection.forward;
   late AnimationPreset _selectedPreset;
-  TextEditingController _textController = TextEditingController();
+  final TextEditingController _textController = TextEditingController();
 
   // Define animation presets
   final List<AnimationPreset> presets = const [
     AnimationPreset(
-      name: "Classic Fade & Blur",
+      name: 'Classic Fade & Blur',
       strategy: FadeBlurStrategy(),
-      description: "Smooth fade in with gaussian blur effect",
+      description: 'Smooth fade in with gaussian blur effect',
     ),
     AnimationPreset(
-      name: "Gentle Float",
+      name: 'Gentle Float',
       strategy: FlyingCharactersStrategy(
         maxOffset: 50,
         randomDirection: false,
         angle: -math.pi / 2,
       ),
-      description: "Characters float up gently",
+      description: 'Characters float up gently',
     ),
     AnimationPreset(
-      name: "Gentle Float with Blur",
+      name: 'Gentle Float with Blur',
       strategy: FlyingCharactersStrategy(
         maxOffset: 50,
         randomDirection: false,
         enableBlur: true,
         angle: -math.pi / 2,
       ),
-      description: "Characters float up gently",
+      description: 'Characters float up gently',
     ),
     AnimationPreset(
-      name: "Chaos Scatter",
+      name: 'Chaos Scatter',
       strategy: FlyingCharactersStrategy(
         maxOffset: 50,
-        randomDirection: true,
       ),
-      description: "Characters scatter in random directions",
+      description: 'Characters scatter in random directions',
     ),
     AnimationPreset(
-      name: "Chaos Scatter with Blur",
+      name: 'Chaos Scatter with Blur',
       strategy: FlyingCharactersStrategy(
         maxOffset: 50,
-        randomDirection: true,
         enableBlur: true,
       ),
-      description: "Characters scatter in random directions",
+      description: 'Characters scatter in random directions',
     ),
     AnimationPreset(
-      name: "Swirl Float",
+      name: 'Swirl Float',
       strategy: SwirlFloatStrategy(
-        yOffset: -200.0,
-        maxXDeviation: 60.0,
-        maxBlur: 10.0,
+        yOffset: -200,
+        maxXDeviation: 60,
+        maxBlur: 10,
         enableBlur: false,
         curveIntensity: 0.7, // More pronounced S-curve
         synchronizeAnimation: true,
       ),
-      description: "Characters float in a swirl",
+      description: 'Characters float in a swirl',
     ),
     AnimationPreset(
-      name: "Swirl Float with Blur",
+      name: 'Swirl Float with Blur',
       strategy: SwirlFloatStrategy(
-        yOffset: -200.0,
-        maxXDeviation: 60.0,
-        maxBlur: 10.0,
-        enableBlur: true,
+        yOffset: -200,
+        maxXDeviation: 60,
+        maxBlur: 10,
         curveIntensity: 0.7,
         synchronizeAnimation: true, // More pronounced S-curve
       ),
-      description: "Characters float in a swirl",
+      description: 'Characters float in a swirl',
     ),
     AnimationPreset(
       name: 'Flip up',
       strategy: FlipUpStrategy(
         perspectiveValue: 0.02, // Adjust for more/less dramatic perspective
       ),
-      description: "Characters flip up using 3d transform",
-    )
+      description: 'Characters flip up using 3d transform',
+    ),
   ];
 
   @override
@@ -141,7 +139,7 @@ class _AnimationDemoScreenState extends State<AnimationDemoScreen> {
                   // Animation Preview Area
                   ConstrainedBox(
                     constraints: const BoxConstraints(
-                      minHeight: 100.0,
+                      minHeight: 100,
                     ),
                     child: EnhancedTextRevealEffect(
                       text: _demoText,
@@ -166,9 +164,9 @@ class _AnimationDemoScreenState extends State<AnimationDemoScreen> {
                           _isAnimating = !_isAnimating;
                         });
                       },
-                      icon: Icon(_isAnimating
-                          ? Icons.stop_rounded
-                          : Icons.play_arrow_rounded),
+                      icon: Icon(
+                        _isAnimating ? Icons.stop_rounded : Icons.play_arrow_rounded,
+                      ),
                       label: Text(_isAnimating ? 'Reset' : 'Play'),
                       style: ElevatedButton.styleFrom(
                         padding: const EdgeInsets.symmetric(
@@ -257,8 +255,7 @@ class _AnimationDemoScreenState extends State<AnimationDemoScreen> {
                           ),
                         ],
                         selected: {_direction},
-                        onSelectionChanged:
-                            (Set<AnimationDirection> selection) {
+                        onSelectionChanged: (Set<AnimationDirection> selection) {
                           setState(() {
                             _direction = selection.first;
                           });

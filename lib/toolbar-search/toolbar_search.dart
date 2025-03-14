@@ -3,27 +3,21 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+
 import 'package:fx_2_folder/stacked-cards/stacked_card.dart';
-// toolbar_dynamic.dart
-
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 // toolbar_dynamic.dart
 
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+// toolbar_dynamic.dart
 
 class ToolbarDynamic extends StatefulWidget {
-  const ToolbarDynamic({Key? key}) : super(key: key);
+  const ToolbarDynamic({super.key});
 
   @override
   State<ToolbarDynamic> createState() => _ToolbarDynamicState();
 }
 
-class _ToolbarDynamicState extends State<ToolbarDynamic>
-    with SingleTickerProviderStateMixin {
+class _ToolbarDynamicState extends State<ToolbarDynamic> with SingleTickerProviderStateMixin {
   bool isOpen = false;
   final FocusNode _focusNode = FocusNode();
   late AnimationController _animationController;
@@ -44,12 +38,12 @@ class _ToolbarDynamicState extends State<ToolbarDynamic>
     );
 
     _widthAnimation = Tween<double>(
-      begin: 98.0,
-      end: 400.0, // Increased width for search bar
+      begin: 98,
+      end: 400, // Increased width for search bar
     ).animate(
       CurvedAnimation(
         parent: _animationController,
-        curve: const SpringCurve(mass: 1.0, stiffness: 500.0, damping: 20.0),
+        curve: const SpringCurve(mass: 1, stiffness: 500, damping: 20),
       ),
     );
 
@@ -111,7 +105,7 @@ class _ToolbarDynamicState extends State<ToolbarDynamic>
                   ],
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(8),
                   child: Stack(
                     children: [
                       // Collapsed content with slide animation
@@ -157,7 +151,7 @@ class _ToolbarDynamicState extends State<ToolbarDynamic>
   Widget _buildCollapsedContent() {
     return Row(
       children: [
-        CustomIconButton(
+        const CustomIconButton(
           icon: Icons.person_outline,
           onPressed: null,
           ariaLabel: 'User profile',
@@ -218,16 +212,15 @@ class _ToolbarDynamicState extends State<ToolbarDynamic>
 }
 
 class CustomIconButton extends StatelessWidget {
-  final IconData icon;
-  final VoidCallback? onPressed;
-  final String ariaLabel;
-
   const CustomIconButton({
-    Key? key,
+    super.key,
     required this.icon,
     required this.onPressed,
     required this.ariaLabel,
-  }) : super(key: key);
+  });
+  final IconData icon;
+  final VoidCallback? onPressed;
+  final String ariaLabel;
 
   @override
   Widget build(BuildContext context) {
@@ -248,9 +241,7 @@ class CustomIconButton extends StatelessWidget {
             child: Icon(
               icon,
               size: 20,
-              color: onPressed == null
-                  ? Colors.black.withOpacity(0.3)
-                  : Colors.black.withOpacity(0.6),
+              color: onPressed == null ? Colors.black.withOpacity(0.3) : Colors.black.withOpacity(0.6),
             ),
           ),
         ),
@@ -261,31 +252,28 @@ class CustomIconButton extends StatelessWidget {
 
 // Custom Spring Curve for more natural animation
 class SpringCurve extends Curve {
-  final double mass;
-  final double stiffness;
-  final double damping;
-
   const SpringCurve({
     required this.mass,
     required this.stiffness,
     required this.damping,
   });
+  final double mass;
+  final double stiffness;
+  final double damping;
 
   @override
   double transform(double t) {
     final omega = sqrt(stiffness / mass);
     final zeta = damping / (2 * sqrt(stiffness * mass));
-    final omega_d = omega * sqrt(1.0 - zeta * zeta);
+    final omegaD = omega * sqrt(1.0 - zeta * zeta);
 
-    return 1.0 -
-        exp(-zeta * omega * t) *
-            (cos(omega_d * t) + (zeta * omega / omega_d) * sin(omega_d * t));
+    return 1.0 - exp(-zeta * omega * t) * (cos(omegaD * t) + (zeta * omega / omegaD) * sin(omegaD * t));
   }
 }
 
 //Demo
 class ToolbarSearchDemo extends StatefulWidget {
-  const ToolbarSearchDemo({Key? key}) : super(key: key);
+  const ToolbarSearchDemo({super.key});
 
   @override
   State<ToolbarSearchDemo> createState() => _ToolbarSearchDemoState();
@@ -295,8 +283,7 @@ class _ToolbarSearchDemoState extends State<ToolbarSearchDemo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor:
-          Colors.transparent, // Make scaffold background transparent
+      backgroundColor: Colors.transparent, // Make scaffold background transparent
       body: Stack(
         fit: StackFit.expand, // Make stack fill the available space
         children: [

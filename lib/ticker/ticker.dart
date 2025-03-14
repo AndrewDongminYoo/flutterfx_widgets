@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class LayeredTickers extends StatelessWidget {
-  const LayeredTickers({Key? key}) : super(key: key);
+  const LayeredTickers({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +17,6 @@ class LayeredTickers extends StatelessWidget {
             child: ScrollingTickerWidget(
               text: "BLACK FRIDAY '24",
               backgroundColor: Colors.purple.shade800,
-              transform: -0.2,
               height: 45,
             ),
           ),
@@ -26,7 +25,7 @@ class LayeredTickers extends StatelessWidget {
             left: 0,
             right: 0,
             child: ScrollingTickerWidget(
-              text: "HEADPHONE ZONE",
+              text: 'HEADPHONE ZONE',
               backgroundColor: Colors.purple.shade600,
               transform: -0.15,
               speed: 45,
@@ -38,7 +37,7 @@ class LayeredTickers extends StatelessWidget {
             left: 0,
             right: 0,
             child: ScrollingTickerWidget(
-              text: "BIG DEALS",
+              text: 'BIG DEALS',
               backgroundColor: Colors.purple.shade400,
               transform: -0.1,
               speed: 40,
@@ -61,8 +60,7 @@ class LayeredTickers extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
                   color: Colors.purple,
                   child: const Text(
                     'FRIDAY',
@@ -92,19 +90,10 @@ class LayeredTickers extends StatelessWidget {
 }
 
 class ScrollingTickerWidget extends StatefulWidget {
-  final String text;
-  final IconData icon;
-  final Color backgroundColor;
-  final Color textColor;
-  final Color iconColor;
-  final double height;
-  final double speed;
-  final TextStyle? textStyle;
-  final double iconSize;
-  final double transform; // Added transform parameter for skew angle
+  // Added transform parameter for skew angle
 
   const ScrollingTickerWidget({
-    Key? key,
+    super.key,
     required this.text,
     this.icon = Icons.headphones,
     this.backgroundColor = Colors.purple,
@@ -115,14 +104,23 @@ class ScrollingTickerWidget extends StatefulWidget {
     this.textStyle,
     this.iconSize = 24.0,
     this.transform = -0.2, // Default transform angle
-  }) : super(key: key);
+  });
+  final String text;
+  final IconData icon;
+  final Color backgroundColor;
+  final Color textColor;
+  final Color iconColor;
+  final double height;
+  final double speed;
+  final TextStyle? textStyle;
+  final double iconSize;
+  final double transform;
 
   @override
   State<ScrollingTickerWidget> createState() => _ScrollingTickerWidgetState();
 }
 
-class _ScrollingTickerWidgetState extends State<ScrollingTickerWidget>
-    with SingleTickerProviderStateMixin {
+class _ScrollingTickerWidgetState extends State<ScrollingTickerWidget> with SingleTickerProviderStateMixin {
   late ScrollController _scrollController;
   late AnimationController _animationController;
 
@@ -141,9 +139,8 @@ class _ScrollingTickerWidgetState extends State<ScrollingTickerWidget>
   }
 
   void _startScrolling() {
-    double screenWidth = MediaQuery.of(context).size.width;
-    final duration =
-        Duration(milliseconds: ((screenWidth) / widget.speed * 4000).toInt());
+    final screenWidth = MediaQuery.of(context).size.width;
+    final duration = Duration(milliseconds: (screenWidth / widget.speed * 4000).toInt());
 
     Future.delayed(const Duration(milliseconds: 50), () {
       if (_scrollController.hasClients) {

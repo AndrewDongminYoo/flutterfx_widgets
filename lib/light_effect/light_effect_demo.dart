@@ -4,9 +4,11 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 
 class LightEffectWidgetDemo extends StatelessWidget {
+  const LightEffectWidgetDemo({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       backgroundColor: Colors.black,
       body: GradientControlPage(),
     );
@@ -51,7 +53,8 @@ class _GradientControlPageState extends State<GradientControlPage> {
               children: [
                 if (showDebugElements) ...[
                   _buildControlLabel(
-                      'Angle: ${(startAngle * 180 / pi).toStringAsFixed(1)}°'),
+                    'Angle: ${(startAngle * 180 / pi).toStringAsFixed(1)}°',
+                  ),
                   Slider(
                     value: startAngle,
                     min: -pi,
@@ -62,8 +65,7 @@ class _GradientControlPageState extends State<GradientControlPage> {
                 CheckboxListTile(
                   title: const Text('Debug'),
                   value: showDebugElements,
-                  onChanged: (value) =>
-                      setState(() => showDebugElements = value ?? true),
+                  onChanged: (value) => setState(() => showDebugElements = value ?? true),
                 ),
               ],
             ),
@@ -75,7 +77,7 @@ class _GradientControlPageState extends State<GradientControlPage> {
 
   Widget _buildControlLabel(String text) {
     return Padding(
-      padding: const EdgeInsets.only(top: 8.0),
+      padding: const EdgeInsets.only(top: 8),
       child: Text(
         text,
         style: const TextStyle(color: Colors.white70),
@@ -85,11 +87,6 @@ class _GradientControlPageState extends State<GradientControlPage> {
 }
 
 class GradientDemo extends StatelessWidget {
-  final double startAngle;
-  final double sweepAngle;
-  final double gradientRadius;
-  final bool showDebugElements;
-
   const GradientDemo({
     super.key,
     required this.startAngle,
@@ -97,6 +94,10 @@ class GradientDemo extends StatelessWidget {
     required this.gradientRadius,
     required this.showDebugElements,
   });
+  final double startAngle;
+  final double sweepAngle;
+  final double gradientRadius;
+  final bool showDebugElements;
 
   @override
   Widget build(BuildContext context) {
@@ -123,12 +124,10 @@ class GradientDemo extends StatelessWidget {
             child: ClipRect(
               child: BackdropFilter(
                 filter: ImageFilter.blur(
-                  sigmaX: 0,
                   sigmaY: 10,
                 ),
                 child: BackdropFilter(
                   filter: ImageFilter.blur(
-                    sigmaX: 0,
                     sigmaY: 10,
                   ),
                   child: Container(
@@ -145,17 +144,16 @@ class GradientDemo extends StatelessWidget {
 }
 
 class GradientPainter extends CustomPainter {
-  final double startAngle;
-  final double sweepAngle;
-  final double gradientRadius;
-  final bool showDebugElements;
-
   GradientPainter({
     required this.startAngle,
     required this.sweepAngle,
     required this.gradientRadius,
     required this.showDebugElements,
   });
+  final double startAngle;
+  final double sweepAngle;
+  final double gradientRadius;
+  final bool showDebugElements;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -173,7 +171,7 @@ class GradientPainter extends CustomPainter {
     // Left gradient
     final leftGradientPaint = Paint()
       ..shader = SweepGradient(
-        center: Alignment(-0.5, 0), // Left center
+        center: const Alignment(-0.5, 0), // Left center
         startAngle: startAngle,
         endAngle: startAngle + sweepAngle,
         colors: [
@@ -187,7 +185,7 @@ class GradientPainter extends CustomPainter {
     // Right gradient (mirrored)
     final rightGradientPaint = Paint()
       ..shader = SweepGradient(
-        center: Alignment(0.5, 0), // Right center
+        center: const Alignment(0.5, 0), // Right center
         startAngle: pi - startAngle - sweepAngle,
         endAngle: pi - startAngle,
         colors: [
@@ -234,7 +232,11 @@ class GradientPainter extends CustomPainter {
   }
 
   void _drawDashedCircle(
-      Canvas canvas, Offset center, double radius, Paint paint) {
+    Canvas canvas,
+    Offset center,
+    double radius,
+    Paint paint,
+  ) {
     const dashLength = 5;
     const dashSpace = 5;
     double currentAngle = 0;

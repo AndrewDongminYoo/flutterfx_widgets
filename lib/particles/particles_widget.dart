@@ -1,7 +1,18 @@
 import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 
 class Particles extends StatefulWidget {
+  const Particles({
+    super.key,
+    this.quantity = 100,
+    this.ease = 50,
+    required this.color,
+    this.staticity = 50,
+    this.size = 0.4,
+    this.vx = 0,
+    this.vy = 0,
+  });
   final int quantity;
   final double ease;
   final Color color;
@@ -10,23 +21,11 @@ class Particles extends StatefulWidget {
   final double vx;
   final double vy;
 
-  const Particles({
-    Key? key,
-    this.quantity = 100,
-    this.ease = 50,
-    required this.color,
-    this.staticity = 50,
-    this.size = 0.4,
-    this.vx = 0,
-    this.vy = 0,
-  }) : super(key: key);
-
   @override
   State<Particles> createState() => _ParticlesState();
 }
 
-class _ParticlesState extends State<Particles>
-    with SingleTickerProviderStateMixin {
+class _ParticlesState extends State<Particles> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   List<Particle> particles = [];
   Offset mousePosition = Offset.zero;
@@ -59,7 +58,7 @@ class _ParticlesState extends State<Particles>
 
   void _initParticles() {
     particles.clear();
-    for (int i = 0; i < widget.quantity; i++) {
+    for (var i = 0; i < widget.quantity; i++) {
       particles.add(_createParticle());
     }
   }
@@ -69,7 +68,7 @@ class _ParticlesState extends State<Particles>
       x: random.nextDouble() * canvasSize.width,
       y: random.nextDouble() * canvasSize.height,
       size: random.nextDouble() * 2 + widget.size,
-      alpha: 0.0,
+      alpha: 0,
       targetAlpha: random.nextDouble() * 0.6 + 0.1,
       dx: (random.nextDouble() - 0.5) * 0.1,
       dy: (random.nextDouble() - 0.5) * 0.1,
@@ -78,7 +77,7 @@ class _ParticlesState extends State<Particles>
   }
 
   void _updateParticles() {
-    for (int i = 0; i < particles.length; i++) {
+    for (var i = 0; i < particles.length; i++) {
       final particle = particles[i];
 
       // Update position
@@ -86,19 +85,15 @@ class _ParticlesState extends State<Particles>
       particle.y += particle.dy + widget.vy;
 
       // Update translation based on mouse position
-      final double targetTranslateX =
-          mousePosition.dx / (widget.staticity / particle.magnetism);
-      final double targetTranslateY =
-          mousePosition.dy / (widget.staticity / particle.magnetism);
+      final targetTranslateX = mousePosition.dx / (widget.staticity / particle.magnetism);
+      final targetTranslateY = mousePosition.dy / (widget.staticity / particle.magnetism);
 
-      particle.translateX +=
-          (targetTranslateX - particle.translateX) / widget.ease;
-      particle.translateY +=
-          (targetTranslateY - particle.translateY) / widget.ease;
+      particle.translateX += (targetTranslateX - particle.translateX) / widget.ease;
+      particle.translateY += (targetTranslateY - particle.translateY) / widget.ease;
 
       // Handle alpha
-      final double edge = _calculateClosestEdge(particle);
-      final double remapEdge = _remapValue(edge, 0, 20, 0, 1).clamp(0.0, 1.0);
+      final edge = _calculateClosestEdge(particle);
+      final remapEdge = _remapValue(edge, 0, 20, 0, 1).clamp(0.0, 1.0);
 
       if (remapEdge > 1) {
         particle.alpha += 0.02;
@@ -118,7 +113,7 @@ class _ParticlesState extends State<Particles>
   }
 
   double _calculateClosestEdge(Particle particle) {
-    final List<double> edges = [
+    final edges = <double>[
       particle.x + particle.translateX - particle.size,
       canvasSize.width - particle.x - particle.translateX - particle.size,
       particle.y + particle.translateY - particle.size,
@@ -128,7 +123,12 @@ class _ParticlesState extends State<Particles>
   }
 
   double _remapValue(
-      double value, double start1, double end1, double start2, double end2) {
+    double value,
+    double start1,
+    double end1,
+    double start2,
+    double end2,
+  ) {
     return ((value - start1) * (end2 - start2)) / (end1 - start1) + start2;
   }
 
@@ -150,8 +150,8 @@ class _ParticlesState extends State<Particles>
 
         return MouseRegion(
           onHover: (event) {
-            final RenderBox box = context.findRenderObject() as RenderBox;
-            final Offset localPosition = box.globalToLocal(event.position);
+            final box = context.findRenderObject()! as RenderBox;
+            final localPosition = box.globalToLocal(event.position);
             mousePosition = Offset(
               localPosition.dx - canvasSize.width / 2,
               localPosition.dy - canvasSize.height / 2,
@@ -171,13 +171,12 @@ class _ParticlesState extends State<Particles>
 }
 
 class ParticlesPainter extends CustomPainter {
-  final List<Particle> particles;
-  final Color color;
-
   ParticlesPainter({
     required this.particles,
     required this.color,
   });
+  final List<Particle> particles;
+  final Color color;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -204,17 +203,6 @@ class ParticlesPainter extends CustomPainter {
 }
 
 class Particle {
-  double x;
-  double y;
-  double translateX;
-  double translateY;
-  double size;
-  double alpha;
-  double targetAlpha;
-  double dx;
-  double dy;
-  double magnetism;
-
   Particle({
     required this.x,
     required this.y,
@@ -227,4 +215,14 @@ class Particle {
     required this.dy,
     required this.magnetism,
   });
+  double x;
+  double y;
+  double translateX;
+  double translateY;
+  double size;
+  double alpha;
+  double targetAlpha;
+  double dx;
+  double dy;
+  double magnetism;
 }

@@ -1,12 +1,13 @@
 import 'dart:math';
-import 'package:flutter/material.dart';
-import 'package:fx_2_folder/progress-bar/progress_bar.dart';
 import 'dart:ui' as ui;
 
-class CircularProgressStrategy implements ProgressAnimationStrategy {
-  final double strokeWidth;
+import 'package:flutter/material.dart';
 
+import 'package:fx_2_folder/progress-bar/progress_bar.dart';
+
+class CircularProgressStrategy implements ProgressAnimationStrategy {
   CircularProgressStrategy({this.strokeWidth = 8.0});
+  final double strokeWidth;
 
   @override
   Widget buildProgressWidget({
@@ -17,8 +18,7 @@ class CircularProgressStrategy implements ProgressAnimationStrategy {
   }) {
     return Container(
       width: style.width,
-      height:
-          style.width, // Using width for both dimensions to keep it circular
+      height: style.width, // Using width for both dimensions to keep it circular
       padding: style.padding,
       child: CustomPaint(
         painter: CircularProgressPainter(
@@ -34,12 +34,6 @@ class CircularProgressStrategy implements ProgressAnimationStrategy {
 }
 
 class CircularProgressPainter extends CustomPainter {
-  final double progress;
-  final double strokeWidth;
-  final Color backgroundColor;
-  final Color progressColor;
-  final List<Color>? gradientColors;
-
   CircularProgressPainter({
     required this.progress,
     required this.strokeWidth,
@@ -47,6 +41,11 @@ class CircularProgressPainter extends CustomPainter {
     required this.progressColor,
     this.gradientColors,
   });
+  final double progress;
+  final double strokeWidth;
+  final Color backgroundColor;
+  final Color progressColor;
+  final List<Color>? gradientColors;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -75,8 +74,7 @@ class CircularProgressPainter extends CustomPainter {
 
     // Calculate gradient points based on the current progress
     final startPoint = pathMetrics.getTangentForOffset(0)?.position ?? center;
-    final endPoint =
-        pathMetrics.getTangentForOffset(pathLength)?.position ?? center;
+    final endPoint = pathMetrics.getTangentForOffset(pathLength)?.position ?? center;
 
     // Draw progress arc
     final progressPaint = Paint()

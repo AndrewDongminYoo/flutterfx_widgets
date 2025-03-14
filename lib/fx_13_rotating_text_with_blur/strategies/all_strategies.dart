@@ -55,7 +55,9 @@ class DefaultRotationStrategy extends RotationAnimationStrategy {
     canvas.translate(x, y);
     canvas.rotate(angle + pi / 2);
     textPainter.paint(
-        canvas, Offset(-charSize.width / 2, -charSize.height / 2));
+      canvas,
+      Offset(-charSize.width / 2, -charSize.height / 2),
+    );
     canvas.restore();
   }
 
@@ -81,13 +83,12 @@ class DefaultRotationStrategy extends RotationAnimationStrategy {
 
 // Wave rotation strategy
 class WaveRotationStrategy extends RotationAnimationStrategy {
-  final double waveAmplitude;
-  final double waveFrequency;
-
   const WaveRotationStrategy({
     this.waveAmplitude = 10.0,
     this.waveFrequency = 2.0,
   });
+  final double waveAmplitude;
+  final double waveFrequency;
 
   @override
   void paintCharacter({
@@ -101,9 +102,8 @@ class WaveRotationStrategy extends RotationAnimationStrategy {
     required Size charSize,
   }) {
     // Add wave effect to radius
-    double waveOffset =
-        sin(angle * waveFrequency + progress * 2 * pi) * waveAmplitude;
-    double finalRadius = radius + waveOffset;
+    final waveOffset = sin(angle * waveFrequency + progress * 2 * pi) * waveAmplitude;
+    final finalRadius = radius + waveOffset;
 
     final x = center.dx + finalRadius * cos(angle);
     final y = center.dy + finalRadius * sin(angle);
@@ -119,20 +119,21 @@ class WaveRotationStrategy extends RotationAnimationStrategy {
     canvas.translate(x, y);
     canvas.rotate(angle + pi / 2);
     textPainter.paint(
-        canvas, Offset(-charSize.width / 2, -charSize.height / 2));
+      canvas,
+      Offset(-charSize.width / 2, -charSize.height / 2),
+    );
     canvas.restore();
   }
 }
 
 // Bounce rotation strategy
 class BounceRotationStrategy extends RotationAnimationStrategy {
-  final double bounceHeight;
-  final double bounceFrequency;
-
   const BounceRotationStrategy({
     this.bounceHeight = 20.0,
     this.bounceFrequency = 3.0,
   });
+  final double bounceHeight;
+  final double bounceFrequency;
 
   @override
   void paintCharacter({
@@ -146,10 +147,9 @@ class BounceRotationStrategy extends RotationAnimationStrategy {
     required Size charSize,
   }) {
     // Calculate bounce effect
-    double bounce = max(0, sin(angle * bounceFrequency + progress * 2 * pi));
-    double bounceOffset =
-        bounce * bounce * bounceHeight; // Squared for more bounce-like effect
-    double finalRadius = radius - bounceOffset;
+    final double bounce = max(0, sin(angle * bounceFrequency + progress * 2 * pi));
+    final bounceOffset = bounce * bounce * bounceHeight; // Squared for more bounce-like effect
+    final finalRadius = radius - bounceOffset;
 
     final x = center.dx + finalRadius * cos(angle);
     final y = center.dy + finalRadius * sin(angle);
@@ -165,20 +165,21 @@ class BounceRotationStrategy extends RotationAnimationStrategy {
     canvas.translate(x, y);
     canvas.rotate(angle + pi / 2);
     textPainter.paint(
-        canvas, Offset(-charSize.width / 2, -charSize.height / 2));
+      canvas,
+      Offset(-charSize.width / 2, -charSize.height / 2),
+    );
     canvas.restore();
   }
 }
 
 // Vibration rotation strategy - characters vibrate while rotating
 class VibrationRotationStrategy extends RotationAnimationStrategy {
-  final double vibrationIntensity;
-  final double vibrationSpeed;
-
   const VibrationRotationStrategy({
     this.vibrationIntensity = 3.0,
     this.vibrationSpeed = 15.0,
   });
+  final double vibrationIntensity;
+  final double vibrationSpeed;
 
   @override
   void paintCharacter({
@@ -192,11 +193,10 @@ class VibrationRotationStrategy extends RotationAnimationStrategy {
     required Size charSize,
   }) {
     // Add random-like vibration using multiple sine waves
-    double noise = sin(angle * 5 + progress * vibrationSpeed) *
-        cos(angle * 3 + progress * vibrationSpeed * 1.5);
+    final noise = sin(angle * 5 + progress * vibrationSpeed) * cos(angle * 3 + progress * vibrationSpeed * 1.5);
 
-    double offsetX = noise * vibrationIntensity * cos(angle);
-    double offsetY = noise * vibrationIntensity * sin(angle);
+    final offsetX = noise * vibrationIntensity * cos(angle);
+    final offsetY = noise * vibrationIntensity * sin(angle);
 
     final x = center.dx + radius * cos(angle) + offsetX;
     final y = center.dy + radius * sin(angle) + offsetY;
@@ -212,20 +212,21 @@ class VibrationRotationStrategy extends RotationAnimationStrategy {
     canvas.translate(x, y);
     canvas.rotate(angle + pi / 2 + noise * 0.1); // Slight rotation vibration
     textPainter.paint(
-        canvas, Offset(-charSize.width / 2, -charSize.height / 2));
+      canvas,
+      Offset(-charSize.width / 2, -charSize.height / 2),
+    );
     canvas.restore();
   }
 }
 
 // Spiral rotation strategy - characters follow a spiral path while rotating
 class SpiralRotationStrategy extends RotationAnimationStrategy {
-  final double spiralTightness;
-  final double spiralSpeed;
-
   const SpiralRotationStrategy({
     this.spiralTightness = 20.0,
     this.spiralSpeed = 2.0,
   });
+  final double spiralTightness;
+  final double spiralSpeed;
 
   @override
   void paintCharacter({
@@ -239,8 +240,7 @@ class SpiralRotationStrategy extends RotationAnimationStrategy {
     required Size charSize,
   }) {
     // Calculate spiral effect
-    double spiralRadius =
-        radius + sin(angle * spiralSpeed + progress * 2 * pi) * spiralTightness;
+    final spiralRadius = radius + sin(angle * spiralSpeed + progress * 2 * pi) * spiralTightness;
 
     final x = center.dx + spiralRadius * cos(angle);
     final y = center.dy + spiralRadius * sin(angle);
@@ -256,20 +256,21 @@ class SpiralRotationStrategy extends RotationAnimationStrategy {
     canvas.translate(x, y);
     canvas.rotate(angle + pi / 2);
     textPainter.paint(
-        canvas, Offset(-charSize.width / 2, -charSize.height / 2));
+      canvas,
+      Offset(-charSize.width / 2, -charSize.height / 2),
+    );
     canvas.restore();
   }
 }
 
 // Elastic rotation strategy - characters stretch and squish while rotating
 class ElasticRotationStrategy extends RotationAnimationStrategy {
-  final double elasticity;
-  final double frequency;
-
   const ElasticRotationStrategy({
     this.elasticity = 0.3,
     this.frequency = 2.0,
   });
+  final double elasticity;
+  final double frequency;
 
   @override
   void paintCharacter({
@@ -286,9 +287,8 @@ class ElasticRotationStrategy extends RotationAnimationStrategy {
     final y = center.dy + radius * sin(angle);
 
     // Calculate elastic transformation
-    double stretch =
-        1 + elasticity * sin(angle * frequency + progress * 2 * pi);
-    double squeeze = 1 / stretch; // Maintain area by compensating stretch
+    final stretch = 1 + elasticity * sin(angle * frequency + progress * 2 * pi);
+    final squeeze = 1 / stretch; // Maintain area by compensating stretch
 
     final textSpan = TextSpan(text: character, style: textStyle);
     final textPainter = TextPainter(
@@ -302,7 +302,9 @@ class ElasticRotationStrategy extends RotationAnimationStrategy {
     canvas.rotate(angle + pi / 2);
     canvas.scale(stretch, squeeze);
     textPainter.paint(
-        canvas, Offset(-charSize.width / 2, -charSize.height / 2));
+      canvas,
+      Offset(-charSize.width / 2, -charSize.height / 2),
+    );
     canvas.restore();
   }
 }
