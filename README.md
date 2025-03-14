@@ -10,8 +10,6 @@ Star the repo if you find any effect usefull.
 
 [📚 View the documentation](https://www.flutterfx.com/docs)
 
-
-
 # Preview
 
 <table>
@@ -141,8 +139,6 @@ Star the repo if you find any effect usefull.
 <strong>Life Balance</strong>
 </td>
 </tr>
-
-
 
 <tr>
 <td align="center">
