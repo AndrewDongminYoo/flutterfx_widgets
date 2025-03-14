@@ -212,7 +212,7 @@ class _BookshelfWidgetState extends State<BookshelfWidget> {
   }
 
   void _toggleBook(int index) {
-    print('on tap gesture');
+    debugPrint('on tap gesture');
     setState(() {
       for (var i = 0; i < _books.length; i++) {
         if (i == index) {

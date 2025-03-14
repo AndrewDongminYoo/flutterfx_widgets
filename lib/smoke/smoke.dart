@@ -53,7 +53,7 @@ class _SmokeHomeWidgetState extends State<SmokeHomeWidget> {
       child: Scaffold(
         body: GestureDetector(
           onTap: () {
-            print('Tapped!');
+            debugPrint('Tapped!');
             exitFullScreen();
             Navigator.pop(context);
           },
@@ -476,7 +476,7 @@ class BlurredCircle extends StatelessWidget {
       ],
       stepDuration: const Duration(seconds: 3),
       onSequenceChange: (int index) {
-        print('New sequence started: $index');
+        debugPrint('New sequence started: $index');
         // Perform any other actions you need here
         //switch from 0 to 7
         if (index == 0) {

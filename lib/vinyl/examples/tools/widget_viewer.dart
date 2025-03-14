@@ -85,7 +85,7 @@ class _WidgetViewerState extends State<WidgetViewer> {
                   max: 0.1,
                   onChanged: (value) => setState(() {
                     _perspective = value;
-                    print('Perspective, value: $_perspective');
+                    debugPrint('Perspective, value: $_perspective');
                   }),
                   label: 'Perspective: ${_perspective.toStringAsFixed(0)}°',
                 ),

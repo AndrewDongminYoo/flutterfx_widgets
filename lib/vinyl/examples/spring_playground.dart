@@ -114,7 +114,7 @@ class SpringButtonState extends State<SpringButton> with SingleTickerProviderSta
           alignment: Alignment.center,
           child: ElevatedButton(
             onPressed: () {
-              print('rotate pressed');
+              debugPrint('rotate pressed');
               _controller.forward(from: 0);
               widget.onPressed();
             },

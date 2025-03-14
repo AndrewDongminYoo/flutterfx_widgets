@@ -100,12 +100,12 @@ class _Gyro3DTextState extends State<Gyro3DText> {
       final pitchIntensity = _getTiltIntensity(pitch);
       final rollIntensity = _getTiltIntensity(roll);
 
-      print('\n\x1B[36m═══════════ Device Orientation Log ═══════════\x1B[0m');
-      print(_generateAsciiArt(pitch, roll));
-      print('\x1B[33m┌ Timestamp: $timestamp');
-      print('├ Pitch: ${pitch.toStringAsFixed(1)}° ($pitchIntensity tilt)');
-      print('├ Roll: ${roll.toStringAsFixed(1)}° ($rollIntensity tilt)');
-      print(
+      debugPrint('\n\x1B[36m═══════════ Device Orientation Log ═══════════\x1B[0m');
+      debugPrint(_generateAsciiArt(pitch, roll));
+      debugPrint('\x1B[33m┌ Timestamp: $timestamp');
+      debugPrint('├ Pitch: ${pitch.toStringAsFixed(1)}° ($pitchIntensity tilt)');
+      debugPrint('├ Roll: ${roll.toStringAsFixed(1)}° ($rollIntensity tilt)');
+      debugPrint(
         '└ Movement: ${pitch.abs() > widget.movementThreshold || roll.abs() > widget.movementThreshold ? "Active" : "Stable"}\x1B[0m',
       );
     }
@@ -150,7 +150,7 @@ class _Gyro3DTextState extends State<Gyro3DText> {
         }
       },
       onError: (Object? e) {
-        print('\x1B[31m🚨 Error from accelerometer: $e\x1B[0m');
+        debugPrint('\x1B[31m🚨 Error from accelerometer: $e\x1B[0m');
       },
       cancelOnError: false,
     );

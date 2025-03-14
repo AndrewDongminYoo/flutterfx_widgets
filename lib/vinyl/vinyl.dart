@@ -252,7 +252,7 @@ class TransformAppState extends State<TransformApp> with TickerProviderStateMixi
 
     animParentController.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
-        print('animation completed | resetting now');
+        debugPrint('animation completed | resetting now');
         resetAnimation();
         _changeAnimationListOrder();
         animController.forward();
@@ -355,7 +355,7 @@ class TransformAppState extends State<TransformApp> with TickerProviderStateMixi
 
   // Update called in the middle of animation to make the card go behind another card!
   void _changeStackOrder() {
-    print('_changeStackOrder');
+    debugPrint('_changeStackOrder');
     setState(() {
       final item = _vinylItems.removeAt(_vinylItems.length - 1);
       _vinylItems.insert(0, item);
@@ -364,7 +364,7 @@ class TransformAppState extends State<TransformApp> with TickerProviderStateMixi
 
   // Update called after the animation has finished
   void _changeAnimationListOrder() {
-    print('_changeAnimationListOrder');
+    debugPrint('_changeAnimationListOrder');
     setState(() {
       final firstElement = vinylOrder.removeAt(0);
       vinylOrder.add(firstElement);

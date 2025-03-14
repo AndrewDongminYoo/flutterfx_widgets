@@ -23,7 +23,7 @@ class _DemoState extends State<SliderDemo> {
             Positioned.fill(
               child: WorkLifeSlider(
                 onChanged: (newValue) {
-                  print('New work-life balance: $newValue%');
+                  debugPrint('New work-life balance: $newValue%');
                 },
               ),
             ),

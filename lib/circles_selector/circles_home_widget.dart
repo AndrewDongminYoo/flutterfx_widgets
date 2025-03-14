@@ -150,7 +150,7 @@ class PannableCircleGridState extends State<PannableCircleGrid> with TickerProvi
     setState(() {
       _offset += details.delta;
     });
-    print('Pan update: ${details.delta}'); // De
+    debugPrint('Pan update: ${details.delta}'); // De
   }
 
   void _handlePanEnd(DragEndDetails details) {
@@ -164,7 +164,7 @@ class PannableCircleGridState extends State<PannableCircleGrid> with TickerProvi
       if (_flingVelocity.distance > maxSpeed) {
         _flingVelocity = (_flingVelocity / _flingVelocity.distance) * maxSpeed;
       }
-      print('Fling started - Velocity: $_flingVelocity');
+      debugPrint('Fling started - Velocity: $_flingVelocity');
 
       _flingAnimationController.reset();
       _flingAnimationController.forward();

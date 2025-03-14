@@ -305,7 +305,7 @@ class _LoadingAppState extends State<LoadingApp> {
             controller: _revealController,
             duration: const Duration(milliseconds: 1500),
             onAnimationComplete: () {
-              print('App reveal completed!');
+              debugPrint('App reveal completed!');
             },
             child: ColoredBox(
               color: const Color(0xFF121212),

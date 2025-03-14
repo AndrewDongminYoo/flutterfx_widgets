@@ -35,7 +35,7 @@ class _TextRotateBlurDemoState extends State<TextRotateBlurDemo> {
               wedgeOpacity: 0.50, // 70% opacity
               wedgeAngleDegrees: 30,
               onAnimationComplete: () {
-                print('Reveal complete!');
+                debugPrint('Reveal complete!');
               },
               child: const RotatingTextWidget(
                 text: 'Your rotating text here',

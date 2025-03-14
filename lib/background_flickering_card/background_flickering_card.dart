@@ -289,7 +289,7 @@ class ColorfulCardsDemo extends StatelessWidget {
                 subtitle: 'Advanced AI Neural Networks',
                 icon: Icons.psychology,
                 colorScheme: CardThemes.cyberpunk,
-                onTap: () => print('Cyberpunk card tapped'),
+                onTap: () => debugPrint('Cyberpunk card tapped'),
               ),
 
               // Aurora Theme Card
@@ -298,7 +298,7 @@ class ColorfulCardsDemo extends StatelessWidget {
                 subtitle: 'Quantum Computing Systems',
                 icon: Icons.memory,
                 colorScheme: CardThemes.aurora,
-                onTap: () => print('Aurora card tapped'),
+                onTap: () => debugPrint('Aurora card tapped'),
               ),
 
               // Sunset Theme Card
@@ -307,7 +307,7 @@ class ColorfulCardsDemo extends StatelessWidget {
                 subtitle: 'Real-time Data Processing',
                 icon: Icons.analytics,
                 colorScheme: CardThemes.sunset,
-                onTap: () => print('Sunset card tapped'),
+                onTap: () => debugPrint('Sunset card tapped'),
               ),
             ],
           ),

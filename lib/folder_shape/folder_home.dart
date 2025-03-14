@@ -71,7 +71,7 @@ class _FolderHomeWidgetState extends State<FolderHomeWidget> with TickerProvider
               builder: (context, child) {
                 return GestureDetector(
                   onTap: () {
-                    print('Widget tapped!');
+                    debugPrint('Widget tapped!');
                     if (isOpen) {
                       _animationController.reverse().orCancel;
                       _shawdowAnimationController.reverse();

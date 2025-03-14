@@ -196,7 +196,7 @@ class _LoadingAppState extends State<LoadingApp1> {
         controller: _revealController,
         duration: const Duration(milliseconds: 1500),
         onAnimationComplete: () {
-          print('Reveal completed!');
+          debugPrint('Reveal completed!');
         },
         child: Stack(
           children: [

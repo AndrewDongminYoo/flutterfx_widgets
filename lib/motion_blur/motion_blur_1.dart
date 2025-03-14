@@ -44,12 +44,12 @@ class _MotionBlurWidgetState extends State<MotionBlurWidget> {
           shader = program.fragmentShader();
         });
       }
-      print('Shader loaded successfully!'); // Debug print
+      debugPrint('Shader loaded successfully!'); // Debug print
     } catch (e) {
-      print('Error loading shader: $e');
+      debugPrint('Error loading shader: $e');
       // Print more detailed error information
-      print('Shader asset path: ${widget.shaderAsset}');
-      print('Stack trace: ${StackTrace.current}');
+      debugPrint('Shader asset path: ${widget.shaderAsset}');
+      debugPrint('Stack trace: ${StackTrace.current}');
     }
   }
 
@@ -69,7 +69,7 @@ class _MotionBlurWidgetState extends State<MotionBlurWidget> {
         }
       }
     } catch (e) {
-      print('Error capturing child image: $e');
+      debugPrint('Error capturing child image: $e');
     }
   }
 
@@ -153,7 +153,7 @@ class _MotionBlurWidgetState extends State<MotionBlurWidget> {
                         Positioned.fill(
                           child: LayoutBuilder(
                             builder: (context, constraints) {
-                              print(
+                              debugPrint(
                                 'Applying shader with velocity: ${_velocity.distance}',
                               ); // Debug print
                               return CustomPaint(
@@ -197,7 +197,7 @@ class ShaderPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     try {
-      print(
+      debugPrint(
         'Painting with shader - Size: $size, Strength: $strength, Angle: $angle',
       ); // Debug print
 
@@ -214,10 +214,10 @@ class ShaderPainter extends CustomPainter {
         Paint()..shader = shader,
       );
 
-      print('Shader painted successfully'); // Debug print
+      debugPrint('Shader painted successfully'); // Debug print
     } catch (e) {
-      print('Error painting shader: $e');
-      print('Stack trace: ${StackTrace.current}');
+      debugPrint('Error painting shader: $e');
+      debugPrint('Stack trace: ${StackTrace.current}');
     }
   }
 
