@@ -1,5 +1,3 @@
-// progress_loader.dart
-
 import 'package:flutter/material.dart';
 
 /// Abstract class defining the contract for progress animation strategies

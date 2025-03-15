@@ -1,5 +1,3 @@
-// work_life_slider.dart
-
 import 'package:flutter/material.dart';
 
 /// A custom slider widget that visualizes work-life balance percentage

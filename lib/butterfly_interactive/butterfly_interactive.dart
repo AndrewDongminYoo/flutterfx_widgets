@@ -62,7 +62,6 @@ class ButterflyController extends ChangeNotifier {
   }
 }
 
-// movement_physics.dart
 class MovementPhysics {
   static const double maxSpeed = 300; // pixels per second
   static const double acceleration = 200; // pixels per second squared
@@ -71,7 +70,6 @@ class MovementPhysics {
   static const double hoverFrequency = 1.5; // cycles per second
 }
 
-// interactive_butterfly.dart
 class InteractiveButterfly extends StatefulWidget {
   const InteractiveButterfly({
     super.key,
@@ -280,7 +278,6 @@ class _InteractiveButterflyState extends State<InteractiveButterfly> with Single
   }
 }
 
-// butterfly_swarm.dart
 class ButterflySwarm extends StatefulWidget {
   const ButterflySwarm({
     super.key,

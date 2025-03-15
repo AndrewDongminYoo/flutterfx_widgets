@@ -1,5 +1,3 @@
-// lib/helpers/tech_icons.dart
-
 import 'package:flutter/material.dart';
 
 class TechStackIcons {

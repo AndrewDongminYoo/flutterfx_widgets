@@ -1,5 +1,3 @@
-// particles_demo.dart
-
 import 'package:flutter/material.dart';
 
 import 'package:fx_2_folder/button_shimmer/button_shimmer.dart';

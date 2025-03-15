@@ -110,7 +110,6 @@ class _MarqueeWidgetState extends State<MarqueeWidget> with SingleTickerProvider
   }
 }
 
-// review_card.dart
 class ReviewCard extends StatelessWidget {
   const ReviewCard({
     super.key,
@@ -202,7 +201,6 @@ class ReviewCard extends StatelessWidget {
   }
 }
 
-// example_usage.dart
 class MarqueeDemo extends StatelessWidget {
   MarqueeDemo({super.key});
 

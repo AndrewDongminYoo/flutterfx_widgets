@@ -1,5 +1,3 @@
-// lib/background_beams.dart
-
 import 'dart:async';
 import 'dart:math';
 import 'dart:ui' as ui;

@@ -1,14 +1,8 @@
-// toolbar_dynamic.dart
-
 import 'dart:math';
 
 import 'package:flutter/material.dart';
 
 import 'package:fx_2_folder/stacked_cards/stacked_card.dart';
-
-// toolbar_dynamic.dart
-
-// toolbar_dynamic.dart
 
 class ToolbarDynamic extends StatefulWidget {
   const ToolbarDynamic({super.key});
