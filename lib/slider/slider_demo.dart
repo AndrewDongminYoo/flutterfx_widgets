@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:fx_2_folder/slider/slider.dart';
+import 'package:flutterfx_widgets/slider/slider.dart';
 
 class SliderDemo extends StatefulWidget {
   const SliderDemo({super.key});

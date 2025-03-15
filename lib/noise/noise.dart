@@ -4,7 +4,7 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 
-import 'package:fx_2_folder/noise/strategy_noise.dart';
+import 'package:flutterfx_widgets/noise/strategy_noise.dart';
 
 // Abstract Strategy Interface
 abstract class NoiseStrategy {

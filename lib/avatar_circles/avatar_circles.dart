@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:url_launcher/url_launcher.dart';
 
-import 'package:fx_2_folder/stacked_cards/stacked_card.dart';
+import 'package:flutterfx_widgets/stacked_cards/stacked_card.dart';
 
 /// Represents an individual avatar with its image and profile URLs
 class Avatar {

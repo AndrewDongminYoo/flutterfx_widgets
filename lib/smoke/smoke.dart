@@ -4,9 +4,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'package:fx_2_folder/smoke/animated_circles.dart';
-import 'package:fx_2_folder/smoke/animation_sequence.dart';
-import 'package:fx_2_folder/smoke/circle_data.dart';
+import 'package:flutterfx_widgets/smoke/animated_circles.dart';
+import 'package:flutterfx_widgets/smoke/animation_sequence.dart';
+import 'package:flutterfx_widgets/smoke/circle_data.dart';
 
 const defaultColor = Color.fromRGBO(176, 176, 176, 1);
 

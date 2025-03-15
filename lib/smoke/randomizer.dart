@@ -2,7 +2,7 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 
-import 'package:fx_2_folder/smoke/circle_data.dart';
+import 'package:flutterfx_widgets/smoke/circle_data.dart';
 
 List<List<CircleData>> generateRandomCircleSets(int N, int setCount) {
   assert(N > 0 && setCount > 0, 'N and setCount must be positive integers');

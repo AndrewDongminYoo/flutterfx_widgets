@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:fx_2_folder/text_on_path/text_on_path_editor.dart';
+import 'package:flutterfx_widgets/text_on_path/text_on_path_editor.dart';
 
 class TextOnPathDemo extends StatelessWidget {
   const TextOnPathDemo({super.key});

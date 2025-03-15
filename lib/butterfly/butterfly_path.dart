@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
-import 'package:fx_2_folder/butterfly/butterfly.dart';
+import 'package:flutterfx_widgets/butterfly/butterfly.dart';
 
 class MovingButterfly extends StatefulWidget {
   const MovingButterfly({

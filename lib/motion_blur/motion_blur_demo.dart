@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:fx_2_folder/motion_blur/motion_blur_1.dart';
+import 'package:flutterfx_widgets/motion_blur/motion_blur_1.dart';
 
 class MotionStreakingDemo extends StatefulWidget {
   const MotionStreakingDemo({super.key});

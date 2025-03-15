@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:fx_2_folder/globe/globe.dart';
-import 'package:fx_2_folder/globe/icon_helper.dart';
+import 'package:flutterfx_widgets/globe/globe.dart';
+import 'package:flutterfx_widgets/globe/icon_helper.dart';
 
 class TechStackCloud extends StatelessWidget {
   TechStackCloud({super.key});

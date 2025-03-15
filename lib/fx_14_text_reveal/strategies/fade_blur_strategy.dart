@@ -4,7 +4,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
-import 'package:fx_2_folder/fx_14_text_reveal/text_reveal_widget.dart';
+import 'package:flutterfx_widgets/fx_14_text_reveal/text_reveal_widget.dart';
 
 class FadeBlurStrategy extends BaseAnimationStrategy {
   const FadeBlurStrategy({this.maxBlur = 8.0}) : super();

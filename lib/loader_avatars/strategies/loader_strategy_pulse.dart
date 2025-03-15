@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
-import 'package:fx_2_folder/loader_avatars/loader_avatars.dart';
+import 'package:flutterfx_widgets/loader_avatars/loader_avatars.dart';
 
 class PulseAnimationStrategy extends AvatarAnimationStrategy {
   PulseAnimationStrategy({

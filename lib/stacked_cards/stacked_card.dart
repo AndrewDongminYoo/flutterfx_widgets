@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:fx_2_folder/stacked_cards/widget_theme.dart';
+import 'package:flutterfx_widgets/stacked_cards/widget_theme.dart';
 
 class StackedCardDemo extends StatefulWidget {
   const StackedCardDemo({super.key});

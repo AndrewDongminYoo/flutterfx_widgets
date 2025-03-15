@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:fx_2_folder/thanos_snap/thanos_snap.dart';
+import 'package:flutterfx_widgets/thanos_snap/thanos_snap.dart';
 
 class ThanosSnapDemo extends StatelessWidget {
   const ThanosSnapDemo({super.key});

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:fx_2_folder/light_bulb_night_mode/light_bulb.dart';
+import 'package:flutterfx_widgets/light_bulb_night_mode/light_bulb.dart';
 
 class NightModeDemo extends StatefulWidget {
   const NightModeDemo({super.key});

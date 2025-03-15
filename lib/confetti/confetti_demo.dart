@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
-import 'package:fx_2_folder/confetti/confetti.dart';
+import 'package:flutterfx_widgets/confetti/confetti.dart';
 
 class ConfettiDemo extends StatefulWidget {
   const ConfettiDemo({super.key});

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:fx_2_folder/butterfly_interactive/butterfly_interactive.dart';
-import 'package:fx_2_folder/butterfly_interactive/design/grid.dart';
+import 'package:flutterfx_widgets/butterfly_interactive/butterfly_interactive.dart';
+import 'package:flutterfx_widgets/butterfly_interactive/design/grid.dart';
 
 class ButterflyInteractiveDemo extends StatefulWidget {
   const ButterflyInteractiveDemo({super.key});

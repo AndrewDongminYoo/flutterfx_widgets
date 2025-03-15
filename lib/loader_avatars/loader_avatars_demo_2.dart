@@ -2,9 +2,9 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
-import 'package:fx_2_folder/loader_avatars/design/grid.dart';
-import 'package:fx_2_folder/loader_avatars/loader_avatars.dart';
-import 'package:fx_2_folder/loader_avatars/strategies/coin_flip_strategy.dart';
+import 'package:flutterfx_widgets/loader_avatars/design/grid.dart';
+import 'package:flutterfx_widgets/loader_avatars/loader_avatars.dart';
+import 'package:flutterfx_widgets/loader_avatars/strategies/coin_flip_strategy.dart';
 
 class LoaderAvatarsDemo2 extends StatelessWidget {
   const LoaderAvatarsDemo2({super.key});

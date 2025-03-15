@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
-import 'package:fx_2_folder/fx_10_hyper_text/hyper_text.dart';
+import 'package:flutterfx_widgets/fx_10_hyper_text/hyper_text.dart';
 
 class HyperTextDemo extends StatefulWidget {
   const HyperTextDemo({super.key});

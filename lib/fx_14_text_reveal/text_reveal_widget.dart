@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:fx_2_folder/fx_14_text_reveal/strategies/fade_blur_strategy.dart';
+import 'package:flutterfx_widgets/fx_14_text_reveal/strategies/fade_blur_strategy.dart';
 
 abstract class TextAnimationStrategy {
   const TextAnimationStrategy({

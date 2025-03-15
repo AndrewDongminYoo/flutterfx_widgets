@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
-import 'package:fx_2_folder/stacked_cards/stacked_card.dart';
+import 'package:flutterfx_widgets/stacked_cards/stacked_card.dart';
 
 //Future note: Support different animation like blur fade to make it look better for another day!
 

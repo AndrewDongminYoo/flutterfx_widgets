@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:fx_2_folder/orbit/widget/orbit_widget.dart';
+import 'package:flutterfx_widgets/orbit/widget/orbit_widget.dart';
 
 class OrbitDemo extends StatelessWidget {
   const OrbitDemo({super.key});

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:fx_2_folder/particles_github_spark/particles_github_spark.dart';
+import 'package:flutterfx_widgets/particles_github_spark/particles_github_spark.dart';
 
 class ParticlesGithubSparkDemo extends StatefulWidget {
   const ParticlesGithubSparkDemo({super.key});

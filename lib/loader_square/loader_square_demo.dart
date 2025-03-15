@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:fx_2_folder/loader_sphere/grid.dart';
-import 'package:fx_2_folder/loader_square/loader_square.dart';
+import 'package:flutterfx_widgets/loader_sphere/grid.dart';
+import 'package:flutterfx_widgets/loader_square/loader_square.dart';
 
 class LoaderSquareDemo extends StatefulWidget {
   const LoaderSquareDemo({super.key});

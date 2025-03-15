@@ -2,9 +2,9 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
-import 'package:fx_2_folder/book_open/book_open.dart';
-import 'package:fx_2_folder/book_open/design/book_cover.dart';
-import 'package:fx_2_folder/book_open/grid.dart';
+import 'package:flutterfx_widgets/book_open/book_open.dart';
+import 'package:flutterfx_widgets/book_open/design/book_cover.dart';
+import 'package:flutterfx_widgets/book_open/grid.dart';
 
 class BookOpenDemo extends StatefulWidget {
   const BookOpenDemo({super.key});

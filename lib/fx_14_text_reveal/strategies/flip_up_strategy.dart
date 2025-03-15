@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
-import 'package:fx_2_folder/fx_14_text_reveal/text_reveal_widget.dart';
+import 'package:flutterfx_widgets/fx_14_text_reveal/text_reveal_widget.dart';
 
 class FlipUpStrategy extends BaseAnimationStrategy {
   // Controls the intensity of the perspective effect

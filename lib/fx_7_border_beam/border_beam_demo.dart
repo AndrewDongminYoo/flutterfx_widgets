@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:fx_2_folder/fx_7_border_beam/border_beam.dart';
+import 'package:flutterfx_widgets/fx_7_border_beam/border_beam.dart';
 
 class BorderBeamHomeWidget extends StatelessWidget {
   const BorderBeamHomeWidget({super.key});

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:fx_2_folder/fx_8_meteor_border/meteors.dart';
+import 'package:flutterfx_widgets/fx_8_meteor_border/meteors.dart';
 
 class MeteorDemo extends StatelessWidget {
   const MeteorDemo({super.key});

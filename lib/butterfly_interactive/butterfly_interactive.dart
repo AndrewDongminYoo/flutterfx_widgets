@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'package:fx_2_folder/butterfly_interactive/butterfly.dart';
+import 'package:flutterfx_widgets/butterfly_interactive/butterfly.dart';
 
 class ButterflyConfig {
   ButterflyConfig({

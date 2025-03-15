@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:fx_2_folder/particles/particles_widget.dart';
+import 'package:flutterfx_widgets/particles/particles_widget.dart';
 
 class ParticlesDemo extends StatefulWidget {
   const ParticlesDemo({super.key});

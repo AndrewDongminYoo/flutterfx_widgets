@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:fx_2_folder/gemini_splash/combined_.dart';
-import 'package:fx_2_folder/gemini_splash/glowing_fog.dart';
+import 'package:flutterfx_widgets/gemini_splash/combined_.dart';
+import 'package:flutterfx_widgets/gemini_splash/glowing_fog.dart';
 
 class SparkleDemo extends StatefulWidget {
   const SparkleDemo({super.key});

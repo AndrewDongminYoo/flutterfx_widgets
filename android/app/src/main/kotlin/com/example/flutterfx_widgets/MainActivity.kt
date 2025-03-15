@@ -1,4 +1,4 @@
-package com.example.fx_2_folder
+package com.example.flutterfx_widgets
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:fx_2_folder/bottom_sheet/bottom_sheet.dart';
-import 'package:fx_2_folder/bottom_sheet/grid.dart';
+import 'package:flutterfx_widgets/bottom_sheet/bottom_sheet.dart';
+import 'package:flutterfx_widgets/bottom_sheet/grid.dart';
 
 class BottomSheetDemo extends StatefulWidget {
   const BottomSheetDemo({super.key});

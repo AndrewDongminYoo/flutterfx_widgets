@@ -1,6 +1,6 @@
 {
-  "name": "fx_2_folder",
-  "short_name": "fx_2_folder",
+  "name": "flutterfx_widgets",
+  "short_name": "flutterfx_widgets",
   "start_url": ".",
   "display": "standalone",
   "background_color": "#0175C2",

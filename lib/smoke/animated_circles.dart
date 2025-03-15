@@ -2,8 +2,8 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 
-import 'package:fx_2_folder/smoke/animation_sequence.dart';
-import 'package:fx_2_folder/smoke/circle_data.dart';
+import 'package:flutterfx_widgets/smoke/animation_sequence.dart';
+import 'package:flutterfx_widgets/smoke/circle_data.dart';
 
 class AnimatedCircles extends StatefulWidget {
   const AnimatedCircles({super.key, required this.sequence});

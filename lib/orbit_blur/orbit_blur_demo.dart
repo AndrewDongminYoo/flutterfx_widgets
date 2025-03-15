@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:fx_2_folder/orbit_blur/orbit_blur.dart';
+import 'package:flutterfx_widgets/orbit_blur/orbit_blur.dart';
 
 class OrbitExtendedDemo extends StatelessWidget {
   const OrbitExtendedDemo({super.key});

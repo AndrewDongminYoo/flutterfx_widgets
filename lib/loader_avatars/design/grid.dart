@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:fx_2_folder/loader_avatars/design/widget_theme.dart';
+import 'package:flutterfx_widgets/loader_avatars/design/widget_theme.dart';
 
 class GridPatternPainter extends CustomPainter {
   GridPatternPainter({required this.isDarkMode});

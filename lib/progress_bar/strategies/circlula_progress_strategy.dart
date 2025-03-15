@@ -3,7 +3,7 @@ import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 
-import 'package:fx_2_folder/progress_bar/progress_bar.dart';
+import 'package:flutterfx_widgets/progress_bar/progress_bar.dart';
 
 class CircularProgressStrategy implements ProgressAnimationStrategy {
   CircularProgressStrategy({this.strokeWidth = 8.0});

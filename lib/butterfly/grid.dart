@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:fx_2_folder/button_shimmer/design/widget_theme.dart';
+import 'package:flutterfx_widgets/button_shimmer/design/widget_theme.dart';
 
 class GridPatternPainter extends CustomPainter {
   GridPatternPainter({required this.isDarkMode});

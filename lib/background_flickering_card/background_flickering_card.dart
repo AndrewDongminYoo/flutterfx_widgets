@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
-import 'package:fx_2_folder/background_flicker_grid/background_flicker_grid.dart';
+import 'package:flutterfx_widgets/background_flicker_grid/background_flicker_grid.dart';
 
 class FancyCard extends StatelessWidget {
   const FancyCard({

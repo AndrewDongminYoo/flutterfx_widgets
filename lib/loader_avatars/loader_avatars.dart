@@ -2,9 +2,9 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 
-import 'package:fx_2_folder/loader_avatars/strategies/loader_strategy_pulse.dart';
-import 'package:fx_2_folder/loader_avatars/strategies/loader_strategy_ripple.dart';
-import 'package:fx_2_folder/loader_avatars/strategies/loader_strategy_wave.dart';
+import 'package:flutterfx_widgets/loader_avatars/strategies/loader_strategy_pulse.dart';
+import 'package:flutterfx_widgets/loader_avatars/strategies/loader_strategy_ripple.dart';
+import 'package:flutterfx_widgets/loader_avatars/strategies/loader_strategy_wave.dart';
 
 // Step 1: Define the strategy interface
 abstract class AvatarAnimationStrategy {

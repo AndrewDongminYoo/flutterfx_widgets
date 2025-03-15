@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-import 'package:fx_2_folder/loader_avatars/design/grid.dart';
-import 'package:fx_2_folder/loader_avatars/loader_avatars.dart';
-import 'package:fx_2_folder/loader_avatars/strategies/loader_strategy_pulse.dart';
-import 'package:fx_2_folder/loader_avatars/strategies/loader_strategy_random.dart';
-import 'package:fx_2_folder/loader_avatars/strategies/loader_strategy_ripple.dart';
-import 'package:fx_2_folder/loader_avatars/strategies/loader_strategy_wave.dart';
+import 'package:flutterfx_widgets/loader_avatars/design/grid.dart';
+import 'package:flutterfx_widgets/loader_avatars/loader_avatars.dart';
+import 'package:flutterfx_widgets/loader_avatars/strategies/loader_strategy_pulse.dart';
+import 'package:flutterfx_widgets/loader_avatars/strategies/loader_strategy_random.dart';
+import 'package:flutterfx_widgets/loader_avatars/strategies/loader_strategy_ripple.dart';
+import 'package:flutterfx_widgets/loader_avatars/strategies/loader_strategy_wave.dart';
 
 class LoaderAvatarsDemo extends StatelessWidget {
   const LoaderAvatarsDemo({super.key});

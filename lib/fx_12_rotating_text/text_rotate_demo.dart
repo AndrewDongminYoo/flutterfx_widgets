@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:fx_2_folder/fx_12_rotating_text/text_rotate.dart';
+import 'package:flutterfx_widgets/fx_12_rotating_text/text_rotate.dart';
 
 class TextRotateDemo extends StatefulWidget {
   const TextRotateDemo({super.key});

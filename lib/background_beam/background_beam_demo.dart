@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:fx_2_folder/background_beam/background_beam.dart';
+import 'package:flutterfx_widgets/background_beam/background_beam.dart';
 
 class BackgroundBeamDemo extends StatefulWidget {
   const BackgroundBeamDemo({super.key});

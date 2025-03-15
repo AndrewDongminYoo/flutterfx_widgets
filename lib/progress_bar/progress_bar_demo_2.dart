@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-import 'package:fx_2_folder/progress_bar/design/grid.dart';
-import 'package:fx_2_folder/progress_bar/progress_bar.dart';
-import 'package:fx_2_folder/progress_bar/strategies/clock_progress_strategy.dart';
-import 'package:fx_2_folder/progress_bar/strategies/snow_progres_strategy.dart';
-import 'package:fx_2_folder/progress_bar/strategies/typing_progress_strategy.dart';
+import 'package:flutterfx_widgets/progress_bar/design/grid.dart';
+import 'package:flutterfx_widgets/progress_bar/progress_bar.dart';
+import 'package:flutterfx_widgets/progress_bar/strategies/clock_progress_strategy.dart';
+import 'package:flutterfx_widgets/progress_bar/strategies/snow_progres_strategy.dart';
+import 'package:flutterfx_widgets/progress_bar/strategies/typing_progress_strategy.dart';
 
 class ProgressBarDemo2 extends StatefulWidget {
   const ProgressBarDemo2({super.key});

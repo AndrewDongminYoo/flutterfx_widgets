@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
-import 'package:fx_2_folder/butterfly/butterfly_path.dart';
+import 'package:flutterfx_widgets/butterfly/butterfly_path.dart';
 
 class ButterflyDemo extends StatefulWidget {
   const ButterflyDemo({super.key});

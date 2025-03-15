@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:fx_2_folder/folder_shape/gradient_shadow.dart';
+import 'package:flutterfx_widgets/folder_shape/gradient_shadow.dart';
 
 class FolderHomeWidget extends StatefulWidget {
   const FolderHomeWidget({super.key, required this.title, required this.curve});

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:fx_2_folder/noise/noise.dart';
-import 'package:fx_2_folder/noise/strategy_noise.dart';
+import 'package:flutterfx_widgets/noise/noise.dart';
+import 'package:flutterfx_widgets/noise/strategy_noise.dart';
 
 class PracticalNoiseShowcase extends StatefulWidget {
   const PracticalNoiseShowcase({super.key});

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:fx_2_folder/text_3d_pop/text_3d_pop.dart';
+import 'package:flutterfx_widgets/text_3d_pop/text_3d_pop.dart';
 
 class Text3dPopDemo extends StatelessWidget {
   const Text3dPopDemo({super.key});

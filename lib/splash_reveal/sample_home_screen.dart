@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:fx_2_folder/splash_reveal/splash_demo.dart';
+import 'package:flutterfx_widgets/splash_reveal/splash_demo.dart';
 
 class MonochromeHomeScreen extends StatelessWidget {
   const MonochromeHomeScreen({super.key});

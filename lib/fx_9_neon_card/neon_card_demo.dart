@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:fx_2_folder/fx_9_neon_card/neon_card.dart';
-import 'package:fx_2_folder/fx_9_neon_card/neon_text.dart';
+import 'package:flutterfx_widgets/fx_9_neon_card/neon_card.dart';
+import 'package:flutterfx_widgets/fx_9_neon_card/neon_text.dart';
 
 class NeonGradientCardDemo extends StatelessWidget {
   const NeonGradientCardDemo({super.key});

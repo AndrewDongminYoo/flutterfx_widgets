@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:fx_2_folder/fx_13_rotating_text_with_blur/reveal/clock_reveal.dart';
-import 'package:fx_2_folder/fx_13_rotating_text_with_blur/text_rotate_blur.dart';
-import 'package:fx_2_folder/fx_14_text_reveal/text_reveal_widget.dart';
+import 'package:flutterfx_widgets/fx_13_rotating_text_with_blur/reveal/clock_reveal.dart';
+import 'package:flutterfx_widgets/fx_13_rotating_text_with_blur/text_rotate_blur.dart';
+import 'package:flutterfx_widgets/fx_14_text_reveal/text_reveal_widget.dart';
 
 class TextRotateBlurDemo extends StatefulWidget {
   const TextRotateBlurDemo({super.key});

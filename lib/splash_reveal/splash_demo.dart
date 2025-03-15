@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
-import 'package:fx_2_folder/splash_reveal/sample_home_screen.dart';
+import 'package:flutterfx_widgets/splash_reveal/sample_home_screen.dart';
 
 class SplashRevealController {
   _SplashRevealWidgetState? _state;

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:fx_2_folder/background_aurora/aurora_widget.dart';
+import 'package:flutterfx_widgets/background_aurora/aurora_widget.dart';
 
 class AuroraDemo extends StatelessWidget {
   const AuroraDemo({super.key});

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:fx_2_folder/celebrate/celebrate.dart';
+import 'package:flutterfx_widgets/celebrate/celebrate.dart';
 
 class CelebrateHomeWidget extends StatelessWidget {
   const CelebrateHomeWidget({super.key});

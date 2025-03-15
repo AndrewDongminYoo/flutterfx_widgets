@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:fx_2_folder/stacked_scroll/stacked_scroll.dart';
+import 'package:flutterfx_widgets/stacked_scroll/stacked_scroll.dart';
 
 class StackedScrollDemo extends StatefulWidget {
   const StackedScrollDemo({super.key});

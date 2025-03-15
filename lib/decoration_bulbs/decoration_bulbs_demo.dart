@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:fx_2_folder/decoration_bulbs/decoration_bulbs.dart';
+import 'package:flutterfx_widgets/decoration_bulbs/decoration_bulbs.dart';
 
 class DecorationBulbsDemo extends StatefulWidget {
   const DecorationBulbsDemo({super.key});

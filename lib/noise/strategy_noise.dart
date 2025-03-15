@@ -2,7 +2,7 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 
-import 'package:fx_2_folder/noise/noise.dart';
+import 'package:flutterfx_widgets/noise/noise.dart';
 
 class SimplexNoiseStrategy implements NoiseStrategy {
   SimplexNoiseStrategy() {

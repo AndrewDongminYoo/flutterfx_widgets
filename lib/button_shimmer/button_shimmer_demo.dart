@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:fx_2_folder/button_shimmer/button_shimmer.dart';
-import 'package:fx_2_folder/stacked_expand_cards/stacked_expand_card.dart';
+import 'package:flutterfx_widgets/button_shimmer/button_shimmer.dart';
+import 'package:flutterfx_widgets/stacked_expand_cards/stacked_expand_card.dart';
 
 class ButtonShimmerDemo extends StatefulWidget {
   const ButtonShimmerDemo({super.key});

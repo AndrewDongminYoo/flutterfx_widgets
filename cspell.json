@@ -41,7 +41,7 @@
     "shaders/*.frag",
     "windows/runner"
   ],
-  "ignoreWords": ["meta-data", "pbxproj"],
+  "ignoreWords": ["flutterfx", "meta-data", "pbxproj"],
   "useGitignore": true,
   "allowCompoundWords": true,
   "suggestionsTimeout": 5000,

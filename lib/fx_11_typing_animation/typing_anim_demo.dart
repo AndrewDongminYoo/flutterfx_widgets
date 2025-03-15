@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:fx_2_folder/fx_11_typing_animation/typing_anim.dart';
+import 'package:flutterfx_widgets/fx_11_typing_animation/typing_anim.dart';
 
 class TypingAnimationDemo extends StatefulWidget {
   const TypingAnimationDemo({super.key});

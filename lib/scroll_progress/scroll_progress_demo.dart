@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:fx_2_folder/scroll_progress/design/widget_theme.dart';
-import 'package:fx_2_folder/scroll_progress/scroll_progress.dart';
+import 'package:flutterfx_widgets/scroll_progress/design/widget_theme.dart';
+import 'package:flutterfx_widgets/scroll_progress/scroll_progress.dart';
 
 class ScrollProgressDemo extends StatefulWidget {
   const ScrollProgressDemo({super.key});

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:fx_2_folder/visibility/blur_fade_widget.dart';
+import 'package:flutterfx_widgets/visibility/blur_fade_widget.dart';
 
 class BlurFadeExample extends StatefulWidget {
   const BlurFadeExample({super.key});

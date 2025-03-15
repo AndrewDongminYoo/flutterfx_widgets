@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:fx_2_folder/background_exploding_beam/background_beam_explosion.dart';
+import 'package:flutterfx_widgets/background_exploding_beam/background_beam_explosion.dart';
 
 class ExplodingBeamDemo extends StatefulWidget {
   const ExplodingBeamDemo({super.key});

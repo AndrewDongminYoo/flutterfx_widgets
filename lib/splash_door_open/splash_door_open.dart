@@ -2,7 +2,7 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 
-import 'package:fx_2_folder/splash_door_open/sample_welcome_screen.dart';
+import 'package:flutterfx_widgets/splash_door_open/sample_welcome_screen.dart';
 
 class DoorSplashScreen extends StatefulWidget {
   const DoorSplashScreen({

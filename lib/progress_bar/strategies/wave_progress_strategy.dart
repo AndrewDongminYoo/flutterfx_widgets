@@ -2,7 +2,7 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 
-import 'package:fx_2_folder/progress_bar/progress_bar.dart';
+import 'package:flutterfx_widgets/progress_bar/progress_bar.dart';
 
 /// Strategy for wave-style liquid progress animation
 class DynamicWaveProgressStrategy implements ProgressAnimationStrategy {

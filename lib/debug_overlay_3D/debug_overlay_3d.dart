@@ -2,8 +2,8 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 
-import 'package:fx_2_folder/stacked_cards/stacked_card.dart';
-import 'package:fx_2_folder/vinyl/vinyl.dart';
+import 'package:flutterfx_widgets/stacked_cards/stacked_card.dart';
+import 'package:flutterfx_widgets/vinyl/vinyl.dart';
 
 /// A widget that wraps content in a debug overlay allowing 3D inspection
 class DebugTransformOverlay extends StatefulWidget {

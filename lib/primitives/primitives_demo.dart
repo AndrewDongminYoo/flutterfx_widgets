@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:fx_2_folder/primitives/primitives.dart';
+import 'package:flutterfx_widgets/primitives/primitives.dart';
 
 class MotionPrimitiveDemo extends StatefulWidget {
   const MotionPrimitiveDemo({super.key});
