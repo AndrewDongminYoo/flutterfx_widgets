@@ -16,9 +16,9 @@ class TechStackCloud extends StatelessWidget {
     'android',
     'html5',
     'css3',
-    'nodedotjs',
+    'node.js',
     'express',
-    'nextdotjs',
+    'next.js',
     'prisma',
     'amazonaws',
     'postgresql',
@@ -35,7 +35,7 @@ class TechStackCloud extends StatelessWidget {
     'gitlab',
     'visualstudiocode',
     'androidstudio',
-    'sonarqube',
+    'sonar',
     'figma',
   ];
 

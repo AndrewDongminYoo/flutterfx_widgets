@@ -31,10 +31,10 @@ class _WidgetViewerState extends State<WidgetViewer> {
                 // setEntry(1, 3, y): Translates along the Y-axis
                 // setEntry(2, 3, z): Translates along the Z-axis
                 transform: Matrix4.identity()
-                  ..setEntry(3, 2, 0.0003512553609721081) // perspectivez
+                  ..setEntry(3, 2, 0.0003512553609721081) // perspectives
                   // ..setEntry(3, 1, _perspective) // y
                   // ..setEntry(3, 0, _perspective) //x
-                  ..rotateY(323 * pi / 180) // horixontal
+                  ..rotateY(323 * pi / 180) // horizontal
                   ..rotateX(355 * pi / 180) // vertical
                   ..rotateZ(6 * pi / 180) //z : 32
                   ..scale(_zoom),

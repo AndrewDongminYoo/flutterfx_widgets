@@ -315,8 +315,8 @@ class StarTrailPainter extends CustomPainter {
   bool shouldRepaint(StarTrailPainter oldDelegate) => true;
 }
 
-class BgOrbittalStarDemo extends StatelessWidget {
-  const BgOrbittalStarDemo({super.key});
+class BgOrbitalStarDemo extends StatelessWidget {
+  const BgOrbitalStarDemo({super.key});
 
   @override
   Widget build(BuildContext context) {

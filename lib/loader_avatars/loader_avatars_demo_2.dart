@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 import 'package:fx_2_folder/loader_avatars/design/grid.dart';
 import 'package:fx_2_folder/loader_avatars/loader_avatars.dart';
-import 'package:fx_2_folder/loader_avatars/strategies/strat_2.dart';
+import 'package:fx_2_folder/loader_avatars/strategies/coin_flip_strategy.dart';
 
 class LoaderAvatarsDemo2 extends StatelessWidget {
   const LoaderAvatarsDemo2({super.key});

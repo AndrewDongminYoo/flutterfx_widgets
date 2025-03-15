@@ -28,6 +28,11 @@ lint:
     - prettier@3.5.3
     - trufflehog@3.88.16
     - yamllint@1.36.0
+  ignore:
+    - linters:
+        - osv-scanner
+      paths:
+        - "**/Podfile.lock"
 actions:
   enabled:
     - trunk-announce

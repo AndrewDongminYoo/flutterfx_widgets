@@ -8,7 +8,7 @@ class Particles extends StatefulWidget {
     this.quantity = 100,
     this.ease = 50,
     required this.color,
-    this.staticity = 50,
+    this.staticcity = 50,
     this.size = 0.4,
     this.vx = 0,
     this.vy = 0,
@@ -17,7 +17,7 @@ class Particles extends StatefulWidget {
   final int quantity;
   final double ease;
   final Color color;
-  final double staticity;
+  final double staticcity;
   final double size;
   final double vx;
   final double vy;
@@ -86,8 +86,8 @@ class _ParticlesState extends State<Particles> with SingleTickerProviderStateMix
       particle.y += particle.dy + widget.vy;
 
       // Update translation based on mouse position
-      final targetTranslateX = mousePosition.dx / (widget.staticity / particle.magnetism);
-      final targetTranslateY = mousePosition.dy / (widget.staticity / particle.magnetism);
+      final targetTranslateX = mousePosition.dx / (widget.staticcity / particle.magnetism);
+      final targetTranslateY = mousePosition.dy / (widget.staticcity / particle.magnetism);
 
       particle.translateX += (targetTranslateX - particle.translateX) / widget.ease;
       particle.translateY += (targetTranslateY - particle.translateY) / widget.ease;

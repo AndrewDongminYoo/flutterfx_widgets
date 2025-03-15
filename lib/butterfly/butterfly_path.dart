@@ -111,9 +111,9 @@ class _MovingButterflyState extends State<MovingButterfly> with SingleTickerProv
     super.dispose();
   }
 
-  // Calculate position along the Bézier curve
+  // Calculate position along the Bezier curve
   Offset _calculatePosition(double t) {
-    // Cubic Bézier curve formula
+    // Cubic Bezier curve formula
     final u = 1 - t;
     final tt = t * t;
     final uu = u * u;
@@ -128,7 +128,7 @@ class _MovingButterflyState extends State<MovingButterfly> with SingleTickerProv
 
   // Calculate rotation angle based on the curve's tangent
   double _calculateRotation(double t) {
-    // Calculate the derivative of the Bézier curve
+    // Calculate the derivative of the Bezier curve
     const epsilon = 0.001;
     final currentPos = _calculatePosition(t);
     final nextPos = _calculatePosition(t + epsilon);

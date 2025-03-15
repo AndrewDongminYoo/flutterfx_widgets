@@ -13,7 +13,7 @@ class TechStackIcons {
     'html5': Icons.html,
     'css3': Icons.css,
     'express': Icons.developer_board,
-    'nextdotjs': Icons.next_plan,
+    'next.js': Icons.next_plan,
     'prisma': Icons.storage,
     'amazonaws': Icons.cloud,
     'firebase': Icons.local_fire_department,
@@ -28,7 +28,7 @@ class TechStackIcons {
     'gitlab': Icons.engineering,
     'visualstudiocode': Icons.code,
     'androidstudio': Icons.android,
-    'sonarqube': Icons.analytics,
+    'sonar': Icons.analytics,
     'figma': Icons.design_services,
   };
 

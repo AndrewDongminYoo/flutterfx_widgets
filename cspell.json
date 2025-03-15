@@ -1,8 +1,13 @@
 {
   "version": "0.2",
   "$schema": "https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json",
-  "dictionaries": ["vgv_allowed", "vgv_forbidden"],
+  "dictionaries": ["lorem", "vgv_allowed", "vgv_forbidden"],
   "dictionaryDefinitions": [
+    {
+      "name": "lorem",
+      "path": "https://raw.githubusercontent.com/streetsidesoftware/cspell-dicts/refs/heads/main/dictionaries/lorem-ipsum/dict/lorem.txt",
+      "description": "Lorem-ipsum dictionary for cspell."
+    },
     {
       "name": "vgv_allowed",
       "path": "https://raw.githubusercontent.com/verygoodopensource/very_good_dictionaries/main/allowed.txt",
@@ -15,27 +20,43 @@
     }
   ],
   "ignorePaths": [
-    "assets/svg/*.svg",
-    "android/**/res/**/*.xml",
-    "**/Podfile",
-    "**/google-services.json",
-    "lib/firebase_options*.dart",
-    "**/*.xib",
-    "**/*.xcscheme",
-    "**/*.xcconfig",
-    "**/*.swift",
-    "**/*.storyboard",
-    "**/*.properties",
-    "**/*.plist",
-    "**/*.pbxproj",
-    "**/*.icns",
-    "**/*.entitlements",
+    ".vscode/*.json",
     "**/.gitignore",
-    ".vscode/*.json"
+    "**/*.entitlements",
+    "**/*.pbxproj",
+    "**/*.plist",
+    "**/*.properties",
+    "**/*.storyboard",
+    "**/*.swift",
+    "**/*.xcconfig",
+    "**/*.xcscheme",
+    "**/*.xib",
+    "**/CMakeLists.txt",
+    "**/google-services.json",
+    "**/Podfile",
+    "android/**/res/**/*.xml",
+    "assets/svg/*.svg",
+    "lib/firebase_options*.dart",
+    "linux/my_application.cc",
+    "shaders/*.frag",
+    "windows/runner"
   ],
-  "ignoreWords": ["meta-data"],
+  "ignoreWords": ["meta-data", "pbxproj"],
   "useGitignore": true,
   "allowCompoundWords": true,
   "suggestionsTimeout": 5000,
-  "words": []
+  "words": [
+    "cupertino",
+    "futureor",
+    "interps",
+    "ints",
+    "lacunarity",
+    "LTWH",
+    "menlo",
+    "pannable",
+    "roboto",
+    "vercel",
+    "voronoi",
+    "worley"
+  ]
 }

@@ -228,7 +228,7 @@ class FullScreenTextMorph extends StatefulWidget {
 class _FullScreenTextMorphState extends State<FullScreenTextMorph> {
   final List<String> words = [
     'Banter',
-    'Bunty',
+    'Bounty',
     'Bubbly',
     'Biscuit',
     'Circuit',

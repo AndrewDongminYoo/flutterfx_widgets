@@ -372,8 +372,8 @@ class HomeScreen extends StatelessWidget {
       isFullScreen: true,
     ),
     AnimationExample(
-      title: 'Oribital Star',
-      builder: (context) => const BgOrbittalStarDemo(),
+      title: 'Orbital Star',
+      builder: (context) => const BgOrbitalStarDemo(),
       appBarColor: Colors.black,
       isFullScreen: true,
     ),

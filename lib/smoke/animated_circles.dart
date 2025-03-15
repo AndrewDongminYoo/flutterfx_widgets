@@ -91,9 +91,9 @@ class CirclesPainter extends CustomPainter {
         (c) => c.id == startCircle.id,
         orElse: () => startCircle,
       );
-      final lerpedCircle = startCircle.lerp(endCircle, progress);
+      final lerpCircle = startCircle.lerp(endCircle, progress);
 
-      // Generate control points for the Bézier curve
+      // Generate control points for the Bezier curve
       final controlPoint1 = _generateControlPoint(
         startCircle.normalizedPosition,
         endCircle.normalizedPosition,
@@ -105,7 +105,7 @@ class CirclesPainter extends CustomPainter {
         random,
       );
 
-      // Calculate the position along the Bézier curve
+      // Calculate the position along the Bezier curve
       var position = _calculateBezierPoint(
         startCircle.normalizedPosition,
         controlPoint1,
@@ -116,14 +116,14 @@ class CirclesPainter extends CustomPainter {
 
       // Convert normalized position to actual position
       position = Offset(position.dx * size.width, position.dy * size.height);
-      // var position = Offset(lerpedCircle.normalizedPosition.dx * size.width,
-      //     lerpedCircle.normalizedPosition.dy * size.height);
+      // var position = Offset(lerpCircle.normalizedPosition.dx * size.width,
+      //     lerpCircle.normalizedPosition.dy * size.height);
 
       final paint = Paint()
-        ..color = lerpedCircle.color.withValues(alpha: 1)
+        ..color = lerpCircle.color.withValues(alpha: 1)
         ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 100);
 
-      canvas.drawCircle(position, lerpedCircle.radius, paint);
+      canvas.drawCircle(position, lerpCircle.radius, paint);
     }
   }
 

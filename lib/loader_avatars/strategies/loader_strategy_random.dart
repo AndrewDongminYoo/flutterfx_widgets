@@ -43,11 +43,11 @@ class RandomAnimationStrategy extends AvatarAnimationStrategy {
     required int index,
   }) {
     final angle = animation.value;
-    final verticalDisp = sin(angle) * maxDisplacement;
-    final horizontalDisp = cos(angle * 1.5) * (maxDisplacement / 3);
+    final verticalDisplacement = sin(angle) * maxDisplacement;
+    final horizontalDisplacement = cos(angle * 1.5) * (maxDisplacement / 3);
 
     return Transform.translate(
-      offset: Offset(horizontalDisp, verticalDisp),
+      offset: Offset(horizontalDisplacement, verticalDisplacement),
       child: child,
     );
   }
