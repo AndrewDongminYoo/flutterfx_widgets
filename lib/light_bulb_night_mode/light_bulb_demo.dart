@@ -87,7 +87,9 @@ class ThemeShowcaseCard extends StatelessWidget {
                           shape: BoxShape.circle,
                           boxShadow: [
                             BoxShadow(
-                              color: isDarkMode ? Colors.blue.withValues(alpha: 0.2) : Colors.orange.withValues(alpha: 0.2),
+                              color: isDarkMode
+                                  ? Colors.blue.withValues(alpha: 0.2)
+                                  : Colors.orange.withValues(alpha: 0.2),
                               blurRadius: 8,
                               offset: const Offset(0, 2),
                             ),

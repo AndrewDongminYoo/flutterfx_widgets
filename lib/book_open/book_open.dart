@@ -162,8 +162,8 @@ class _AnimatedBookState extends State<AnimatedBook> with SingleTickerProviderSt
                                 borderRadius: BorderRadius.circular(8),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: Colors.black.withValues(alpha:
-                                      _clampOpacity(
+                                    color: Colors.black.withValues(
+                                      alpha: _clampOpacity(
                                         0.8 * (1 - normalizedIndex),
                                       ),
                                     ),
@@ -192,8 +192,8 @@ class _AnimatedBookState extends State<AnimatedBook> with SingleTickerProviderSt
                               borderRadius: BorderRadius.circular(8),
                               boxShadow: [
                                 BoxShadow(
-                                  color: Colors.black.withValues(alpha:
-                                    _clampOpacity(
+                                  color: Colors.black.withValues(
+                                    alpha: _clampOpacity(
                                       0.3 * (1 - _animation.value),
                                     ),
                                   ),
