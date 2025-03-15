@@ -14,6 +14,7 @@ class Avatar {
     required this.imageUrl,
     required this.profileUrl,
   });
+
   final String imageUrl;
   final String profileUrl;
 }
@@ -143,6 +144,7 @@ class AvatarCircles extends StatelessWidget {
 
 class AvatarCirclesShowcase extends StatelessWidget {
   AvatarCirclesShowcase({super.key});
+
   final List<Avatar> sampleAvatars = [
     const Avatar(
       imageUrl:

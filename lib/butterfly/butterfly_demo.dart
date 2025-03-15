@@ -82,6 +82,7 @@ class ButterflyConfig {
     required this.startXPercent,
     required this.scale,
   });
+
   final Duration delay;
   final Duration duration;
   final double startXPercent;

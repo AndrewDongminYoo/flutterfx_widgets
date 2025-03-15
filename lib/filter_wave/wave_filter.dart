@@ -11,6 +11,7 @@ class WaveWarpEffect extends StatefulWidget {
     this.speed = 1.0,
     this.phase = 0.0,
   });
+
   final Widget child;
   final double waveHeight;
   final double waveWidth;
@@ -65,6 +66,7 @@ class WaveClipper extends CustomClipper<Path> {
     required this.waveWidth,
     required this.phase,
   });
+
   final double animationValue;
   final double waveHeight;
   final double waveWidth;

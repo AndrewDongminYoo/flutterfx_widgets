@@ -11,6 +11,7 @@ class BlurFadeExample extends StatefulWidget {
 
 class _BlurFadeExampleState extends State<BlurFadeExample> {
   bool _isVisible = true;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

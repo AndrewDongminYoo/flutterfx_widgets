@@ -13,6 +13,7 @@ class Particles extends StatefulWidget {
     this.vx = 0,
     this.vy = 0,
   });
+
   final int quantity;
   final double ease;
   final Color color;
@@ -175,6 +176,7 @@ class ParticlesPainter extends CustomPainter {
     required this.particles,
     required this.color,
   });
+
   final List<Particle> particles;
   final Color color;
 

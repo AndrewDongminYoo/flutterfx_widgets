@@ -131,6 +131,7 @@ class SpringButton extends StatefulWidget {
     required this.curve,
     required this.duration,
   });
+
   final String text;
   final Curve curve;
   final Duration duration;

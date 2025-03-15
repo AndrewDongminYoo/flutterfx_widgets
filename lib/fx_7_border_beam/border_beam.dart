@@ -14,6 +14,7 @@ class BorderBeam extends StatefulWidget {
     this.borderRadius = const BorderRadius.all(Radius.circular(12)),
     this.padding = EdgeInsets.zero,
   });
+
   final Widget child;
   final double duration;
   final double borderWidth;
@@ -81,6 +82,7 @@ class BorderBeamPainter extends CustomPainter {
     required this.staticBorderColor,
     required this.borderRadius,
   });
+
   final double progress;
   final double borderWidth;
   final Color colorFrom;

@@ -10,6 +10,7 @@ class RippleAnimationStrategy extends AvatarAnimationStrategy {
     this.staggerDelay = const Duration(milliseconds: 120),
     this.maxDisplacement = 12.0,
   });
+
   final Duration animationDuration;
   final Duration staggerDelay;
   final double maxDisplacement;

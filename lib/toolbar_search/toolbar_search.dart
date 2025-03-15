@@ -218,6 +218,7 @@ class CustomIconButton extends StatelessWidget {
     required this.onPressed,
     required this.ariaLabel,
   });
+
   final IconData icon;
   final VoidCallback? onPressed;
   final String ariaLabel;
@@ -257,6 +258,7 @@ class SpringCurve extends Curve {
     required this.stiffness,
     required this.damping,
   });
+
   final double mass;
   final double stiffness;
   final double damping;

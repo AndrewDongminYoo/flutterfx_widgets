@@ -11,6 +11,7 @@ class OrbitingDot {
     this.dotSize = 4.0,
     this.angle = 0.0,
   });
+
   final double orbitRadius;
   final double baseHeight;
   final Color color;
@@ -42,6 +43,7 @@ class FestiveTree extends StatefulWidget {
       Colors.orange,
     ],
   });
+
   final double maxRadius;
   final double height;
   final int numberOfOrbits;
@@ -146,6 +148,7 @@ class OrbitingDotsPainter extends CustomPainter {
     this.showOrbits = false,
     this.isChaoticMode = false, // Default to orderly mode
   });
+
   final List<OrbitingDot> dots;
   final Color starColor;
   final bool showOrbits;

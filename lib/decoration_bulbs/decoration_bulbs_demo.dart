@@ -384,6 +384,7 @@ class ShowcaseItem {
     required this.title,
     required this.builder,
   });
+
   final String title;
   final Widget Function(bool showLights, LightAnimationStrategy strategy) builder;
 }

@@ -9,6 +9,7 @@ class AnimatedGridPattern extends StatefulWidget {
     this.gridSize = 40,
     this.skewAngle = 12,
   });
+
   final List<List<int>> squares;
   final double gridSize;
   final double skewAngle;

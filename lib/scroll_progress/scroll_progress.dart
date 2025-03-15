@@ -14,6 +14,7 @@ class ScrollProgressBasic extends StatefulWidget {
     super.key,
     this.style = ScrollProgressStyle.default_,
   });
+
   final ScrollProgressStyle style;
 
   @override

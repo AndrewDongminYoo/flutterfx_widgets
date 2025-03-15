@@ -159,6 +159,7 @@ class CardColorScheme {
     required this.subtitleColor,
     required this.accentGlowColor,
   });
+
   final Color gridColor;
   final Color borderColor;
   final List<Color> gradientColors;

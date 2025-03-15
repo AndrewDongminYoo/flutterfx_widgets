@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class FolderBackCoverGradientPainter extends CustomPainter {
   FolderBackCoverGradientPainter(this.animation) : super(repaint: animation);
   final Animation<double> animation;
+
   @override
   void paint(Canvas canvas, Size size) {
     final path = Path();
@@ -355,6 +356,7 @@ class BigCirclePainter extends CustomPainter {
 
 class ReflectionWidget extends StatelessWidget {
   const ReflectionWidget(this.animation, this.shadowAnimation, {super.key});
+
   final Animation<double> animation;
   final Animation<double> shadowAnimation;
 

@@ -7,6 +7,7 @@ class GradientText extends StatelessWidget {
     required this.fontSize,
     required this.gradientColors,
   });
+
   final String text;
   final double fontSize;
   final List<Color> gradientColors;

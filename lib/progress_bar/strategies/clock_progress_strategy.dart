@@ -33,6 +33,7 @@ class PizzaProgressPainter extends CustomPainter {
     required this.fillColor,
     required this.backgroundColor,
   });
+
   final double progress;
   final Color fillColor;
   final Color backgroundColor;

@@ -7,6 +7,7 @@ import 'package:fx_2_folder/progress_bar/progress_bar.dart';
 
 class CircularProgressStrategy implements ProgressAnimationStrategy {
   CircularProgressStrategy({this.strokeWidth = 8.0});
+
   final double strokeWidth;
 
   @override
@@ -41,6 +42,7 @@ class CircularProgressPainter extends CustomPainter {
     required this.progressColor,
     this.gradientColors,
   });
+
   final double progress;
   final double strokeWidth;
   final Color backgroundColor;

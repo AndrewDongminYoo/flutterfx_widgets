@@ -25,6 +25,7 @@ class ProgressStyle {
     this.curve = Curves.easeInOut,
     this.animationDuration = const Duration(milliseconds: 300),
   });
+
   final Color primaryColor;
   final Color backgroundColor;
   final double width;
@@ -69,6 +70,7 @@ class ProgressLoader extends StatefulWidget {
     this.style = const ProgressStyle(),
     this.onProgressUpdate,
   });
+
   final double progress;
   final ProgressAnimationStrategy strategy;
   final ProgressStyle style;

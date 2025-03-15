@@ -9,6 +9,7 @@ class DisclosureConfig {
     this.expandCurve = Curves.easeOut,
     this.collapseCurve = Curves.easeIn,
   });
+
   final Duration expandDuration;
   final Duration collapseDuration;
   final Curve expandCurve;
@@ -22,6 +23,7 @@ class DisclosureState extends InheritedWidget {
     required this.toggleExpansion,
     required super.child,
   });
+
   final bool isExpanded;
   final VoidCallback toggleExpansion;
 
@@ -47,6 +49,7 @@ class Disclosure extends StatefulWidget {
     this.decoration,
     this.padding = const EdgeInsets.all(16),
   });
+
   final Widget? trigger;
   final Widget content;
   final bool initiallyExpanded;
@@ -167,6 +170,7 @@ class DisclosureTrigger extends StatelessWidget {
     required this.child,
     this.padding = const EdgeInsets.all(16),
   });
+
   final Widget child;
   final EdgeInsetsGeometry padding;
 

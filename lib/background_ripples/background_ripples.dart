@@ -9,6 +9,7 @@ class Ripple extends StatefulWidget {
     this.color = Colors.black,
     this.duration = const Duration(seconds: 2),
   });
+
   final double mainCircleSize;
   final double mainCircleOpacity;
   final int numCircles;

@@ -10,6 +10,7 @@ class StepRotatingShape extends StatefulWidget {
     this.pauseDuration = const Duration(milliseconds: 200),
     this.color = const Color(0xFF8157E8),
   });
+
   final double size;
   final Duration rotationDuration;
   final Duration pauseDuration;
@@ -104,6 +105,7 @@ class StarPainter extends CustomPainter {
     required this.rotationAngle,
     required this.color,
   });
+
   final double rotationAngle;
   final Color color;
 

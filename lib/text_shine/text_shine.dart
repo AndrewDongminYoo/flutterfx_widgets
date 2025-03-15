@@ -195,6 +195,7 @@ class ShimmerText extends StatefulWidget {
       Color(0xFF1E293B),
     ],
   });
+
   final String text;
   final double? shimmerWidth;
   final TextStyle? style;
@@ -303,6 +304,7 @@ class _BackgroundShimmerEffectState extends State<BackgroundShimmerEffect> with 
 
 class ShimmerBackgroundPainter extends CustomPainter {
   ShimmerBackgroundPainter({required this.animation});
+
   final double animation;
 
   @override

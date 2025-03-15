@@ -250,6 +250,7 @@ class CircleGridPainter extends CustomPainter {
     this.selectedIndex,
     required this.animationControllers,
   });
+
   final Offset offset;
   final double circleSize;
   final double selectedCircleMultiplier;
@@ -449,6 +450,7 @@ class _VisibleArea {
     required this.startRow,
     required this.endRow,
   });
+
   final int startCol;
   final int endCol;
   final int startRow;
@@ -463,6 +465,7 @@ class DebugPainter extends CustomPainter {
     required this.spacing,
     required this.columns,
   });
+
   final Offset? tapPosition;
   final Offset gridOffset;
   final double circleSize;

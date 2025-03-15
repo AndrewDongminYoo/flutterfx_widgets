@@ -116,6 +116,7 @@ class Marquee3DContent extends StatefulWidget {
     required this.logos,
     required this.durationInSeconds,
   });
+
   final List<Map<String, String>> logos;
   final int durationInSeconds;
 
@@ -184,6 +185,7 @@ class LogoCard extends StatefulWidget {
     required this.imageUrl,
     required this.name,
   });
+
   final String imageUrl;
   final String name;
 

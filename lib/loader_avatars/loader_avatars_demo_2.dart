@@ -137,6 +137,7 @@ class _DemoSection extends StatelessWidget {
     required this.title,
     required this.child,
   });
+
   final String title;
   final Widget child;
 

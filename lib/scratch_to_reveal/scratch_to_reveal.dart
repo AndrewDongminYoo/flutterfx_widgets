@@ -19,6 +19,7 @@ class ScratchToReveal extends StatefulWidget {
     this.enableHapticFeedback = true,
     this.enableSoundEffects = false,
   });
+
   final Widget child;
   final double width;
   final double height;
@@ -172,6 +173,7 @@ class ScratchPainter extends CustomPainter {
     required this.scratchImage,
     required this.path,
   });
+
   final ui.Image scratchImage;
   final Path path;
 

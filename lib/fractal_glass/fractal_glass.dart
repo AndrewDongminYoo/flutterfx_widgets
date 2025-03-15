@@ -9,6 +9,7 @@ class FractalGlassEffect extends StatefulWidget {
     super.key,
     required this.imageProvider,
   });
+
   final ImageProvider imageProvider;
 
   @override
@@ -105,6 +106,7 @@ class FractalGlassPainter extends CustomPainter {
     this.turbulence = 0.05,
     this.scale = 10.0,
   });
+
   final ImageProvider image;
   final double turbulence;
   final double scale;

@@ -81,6 +81,7 @@ class ShaderPainter extends CustomPainter {
     required this.resolution,
     required this.time,
   });
+
   final FragmentShader shader;
   final Size resolution;
   final double time;

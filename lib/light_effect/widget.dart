@@ -10,6 +10,7 @@ class LightEffectWidget extends StatelessWidget {
     this.backgroundColor = Colors.black,
     this.lightColor = Colors.white,
   });
+
   final double width;
   final double height;
   final Color backgroundColor;
@@ -73,6 +74,7 @@ class TopLightEffectPainter extends CustomPainter {
     required this.lightColor,
     required this.backgroundColor,
   });
+
   final Color lightColor;
   final Color backgroundColor;
 

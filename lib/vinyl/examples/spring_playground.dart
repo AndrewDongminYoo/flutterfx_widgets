@@ -72,6 +72,7 @@ class SpringButton extends StatefulWidget {
     required this.onPressed,
     required this.curve,
   });
+
   final Widget child;
   final VoidCallback onPressed;
   final Curve curve;
@@ -266,6 +267,7 @@ class BouncyHeavyMassCurve extends Curve {
 
 class HighVelocitySpringCurve extends Curve {
   const HighVelocitySpringCurve({this.a = 0.3, this.w = 20});
+
   final double a;
   final double w;
 

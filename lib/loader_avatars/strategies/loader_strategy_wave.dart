@@ -11,6 +11,7 @@ class WaveAnimationStrategy extends AvatarAnimationStrategy {
     this.reverseWave = false,
     this.maxDisplacement = 12.0,
   });
+
   final Duration animationDuration;
   final Duration staggerDelay;
   final bool reverseWave;

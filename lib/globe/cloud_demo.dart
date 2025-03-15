@@ -5,6 +5,7 @@ import 'package:fx_2_folder/globe/icon_helper.dart';
 
 class TechStackCloud extends StatelessWidget {
   TechStackCloud({super.key});
+
   final List<String> slugs = [
     'typescript',
     'javascript',

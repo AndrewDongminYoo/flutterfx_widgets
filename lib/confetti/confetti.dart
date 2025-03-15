@@ -194,6 +194,7 @@ class EnhancedConfettiOptions {
     this.burstDuration = 0.3, // 300ms
     this.floatDuration = 1.5, // 1.5s
   });
+
   final int particleCount;
   final double initialSpread; // Initial spread angle
   final double burstSpread; // Spread after burst
@@ -216,6 +217,7 @@ class EnhancedConfettiPainter extends CustomPainter {
     required this.progress,
     required this.options,
   });
+
   final List<EnhancedConfettiParticle> particles;
   final double progress;
   final EnhancedConfettiOptions options;

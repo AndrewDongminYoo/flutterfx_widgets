@@ -89,6 +89,7 @@ class BookWidget extends StatefulWidget {
     required this.book,
     required this.isOpen,
   });
+
   final Book book;
   final bool isOpen;
 
@@ -189,6 +190,7 @@ class Book {
     required this.spineAsset,
     this.isOpen = false,
   });
+
   final String coverAsset;
   final String spineAsset;
   bool isOpen;
@@ -196,6 +198,7 @@ class Book {
 
 class BookshelfWidget extends StatefulWidget {
   const BookshelfWidget({super.key, required this.books});
+
   final List<Book> books;
 
   @override
@@ -258,6 +261,7 @@ class AnimatedBookWrapper extends StatelessWidget {
     required this.isOpen,
     this.duration = const Duration(milliseconds: 300),
   });
+
   final Widget child;
   final bool isOpen;
   final Duration duration;

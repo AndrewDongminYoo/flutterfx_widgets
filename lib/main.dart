@@ -108,6 +108,7 @@ class AnimationExample {
     this.appBarColor,
     this.isFullScreen = false,
   });
+
   final String title;
   final Widget Function(BuildContext) builder;
   final Color? appBarColor;
@@ -116,6 +117,7 @@ class AnimationExample {
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
+
   final List<AnimationExample> examples = [
     AnimationExample(
       title: 'Folder',
@@ -613,6 +615,7 @@ class HomeScreen extends StatelessWidget {
 
 class DetailScreen extends StatelessWidget {
   const DetailScreen({super.key, required this.example});
+
   final AnimationExample example;
 
   @override
@@ -633,6 +636,7 @@ class DetailScreen extends StatelessWidget {
 
 class FullScreen extends StatelessWidget {
   const FullScreen({super.key, required this.example});
+
   final AnimationExample example;
 
   @override

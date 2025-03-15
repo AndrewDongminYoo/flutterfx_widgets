@@ -5,6 +5,7 @@ class LightbulbIconPainter extends CustomPainter {
     this.color = Colors.black,
     this.strokeWidth = 2.0,
   });
+
   final Color color;
   final double strokeWidth;
 
@@ -98,6 +99,7 @@ class LightbulbIcon extends StatelessWidget {
     this.color = Colors.black,
     this.strokeWidth = 2.0,
   });
+
   final double size;
   final Color color;
   final double strokeWidth;

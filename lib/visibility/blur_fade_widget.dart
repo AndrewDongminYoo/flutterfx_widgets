@@ -10,6 +10,7 @@ class BlurFade extends StatefulWidget {
     this.duration = const Duration(milliseconds: 200),
     this.isVisible,
   });
+
   final Widget child;
   final Duration delay;
   final Duration duration;

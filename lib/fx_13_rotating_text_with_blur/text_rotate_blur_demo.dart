@@ -17,6 +17,7 @@ class _TextRotateBlurDemoState extends State<TextRotateBlurDemo> {
   // like the reveal text strategies.
 
   bool _isAnimating = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -15,6 +15,7 @@ class SynchronizedBlinkStrategy implements LightAnimationStrategy {
   SynchronizedBlinkStrategy({
     this.duration = const Duration(milliseconds: 1200),
   });
+
   final List<AnimationController> _controllers = [];
   final Duration duration;
 
@@ -56,6 +57,7 @@ class SequentialBlinkStrategy implements LightAnimationStrategy {
   SequentialBlinkStrategy({
     this.duration = const Duration(milliseconds: 300),
   });
+
   final List<AnimationController> _controllers = [];
   final Duration duration;
   Timer? _sequenceTimer;
@@ -116,6 +118,7 @@ class WaveBlinkStrategy implements LightAnimationStrategy {
   WaveBlinkStrategy({
     this.duration = const Duration(milliseconds: 1500),
   });
+
   final List<AnimationController> _controllers = [];
   final Duration duration;
   Timer? _waveTimer;
@@ -181,6 +184,7 @@ class DecorativeLightsDecorator extends StatefulWidget {
     this.enableAnimation = true,
     required this.animationStrategy,
   });
+
   final Widget child;
   final int numberOfLights;
   final double bulbHeight;

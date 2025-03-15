@@ -45,6 +45,7 @@ class ThemeShowcaseCard extends StatelessWidget {
     super.key,
     required this.isDarkMode,
   });
+
   final bool isDarkMode;
 
   @override

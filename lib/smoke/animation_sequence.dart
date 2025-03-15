@@ -8,6 +8,7 @@ class AnimationSequence {
     this.stepDuration = const Duration(seconds: 1),
     this.onSequenceChange,
   });
+
   final List<List<CircleData>> sequences;
   final Duration stepDuration;
   final ValueChanged<int>? onSequenceChange;

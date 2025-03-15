@@ -15,6 +15,7 @@ class AnimationPreset {
     required this.strategy,
     required this.description,
   });
+
   final String name;
   final TextAnimationStrategy strategy;
   final String description;

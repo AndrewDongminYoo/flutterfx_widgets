@@ -18,6 +18,7 @@ class GlowingThreadWidget extends StatefulWidget {
     this.glowWidth = 4.0,
     this.debugMode = false,
   });
+
   final Widget child;
   final Color threadColor;
   final Color glowColor;
@@ -99,6 +100,7 @@ class GlowingThreadPainter extends CustomPainter {
     required this.glowWidth,
     required this.debugMode,
   });
+
   final double progress;
   final Color threadColor;
   final Color glowColor;

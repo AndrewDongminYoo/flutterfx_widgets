@@ -12,6 +12,7 @@ class BottomSheetDemo extends StatefulWidget {
 
 class _BottomSheetDemoState extends State<BottomSheetDemo> {
   final _drawerController = CustomDrawerController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

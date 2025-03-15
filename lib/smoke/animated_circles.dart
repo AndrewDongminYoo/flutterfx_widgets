@@ -7,6 +7,7 @@ import 'package:fx_2_folder/smoke/circle_data.dart';
 
 class AnimatedCircles extends StatefulWidget {
   const AnimatedCircles({super.key, required this.sequence});
+
   final AnimationSequence sequence;
 
   @override
@@ -76,6 +77,7 @@ class CirclesPainter extends CustomPainter {
     required this.endCircles,
     required this.progress,
   });
+
   final List<CircleData> startCircles;
   final List<CircleData> endCircles;
   final double progress;

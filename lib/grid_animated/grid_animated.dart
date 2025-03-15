@@ -13,6 +13,7 @@ class AnimatedGrid extends StatefulWidget {
     this.staggerDuration = const Duration(milliseconds: 100),
     this.animationDuration = const Duration(milliseconds: 500),
   });
+
   final List<Widget> children;
   final int crossAxisCount;
   final double spacing;
@@ -79,6 +80,7 @@ class _AnimatedGridItem extends StatefulWidget {
     required this.duration,
     required this.isReadyToAnimate,
   });
+
   final Widget child;
   final Duration delay;
   final Duration duration;

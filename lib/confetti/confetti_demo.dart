@@ -159,6 +159,7 @@ class _ConfettiButton extends StatelessWidget {
     required this.color,
     required this.onPressed,
   });
+
   final String label;
   final Color color;
   final VoidCallback onPressed;

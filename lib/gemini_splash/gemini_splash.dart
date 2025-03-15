@@ -9,6 +9,7 @@ class AnimatedSparkle extends StatefulWidget {
     this.color = Colors.pink,
     this.duration = const Duration(milliseconds: 1300),
   });
+
   final double size;
   final Color color;
   final Duration duration;
@@ -144,6 +145,7 @@ class _AnimatedSparkleState extends State<AnimatedSparkle> with SingleTickerProv
 
 class StarPainter extends CustomPainter {
   StarPainter({required this.color});
+
   final Color color;
 
   @override

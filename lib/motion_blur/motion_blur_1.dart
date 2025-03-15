@@ -10,6 +10,7 @@ class MotionBlurWidget extends StatefulWidget {
     required this.child,
     required this.shaderAsset,
   });
+
   final Widget child;
   final String shaderAsset;
 
@@ -189,6 +190,7 @@ class ShaderPainter extends CustomPainter {
     required this.angle,
     required this.image,
   });
+
   final ui.FragmentShader shader;
   final double strength;
   final double angle;

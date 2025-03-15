@@ -16,6 +16,7 @@ class ShimmerButton extends StatefulWidget {
     this.borderWidth = 1.5,
     this.staticBorderColor = const Color(0x1AFFFFFF), // 10% white
   });
+
   final Widget child;
   final VoidCallback? onPressed;
   final Color shimmerColorFrom;
@@ -138,6 +139,7 @@ class ShimmerBorderPainter extends CustomPainter {
     required this.staticBorderColor,
     required this.borderRadius,
   });
+
   final double progress;
   final double borderWidth;
   final Color colorFrom;

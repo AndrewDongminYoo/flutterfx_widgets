@@ -51,6 +51,7 @@ class CustomDrawer extends StatefulWidget {
     this.backgroundColor = Colors.white,
     this.barrierColor = Colors.black54,
   });
+
   final Widget mainContent;
   final Widget drawerContent;
   final double minHeight;

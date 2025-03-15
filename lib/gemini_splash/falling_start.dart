@@ -10,6 +10,7 @@ class FallingStarWidget extends StatefulWidget {
     this.size = 30,
     this.maxStretch = 5.0,
   });
+
   final double startY;
   final Color primaryColor;
   final double size;
@@ -178,6 +179,7 @@ class Particle {
     this.speed = 1.0,
     this.size = 1.0,
   });
+
   final double angle;
   final double speed;
   final double size;
@@ -193,6 +195,7 @@ class EnhancedStarPainter extends CustomPainter {
     required this.particleSpread,
     required this.glowIntensity,
   });
+
   final Color primaryColor;
   final double blur;
   final double stretchFactor;

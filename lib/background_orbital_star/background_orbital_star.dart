@@ -264,6 +264,7 @@ class StarController {
     required this.pathIndex,
     required this.brightness,
   });
+
   final AnimationController controller;
   final int pathIndex;
   final double brightness;
@@ -275,6 +276,7 @@ class StarTrailPainter extends CustomPainter {
     required this.pathIndex,
     required this.brightness,
   });
+
   final double animation;
   final int pathIndex;
   final double brightness;

@@ -46,6 +46,7 @@ class _WaveProgressWidget extends StatefulWidget {
     required this.autoAnimate,
     required this.waveCurve,
   });
+
   final double progress;
   final ProgressStyle style;
   final Duration waveDuration;

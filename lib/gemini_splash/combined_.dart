@@ -10,6 +10,7 @@ class UnifiedStarAnimation extends StatefulWidget {
     this.totalDuration = const Duration(milliseconds: 4800),
     this.onAnimationComplete,
   });
+
   final Color color;
   final double size;
   final Duration totalDuration;
@@ -314,6 +315,7 @@ class _UnifiedStarAnimationState extends State<UnifiedStarAnimation> with Single
 
 class StarPainter extends CustomPainter {
   StarPainter({required this.color});
+
   final Color color;
 
   @override
@@ -365,6 +367,7 @@ class Particle {
     this.speed = 1.0,
     this.size = 1.0,
   });
+
   final double angle;
   final double speed;
   final double size;
@@ -381,6 +384,7 @@ class EnhancedStarPainter extends CustomPainter {
     required this.glowIntensity,
     required this.rotation,
   });
+
   final Color primaryColor;
   final double blur;
   final double stretchFactor;

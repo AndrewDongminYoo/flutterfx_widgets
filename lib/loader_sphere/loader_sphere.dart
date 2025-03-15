@@ -9,6 +9,7 @@ class AnimatedWaveRipple extends StatefulWidget {
     this.duration = const Duration(seconds: 2),
     this.opacity = 0.5,
   });
+
   final double size;
   final Duration duration;
   final double opacity;
@@ -232,6 +233,7 @@ class _AnimatedWaveRippleState extends State<AnimatedWaveRipple> with SingleTick
 
 class EllipsePainter extends CustomPainter {
   EllipsePainter({required this.color});
+
   final Color color;
 
   @override

@@ -14,6 +14,7 @@ class AnimatedBook extends StatefulWidget {
     this.aspectRatio = 0.7,
     this.numberOfPages = 25,
   });
+
   final Widget coverChild;
   final Widget pageChild;
   final double? width;

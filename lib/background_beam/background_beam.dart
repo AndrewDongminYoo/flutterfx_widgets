@@ -11,6 +11,7 @@ class BorderBeamsBackground extends StatelessWidget {
     super.key,
     this.numberOfSimultaneousBeams = 10,
   });
+
   final int numberOfSimultaneousBeams;
 
   @override
@@ -40,6 +41,7 @@ class BeamAnimation {
     required this.controller,
     required this.startTime,
   });
+
   final int beamIndex;
   final AnimationController controller;
   final DateTime startTime;
@@ -50,6 +52,7 @@ class BackgroundBeams extends StatefulWidget {
     super.key,
     required this.numberOfBeams,
   });
+
   final int numberOfBeams;
 
   @override
@@ -162,6 +165,7 @@ class BeamsPainter extends CustomPainter {
   BeamsPainter({
     required this.activeBeams,
   });
+
   final List<BeamAnimation> activeBeams;
 
   List<Path> getBeamPaths(Size size) {
@@ -286,6 +290,7 @@ class BeamPath {
     required this.endX,
     required this.endY,
   });
+
   final double startX;
   final double startY;
   final double controlX;

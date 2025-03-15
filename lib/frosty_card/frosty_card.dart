@@ -150,6 +150,7 @@ class FrostyCard extends StatelessWidget {
     required this.opacity,
     required this.color,
   });
+
   final double borderRadius;
   final double blurValue;
   final double opacity;

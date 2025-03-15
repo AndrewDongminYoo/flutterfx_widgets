@@ -94,6 +94,7 @@ class GradientDemo extends StatelessWidget {
     required this.gradientRadius,
     required this.showDebugElements,
   });
+
   final double startAngle;
   final double sweepAngle;
   final double gradientRadius;
@@ -150,6 +151,7 @@ class GradientPainter extends CustomPainter {
     required this.gradientRadius,
     required this.showDebugElements,
   });
+
   final double startAngle;
   final double sweepAngle;
   final double gradientRadius;

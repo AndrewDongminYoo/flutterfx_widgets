@@ -12,6 +12,7 @@ class TextMorph extends StatelessWidget {
     required this.text,
     this.style,
   });
+
   final String text;
   final TextStyle? style;
 
@@ -54,6 +55,7 @@ class MorphCharacter extends StatefulWidget {
     required this.character,
     this.style,
   });
+
   final String character;
   final TextStyle? style;
 

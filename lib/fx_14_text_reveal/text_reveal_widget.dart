@@ -6,6 +6,7 @@ abstract class TextAnimationStrategy {
   const TextAnimationStrategy({
     this.synchronizeAnimation = false,
   });
+
   final bool synchronizeAnimation;
 
   Widget buildAnimatedCharacter({
@@ -170,6 +171,7 @@ class EnhancedTextRevealEffect extends StatefulWidget {
     this.direction = AnimationDirection.forward,
     super.key,
   });
+
   final String text;
   final TextStyle? style;
   final Duration duration;

@@ -87,6 +87,7 @@ class WaveRotationStrategy extends RotationAnimationStrategy {
     this.waveAmplitude = 10.0,
     this.waveFrequency = 2.0,
   });
+
   final double waveAmplitude;
   final double waveFrequency;
 
@@ -132,6 +133,7 @@ class BounceRotationStrategy extends RotationAnimationStrategy {
     this.bounceHeight = 20.0,
     this.bounceFrequency = 3.0,
   });
+
   final double bounceHeight;
   final double bounceFrequency;
 
@@ -178,6 +180,7 @@ class VibrationRotationStrategy extends RotationAnimationStrategy {
     this.vibrationIntensity = 3.0,
     this.vibrationSpeed = 15.0,
   });
+
   final double vibrationIntensity;
   final double vibrationSpeed;
 
@@ -225,6 +228,7 @@ class SpiralRotationStrategy extends RotationAnimationStrategy {
     this.spiralTightness = 20.0,
     this.spiralSpeed = 2.0,
   });
+
   final double spiralTightness;
   final double spiralSpeed;
 
@@ -269,6 +273,7 @@ class ElasticRotationStrategy extends RotationAnimationStrategy {
     this.elasticity = 0.3,
     this.frequency = 2.0,
   });
+
   final double elasticity;
   final double frequency;
 

@@ -10,6 +10,7 @@ class SnowProgressStrategy implements ProgressAnimationStrategy {
     this.maxSnowflakeSize = 3,
     this.snowColor,
   });
+
   final int snowflakeCount;
   final double maxSnowflakeSize;
   final Color? snowColor;
@@ -39,6 +40,7 @@ class _SnowProgressWidget extends StatefulWidget {
     required this.maxSnowflakeSize,
     required this.snowColor,
   });
+
   final double progress;
   final ProgressStyle style;
   final int snowflakeCount;

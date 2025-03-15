@@ -8,6 +8,7 @@ class RetroGridBackground extends StatefulWidget {
     this.angle = 65,
     this.child,
   });
+
   final double angle;
   final Widget? child;
 
@@ -129,6 +130,7 @@ class GridPainter extends CustomPainter {
     required this.offset,
     required this.isDark,
   });
+
   final double offset;
   final bool isDark;
   final double gridSize = 40;

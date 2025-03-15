@@ -8,6 +8,7 @@ class BackgroundBeamsWithCollision extends StatefulWidget {
     super.key,
     this.child,
   });
+
   final Widget? child;
 
   @override
@@ -90,6 +91,7 @@ class BeamConfig {
     this.delay = 0,
     this.height = 56,
   });
+
   final double initialX;
   final double duration;
   final double repeatDelay;
@@ -102,6 +104,7 @@ class SimpleExplosion extends StatefulWidget {
     super.key,
     required this.position,
   });
+
   final Offset position;
 
   @override
@@ -174,6 +177,7 @@ class ExplosionParticle {
     required this.speed,
     required this.radius,
   });
+
   final double angle;
   final double speed;
   final double radius;
@@ -185,6 +189,7 @@ class ExplosionPainter extends CustomPainter {
     required this.progress,
     required this.particles,
   });
+
   final Offset position;
   final double progress;
   final List<ExplosionParticle> particles;
@@ -235,6 +240,7 @@ class CollisionMechanism extends StatefulWidget {
     required this.beamOptions,
     required this.containerHeight,
   });
+
   final BeamConfig beamOptions;
   final double containerHeight;
 

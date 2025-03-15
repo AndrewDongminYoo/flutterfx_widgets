@@ -13,6 +13,7 @@ class IconItem {
     required this.color,
     this.scale = 1.0,
   });
+
   final String name;
   final IconData icon;
   vector.Vector3 position;
@@ -27,6 +28,7 @@ class GlobeOfLogos extends StatefulWidget {
     this.radius = 150.0,
     this.defaultIconColor = Colors.white,
   });
+
   final List<IconData> icons;
   final double radius;
   final Color defaultIconColor;
@@ -277,6 +279,7 @@ class IconCloudPainter extends CustomPainter {
     required this.iconItems,
     required this.radius,
   });
+
   final List<IconItem> iconItems;
   final double radius;
 

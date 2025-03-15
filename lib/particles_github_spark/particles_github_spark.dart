@@ -17,6 +17,7 @@ class RisingParticles extends StatefulWidget {
     this.maxSize = 8,
     this.minSize = 3,
   });
+
   final int quantity;
   final List<Color> colors;
   final double maxSize;
@@ -119,6 +120,7 @@ class _RisingParticlesState extends State<RisingParticles> with SingleTickerProv
 
 class RisingParticlesPainter extends CustomPainter {
   RisingParticlesPainter({required this.particles});
+
   final List<RisingParticle> particles;
 
   @override
@@ -255,6 +257,7 @@ class RisingParticle {
     required this.progress,
     required this.speed,
   });
+
   final double startX;
   final double startY;
   final Offset controlPoint1;

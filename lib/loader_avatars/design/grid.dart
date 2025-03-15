@@ -4,7 +4,9 @@ import 'package:fx_2_folder/loader_avatars/design/widget_theme.dart';
 
 class GridPatternPainter extends CustomPainter {
   GridPatternPainter({required this.isDarkMode});
+
   final bool isDarkMode;
+
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()

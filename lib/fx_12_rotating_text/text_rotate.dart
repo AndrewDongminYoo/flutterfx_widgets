@@ -10,6 +10,7 @@ class RotatingTextWidget extends StatefulWidget {
     required this.textStyle,
     required this.rotationDuration,
   });
+
   final String text;
   final double radius;
   final TextStyle textStyle;
@@ -63,6 +64,7 @@ class _CircularTextPainter extends CustomPainter {
     required this.textStyle,
     required this.progress,
   });
+
   final String text;
   final double radius;
   final TextStyle textStyle;

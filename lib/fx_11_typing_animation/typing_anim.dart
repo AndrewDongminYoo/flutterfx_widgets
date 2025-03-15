@@ -10,6 +10,7 @@ class TypingAnimation extends StatefulWidget {
     this.style,
     this.animate = false,
   });
+
   final String text;
   final Duration duration;
   final TextStyle? style;

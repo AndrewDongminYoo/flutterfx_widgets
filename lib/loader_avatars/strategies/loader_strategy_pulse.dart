@@ -12,6 +12,7 @@ class PulseAnimationStrategy extends AvatarAnimationStrategy {
     this.waveWidth = 1.0,
     this.phaseShiftFactor = 0.35,
   });
+
   final Duration animationDuration;
   final double baseScale;
   final double scaleAmount;

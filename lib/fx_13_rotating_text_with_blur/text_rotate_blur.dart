@@ -28,6 +28,7 @@ class RotatingTextWidget extends StatefulWidget {
     required this.textStyle,
     required this.rotationDuration,
   });
+
   final String text;
   final double radius;
   final TextStyle textStyle;
@@ -82,6 +83,7 @@ class _CircularTextPainter extends CustomPainter {
     required this.textStyle,
     required this.progress,
   });
+
   final String text;
   final double radius;
   final TextStyle textStyle;
@@ -261,6 +263,7 @@ class RotationCalculator {
     required this.textStyle,
     required this.progress,
   });
+
   final String text;
   final double radius;
   final TextStyle textStyle;
@@ -312,6 +315,7 @@ class CharacterMeasurements {
     required this.charWidths,
     required this.totalWidth,
   });
+
   final List<double> charWidths;
   final double totalWidth;
 }
@@ -325,6 +329,7 @@ class SegmentMeasurements {
     required this.textAngle,
     required this.dotAngle,
   });
+
   final double initialStartAngle;
   final int repetitions;
   final double segmentAngle;

@@ -20,6 +20,7 @@ class Gyro3DText extends StatefulWidget {
     this.movementThreshold = 2.0,
     this.smoothingFactor = 0.1,
   });
+
   final String text;
   final double fontSize;
   final FontWeight fontWeight;

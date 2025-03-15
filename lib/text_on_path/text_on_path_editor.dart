@@ -241,6 +241,7 @@ class TextOnPathPainter extends CustomPainter {
     required this.controlPoints,
     this.selectedPointIndex,
   });
+
   final String text;
   final double fontSize;
   final double spread;

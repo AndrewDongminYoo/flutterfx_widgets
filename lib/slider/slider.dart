@@ -9,6 +9,7 @@ class WorkLifeSlider extends StatefulWidget {
     this.value = 50.0,
     this.onChanged,
   });
+
   final double value;
   final ValueChanged<double>? onChanged;
 

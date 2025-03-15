@@ -12,6 +12,7 @@ class ButterflyConfig {
     required this.startXPercent,
     required this.scale,
   });
+
   final Duration delay;
   final Duration duration;
   final double startXPercent;
@@ -81,6 +82,7 @@ class InteractiveButterfly extends StatefulWidget {
     this.startXPercent = 0.5,
     this.scale = 1.0,
   });
+
   final double screenHeight;
   final double screenWidth;
   final Duration duration;
@@ -284,6 +286,7 @@ class ButterflySwarm extends StatefulWidget {
     super.key,
     this.numberOfButterflies = 15,
   });
+
   final int numberOfButterflies;
 
   @override

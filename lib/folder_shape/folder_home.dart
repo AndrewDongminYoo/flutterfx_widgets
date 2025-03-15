@@ -4,6 +4,7 @@ import 'package:fx_2_folder/folder_shape/gradient_shadow.dart';
 
 class FolderHomeWidget extends StatefulWidget {
   const FolderHomeWidget({super.key, required this.title, required this.curve});
+
   final String title;
   final Curve curve;
 

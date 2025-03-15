@@ -19,6 +19,7 @@ class SwirlFloatStrategy extends BaseAnimationStrategy {
     this.curveIntensity = 0.5, // 0.5 means medium curve intensity
     super.synchronizeAnimation = false,
   });
+
   final double yOffset; // Fixed Y offset for floating
   final double maxXDeviation; // Maximum random X deviation
   final double maxBlur; // Maximum blur amount

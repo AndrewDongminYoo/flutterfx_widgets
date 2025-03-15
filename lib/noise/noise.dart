@@ -343,6 +343,7 @@ class NoiseVisualizer extends StatelessWidget {
     this.frequency = 0.05,
     this.opacity = 1.0,
   });
+
   final NoiseStrategy noiseStrategy;
   final double scale;
   final double frequency;
@@ -386,6 +387,7 @@ class NoisePainter extends CustomPainter {
     required this.frequency,
     required this.opacity,
   });
+
   final NoiseStrategy noiseStrategy;
   final double scale;
   final double frequency;

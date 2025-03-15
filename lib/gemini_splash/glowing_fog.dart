@@ -11,6 +11,7 @@ class MysticalWaves extends StatefulWidget {
     this.waveDuration = const Duration(seconds: 3),
     this.waveColors,
   });
+
   final double height;
   final Duration animationDuration;
   final Duration waveDuration;
@@ -118,6 +119,7 @@ class _WavePainter extends CustomPainter {
     this.blur = 30.0,
     this.opacity = 0.5,
   });
+
   final Color waveColor;
   final Animation<double> animation;
   final double waveOffset;

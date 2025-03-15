@@ -255,7 +255,9 @@ class _StackedExpandedCardDemoState extends State<StackedExpandedCardDemo> {
 
 class GridPatternPainter extends CustomPainter {
   GridPatternPainter({required this.isDarkMode});
+
   final bool isDarkMode;
+
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
@@ -291,6 +293,7 @@ class SimpleCard extends StatelessWidget {
     this.title = 'Simple Card Title',
     required this.isDarkMode,
   });
+
   final String title;
   final bool isDarkMode;
 
@@ -333,6 +336,7 @@ class CardModel {
     required this.id,
     this.hasCompletedEntryAnimation = false,
   });
+
   final String content;
   final int id;
   bool hasCompletedEntryAnimation;
@@ -345,6 +349,7 @@ class CardPosition {
     this.y = 0.0,
     this.z = 0.0,
   });
+
   final double x;
   final double y;
   final double z;
@@ -371,6 +376,7 @@ class AnimatedCardWidget extends StatefulWidget {
     this.onEntryAnimationComplete,
     super.key,
   });
+
   final CardModel card;
   final CardPosition position;
   final Duration duration;

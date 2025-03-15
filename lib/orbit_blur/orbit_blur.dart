@@ -47,6 +47,7 @@ class OrbitingIcons extends StatelessWidget {
     required this.duration,
     required this.showPaths,
   });
+
   final bool reverse;
   final double duration;
   final bool showPaths;
@@ -181,6 +182,7 @@ class OrbitingCircle extends StatelessWidget {
     required this.clockwise,
     required this.icons,
   });
+
   final double duration;
   final double radius;
   final bool showPath;
@@ -239,6 +241,7 @@ class SingleOrbitingCircle extends StatefulWidget {
     required this.moveClockwise,
     this.child,
   });
+
   final double duration;
   final double delay;
   final double radius;

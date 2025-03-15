@@ -13,6 +13,7 @@ class MovingButterfly extends StatefulWidget {
     this.startXPercent = 0.5,
     this.scale = 1.0,
   });
+
   final double screenHeight;
   final double screenWidth;
   final Duration duration;

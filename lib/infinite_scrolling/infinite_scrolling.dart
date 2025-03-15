@@ -11,6 +11,7 @@ class MarqueeWidget extends StatefulWidget {
     this.duration = const Duration(seconds: 40),
     this.gap = 16.0,
   });
+
   final List<Widget> children;
   final bool reverse;
   final bool pauseOnHover;
@@ -118,6 +119,7 @@ class ReviewCard extends StatelessWidget {
     required this.username,
     required this.body,
   });
+
   final String imageUrl;
   final String name;
   final String username;

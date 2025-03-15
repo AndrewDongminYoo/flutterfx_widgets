@@ -161,6 +161,7 @@ class _DotsPainter extends CustomPainter {
     required this.touchLocation,
     required this.maxEffectRadius,
   });
+
   final int columns;
   final int rows;
   final double dotSize;

@@ -19,6 +19,7 @@ class ThemeLightBulb extends StatefulWidget {
     required this.onThemeChanged,
     this.initialState = true,
   });
+
   final ValueChanged<bool> onThemeChanged;
   final bool initialState;
 
@@ -138,6 +139,7 @@ class LightBulbPainter extends CustomPainter {
     required this.isOn,
     required this.pullProgress,
   });
+
   final bool isOn;
   final double pullProgress;
 

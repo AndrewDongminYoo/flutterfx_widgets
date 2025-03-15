@@ -8,6 +8,7 @@ class MinimalistBookCover extends StatelessWidget {
     this.backgroundColor = const Color(0xFFFF6B6B),
     this.textColor = Colors.white,
   });
+
   final String title;
   final String author;
   final Color backgroundColor;

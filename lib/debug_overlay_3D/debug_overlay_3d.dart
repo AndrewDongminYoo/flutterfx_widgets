@@ -12,6 +12,7 @@ class DebugTransformOverlay extends StatefulWidget {
     required this.child,
     this.enabled = true,
   });
+
   final Widget child;
   final bool enabled;
 

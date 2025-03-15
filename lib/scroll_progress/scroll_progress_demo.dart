@@ -12,6 +12,7 @@ class ScrollProgressDemo extends StatefulWidget {
 
 class _ScrollProgressBasicState extends State<ScrollProgressDemo> {
   ScrollProgressStyle _currentStyle = ScrollProgressStyle.default_;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -118,6 +119,7 @@ class _StyleButton extends StatelessWidget {
     required this.isSelected,
     required this.onTap,
   });
+
   final String title;
   final bool isSelected;
   final VoidCallback onTap;
@@ -163,7 +165,9 @@ class _StyleButton extends StatelessWidget {
 
 class GridPatternPainter extends CustomPainter {
   GridPatternPainter({required this.isDarkMode});
+
   final bool isDarkMode;
+
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()

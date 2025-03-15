@@ -6,6 +6,7 @@ class TextOnPathWidget extends StatelessWidget {
     required this.text,
     this.fontSize = 20,
   });
+
   final String text;
   final double fontSize;
 
@@ -40,6 +41,7 @@ class TextOnPathPainter extends CustomPainter {
     this.fontSize = 20,
     required this.textStyle,
   });
+
   final String text;
   final Path path;
   final double fontSize;
@@ -118,6 +120,7 @@ class BezierTextOnPath extends StatefulWidget {
     required this.text,
     this.fontSize = 20,
   });
+
   final String text;
   final double fontSize;
 

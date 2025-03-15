@@ -381,6 +381,7 @@ class VinylItem {
     this.zPositionValue = 0.0,
     this.rotateX = 0.0,
   });
+
   final String id;
   final Color color;
   final String asset;

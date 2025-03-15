@@ -13,6 +13,7 @@ class FlickeringGrid extends StatefulWidget {
     this.height,
     this.maxOpacity = 0.3,
   });
+
   final double squareSize;
   final double gridGap;
   final double flickerChance;
@@ -114,6 +115,7 @@ class _GridPainter extends CustomPainter {
     required this.gridGap,
     required this.color,
   });
+
   final List<double> squares;
   final double squareSize;
   final double gridGap;
@@ -306,6 +308,7 @@ class FlickeringGridConfig {
     required this.flickerChance,
     required this.description,
   });
+
   final double squareSize;
   final double gridGap;
   final Color color;
@@ -320,6 +323,7 @@ class FullscreenFlickeringGrid extends StatelessWidget {
     required this.config,
     required this.title,
   });
+
   final FlickeringGridConfig config;
   final String title;
 
@@ -389,6 +393,7 @@ class ThemePreviewCard extends StatelessWidget {
     required this.title,
     required this.config,
   });
+
   final String title;
   final FlickeringGridConfig config;
 

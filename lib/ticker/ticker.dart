@@ -105,6 +105,7 @@ class ScrollingTickerWidget extends StatefulWidget {
     this.iconSize = 24.0,
     this.transform = -0.2, // Default transform angle
   });
+
   final String text;
   final IconData icon;
   final Color backgroundColor;

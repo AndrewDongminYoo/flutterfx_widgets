@@ -16,6 +16,7 @@ class ThreadedWidget extends StatelessWidget {
     this.wrapCurvature = 0.05,
     this.debugMode = false, // Default to false
   });
+
   final Widget child;
   final Color threadColor;
   final double topSpacing;
@@ -58,6 +59,7 @@ class ThreadPainter extends CustomPainter {
     required this.wrapCurvature,
     required this.debugMode,
   });
+
   final Color threadColor;
   final double topSpacing;
   final double bottomSpacing;

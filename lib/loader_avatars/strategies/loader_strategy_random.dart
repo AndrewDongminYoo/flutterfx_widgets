@@ -11,6 +11,7 @@ class RandomAnimationStrategy extends AvatarAnimationStrategy {
     this.maxAdditionalDuration = const Duration(milliseconds: 800),
     this.maxInitialDelay = const Duration(milliseconds: 1000),
   });
+
   final Random _random = Random();
   final double maxDisplacement;
   final Duration baseDuration;

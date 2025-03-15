@@ -12,6 +12,7 @@ class FlipUpStrategy extends BaseAnimationStrategy {
     this.perspectiveValue = 0.003,
     super.synchronizeAnimation = false,
   });
+
   final double rotationAngle; // Maximum rotation angle in radians
   final double perspectiveValue;
 

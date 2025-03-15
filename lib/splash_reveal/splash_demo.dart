@@ -34,6 +34,7 @@ class SplashRevealWidget extends StatefulWidget {
     this.overlayColor = Colors.white,
     this.onAnimationComplete,
   });
+
   final Widget child;
   final Duration duration;
   final Color overlayColor;
@@ -145,6 +146,7 @@ class _SplashRevealWidgetState extends State<SplashRevealWidget> with SingleTick
 
 class CircularRevealClipper extends CustomClipper<Path> {
   CircularRevealClipper({required this.revealPercent});
+
   final double revealPercent;
 
   @override

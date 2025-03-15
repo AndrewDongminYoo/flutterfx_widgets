@@ -24,6 +24,7 @@ class _TypingProgressWidget extends StatefulWidget {
     required this.animation,
     required this.style,
   });
+
   final double progress;
   final Animation<double> animation;
   final ProgressStyle style;

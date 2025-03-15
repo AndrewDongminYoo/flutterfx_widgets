@@ -8,6 +8,7 @@ class AuroraPainter extends CustomPainter {
     required this.isDark,
     required this.showRadialGradient,
   });
+
   final double progress;
   final bool isDark;
   final bool showRadialGradient;
@@ -91,6 +92,7 @@ class AuroraBackground extends StatefulWidget {
     required this.child,
     this.showRadialGradient = true,
   });
+
   final Widget child;
   final bool showRadialGradient;
 

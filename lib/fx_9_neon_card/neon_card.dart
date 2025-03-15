@@ -9,6 +9,7 @@ class NeonCard extends StatefulWidget {
     this.intensity = 0.3,
     this.glowSpread = 2.0,
   });
+
   final Widget child;
   final double intensity;
   final double glowSpread;
@@ -59,6 +60,7 @@ class GlowRectanglePainter extends CustomPainter {
     this.intensity = 0.3,
     this.glowSpread = 2.0,
   });
+
   final double progress;
   final double intensity;
   final double glowSpread;

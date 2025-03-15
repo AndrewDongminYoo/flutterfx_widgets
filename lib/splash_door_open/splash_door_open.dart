@@ -10,6 +10,7 @@ class DoorSplashScreen extends StatefulWidget {
     required this.child,
     this.animationDuration = const Duration(seconds: 3),
   });
+
   final Widget child; // The widget to reveal after animation
   final Duration animationDuration;
 

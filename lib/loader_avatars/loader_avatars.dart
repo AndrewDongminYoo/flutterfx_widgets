@@ -31,6 +31,7 @@ class AnimatedAvatarRow extends StatefulWidget {
     this.avatarImages,
     this.borderColors,
   });
+
   final int numberOfAvatars;
   final double avatarSize;
   final double overlapFactor;

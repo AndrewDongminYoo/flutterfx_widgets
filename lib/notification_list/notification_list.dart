@@ -8,6 +8,7 @@ class NotificationItem {
     required this.color,
     required this.time,
   });
+
   final String name;
   final String description;
   final String icon;
@@ -21,6 +22,7 @@ class AnimatedNotificationList extends StatefulWidget {
     required this.notifications,
     this.delay = const Duration(milliseconds: 1000),
   });
+
   final List<NotificationItem> notifications;
   final Duration delay;
 
@@ -154,6 +156,7 @@ class NotificationCard extends StatelessWidget {
     required this.item,
     required this.index,
   });
+
   final NotificationItem item;
   final int index;
 
@@ -244,6 +247,7 @@ class NotificationCard extends StatelessWidget {
 
 class NotificationDemo extends StatelessWidget {
   NotificationDemo({super.key});
+
   final List<NotificationItem> notifications = [
     NotificationItem(
       name: 'Cha-ching! 💰',

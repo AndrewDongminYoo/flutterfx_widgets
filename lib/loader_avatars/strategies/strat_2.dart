@@ -13,6 +13,7 @@ class CoinFlipStrategy extends AvatarAnimationStrategy {
     this.perspectiveValue = 0.002,
     this.rotationAngle = pi, // Full rotation
   });
+
   final Duration animationDuration;
   final Duration staggerDelay;
   final double maxHeight;
@@ -73,6 +74,7 @@ class CoinRotateStrategy extends AvatarAnimationStrategy {
     this.perspectiveValue = 0.002,
     this.rotationAngle = pi, // Full rotation
   });
+
   final Duration animationDuration;
   final Duration staggerDelay;
   final double maxHeight;
@@ -124,6 +126,7 @@ class CoinRotateXStrategy extends AvatarAnimationStrategy {
     this.perspectiveValue = 0.002,
     this.rotationAngle = pi, // Full rotation
   });
+
   final Duration animationDuration;
   final Duration staggerDelay;
   final double maxHeight;
@@ -175,6 +178,7 @@ class CoinRotateYStrategy extends AvatarAnimationStrategy {
     this.perspectiveValue = 0.002,
     this.rotationAngle = pi, // Full rotation
   });
+
   final Duration animationDuration;
   final Duration staggerDelay;
   final double maxHeight;
@@ -226,6 +230,7 @@ class OrbitAnimationStrategy extends AvatarAnimationStrategy {
     this.orbitRadius = 15.0,
     this.maxRotation = pi / 6,
   });
+
   final Duration animationDuration;
   final Duration staggerDelay;
   final double orbitRadius;
@@ -271,6 +276,7 @@ class BreathingSpaceStrategy extends AvatarAnimationStrategy {
     this.maxScale = 1.2,
     this.maxDistance = 20.0,
   });
+
   final Duration animationDuration;
   final Duration staggerDelay;
   final double maxScale;
@@ -313,6 +319,7 @@ class ZenRippleStrategy extends AvatarAnimationStrategy {
     this.maxRotation = pi / 4,
     this.maxTranslation = 25.0,
   });
+
   final Duration animationDuration;
   final Duration staggerDelay;
   final double maxRotation;
@@ -357,6 +364,7 @@ class FloatingMeditationStrategy extends AvatarAnimationStrategy {
     this.floatHeight = 18.0,
     this.rotationAngle = pi / 8,
   });
+
   final Duration animationDuration;
   final Duration staggerDelay;
   final double floatHeight;

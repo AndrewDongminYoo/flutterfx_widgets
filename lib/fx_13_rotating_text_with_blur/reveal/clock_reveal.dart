@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 // Keep existing ClockHandRevealClipper unchanged
 class ClockHandRevealClipper extends CustomClipper<Path> {
   ClockHandRevealClipper({required this.progress});
+
   final double progress;
 
   @override
@@ -46,6 +47,7 @@ class BlurWedgeClipper extends CustomClipper<Path> {
     required this.wedgeAngle,
     required this.bandWidth,
   });
+
   final double progress;
   final double wedgeAngle;
   final double bandWidth;
@@ -84,6 +86,7 @@ class GradientMaskPainter extends CustomPainter {
     required this.bandWidth,
     required this.wedgeOpacity,
   });
+
   final double progress;
   final double wedgeAngle;
   final double bandWidth;
@@ -146,6 +149,7 @@ class ClockHandRevealWidget extends StatefulWidget {
     this.wedgeOpacity = 0.7,
     this.blurBandWidth = 0.15,
   });
+
   final Widget child;
   final Duration duration;
   final bool autoStart;
